@@ -344,14 +344,20 @@
             .sched-compare { grid-template-columns: 1fr; }
         }
 
+        .back-link { display: inline-block; font-size: 13px; font-weight: 600; color: var(--goal-brand); text-decoration: none; margin-bottom: 24px; }
+        .back-link:hover { text-decoration: underline; }
+
         @media print {
             body { padding: 20px; font-size: 12px; }
             .issue-card, .rec-card, .summary-section, .exec-card { break-inside: avoid; }
+            .back-link { display: none; }
         }
     </style>
 </head>
 <body>
 <div class="container">
+
+    <a href="index.html" class="back-link">← Back to Reports</a>
 
     <!-- HEADER -->
     <div class="header">
