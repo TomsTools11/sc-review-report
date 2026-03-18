@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supreme Choice Insurance Solutions — Performance Review</title>
+    <style>
+        :root {
+            --goal-brand: #077BE5;
+            --goal-dark-blue: #00172D;
+            --goal-accent-1: #3AEECA;
+            --goal-accent-2: #97C2E8;
+            --goal-accent-3: #9FDACD;
+            --goal-light-grey: #F8F9FC;
+            --goal-text: #001020;
+            --neutral-gray: #6B7280;
+            --light-gray: #9CA3AF;
+            --border-gray: #E5E7EB;
+            --bg-track: #E5E7EB;
+            --white: #FFFFFF;
+            --success-green: #10B981;
+            --warning-red: #EF4444;
+            --warning-orange: #F59E0B;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: var(--white);
+            color: var(--goal-text);
+            line-height: 1.5;
+            padding: 40px;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        /* Header */
+        .header { text-align: center; margin-bottom: 48px; }
+        .header-logo { font-size: 14px; font-weight: 700; color: var(--goal-brand); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+        .header h1 { font-size: 28px; font-weight: 700; color: var(--goal-text); margin-bottom: 4px; }
+        .header p { font-size: 14px; color: var(--neutral-gray); }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        .kpi-card {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+        .kpi-value { font-size: 32px; font-weight: 700; color: var(--goal-brand); margin-bottom: 8px; }
+        .kpi-value.green { color: var(--success-green); }
+        .kpi-value.red { color: var(--warning-red); }
+        .kpi-value.orange { color: var(--warning-orange); }
+        .kpi-label { font-size: 13px; color: var(--neutral-gray); }
+        .kpi-sublabel { font-size: 11px; color: var(--light-gray); margin-top: 4px; }
+
+        /* Section */
+        .section { margin-bottom: 48px; }
+        .section-title { font-size: 18px; font-weight: 700; color: var(--goal-text); margin-bottom: 8px; }
+        .section-subtitle { font-size: 14px; color: var(--neutral-gray); margin-bottom: 20px; line-height: 1.6; }
+
+        /* Executive Summary Card */
+        .exec-card {
+            background: var(--goal-light-grey);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .exec-card h2 { font-size: 18px; font-weight: 700; color: var(--goal-text); margin-bottom: 12px; }
+        .exec-card p { font-size: 14px; color: var(--neutral-gray); line-height: 1.7; }
+        .exec-card p strong { color: var(--goal-text); }
+
+        /* Issue Cards */
+        .issue-card {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .issue-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+        }
+        .issue-card.blue::before { background: var(--goal-brand); }
+        .issue-card.orange::before { background: var(--warning-orange); }
+        .issue-card.green::before { background: var(--success-green); }
+
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .issue-number {
+            font-size: 12px; font-weight: 700; color: var(--goal-brand);
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .issue-title { font-size: 16px; font-weight: 700; color: var(--goal-text); }
+        .issue-badge {
+            padding: 4px 12px; border-radius: 12px;
+            font-size: 11px; font-weight: 600; white-space: nowrap;
+        }
+        .issue-badge.high { background: #DBEAFE; color: #1E40AF; }
+        .issue-badge.medium { background: #FEF3C7; color: #92400E; }
+        .issue-badge.growth { background: #D1FAE5; color: #065F46; }
+
+        .issue-body { font-size: 14px; color: var(--neutral-gray); line-height: 1.7; margin-bottom: 20px; }
+        .issue-body strong { color: var(--goal-text); }
+
+        /* Data Visualization */
+        .data-viz {
+            background: var(--goal-light-grey);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+        .data-viz-title {
+            font-size: 12px; font-weight: 600; color: var(--neutral-gray);
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        /* Comparison Boxes */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+        .compare-box {
+            text-align: center;
+            padding: 16px;
+            border-radius: 8px;
+        }
+        .compare-box.before { background: #FEF2F2; border: 1px solid #FECACA; }
+        .compare-box.after { background: #EFF6FF; border: 1px solid #BFDBFE; }
+        .compare-box .label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--neutral-gray); margin-bottom: 6px; }
+        .compare-box .value { font-size: 24px; font-weight: 700; }
+        .compare-box .value.red { color: var(--warning-red); }
+        .compare-box .value.blue { color: var(--goal-brand); }
+        .compare-box .sub { font-size: 11px; color: var(--neutral-gray); margin-top: 4px; }
+        .compare-arrow { font-size: 24px; color: var(--light-gray); text-align: center; }
+
+        /* Horizontal Bar Chart */
+        .bar-chart { display: flex; flex-direction: column; gap: 14px; }
+        .bar-row { display: flex; align-items: center; gap: 12px; }
+        .bar-label { min-width: 120px; font-size: 13px; color: var(--neutral-gray); font-weight: 500; }
+        .bar-label.highlight { color: var(--goal-text); font-weight: 600; }
+        .bar-container {
+            flex: 1; height: 28px; background: var(--bg-track);
+            border-radius: 4px; overflow: hidden; position: relative;
+        }
+        .bar { height: 100%; border-radius: 4px; }
+        .bar.blue { background: var(--goal-brand); }
+        .bar.blue-light { background: var(--goal-accent-2); }
+        .bar.green { background: var(--success-green); }
+        .bar.red { background: var(--warning-red); }
+        .bar.orange { background: var(--warning-orange); }
+        .bar-value { min-width: 100px; text-align: right; font-size: 13px; font-weight: 700; color: var(--goal-text); }
+
+        .bar-container .marker {
+            position: absolute; top: 0; height: 100%; width: 2px;
+            background: var(--goal-text); z-index: 2;
+        }
+        .bar-container .marker-label {
+            position: absolute; top: -16px; font-size: 9px; font-weight: 600;
+            color: var(--goal-text); white-space: nowrap; transform: translateX(-50%);
+        }
+
+        /* Stat Grid */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .stat-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 700; margin-bottom: 2px; }
+        .stat-value.blue { color: var(--goal-brand); }
+        .stat-value.green { color: var(--success-green); }
+        .stat-value.red { color: var(--warning-red); }
+        .stat-value.orange { color: var(--warning-orange); }
+        .stat-label { font-size: 11px; color: var(--neutral-gray); line-height: 1.4; }
+
+        /* Side-by-side schedule comparison */
+        .sched-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .sched-col { }
+        .sched-col-title {
+            font-size: 13px; font-weight: 700; margin-bottom: 12px;
+            padding-bottom: 8px; border-bottom: 2px solid var(--border-gray);
+        }
+        .sched-col-title.red { color: var(--warning-red); border-color: #FECACA; }
+        .sched-col-title.blue { color: var(--goal-brand); border-color: #BFDBFE; }
+        .sched-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 6px 0; font-size: 13px; border-bottom: 1px solid var(--border-gray);
+        }
+        .sched-row:last-child { border-bottom: none; }
+        .sched-day { color: var(--goal-text); font-weight: 500; }
+        .sched-hours { font-weight: 600; }
+        .sched-hours.red { color: var(--warning-red); }
+        .sched-hours.blue { color: var(--goal-brand); }
+        .sched-hours.green { color: var(--success-green); }
+
+        /* Impact Banner */
+        .impact-banner {
+            background: linear-gradient(135deg, #EFF6FF 0%, #F0FDF4 100%);
+            border: 1px solid #BFDBFE;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-top: 16px;
+            text-align: center;
+        }
+        .impact-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--neutral-gray); margin-bottom: 6px; }
+        .impact-value { font-size: 20px; font-weight: 700; color: var(--success-green); }
+        .impact-sub { font-size: 12px; color: var(--neutral-gray); margin-top: 4px; }
+
+        /* Recommendation Cards */
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .rec-card {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .rec-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--goal-brand);
+        }
+        .rec-card.green::before { background: var(--success-green); }
+        .rec-card.orange::before { background: var(--warning-orange); }
+        .rec-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .rec-source-name { font-size: 14px; font-weight: 700; color: var(--goal-text); }
+        .rec-action-badge {
+            padding: 3px 10px; border-radius: 10px;
+            font-size: 11px; font-weight: 600; white-space: nowrap;
+        }
+        .rec-action-badge.bid { background: #DBEAFE; color: #1E40AF; }
+        .rec-action-badge.schedule { background: #EDE9FE; color: #5B21B6; }
+        .rec-action-badge.budget { background: #D1FAE5; color: #065F46; }
+
+        .rec-detail-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 6px 0; font-size: 12px;
+        }
+        .rec-detail-label { color: var(--neutral-gray); }
+        .rec-detail-value { font-weight: 600; color: var(--goal-text); }
+        .rec-detail-value.positive { color: var(--success-green); }
+
+        .rec-rationale {
+            font-size: 12px; color: var(--neutral-gray); line-height: 1.5;
+            margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border-gray);
+        }
+
+        /* Next Steps */
+        .summary-section {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 28px 32px;
+        }
+        .summary-title { font-size: 16px; font-weight: 700; color: var(--goal-text); margin-bottom: 12px; }
+        .summary-text { font-size: 14px; color: var(--neutral-gray); line-height: 1.7; }
+        .summary-text strong { color: var(--goal-text); }
+
+        .next-steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .next-step {
+            background: var(--goal-light-grey);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .next-step-number { font-size: 20px; font-weight: 700; color: var(--goal-brand); margin-bottom: 6px; }
+        .next-step-text { font-size: 13px; color: var(--neutral-gray); line-height: 1.5; }
+        .next-step-text strong { color: var(--goal-text); }
+
+        /* Proof Point Callout */
+        .proof-callout {
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .proof-icon { font-size: 18px; flex-shrink: 0; }
+        .proof-text { font-size: 13px; color: #166534; line-height: 1.6; }
+        .proof-text strong { color: #15803D; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 40px 0 16px; color: var(--neutral-gray); font-size: 12px; }
+        .footer-logo { font-size: 20px; font-weight: 700; color: var(--goal-brand); margin-bottom: 8px; }
+        .footer-text { color: var(--light-gray); }
+
+        @media (max-width: 768px) {
+            body { padding: 20px; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-grid, .stat-grid.two-col { grid-template-columns: 1fr; }
+            .next-steps-grid { grid-template-columns: 1fr; }
+            .rec-grid { grid-template-columns: 1fr; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .compare-arrow { transform: rotate(90deg); }
+            .sched-compare { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            body { padding: 20px; font-size: 12px; }
+            .issue-card, .rec-card, .summary-section, .exec-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-logo">GOAL Platform</div>
+        <h1>Supreme Choice Insurance Solutions</h1>
+        <p>Home — California · Campaign Performance Review · March 17, 2026</p>
+    </div>
+
+    <!-- KPI SNAPSHOT -->
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-value">67</div>
+            <div class="kpi-label">Leads Generated</div>
+            <div class="kpi-sublabel">Last 30 Days</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value">$357</div>
+            <div class="kpi-label">Total Spend</div>
+            <div class="kpi-sublabel">$5.33 Cost Per Lead</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value red">0.97%</div>
+            <div class="kpi-label">Win Rate</div>
+            <div class="kpi-sublabel">Room to grow significantly</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-value orange">59.6%</div>
+            <div class="kpi-label">Budget Utilization</div>
+            <div class="kpi-sublabel">$11.91 of $20.00 daily limit used</div>
+        </div>
+    </div>
+
+    <!-- EXECUTIVE SUMMARY -->
+    <div class="exec-card">
+        <h2>Monty — Here's What We Found & How We Can Fix It</h2>
+        <p>
+            We did a deep analysis of your Home — CA campaign and found <strong>three clear opportunities to increase lead volume</strong>. The great news is your campaign already has strong fundamentals — your targeting is dialed in to the right customers, and your cost per lead ($5.33) is efficient. The problem is your campaign <strong>isn't winning enough auctions</strong> to turn those opportunities into leads. Your data actually proves the fix works: during your boosted 140% schedule hours, your win rate jumps to <strong>1.11% — 14x higher</strong> than your non-boosted hours (0.08%). That's because the schedule boost pushes your bids above market pricing on most sources. Below, we break down three changes that will get your bids competitive <strong>all day, every day</strong> — not just during boosted hours — and expand your active window to capture even more traffic.
+        </p>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE PROOF: WHY 140% HOURS PERFORM 14x BETTER -->
+    <!-- ============================================================ -->
+    <div class="issue-card blue">
+        <div class="issue-header">
+            <div>
+                <div class="issue-number">The Data Already Proves It</div>
+                <div class="issue-title">Your 140% Schedule Hours Win 14x More Than Standard Hours</div>
+            </div>
+            <span class="issue-badge high">Key Insight</span>
+        </div>
+
+        <div class="issue-body">
+            When your schedule is set to 140%, it multiplies your bid by 1.4x. That extra boost pushes your effective bids <strong>above the top market position</strong> on most sources — and the results are dramatic. During 140% hours, you qualified on <strong>39.4% of pings</strong> vs. just 8.2% at 100%, and your win rate jumped to <strong>1.11%</strong> vs. 0.08%. The problem? Right now, only a small window of your week runs at 140%. Our recommendations below make your bids competitive <strong>at 100% schedule</strong> so you get these results all day.
+        </div>
+
+        <div class="data-viz">
+            <div class="data-viz-title">Performance: 140% Schedule Hours vs. 100% Schedule Hours</div>
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="stat-value green">14x</div>
+                    <div class="stat-label">Higher Win Rate<br>(1.11% vs 0.08%)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value green">4.8x</div>
+                    <div class="stat-label">Higher Qualification Rate<br>(39.4% vs 8.2%)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value blue">8 of 11</div>
+                    <div class="stat-label">Total Wins Came From<br>140% Schedule Hours</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-viz">
+            <div class="data-viz-title">Why It Works: 140% Pushes Your Bids Above Market</div>
+            <div class="bar-chart">
+                <div style="display: flex; gap: 24px; margin-bottom: 12px; font-size: 11px; color: var(--neutral-gray);">
+                    <span><span style="display:inline-block;width:10px;height:10px;background:var(--goal-accent-2);border-radius:2px;margin-right:4px;"></span> Your bid at 100% schedule</span>
+                    <span><span style="display:inline-block;width:10px;height:10px;background:var(--goal-brand);border-radius:2px;margin-right:4px;"></span> Your bid at 140% schedule</span>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label highlight">Tier 1</div>
+                    <div class="bar-container">
+                        <div class="bar blue-light" style="width: 57%;"></div>
+                        <div class="marker" style="left: 62%;"><div class="marker-label" style="left: 50%;">1st: $4.73</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-red);">$4.39 <small>below</small></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label highlight">Tier 1 @ 140%</div>
+                    <div class="bar-container">
+                        <div class="bar blue" style="width: 80%;"></div>
+                        <div class="marker" style="left: 62%;"><div class="marker-label" style="left: 50%;">1st: $4.73</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--success-green);">$6.15 <small>above ✓</small></div>
+                </div>
+                <div style="height: 8px;"></div>
+                <div class="bar-row">
+                    <div class="bar-label highlight">Home Search</div>
+                    <div class="bar-container">
+                        <div class="bar blue-light" style="width: 58%;"></div>
+                        <div class="marker" style="left: 84%;"><div class="marker-label" style="left: 50%;">1st: $19.11</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-red);">$13.17 <small>below</small></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label highlight">Home Search @ 140%</div>
+                    <div class="bar-container">
+                        <div class="bar blue" style="width: 81%;"></div>
+                        <div class="marker" style="left: 84%;"><div class="marker-label" style="left: 50%;">1st: $19.11</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--success-green);">$18.44 <small>near 1st ✓</small></div>
+                </div>
+                <div style="height: 8px;"></div>
+                <div class="bar-row">
+                    <div class="bar-label highlight">Tier 3</div>
+                    <div class="bar-container">
+                        <div class="bar blue-light" style="width: 49%;"></div>
+                        <div class="marker" style="left: 73%;"><div class="marker-label" style="left: 50%;">1st: $5.90</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-red);">$3.95 <small>below</small></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label highlight">Tier 3 @ 140%</div>
+                    <div class="bar-container">
+                        <div class="bar blue" style="width: 68%;"></div>
+                        <div class="marker" style="left: 73%;"><div class="marker-label" style="left: 50%;">1st: $5.90</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-orange);">$5.53 <small>close</small></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="proof-callout">
+            <div class="proof-icon">&#9989;</div>
+            <div class="proof-text">
+                <strong>Bottom line:</strong> Your own data proves that when bids are above market pricing, leads come in. The recommendations below permanently fix your bids to these competitive levels — so every hour performs like your best hours.
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- REC #1: RAISE BASE BID -->
+    <!-- ============================================================ -->
+    <div class="issue-card blue">
+        <div class="issue-header">
+            <div>
+                <div class="issue-number">Recommendation #1 — Highest Impact</div>
+                <div class="issue-title">Raise Base Bid to Make Every Hour as Competitive as Your Best Hours</div>
+            </div>
+            <span class="issue-badge high">Highest Impact</span>
+        </div>
+
+        <div class="issue-body">
+            Right now, your base bid of <strong>$4.39</strong> is below the market's top position on 4 of your 5 active sources. The only time your bids are competitive is when the 140% schedule boost kicks in. By raising the base bid to <strong>$5.25</strong>, your campaign becomes competitive <strong>at 100% schedule</strong> — meaning the 140% boost is no longer needed as a crutch, and performance improves across every active hour. For Tier 3 and Home Search, we also recommend targeted source adjustments to close the remaining gap.
+        </div>
+
+        <div class="data-viz">
+            <div class="data-viz-title">Your Effective Bid vs. Market — Current vs. After Base Bid Raise</div>
+            <div class="bar-chart">
+                <div style="display: flex; gap: 24px; margin-bottom: 12px; font-size: 11px; color: var(--neutral-gray);">
+                    <span><span style="display:inline-block;width:10px;height:10px;background:var(--goal-accent-2);border-radius:2px;margin-right:4px;"></span> Current bid ($4.39 base)</span>
+                    <span><span style="display:inline-block;width:10px;height:10px;background:var(--goal-brand);border-radius:2px;margin-right:4px;"></span> After raise ($5.25 base)</span>
+                </div>
+
+                <!-- Tier 1 -->
+                <div style="font-size:12px;font-weight:600;color:var(--goal-text);margin-bottom:4px;margin-top:4px;">Tier 1 — 22,377 opportunities (61% of traffic)</div>
+                <div class="bar-row">
+                    <div class="bar-label">Current</div>
+                    <div class="bar-container">
+                        <div class="bar blue-light" style="width: 66%;"></div>
+                        <div class="marker" style="left: 71%;"><div class="marker-label" style="left: 50%;">1st: $4.73</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-red);">$4.39</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label" style="color:var(--goal-brand);font-weight:600;">Recommended</div>
+                    <div class="bar-container">
+                        <div class="bar blue" style="width: 79%;"></div>
+                        <div class="marker" style="left: 71%;"><div class="marker-label" style="left: 50%;">1st: $4.73</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--success-green);">$5.25 ✓</div>
+                </div>
+
+                <div style="height: 12px;"></div>
+
+                <!-- Tier 3 -->
+                <div style="font-size:12px;font-weight:600;color:var(--goal-text);margin-bottom:4px;">Tier 3 — 4,804 opportunities (+ source multiplier raise 90% → 120%)</div>
+                <div class="bar-row">
+                    <div class="bar-label">Current</div>
+                    <div class="bar-container">
+                        <div class="bar blue-light" style="width: 47%;"></div>
+                        <div class="marker" style="left: 71%;"><div class="marker-label" style="left: 50%;">1st: $5.90</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-red);">$3.95</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label" style="color:var(--goal-brand);font-weight:600;">Recommended</div>
+                    <div class="bar-container">
+                        <div class="bar blue" style="width: 76%;"></div>
+                        <div class="marker" style="left: 71%;"><div class="marker-label" style="left: 50%;">1st: $5.90</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--success-green);">$6.30 ✓</div>
+                </div>
+
+                <div style="height: 12px;"></div>
+
+                <!-- Home Search -->
+                <div style="font-size:12px;font-weight:600;color:var(--goal-text);margin-bottom:4px;">Home Search — 3,707 opportunities (+ source multiplier raise 300% → 370%)</div>
+                <div class="bar-row">
+                    <div class="bar-label">Current</div>
+                    <div class="bar-container">
+                        <div class="bar blue-light" style="width: 58%;"></div>
+                        <div class="marker" style="left: 84%;"><div class="marker-label" style="left: 50%;">1st: $19.11</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-red);">$13.17</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label" style="color:var(--goal-brand);font-weight:600;">Recommended</div>
+                    <div class="bar-container">
+                        <div class="bar blue" style="width: 86%;"></div>
+                        <div class="marker" style="left: 84%;"><div class="marker-label" style="left: 50%;">1st: $19.11</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--success-green);">$19.43 ✓</div>
+                </div>
+
+                <div style="height: 12px;"></div>
+
+                <!-- Home SearchB -->
+                <div style="font-size:12px;font-weight:600;color:var(--goal-text);margin-bottom:4px;">Home SearchB — 1,916 opportunities</div>
+                <div class="bar-row">
+                    <div class="bar-label">Current</div>
+                    <div class="bar-container">
+                        <div class="bar blue-light" style="width: 74%;"></div>
+                        <div class="marker" style="left: 83%;"><div class="marker-label" style="left: 50%;">1st: $7.38</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--warning-red);">$6.58</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label" style="color:var(--goal-brand);font-weight:600;">Recommended</div>
+                    <div class="bar-container">
+                        <div class="bar blue" style="width: 89%;"></div>
+                        <div class="marker" style="left: 83%;"><div class="marker-label" style="left: 50%;">1st: $7.38</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--success-green);">$7.88 ✓</div>
+                </div>
+
+                <div style="height: 12px;"></div>
+
+                <!-- Tier 2 -->
+                <div style="font-size:12px;font-weight:600;color:var(--success-green);margin-bottom:4px;">Tier 2 — 2,658 opportunities (already above 1st — no change needed ✓)</div>
+                <div class="bar-row">
+                    <div class="bar-label">Current</div>
+                    <div class="bar-container">
+                        <div class="bar green" style="width: 76%;"></div>
+                        <div class="marker" style="left: 63%;"><div class="marker-label" style="left: 50%;">1st: $4.21</div></div>
+                    </div>
+                    <div class="bar-value" style="color:var(--success-green);">$4.39 ✓</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="impact-banner">
+            <div class="impact-label">Projected Impact</div>
+            <div class="impact-value">All 5 Sources Competitive at 1st Position</div>
+            <div class="impact-sub">Every active hour performs like your current best hours — no schedule boost needed to be competitive.</div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- REC #2: EXPAND SCHEDULE -->
+    <!-- ============================================================ -->
+    <div class="issue-card orange">
+        <div class="issue-header">
+            <div>
+                <div class="issue-number" style="color: var(--warning-orange);">Recommendation #2 — More Hours = More Leads</div>
+                <div class="issue-title">Fix Schedule Gaps and Add Weekend Coverage</div>
+            </div>
+            <span class="issue-badge medium">Quick Win</span>
+        </div>
+
+        <div class="issue-body">
+            Your schedule currently has a <strong>dead hour at 1 PM</strong> on Monday, Thursday, and Friday — right in the middle of the business day. Evening hours after 5 PM and all of Saturday and Sunday are also turned off. That's <strong>14.8% of all available traffic</strong> arriving when your campaign isn't bidding. Once bids are competitive at 100% (from Recommendation #1), we can simplify the schedule and expand coverage. Your best-performing hour is <strong>10 AM with 21 leads</strong> — we want more hours at that level.
+        </div>
+
+        <div class="data-viz">
+            <div class="data-viz-title">Current Schedule vs. Recommended Schedule</div>
+            <div class="sched-compare">
+                <div class="sched-col">
+                    <div class="sched-col-title red">Current Schedule ✕</div>
+                    <div class="sched-row"><span class="sched-day">Monday</span><span class="sched-hours">9am–5pm, mixed 140–200%, <span class="red">1pm gap</span></span></div>
+                    <div class="sched-row"><span class="sched-day">Tue–Wed</span><span class="sched-hours">9am–5pm, 100–115%</span></div>
+                    <div class="sched-row"><span class="sched-day">Thursday</span><span class="sched-hours">9am–5pm, 100–140%, <span class="red">1pm gap</span></span></div>
+                    <div class="sched-row"><span class="sched-day">Friday</span><span class="sched-hours">9am–4pm, 140%, <span class="red">1pm gap</span></span></div>
+                    <div class="sched-row"><span class="sched-day">Saturday</span><span class="sched-hours red">OFF</span></div>
+                    <div class="sched-row"><span class="sched-day">Sunday</span><span class="sched-hours red">OFF</span></div>
+                </div>
+                <div class="sched-col">
+                    <div class="sched-col-title blue">Recommended Schedule ✓</div>
+                    <div class="sched-row"><span class="sched-day">Monday</span><span class="sched-hours blue">8am–6pm, 100% — no gaps</span></div>
+                    <div class="sched-row"><span class="sched-day">Tue–Wed</span><span class="sched-hours blue">8am–6pm, 100%</span></div>
+                    <div class="sched-row"><span class="sched-day">Thursday</span><span class="sched-hours blue">8am–6pm, 100% — no gaps</span></div>
+                    <div class="sched-row"><span class="sched-day">Friday</span><span class="sched-hours blue">8am–6pm, 100% — no gaps</span></div>
+                    <div class="sched-row"><span class="sched-day">Saturday</span><span class="sched-hours green">9am–2pm, 100% — NEW</span></div>
+                    <div class="sched-row"><span class="sched-day">Sunday</span><span class="sched-hours">OFF (or test 10am–1pm)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-viz">
+            <div class="data-viz-title">Hour-by-Hour Performance Shows Strong Demand All Day</div>
+            <div class="bar-chart">
+                <div class="bar-row">
+                    <div class="bar-label highlight">10 AM ★</div>
+                    <div class="bar-container"><div class="bar blue" style="width: 100%;"></div></div>
+                    <div class="bar-value" style="color: var(--goal-brand);">21 leads · Best</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">11 AM</div>
+                    <div class="bar-container"><div class="bar blue" style="width: 57%;"></div></div>
+                    <div class="bar-value">12 leads</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">9 AM</div>
+                    <div class="bar-container"><div class="bar blue" style="width: 52%;"></div></div>
+                    <div class="bar-value">11 leads</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">12 PM</div>
+                    <div class="bar-container"><div class="bar blue-light" style="width: 43%;"></div></div>
+                    <div class="bar-value">9 leads</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">2 PM</div>
+                    <div class="bar-container"><div class="bar blue-light" style="width: 38%;"></div></div>
+                    <div class="bar-value">8 leads</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">3 PM</div>
+                    <div class="bar-container"><div class="bar blue-light" style="width: 24%;"></div></div>
+                    <div class="bar-value">5 leads</div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label" style="color: var(--warning-red);">1 PM ⚠</div>
+                    <div class="bar-container"><div class="bar red" style="width: 0%;"></div></div>
+                    <div class="bar-value" style="color: var(--warning-red);">0 leads · Gap</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="impact-banner">
+            <div class="impact-label">Projected Impact</div>
+            <div class="impact-value">+3 Active Hours/Day + Saturday Coverage</div>
+            <div class="impact-sub">Eliminates the 1 PM dead hour, adds 8 AM and 5 PM windows, and captures weekend shoppers.</div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- REC #3: RAISE DAILY BUDGET -->
+    <!-- ============================================================ -->
+    <div class="issue-card green">
+        <div class="issue-header">
+            <div>
+                <div class="issue-number" style="color: var(--success-green);">Recommendation #3 — Fuel the Growth</div>
+                <div class="issue-title">Increase Daily Budget to Support the New Volume</div>
+            </div>
+            <span class="issue-badge growth">Growth Lever</span>
+        </div>
+
+        <div class="issue-body">
+            Your current daily limit is <strong>$20.00</strong>, but you're only spending <strong>$11.91/day</strong> (59.6% utilization) because the low bids and limited schedule aren't winning enough auctions to spend the full budget. Once Recommendations #1 and #2 are in place — competitive bids across all sources and expanded hours — you'll win significantly more auctions and need headroom to capture that volume. <strong>Raising the daily limit to $40.00</strong> ensures the campaign can scale without hitting a ceiling, while still keeping monthly spend manageable.
+        </div>
+
+        <div class="data-viz">
+            <div class="data-viz-title">Budget Scenario Comparison</div>
+            <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="stat-value orange">$20/day</div>
+                    <div class="stat-label">Current Limit<br>$600/month max<br>Actual: ~$357/month</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value blue">$40/day</div>
+                    <div class="stat-label">Recommended<br>$1,200/month max<br>Room to grow</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value green">$50/day</div>
+                    <div class="stat-label">Aggressive Option<br>$1,500/month max<br>Maximum volume</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="proof-callout">
+            <div class="proof-icon">&#128161;</div>
+            <div class="proof-text">
+                <strong>Important:</strong> The daily limit is a ceiling, not a spend commitment. Your actual spend depends on how many auctions you win. With competitive bids and expanded hours, we expect daily spend to increase gradually — you won't jump to $40/day overnight. The limit just ensures the campaign doesn't hit a wall when it starts winning more.
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SUMMARY: ALL CHANGES TOGETHER -->
+    <!-- ============================================================ -->
+    <div class="section">
+        <div class="section-title">All Changes at a Glance</div>
+        <div class="rec-grid">
+            <div class="rec-card">
+                <div class="rec-card-header">
+                    <div class="rec-source-name">Base Bid Raise</div>
+                    <span class="rec-action-badge bid">Bid Change</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Current</span>
+                    <span class="rec-detail-value">$4.39</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Recommended</span>
+                    <span class="rec-detail-value" style="color: var(--goal-brand);">$5.25</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Impact</span>
+                    <span class="rec-detail-value positive">Tier 1 + Tier 2 above 1st</span>
+                </div>
+            </div>
+
+            <div class="rec-card">
+                <div class="rec-card-header">
+                    <div class="rec-source-name">Tier 3 Source Boost</div>
+                    <span class="rec-action-badge bid">Source Change</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Multiplier</span>
+                    <span class="rec-detail-value">90% → <span style="color: var(--goal-brand);">120%</span></span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Effective bid</span>
+                    <span class="rec-detail-value">$3.95 → <span style="color: var(--goal-brand);">$6.30</span></span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Impact</span>
+                    <span class="rec-detail-value positive">Above 1st ($5.90)</span>
+                </div>
+            </div>
+
+            <div class="rec-card">
+                <div class="rec-card-header">
+                    <div class="rec-source-name">Home Search Boost</div>
+                    <span class="rec-action-badge bid">Source Change</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Multiplier</span>
+                    <span class="rec-detail-value">300% → <span style="color: var(--goal-brand);">370%</span></span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Effective bid</span>
+                    <span class="rec-detail-value">$13.17 → <span style="color: var(--goal-brand);">$19.43</span></span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Impact</span>
+                    <span class="rec-detail-value positive">Above 1st ($19.11)</span>
+                </div>
+            </div>
+
+            <div class="rec-card orange">
+                <div class="rec-card-header">
+                    <div class="rec-source-name">Schedule Cleanup</div>
+                    <span class="rec-action-badge schedule">Schedule</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Fix 1 PM gap</span>
+                    <span class="rec-detail-value positive">Restore to 100%</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Expand hours</span>
+                    <span class="rec-detail-value">8am–6pm Mon–Fri</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Add Saturday</span>
+                    <span class="rec-detail-value positive">9am–2pm</span>
+                </div>
+            </div>
+
+            <div class="rec-card green">
+                <div class="rec-card-header">
+                    <div class="rec-source-name">Daily Budget</div>
+                    <span class="rec-action-badge budget">Budget</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Current</span>
+                    <span class="rec-detail-value">$20.00/day</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Recommended</span>
+                    <span class="rec-detail-value" style="color: var(--goal-brand);">$40.00/day</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Safety net</span>
+                    <span class="rec-detail-value positive">Ceiling, not commitment</span>
+                </div>
+            </div>
+
+            <div class="rec-card">
+                <div class="rec-card-header">
+                    <div class="rec-source-name">Simplify Schedule %</div>
+                    <span class="rec-action-badge schedule">Schedule</span>
+                </div>
+                <div class="rec-detail-row">
+                    <span class="rec-detail-label">Remove 140–200% boosts</span>
+                    <span class="rec-detail-value positive">Set all to 100%</span>
+                </div>
+                <div class="rec-rationale">
+                    Once base bid is competitive, the schedule boost is no longer needed. A clean 100% everywhere is simpler to manage and makes performance easier to read.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- NEXT STEPS -->
+    <!-- ============================================================ -->
+    <div class="section">
+        <div class="summary-section">
+            <div class="summary-title">Next Steps</div>
+            <div class="summary-text">
+                These three recommendations work as a package: the bid adjustments make you competitive, the schedule expansion gives you more at-bats, and the budget increase ensures there's room to capture the new volume. <strong>We recommend implementing all changes together</strong> so we can measure the combined impact. Your daily limit acts as a safety net — actual spend will ramp up gradually as win rate improves.
+            </div>
+            <div class="next-steps-grid">
+                <div class="next-step">
+                    <div class="next-step-number">1</div>
+                    <div class="next-step-text"><strong>Review & Approve</strong><br>Let us know you'd like to proceed with these changes</div>
+                </div>
+                <div class="next-step">
+                    <div class="next-step-number">2</div>
+                    <div class="next-step-text"><strong>We Implement</strong><br>We'll make all changes to your campaign same-day</div>
+                </div>
+                <div class="next-step">
+                    <div class="next-step-number">3</div>
+                    <div class="next-step-text"><strong>7-Day Check-In</strong><br>We'll review performance after one week and fine-tune</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-logo">GOAL</div>
+        <div class="footer-text">Performance Marketing Platform · Client Campaign Review</div>
+        <div class="footer-text" style="margin-top: 8px;">Prepared March 17, 2026 · Supreme Choice Insurance Solutions · Home — CA</div>
+    </div>
+
+</div>
+</body>
+</html>
