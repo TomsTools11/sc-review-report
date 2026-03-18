@@ -40,7 +40,7 @@
 
         .card-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
@@ -67,6 +67,7 @@
         }
         .report-card.internal::before { background: var(--goal-brand); }
         .report-card.client::before { background: var(--goal-accent-1); }
+        .report-card.visual::before { background: #97C2E8; }
 
         .card-badge {
             display: inline-block;
@@ -107,7 +108,7 @@
         }
 
         @media (max-width: 600px) {
-            .card-grid { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: 1fr !important; }
             body { padding: 20px; align-items: flex-start; }
         }
     </style>
@@ -130,6 +131,12 @@
         <a href="sc-client-review.html" class="report-card client">
             <div class="card-title">Account Review</div>
             <div class="card-description">High-level KPIs, lead-to-quote funnel, campaign breakdown, source performance, and strategic next steps.</div>
+            <span class="card-arrow">View report &rarr;</span>
+        </a>
+
+        <a href="sc-30day-performance-visual.html" class="report-card visual">
+            <div class="card-title">Performance — Past 30 Days</div>
+            <div class="card-description">Visual 30-day snapshot with KPI cards, conversion funnel, campaign comparison charts, and performance summary.</div>
             <span class="card-arrow">View report &rarr;</span>
         </a>
     </div>
