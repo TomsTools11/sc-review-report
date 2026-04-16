@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supreme Choice Insurance Solutions — Reports</title>
+    <title>Supreme Choice Insurance Solutions — Dashboards</title>
     <style>
         :root {
             --goal-brand: #077BE5;
@@ -31,7 +31,7 @@
             padding: 40px;
         }
 
-        .container { max-width: 1060px; width: 100%; }
+        .container { max-width: 880px; width: 100%; }
 
         .header { text-align: center; margin-bottom: 48px; }
         .header-logo { font-size: 22px; font-weight: 700; color: var(--goal-brand); margin-bottom: 4px; letter-spacing: -0.5px; }
@@ -40,7 +40,7 @@
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
         }
 
@@ -65,20 +65,8 @@
             top: 0; left: 0;
             width: 100%; height: 4px;
         }
-        .report-card.internal::before { background: var(--goal-brand); }
-        .report-card.client::before { background: var(--goal-accent-1); }
-        .report-card.visual::before { background: #97C2E8; }
-
-        .card-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        .card-badge.internal { background: #DBEAFE; color: #1E40AF; }
-        .card-badge.client { background: #D1FAE5; color: #065F46; }
+        .report-card.performance::before { background: var(--goal-brand); }
+        .report-card.cpa::before { background: var(--goal-accent-1); }
 
         .card-title {
             font-size: 18px;
@@ -118,30 +106,24 @@
     <div class="header">
         <div class="header-logo">GOAL</div>
         <h1>Supreme Choice Insurance Solutions</h1>
-        <p>Campaign Review Reports &middot; March 2026</p>
+        <p>CA Home Campaign Dashboards &middot; April 2026</p>
     </div>
 
     <div class="card-grid">
-        <a href="internal-review.html" class="report-card internal">
-            <div class="card-title">Campaign Review</div>
-            <div class="card-description">Detailed campaign diagnostics with bid optimization, scheduling analysis, source-level performance, and actionable recommendations.</div>
-            <span class="card-arrow">View report &rarr;</span>
+        <a href="Supreme-Choice-Client-Dashboard-April-2026.html" class="report-card performance">
+            <div class="card-title">Performance Review</div>
+            <div class="card-description">Monthly KPIs, lead-to-policy funnel, source-level performance, and trend analysis across the CA Home campaign.</div>
+            <span class="card-arrow">View dashboard &rarr;</span>
         </a>
 
-        <a href="sc-client-review.html" class="report-card client">
-            <div class="card-title">Account Review</div>
-            <div class="card-description">High-level KPIs, lead-to-quote funnel, campaign breakdown, source performance, and strategic next steps.</div>
-            <span class="card-arrow">View report &rarr;</span>
-        </a>
-
-        <a href="sc-30day-performance-visual.html" class="report-card visual">
-            <div class="card-title">Performance — Past 30 Days</div>
-            <div class="card-description">Visual 30-day snapshot with KPI cards, conversion funnel, campaign comparison charts, and performance summary.</div>
-            <span class="card-arrow">View report &rarr;</span>
+        <a href="Supreme-Choice-CPA-Dashboard-April-2026.html" class="report-card cpa">
+            <div class="card-title">Cost Per Acquisition Analysis</div>
+            <div class="card-description">Deep dive into CPA trends, cost efficiency by source, and spend-to-policy economics for the CA Home campaign.</div>
+            <span class="card-arrow">View dashboard &rarr;</span>
         </a>
     </div>
 
-    <div class="footer">GOAL Platform &middot; Prepared March 2026</div>
+    <div class="footer">GOAL Platform &middot; Prepared April 2026</div>
 </div>
 </body>
 </html>
