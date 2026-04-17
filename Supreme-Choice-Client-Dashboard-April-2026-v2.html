@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice Insurance | April 2026 Performance Review</title>
+<style>
+:root {
+  --goal-brand: #077BE5;
+  --goal-dark-blue: #00172D;
+  --goal-accent-1: #3AEECA;
+  --goal-accent-2: #97C2E8;
+  --goal-accent-3: #9FDACD;
+  --goal-light-grey: #F8F9FC;
+  --goal-text: #001020;
+  --border: #E5E7EB;
+  --gray-label: #6B7280;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: var(--goal-light-grey);
+  color: var(--goal-text);
+  line-height: 1.55;
+  padding: 40px 20px;
+}
+.container { max-width: 1120px; margin: 0 auto; }
+.header {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 36px 40px;
+  margin-bottom: 24px;
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.brand-tag {
+  display: inline-block;
+  color: var(--goal-brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.header h1 {
+  color: var(--goal-dark-blue);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.header .subtitle {
+  color: var(--gray-label);
+  font-size: 15px;
+}
+.period-badge {
+  background: var(--goal-light-grey);
+  border: 1px solid var(--border);
+  color: var(--gray-label);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.icp-banner {
+  background: linear-gradient(135deg, rgba(7, 123, 229, 0.06), rgba(58, 238, 202, 0.06));
+  border: 1px solid rgba(7, 123, 229, 0.2);
+  border-left: 4px solid var(--goal-brand);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-top: 8px;
+}
+.icp-banner .label {
+  color: var(--goal-brand);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.icp-banner h3 {
+  color: var(--goal-dark-blue);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.icp-banner p {
+  color: var(--goal-text);
+  font-size: 14px;
+}
+.section {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 36px;
+  margin-bottom: 24px;
+}
+.section h2 {
+  color: var(--goal-dark-blue);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.section .section-sub {
+  color: var(--gray-label);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.kpi {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 20px;
+  text-align: left;
+}
+.kpi .value {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--goal-brand);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.kpi .value.dark { color: var(--goal-dark-blue); }
+.kpi .value.success { color: var(--success); }
+.kpi .label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-label);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.kpi .helper {
+  font-size: 12px;
+  color: var(--gray-label);
+  margin-top: 8px;
+}
+.funnel {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.funnel-step {
+  flex: 1;
+  min-width: 120px;
+  background: var(--goal-light-grey);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 14px;
+  text-align: center;
+  position: relative;
+}
+.funnel-step .label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-label);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.funnel-step .value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--goal-dark-blue);
+}
+.funnel-step .pct {
+  font-size: 12px;
+  color: var(--gray-label);
+  margin-top: 4px;
+}
+.funnel-step.highlight {
+  background: rgba(7, 123, 229, 0.06);
+  border-color: var(--goal-brand);
+}
+.funnel-step.highlight .value {
+  color: var(--goal-brand);
+}
+.wins-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.win-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--success);
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+.win-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--goal-dark-blue);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.win-card h4::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+}
+.win-card p {
+  font-size: 13px;
+  color: var(--goal-text);
+  line-height: 1.55;
+}
+.win-card .stat {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--success);
+  margin: 6px 0;
+}
+.source-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.source-table thead th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-label);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--border);
+  background: var(--goal-light-grey);
+}
+.source-table tbody td {
+  padding: 16px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.source-table tbody tr:last-child td { border-bottom: none; }
+.source-table .source-name {
+  font-weight: 700;
+  color: var(--goal-dark-blue);
+}
+.source-table .source-role {
+  font-size: 12px;
+  color: var(--gray-label);
+  margin-top: 2px;
+}
+.source-table .num {
+  font-variant-numeric: tabular-nums;
+}
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+.badge-success { background: rgba(16, 185, 129, 0.12); color: var(--success); }
+.badge-brand { background: rgba(7, 123, 229, 0.12); color: var(--goal-brand); }
+.badge-warn { background: rgba(245, 158, 11, 0.12); color: var(--warning); }
+.badge-gray { background: var(--goal-light-grey); color: var(--gray-label); }
+.rec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.rec-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+  background: white;
+}
+.rec-card.hold { border-left: 4px solid var(--success); }
+.rec-card.watch { border-left: 4px solid var(--goal-brand); }
+.rec-card.adjust { border-left: 4px solid var(--warning); }
+.rec-card .tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.rec-card.hold .tag { color: var(--success); }
+.rec-card.watch .tag { color: var(--goal-brand); }
+.rec-card.adjust .tag { color: var(--warning); }
+.rec-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--goal-dark-blue);
+  margin-bottom: 8px;
+}
+.rec-card p {
+  font-size: 13px;
+  color: var(--goal-text);
+  line-height: 1.55;
+}
+.summary-box {
+  background: var(--goal-dark-blue);
+  color: white;
+  border-radius: 12px;
+  padding: 32px 36px;
+  margin-bottom: 24px;
+}
+.summary-box h2 {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+.summary-box p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+.summary-box strong { color: var(--goal-accent-1); font-weight: 600; }
+.footer {
+  text-align: center;
+  color: var(--gray-label);
+  font-size: 12px;
+  padding: 20px;
+}
+.footer strong { color: var(--goal-brand); }
+.misaligned-reports {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.misaligned-reports .misaligned-label {
+  color: var(--gray-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.misaligned-reports h3 {
+  color: var(--goal-dark-blue);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.misaligned-reports .misaligned-sub {
+  color: var(--gray-label);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.misaligned-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.misaligned-card {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  background: var(--goal-light-grey);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.misaligned-card:hover {
+  border-color: var(--goal-brand);
+  background: white;
+}
+.misaligned-card .title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--goal-dark-blue);
+  margin-bottom: 2px;
+}
+.misaligned-card .desc {
+  font-size: 12px;
+  color: var(--gray-label);
+  margin-bottom: 10px;
+}
+.misaligned-card .arrow {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--goal-brand);
+  margin-top: auto;
+}
+@media (max-width: 780px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .wins-grid { grid-template-columns: 1fr; }
+  .rec-grid { grid-template-columns: 1fr; }
+  .section { padding: 24px 20px; }
+  .misaligned-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="brand-tag">GOAL Platform | Account Review</div>
+        <h1>Supreme Choice Insurance</h1>
+        <div class="subtitle">California Home Campaign Performance | April 2026</div>
+      </div>
+      <div class="period-badge">Reporting period: Last 30 days</div>
+    </div>
+  </div>
+
+  <!-- Misaligned Reports -->
+  <div class="misaligned-reports">
+    <div class="misaligned-label">Prior Reports</div>
+    <h3>Misaligned Reports</h3>
+    <p class="misaligned-sub">Earlier April 2026 reports built before the non-standard ICP was confirmed. Retained for reference only &mdash; superseded by this review.</p>
+    <div class="misaligned-grid">
+      <a href="Supreme-Choice-Client-Dashboard-April-2026.html" class="misaligned-card">
+        <div class="title">Performance Review</div>
+        <div class="desc">Original April 2026 performance dashboard</div>
+        <span class="arrow">View &rarr;</span>
+      </a>
+      <a href="Supreme-Choice-CPA-Dashboard-April-2026.html" class="misaligned-card">
+        <div class="title">Cost Per Acquisition Analysis</div>
+        <div class="desc">Original April 2026 CPA deep dive</div>
+        <span class="arrow">View &rarr;</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Executive Summary -->
+  <div class="summary-box">
+    <h2>The Two Numbers That Matter</h2>
+    <p>Everything in this campaign comes down to two outcomes: <strong>more bound policies</strong> and <strong>more qualified conversations with non-standard prospects</strong>. This month you produced <strong>2 binds at a $548 Policy CPA</strong> and <strong>21 contacted leads</strong>. Both numbers have room to grow, and the levers to move them are clear.</p>
+    <p>The lead flow itself is matching your profile: <strong>113 non-standard leads at $9.70</strong>, with a <strong>76% quote rate once your team makes contact</strong>. The quality is there. The next two levers are lifting the <strong>18.6% contact rate</strong> toward the 30% benchmark, and leaning into the sources that have actually produced binds.</p>
+  </div>
+
+  <!-- Headline KPIs -->
+  <div class="section">
+    <h2>Headline Metrics</h2>
+    <div class="section-sub">The two North Star numbers are bound policies and qualified conversations</div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="value success">2</div>
+        <div class="label">Policies Bound</div>
+        <div class="helper">North Star metric</div>
+      </div>
+      <div class="kpi">
+        <div class="value">21</div>
+        <div class="label">Qualified Conversations</div>
+        <div class="helper">Contacted leads</div>
+      </div>
+      <div class="kpi">
+        <div class="value">16</div>
+        <div class="label">Quotes Delivered</div>
+        <div class="helper">76% of contacts quoted</div>
+      </div>
+      <div class="kpi">
+        <div class="value dark">113</div>
+        <div class="label">Non-Standard Leads</div>
+        <div class="helper">At $9.70 per lead</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Growth Levers -->
+  <div class="section">
+    <h2>The Two Growth Levers</h2>
+    <div class="section-sub">Where the next sale and the next qualified conversation come from</div>
+    <div class="wins-grid" style="grid-template-columns: 1fr 1fr; gap: 18px;">
+      <div class="win-card" style="border-left-color: var(--goal-brand);">
+        <h4 style="gap: 10px;">
+          <span style="background: var(--goal-brand); width: 24px; height: 24px; border-radius: 50%; color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">1</span>
+          Lift Contact Rate to Unlock Sales
+        </h4>
+        <div class="stat" style="color: var(--goal-brand); font-size: 28px;">18.6% &rarr; 30%</div>
+        <p>Current contact rate of 18.6% means roughly 1 in 5 leads is reached. Lifting to the 30% benchmark would add an estimated <strong>12 more qualified conversations and 4 to 6 additional quotes</strong> on the same lead volume, directly feeding the sales pipeline without increasing spend.</p>
+      </div>
+      <div class="win-card" style="border-left-color: var(--success);">
+        <h4 style="gap: 10px;">
+          <span style="background: var(--success); width: 24px; height: 24px; border-radius: 50%; color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">2</span>
+          Concentrate on Sources That Bind
+        </h4>
+        <div class="stat" style="font-size: 28px;">Tier 1 &amp; Tier 2</div>
+        <p>Tier 1 produced <strong>both binds at $82 Policy CPA</strong>. Tier 2 is the pipeline workhorse with 49 leads and 6 quotes. Reweighting budget toward these two sources is the highest-confidence path to more binds in May without loosening any targeting.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Funnel -->
+  <div class="section">
+    <h2>Conversion Funnel</h2>
+    <div class="section-sub">How traffic moved through the pipeline this month</div>
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="label">Searches</div>
+        <div class="value">6,126</div>
+        <div class="pct">CA Home market</div>
+      </div>
+      <div class="funnel-step">
+        <div class="label">Impressions</div>
+        <div class="value">442</div>
+        <div class="pct">7.2% of searches</div>
+      </div>
+      <div class="funnel-step">
+        <div class="label">Clicks</div>
+        <div class="value">159</div>
+        <div class="pct">36.0% CTR</div>
+      </div>
+      <div class="funnel-step highlight">
+        <div class="label">Leads</div>
+        <div class="value">113</div>
+        <div class="pct">71.1% click-to-lead</div>
+      </div>
+      <div class="funnel-step">
+        <div class="label">Quotes</div>
+        <div class="value">16</div>
+        <div class="pct">76% of contacts</div>
+      </div>
+      <div class="funnel-step highlight">
+        <div class="label">Bound</div>
+        <div class="value">2</div>
+        <div class="pct">12.5% close on quote</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wins -->
+  <div class="section">
+    <h2>Proof Points Supporting the Plan</h2>
+    <div class="section-sub">Evidence that the book is matched to the right traffic</div>
+    <div class="wins-grid">
+      <div class="win-card">
+        <h4>Tier 1 Produced Both Binds</h4>
+        <div class="stat">$82.05</div>
+        <p>Policy CPA on Tier 1 is well below the typical non-standard home benchmark. Two binds on only 23 leads shows a clean match between source and book.</p>
+      </div>
+      <div class="win-card">
+        <h4>Quote Rate on Contact</h4>
+        <div class="stat">76%</div>
+        <p>When your team reaches a lead, three out of four get quoted. The leads arriving are the correct profile. The question is reaching more of them.</p>
+      </div>
+      <div class="win-card">
+        <h4>Lead Cost Holding</h4>
+        <div class="stat">$9.70</div>
+        <p>Cost per non-standard lead remains efficient. Spend per qualified prospect reaching the pipeline is in a healthy range for the category.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Source Performance -->
+  <div class="section">
+    <h2>Source Performance</h2>
+    <div class="section-sub">Where leads and binds came from this month</div>
+    <table class="source-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th class="num">Leads</th>
+          <th class="num">Quotes</th>
+          <th class="num">Policies</th>
+          <th class="num">Quote CPA</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="source-name">Tier 1</div>
+            <div class="source-role">Binding source</div>
+          </td>
+          <td class="num">23</td>
+          <td class="num">3</td>
+          <td class="num"><strong>2</strong></td>
+          <td class="num">$82.05</td>
+          <td><span class="badge badge-success">Producing binds</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="source-name">Tier 2</div>
+            <div class="source-role">Volume workhorse</div>
+          </td>
+          <td class="num">49</td>
+          <td class="num">6</td>
+          <td class="num">0</td>
+          <td class="num">$51.90</td>
+          <td><span class="badge badge-brand">Pipeline driver</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="source-name">Home Search</div>
+            <div class="source-role">Aggressive bid position</div>
+          </td>
+          <td class="num">19</td>
+          <td class="num">4</td>
+          <td class="num">0</td>
+          <td class="num">$96.93</td>
+          <td><span class="badge badge-warn">Monitor cost</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="source-name">Home SearchB</div>
+            <div class="source-role">Secondary search</div>
+          </td>
+          <td class="num">17</td>
+          <td class="num">2</td>
+          <td class="num">0</td>
+          <td class="num">$103.53</td>
+          <td><span class="badge badge-warn">Monitor cost</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="source-name">Tier 3</div>
+            <div class="source-role">Efficient filler</div>
+          </td>
+          <td class="num">5</td>
+          <td class="num">1</td>
+          <td class="num">0</td>
+          <td class="num">$26.06</td>
+          <td><span class="badge badge-gray">Low volume</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="section">
+    <h2>Next Steps</h2>
+    <div class="section-sub">Every action below maps to more sales or more qualified conversations with non-standard prospects</div>
+    <div class="rec-grid">
+      <div class="rec-card watch">
+        <div class="tag">Sales Lever #1</div>
+        <h4>Tighten Lead Follow-Up to Lift Contact Rate</h4>
+        <p>The biggest single lever on sales right now is contact rate. Moving from 18.6% toward 30% would unlock <strong>4 to 6 additional quotes monthly at current spend</strong>. Recommend reviewing speed-to-first-dial, SMS cadence, and multi-attempt rules on Tier 1 and Tier 2 leads first.</p>
+      </div>
+      <div class="rec-card watch">
+        <div class="tag">Sales Lever #2</div>
+        <h4>Concentrate Budget on Binding Sources</h4>
+        <p>Tier 1 produced both binds this month. Tier 2 is the quote volume engine. Proposal: shift a portion of Home Search spend (currently highest cost per quote, zero binds) toward Tier 1 and Tier 2 where non-standard match is proven.</p>
+      </div>
+      <div class="rec-card hold">
+        <div class="tag">Hold Steady</div>
+        <h4>Keep the Currently Insured Filter</h4>
+        <p>The "Currently Insured = No" filter is doing exactly what it should. Leads arriving are matched to your non-standard carriers, and the 76% quote-on-contact rate proves the pipeline quality. No change.</p>
+      </div>
+      <div class="rec-card adjust">
+        <div class="tag">Monitor</div>
+        <h4>Home Search Cost Trend</h4>
+        <p>Home Search and Home SearchB are the highest-cost sources per quote with no binds yet. Home SearchB is trending in the right direction over the last two weeks. If improvement does not hold into May, we will recalibrate bids.</p>
+      </div>
+      <div class="rec-card hold">
+        <div class="tag">Continuing</div>
+        <h4>Reinforce Non-Standard Risk Signals</h4>
+        <p>SR-22, DUI, prior-claims, and lapsed-coverage indicators remain the quality markers for your book. Ongoing optimizations will keep reinforcing these signals, not broaden the net.</p>
+      </div>
+      <div class="rec-card watch">
+        <div class="tag">Tracking</div>
+        <h4>Measuring What Matters</h4>
+        <p>Going forward we will track two numbers weekly: <strong>bound policies</strong> and <strong>qualified conversations with non-standard prospects</strong>. Everything else is a supporting metric that serves those two outcomes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Prepared by your GOAL Platform account team | <strong>Supreme Choice Insurance</strong> | CA Home Campaign | April 2026<br>
+    All conversion rates calculated from Leads. Data pulled from GOAL Platform, last 30 days.
+  </div>
+
+</div>
+</body>
+</html>
