@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — Historical Performance Review</title>
+<style>
+  :root {
+    --goal-brand: #077BE5;
+    --goal-dark-blue: #00172D;
+    --goal-accent-1: #3AEECA;
+    --goal-accent-2: #97C2E8;
+    --goal-accent-3: #9FDACD;
+    --goal-light-grey: #F8F9FC;
+    --goal-text: #001020;
+    --border: #E5E7EB;
+    --muted: #6B7280;
+    --success: #10B981;
+    --warn: #F59E0B;
+    --danger: #EF4444;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background: var(--goal-light-grey);
+    color: var(--goal-text);
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 0 0 48px 0;
+  }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  /* Header */
+  .hero {
+    background: var(--goal-dark-blue);
+    color: #fff;
+    padding: 40px 0 48px 0;
+    margin-bottom: 32px;
+  }
+  .hero .container { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  .hero h1 { font-size: 30px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+  .hero .sub { color: var(--goal-accent-2); font-size: 15px; margin: 0; }
+  .hero .meta {
+    text-align: right;
+    font-size: 13px;
+    color: var(--goal-accent-2);
+    line-height: 1.8;
+  }
+  .hero .meta strong { color: #fff; font-weight: 600; }
+
+  /* Section */
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--goal-dark-blue);
+    margin: 0 0 6px 0;
+    letter-spacing: -0.3px;
+  }
+  h2 .num { color: var(--goal-brand); font-weight: 600; margin-right: 10px; }
+  .section-sub { color: var(--muted); font-size: 14px; margin: 0 0 20px 0; }
+
+  /* Headline card */
+  .headline {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--goal-brand);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+  .headline p { margin: 0; font-size: 16px; line-height: 1.65; }
+  .headline p + p { margin-top: 12px; }
+  .headline em { color: var(--goal-brand); font-style: normal; font-weight: 600; }
+
+  /* Three eras timeline */
+  .eras { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .era {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .era .era-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .era h3 { font-size: 17px; margin: 0 0 10px 0; color: var(--goal-dark-blue); }
+  .era p { margin: 0; font-size: 14px; color: var(--goal-text); line-height: 1.55; }
+  .era.peak { border-top: 3px solid var(--success); }
+  .era.crisis { border-top: 3px solid var(--danger); }
+  .era.foundation { border-top: 3px solid var(--goal-brand); }
+
+  /* KPI cards */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .kpi .value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--goal-brand);
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .kpi .label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+  }
+  .kpi .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .kpi.teal .value { color: #0B8F7A; }
+  .kpi.dark .value { color: var(--goal-dark-blue); }
+
+  /* Winning formula cards */
+  .formula-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .formula {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .formula .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--goal-brand);
+    background: rgba(7, 123, 229, 0.08);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .formula h4 {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    color: var(--goal-dark-blue);
+    font-weight: 700;
+  }
+  .formula p { margin: 0; font-size: 13.5px; color: var(--goal-text); line-height: 1.55; }
+  .formula .qt {
+    border-left: 2px solid var(--goal-accent-2);
+    padding: 4px 0 4px 10px;
+    margin-top: 10px;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 13px;
+  }
+
+  /* Crisis story */
+  .crisis-wrap {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+  }
+  .crisis-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  .crisis-table th, .crisis-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .crisis-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .crisis-table td.metric { color: var(--goal-dark-blue); font-weight: 600; }
+  .crisis-table .good { color: var(--success); font-weight: 700; }
+  .crisis-table .bad { color: var(--danger); font-weight: 700; }
+  .crisis-table .recovery { color: var(--goal-brand); font-weight: 700; }
+
+  .fix-list { list-style: none; padding: 0; margin: 16px 0 0 0; }
+  .fix-list li {
+    padding: 12px 0 12px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    font-size: 14px;
+  }
+  .fix-list li:last-child { border-bottom: none; }
+  .fix-list li::before {
+    content: counter(item);
+    counter-increment: item;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 26px;
+    height: 26px;
+    background: var(--goal-brand);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .fix-list { counter-reset: item; }
+  .fix-list strong { color: var(--goal-dark-blue); }
+
+  /* Recommendations */
+  .rec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .rec {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 22px;
+    border-left: 4px solid var(--goal-brand);
+  }
+  .rec.high { border-left-color: var(--danger); }
+  .rec.med { border-left-color: var(--warn); }
+  .rec.monitor { border-left-color: var(--success); }
+  .rec .pri {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .rec.high .pri { background: rgba(239,68,68,0.1); color: var(--danger); }
+  .rec.med .pri { background: rgba(245,158,11,0.12); color: #B4530A; }
+  .rec.monitor .pri { background: rgba(16,185,129,0.1); color: var(--success); }
+  .rec h4 { margin: 0 0 8px 0; font-size: 16px; color: var(--goal-dark-blue); }
+  .rec p { margin: 0; font-size: 14px; line-height: 1.55; }
+  .rec .impact {
+    display: block;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .rec .impact strong { color: var(--goal-dark-blue); }
+
+  /* Auto problem */
+  .auto-wrap {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+  }
+  .auto-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .auto-col h4 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    font-weight: 700;
+    margin: 0 0 12px 0;
+  }
+  .auto-col ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7; }
+  .auto-col li { margin-bottom: 6px; }
+
+  .compare-bar {
+    margin: 16px 0;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr;
+    gap: 14px;
+    align-items: center;
+    font-size: 13px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row .mlabel { font-weight: 600; color: var(--goal-dark-blue); }
+  .compare-row .bar {
+    height: 22px;
+    background: #F3F4F6;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .compare-row .bar .fill {
+    height: 100%;
+    background: var(--goal-brand);
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  .compare-row .bar.auto .fill { background: var(--warn); }
+
+  /* Guiding principles */
+  .principles {
+    background: var(--goal-dark-blue);
+    color: #fff;
+    border-radius: 8px;
+    padding: 28px 32px;
+  }
+  .principles h2 { color: #fff; margin-bottom: 18px; }
+  .principles h2 .num { color: var(--goal-accent-1); }
+  .principles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 24px; }
+  .principle {
+    padding: 12px 0 12px 30px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #E4F1FB;
+  }
+  .principle::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: var(--goal-accent-1);
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .principle strong { color: #fff; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 900px) {
+    .kpi-grid, .formula-grid, .eras, .principles-grid, .rec-grid { grid-template-columns: 1fr 1fr; }
+    .auto-split { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .kpi-grid, .formula-grid, .eras, .principles-grid, .rec-grid { grid-template-columns: 1fr; }
+    .hero .container { flex-direction: column; align-items: flex-start; }
+    .hero .meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <div>
+      <h1>Supreme Choice — Historical Performance Review</h1>
+      <p class="sub">What we learned from 10 months of campaign history — and where we go from here</p>
+    </div>
+    <div class="meta">
+      <strong>Client:</strong> Supreme Choice Insurance Solutions<br>
+      <strong>Review Period:</strong> March 2025 – April 2026<br>
+      <strong>Prepared by:</strong> GOAL Account Team
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Headline -->
+  <div class="headline">
+    <p><strong>Your campaign has a proven recipe.</strong> When it's working, <em>you are closing uninsured leads</em> at a pace that industry averages don't touch — 30% contact rate, 19% quote rate, $17–75 Home CPA, 17% inbound call rate against an industry average of 3–8%.</p>
+    <p>When it drifts, the signal is always the same: <em>insured comparison shoppers start slipping into the top of the funnel</em>. The fix in September 2025 was surgical, not structural. We expect the same pattern to apply to anything we find today.</p>
+  </div>
+
+  <!-- Three eras -->
+  <section>
+    <h2><span class="num">01</span>The Three Eras of Your Campaign</h2>
+    <p class="section-sub">How performance has evolved from launch through today</p>
+    <div class="eras">
+      <div class="era foundation">
+        <div class="era-label">Mar – Apr 2025</div>
+        <h3>Foundation Era</h3>
+        <p>Currently Insured = No filter locked in. Off-hours bidding trick established. Texas counter-positioning set. Agency Zoom integration started. Every decision since has been built on this foundation.</p>
+      </div>
+      <div class="era peak">
+        <div class="era-label">Aug – Sep 2025</div>
+        <h3>Peak Era</h3>
+        <p>$17–18 CA CPA. 88% answer rate. 17% inbound call rate. 30%+ quote-to-bind. 550% call lift from ad verbiage change. This is the target state we're working back toward.</p>
+      </div>
+      <div class="era crisis">
+        <div class="era-label">Oct 2025 &rarr; Recovery</div>
+        <h3>Crisis &amp; Recovery</h3>
+        <p>QTB collapsed to 7% in September when insured leads started slipping through. We diagnosed advertiser-level drift, blacklisted specific advertiser IDs, and restored the campaign to $37 CPA and 34.7% QTB by late October.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Peak benchmarks KPI -->
+  <section>
+    <h2><span class="num">02</span>The Peak Numbers We're Targeting</h2>
+    <p class="section-sub">Your campaign's best-in-class metrics — these are the benchmarks we're working to restore, not industry averages</p>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="value">30%</div>
+        <div class="label">Contact Rate (Home)</div>
+        <div class="sub">vs 20-40% typical</div>
+      </div>
+      <div class="kpi">
+        <div class="value">19%</div>
+        <div class="label">Quote Rate (Home)</div>
+        <div class="sub">top of industry range</div>
+      </div>
+      <div class="kpi">
+        <div class="value">34.7%</div>
+        <div class="label">Quote-to-Bind</div>
+        <div class="sub">post-recovery, late Oct</div>
+      </div>
+      <div class="kpi teal">
+        <div class="value">17%</div>
+        <div class="label">Inbound Call Rate</div>
+        <div class="sub">vs 3-8% industry</div>
+      </div>
+      <div class="kpi teal">
+        <div class="value">88%</div>
+        <div class="label">Answer Rate</div>
+        <div class="sub">vs 50-70% typical</div>
+      </div>
+      <div class="kpi teal">
+        <div class="value">$17-75</div>
+        <div class="label">Home CPA (CA)</div>
+        <div class="sub">vs $100-300 typical</div>
+      </div>
+      <div class="kpi dark">
+        <div class="value">$2.12</div>
+        <div class="label">Home Search CPC (CA)</div>
+        <div class="sub">vs $10-12 benchmark</div>
+      </div>
+      <div class="kpi dark">
+        <div class="value">550%</div>
+        <div class="label">Call Lift</div>
+        <div class="sub">from Sep 2025 verbiage change</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Winning formula -->
+  <section>
+    <h2><span class="num">03</span>The Winning Formula</h2>
+    <p class="section-sub">Six levers that made your campaign an outlier</p>
+    <div class="formula-grid">
+      <div class="formula">
+        <span class="tag">ICP Lock</span>
+        <h4>Currently Insured = No</h4>
+        <p>Load-bearing filter set from day one. Your non-standard carrier mix (E&amp;S, Fair Plans, SR-22 eligible) uniquely qualifies you to write this book. Nobody else on our platform has this positioning.</p>
+      </div>
+      <div class="formula">
+        <span class="tag">Ad Verbiage</span>
+        <h4>"Call us for a free quote"</h4>
+        <p>Single biggest conversion lever in 10 months of history. Specific call-to-action copy drove a <strong>550% jump in inbound calls</strong> when introduced in Sep 2025. Pivot from form-first to phone-first.</p>
+      </div>
+      <div class="formula">
+        <span class="tag">Automation</span>
+        <h4>Agency Zoom Sequences</h4>
+        <p>Text + email automation fires within minutes of the lead hitting your CRM. Infrastructure that makes 4.5-month delayed sales (Cathy Dillon) possible and lets auto remain viable despite structural headwinds.</p>
+      </div>
+      <div class="formula">
+        <span class="tag">Off-Hours Bidding</span>
+        <h4>The 90-Minute Kick</h4>
+        <p>Base bid at 100%, manually kicked to 130% only if the first 90 minutes of the day are quiet. Smarter than a flat high bid — preserves efficient economics while getting volume when you need it.</p>
+      </div>
+      <div class="formula">
+        <span class="tag">Day-Parting</span>
+        <h4>2:00 PM Lunch Cap</h4>
+        <p>Leads shut off at 2:00 PM, resume at 3:30–4:00 PM, stop for the day after. Prevents pile-ups during no-one-home windows. This single setting preserves your contact rate.</p>
+      </div>
+      <div class="formula">
+        <span class="tag">Counter-Positioning</span>
+        <h4>Keep What Others Cut</h4>
+        <p>Coastal/hurricane counties, DFW hail zones, Harris &amp; Cameron County — everyone else excludes them. You keep them in. Less auction competition, and your carrier mix can actually write the business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Crisis story -->
+  <section>
+    <h2><span class="num">04</span>The September 2025 Playbook</h2>
+    <p class="section-sub">What happened, what we fixed, and why it matters for today</p>
+
+    <div class="crisis-wrap">
+      <p style="margin: 0 0 8px 0; font-size: 14.5px;"><strong>The setup:</strong> September volume <strong>tripled</strong> from August, but sales went <strong>down by half</strong>. Same producer, same process. The problem wasn't the filter — it was who the publishers were actually sending.</p>
+
+      <table class="crisis-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Leads</th>
+            <th>Quotes</th>
+            <th>Sales</th>
+            <th>Quote-to-Bind</th>
+            <th>CPA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="metric">August 2025</td>
+            <td>~40</td>
+            <td>11</td>
+            <td>4</td>
+            <td class="good">36%</td>
+            <td class="good">~$40</td>
+          </tr>
+          <tr>
+            <td class="metric">September 2025</td>
+            <td>~120</td>
+            <td>28</td>
+            <td>2</td>
+            <td class="bad">7%</td>
+            <td class="bad">~$175</td>
+          </tr>
+          <tr>
+            <td class="metric">October 2025</td>
+            <td>~153</td>
+            <td>29</td>
+            <td>8</td>
+            <td class="recovery">27%</td>
+            <td class="recovery">$75</td>
+          </tr>
+          <tr>
+            <td class="metric">Late October 2025</td>
+            <td>—</td>
+            <td>23</td>
+            <td>8</td>
+            <td class="good">34.7%</td>
+            <td class="good">$37</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p style="margin: 16px 0 6px 0; font-size: 14.5px;"><strong>The five moves that recovered the campaign, in order of impact:</strong></p>
+      <ol class="fix-list">
+        <li><strong>Advertiser blacklist.</strong> Specific advertiser IDs (2409, 3954) repeatedly sent insured comparison shoppers despite a compliant filter. Pulled those IDs from Tier 1.</li>
+        <li><strong>Bid down high-volume channels.</strong> Tier 1 dropped 16% ($172→$144), Tier 3 dropped 18% ($99→$81). If a channel is sending junk, stop paying premium for it.</li>
+        <li><strong>Bid up the arbitrage channel.</strong> Home Search / QuoteFunnel pushed from $1.95 to $2.63 per click (35% jump) because its quote-to-bind was 50%.</li>
+        <li><strong>Shut off dead auto channels.</strong> Premium Page Search Inventory #5 on auto: 18 leads, 1 contact in 60 days. Cut it.</li>
+        <li><strong>Stop tweaking once it's fixed.</strong> Your rule: "If it ain't broke, don't fix it." Exactly right.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Recommendations -->
+  <section>
+    <h2><span class="num">05</span>What We Want to Test Next</h2>
+    <p class="section-sub">Specific moves to run on the current campaign — ranked by expected impact</p>
+    <div class="rec-grid">
+      <div class="rec high">
+        <span class="pri">High Priority</span>
+        <h4>Advertiser drift audit</h4>
+        <p>Pull the last 30 days of home leads that didn't convert. Match against the "bad list" pattern from Sep 2025. If 1-2 advertiser IDs are sending insured leads despite a compliant filter, pull those IDs specifically — not the whole source.</p>
+        <span class="impact"><strong>Why:</strong> Direct replay of the September fix. Expect QTB recovery within 2-3 weeks.</span>
+      </div>
+      <div class="rec high">
+        <span class="pri">High Priority</span>
+        <h4>Agency Zoom automation check</h4>
+        <p>Your peak contact rates depended on text + email firing within minutes of a lead. Let's verify sequences are still active, cadence is intact, and new leads aren't silently skipping the automation path.</p>
+        <span class="impact"><strong>Why:</strong> Contact rate drops are often infrastructure, not campaign. Free fix if it's this.</span>
+      </div>
+      <div class="rec med">
+        <span class="pri">Medium</span>
+        <h4>Ad verbiage restoration</h4>
+        <p>Confirm current ad copy still leads with "Call us for a free quote" and "Call us to take advantage." If we've drifted to generic form-first copy, restore the proven language.</p>
+        <span class="impact"><strong>Why:</strong> This single change drove 550% call lift in Sep 2025. Inbound calls close at ~88% pickup for you.</span>
+      </div>
+      <div class="rec med">
+        <span class="pri">Medium</span>
+        <h4>Home Search arbitrage check</h4>
+        <p>In Oct 2025 CA Home Search paid $2.12/click when market was $10-12. Let's re-price against current RightPricing and, if the gap is still open, push modifier aggressively — Nick went to 198% when bid rate was only 12.5%.</p>
+        <span class="impact"><strong>Why:</strong> Arbitrage windows close. If this one is still open, it's pure margin.</span>
+      </div>
+      <div class="rec monitor">
+        <span class="pri">Revisit</span>
+        <h4>Off-hours bidding trick</h4>
+        <p>If we've flattened to a single schedule, propose restoring the Derek-era pattern: 100% base, manual kick to 130% when the first 90 minutes are slow. You've built the muscle — this is your call to make.</p>
+        <span class="impact"><strong>Why:</strong> More efficient long-term than a flat premium bid.</span>
+      </div>
+      <div class="rec monitor">
+        <span class="pri">Revisit</span>
+        <h4>Day-part around agent schedule</h4>
+        <p>If the team's schedule has shifted (new hires, different lunch hours), let's reconfirm the 2:00 PM pause and 3:30 PM resume. Goal is zero leads piling up uncontacted.</p>
+        <span class="impact"><strong>Why:</strong> Lunch-window pile-ups are the cheapest fix with the biggest contact-rate impact.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Auto conversation -->
+  <section>
+    <h2><span class="num">06</span>The Auto Conversation</h2>
+    <p class="section-sub">Your honest diagnosis of why auto underperforms — and what's worth testing vs leaving alone</p>
+    <div class="auto-wrap">
+      <div class="compare-bar">
+        <div class="compare-row">
+          <div class="mlabel">Contact Rate</div>
+          <div class="bar"><div class="fill" style="width: 86%;">26% Home</div></div>
+          <div class="bar auto"><div class="fill" style="width: 29%;">8.8% Auto</div></div>
+        </div>
+        <div class="compare-row">
+          <div class="mlabel">Quote Rate</div>
+          <div class="bar"><div class="fill" style="width: 95%;">19% Home</div></div>
+          <div class="bar auto"><div class="fill" style="width: 50%;">10% Auto</div></div>
+        </div>
+        <div class="compare-row">
+          <div class="mlabel">CPA (60 days)</div>
+          <div class="bar"><div class="fill" style="width: 29%;">$37-75 Home</div></div>
+          <div class="bar auto"><div class="fill" style="width: 100%;">$256+ Auto</div></div>
+        </div>
+      </div>
+
+      <div class="auto-split">
+        <div class="auto-col">
+          <h4>Why auto is structurally harder</h4>
+          <ul>
+            <li>Different producer — home agent is the strong closer, auto agent is junior. Producer skill is part of the gap.</li>
+            <li>Auto lead behavior is structural: people shop auto at work when they can't take calls. QuoteWizard sees the same pattern.</li>
+            <li>Auto lead composition is messier — currently-insured shoppers, homeowners with package deals, etc.</li>
+          </ul>
+        </div>
+        <div class="auto-col">
+          <h4>What's worth testing</h4>
+          <ul>
+            <li>Tighten the auto filter the way home is tight: +no current insurance, +accidents/DUI as positive modifiers, -homeowners as negative.</li>
+            <li>Test SR-22 as a positive modifier — your carrier mix can handle it.</li>
+            <li>Delayed sales pattern proves the automation works on auto over time (Cathy Dillon: June lead → Oct bind). Worth keeping warm.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section>
+    <div class="principles">
+      <h2><span class="num">07</span>Campaign DNA — The Non-Negotiables</h2>
+      <p style="margin: 0 0 20px 0; color: var(--goal-accent-2); font-size: 14px;">The principles we've agreed on. These are the guardrails on every future recommendation.</p>
+      <div class="principles-grid">
+        <div class="principle"><strong>Currently Insured = No stays.</strong> It's the foundation, not a preference.</div>
+        <div class="principle"><strong>No upfront bundling scripts.</strong> You've been clear: introduces a negative into the sales cycle.</div>
+        <div class="principle"><strong>Diagnose at the advertiser level first.</strong> Don't change filters or targeting when drift is likely the issue.</div>
+        <div class="principle"><strong>Never blanket-remove sources.</strong> Aim the fire hose, don't remove it.</div>
+        <div class="principle"><strong>Separate home from auto in every read.</strong> Blended CPA hides the story.</div>
+        <div class="principle"><strong>Industry benchmarks don't apply to you.</strong> You're in non-standard. Your numbers, your baselines.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Prepared for the Supreme Choice review call &middot; April 17, 2026 &middot; GOAL Platform
+  </footer>
+
+</div>
+
+</body>
+</html>
