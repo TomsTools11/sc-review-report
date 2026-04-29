@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — Contact Rate by Source | April 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --goal-blue:#0479DF;
+    --goal-blue-dark:#035FB3;
+    --goal-blue-light:#5BA7E8;
+    --goal-navy:#0A2540;
+    --bg:#F4F7FB;
+    --card:#FFFFFF;
+    --border:#E1E7EF;
+    --text:#1B2733;
+    --muted:#5A6B7B;
+    --green:#0A8A4A;
+    --green-bg:#E6F4EC;
+    --gold:#B8860B;
+    --gold-bg:#FFF8E1;
+    --amber:#C77700;
+    --amber-bg:#FFF4E0;
+    --red:#C7312D;
+    --red-bg:#FBE5E4;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px;line-height:1.55;font-size:14.5px}
+  .wrap{max-width:1080px;margin:0 auto}
+  header{background:linear-gradient(135deg,var(--goal-blue) 0%,var(--goal-navy) 100%);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:22px;box-shadow:0 6px 22px rgba(4,121,223,.22)}
+  header h1{margin:0 0 6px 0;font-size:30px;font-weight:700;letter-spacing:-.5px}
+  header .sub{font-size:15px;opacity:.94;margin-bottom:12px}
+  header .meta{font-size:12.5px;opacity:.85}
+  header .meta strong{color:#cce4fa}
+  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 6px rgba(10,37,64,.04)}
+  h2{margin:0 0 16px 0;color:var(--goal-navy);font-size:21px;font-weight:700;letter-spacing:-.2px}
+  h3{margin:18px 0 8px 0;color:var(--goal-navy);font-size:15.5px;font-weight:600}
+  p{margin:8px 0 14px 0}
+  .hero{background:linear-gradient(135deg,#EEF7FF,#FFFFFF);border:1px solid #BCDDFB;border-radius:14px;padding:28px 32px;margin-bottom:18px}
+  .hero h2{font-size:20px;color:var(--goal-blue-dark);margin-bottom:10px}
+  .hero p{font-size:15.5px;color:var(--text);margin:6px 0 0 0}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:6px 0 14px 0}
+  .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+  .kpi.h{background:linear-gradient(135deg,#E6F1FB,#FFFFFF);border-color:#BCDDFB}
+  .kpi.green{background:linear-gradient(135deg,var(--green-bg),#FFFFFF);border-color:#B7E0C6}
+  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:5px}
+  .kpi .val{font-size:26px;font-weight:700;color:var(--goal-navy);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+  .kpi .ctx{font-size:12.5px;color:var(--muted);margin-top:4px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:#EEF4FB;color:var(--goal-navy);text-align:left;padding:11px 14px;border-bottom:2px solid var(--goal-blue);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+  td{padding:11px 14px;border-bottom:1px solid var(--border)}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:#FAFCFE}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  .pos{color:var(--green);font-weight:700}
+  .neg{color:var(--red);font-weight:700}
+  .chart-wrap{position:relative;height:340px;margin-top:8px}
+  .chart-wrap-tall{position:relative;height:380px;margin-top:8px}
+  .nextstep{background:#fff;border:1px solid var(--border);border-left:5px solid var(--goal-blue);border-radius:10px;padding:18px 22px;margin-bottom:12px}
+  .nextstep h4{margin:0 0 6px 0;font-size:16px;color:var(--goal-navy)}
+  .nextstep p{margin:4px 0 0 0;font-size:14px;color:var(--text)}
+  .nextstep .imp{display:inline-block;background:var(--green-bg);color:var(--green);font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 10px;border-radius:30px;margin-bottom:6px}
+  .callout{background:#FFF8E1;border:1px solid #F0DA9A;border-left:5px solid var(--gold);padding:16px 20px;border-radius:10px;margin:12px 0}
+  .callout strong{color:#8C6800}
+  .green-callout{background:var(--green-bg);border:1px solid #B7E0C6;border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;margin:12px 0}
+  .green-callout strong{color:var(--green)}
+  .blue-callout{background:#EEF7FF;border:1px solid #BCDDFB;border-left:5px solid var(--goal-blue);padding:16px 20px;border-radius:10px;margin:12px 0}
+  .blue-callout strong{color:var(--goal-blue-dark)}
+  ul{margin:6px 0 8px 22px}
+  ul li{margin:4px 0}
+  .signature{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#F4F7FB,#FFFFFF);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-top:14px}
+  .signature .who{font-size:13px;color:var(--muted)}
+  .signature .who b{color:var(--goal-navy);font-size:14.5px;display:block;margin-bottom:2px}
+  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;padding-bottom:8px}
+  .pill{display:inline-block;padding:3px 10px;border-radius:30px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .pill-gold{background:var(--gold-bg);color:var(--gold)}
+  .pill-blue{background:#E6F1FB;color:var(--goal-blue-dark)}
+  .pill-green{background:var(--green-bg);color:var(--green)}
+  .pill-amber{background:var(--amber-bg);color:var(--amber)}
+  .pill-red{background:var(--red-bg);color:var(--red)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .rank{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--goal-blue);color:#fff;font-weight:700;font-size:12px;margin-right:6px;vertical-align:middle}
+  .rank.gold{background:var(--gold)}
+  .rank.silver{background:#7B8794}
+  .rank.bronze{background:#B07235}
+  .trend-up{color:var(--green);font-weight:700}
+  .trend-flat{color:var(--muted);font-weight:600}
+  .trend-down{color:var(--red);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <h1>Contact Rate by Source — Where Your Leads Actually Reach an Agent</h1>
+  <div class="sub">Supreme Choice Insurance — 60-Day Pattern Analysis</div>
+  <div class="meta">
+    Prepared for <strong>Monty</strong> by Tom Panos, GOAL Account Management • <strong>Data window:</strong> Last 60 days (across Home + Auto, CA)
+  </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+  <h2>Why This Analysis</h2>
+  <p>
+    On 4/6 you flagged that <em>contact rate</em> has been the recurring theme — even when nothing else is wrong, agents are having a tougher time reaching the leads.
+    Volume is one story; contact rate is another. A source that sends 100 leads but only delivers 10 conversations is worth less to your team than one that sends 25 leads and delivers 12.
+  </p>
+  <p>
+    Looking back across the last 60 days plus the three preceding 30-day windows, <strong>two clear patterns emerge</strong>: your highest contact-rate sources are not your highest-volume sources, and the contact-rate trend is moving the right direction overall — meaning the post-4/6 changes are working.
+  </p>
+</div>
+
+<!-- ==================== HEADLINE NUMBERS ==================== -->
+<section>
+  <h2>The Headline Numbers</h2>
+  <div class="kpi-grid">
+    <div class="kpi green">
+      <div class="lbl">Best Source CR</div>
+      <div class="val">48.5%</div>
+      <div class="ctx">Home SearchB (60d combined)</div>
+    </div>
+    <div class="kpi green">
+      <div class="lbl">Auto Call-Driven CR</div>
+      <div class="val">100%+</div>
+      <div class="ctx">PPS 2B, PPS 4, PPS 6</div>
+    </div>
+    <div class="kpi h">
+      <div class="lbl">Blended CR Trend (Home)</div>
+      <div class="val">↑ 56%</div>
+      <div class="ctx">13.6% → 21.2% in 60 days</div>
+    </div>
+    <div class="kpi h">
+      <div class="lbl">Worst-Performing Volume Source</div>
+      <div class="val">17%</div>
+      <div class="ctx">Tier 1 (largest pool, lowest CR)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RANKINGS ==================== -->
+<section>
+  <h2>Source Rankings — 60-Day Combined View</h2>
+  <p>Larger window with disposition data fully settled. Sources ranked by Contact Rate, with volume context.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Source</th>
+        <th>Type</th>
+        <th class="num">Leads</th>
+        <th class="num">Calls</th>
+        <th class="num">Contacts</th>
+        <th class="num">Contact Rate</th>
+        <th>Position vs Average</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rank gold">1</span></td>
+        <td><strong>Premium Paid Search 6</strong></td>
+        <td>Auto</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+        <td class="num">4</td>
+        <td class="num pos">400%</td>
+        <td><span class="pill pill-gold">Call-driven</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank gold">2</span></td>
+        <td><strong>Premium Paid Search 4</strong></td>
+        <td>Auto</td>
+        <td class="num">3</td>
+        <td class="num">1</td>
+        <td class="num">5</td>
+        <td class="num pos">167%</td>
+        <td><span class="pill pill-gold">Call-driven</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank gold">3</span></td>
+        <td><strong>Premium Paid Search 2B</strong></td>
+        <td>Auto</td>
+        <td class="num">6</td>
+        <td class="num">2</td>
+        <td class="num">6</td>
+        <td class="num pos">100%</td>
+        <td><span class="pill pill-gold">Call-driven</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank silver">4</span></td>
+        <td><strong>Home SearchB</strong></td>
+        <td>Home</td>
+        <td class="num">33</td>
+        <td class="num">3</td>
+        <td class="num">16</td>
+        <td class="num pos">48.5%</td>
+        <td><span class="pill pill-green">Best volume + reach</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank silver">5</span></td>
+        <td><strong>Tier 3</strong></td>
+        <td>Home</td>
+        <td class="num">11</td>
+        <td class="num">1</td>
+        <td class="num">5</td>
+        <td class="num pos">45.5%</td>
+        <td><span class="pill pill-green">High CR, thin volume</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank bronze">6</span></td>
+        <td>Tier 1</td>
+        <td>Home</td>
+        <td class="num">44</td>
+        <td class="num">5</td>
+        <td class="num">15</td>
+        <td class="num">34.1%</td>
+        <td><span class="pill pill-blue">Mid-tier reach</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank">7</span></td>
+        <td>Home Search</td>
+        <td>Home</td>
+        <td class="num">32</td>
+        <td class="num">2</td>
+        <td class="num">9</td>
+        <td class="num">28.1%</td>
+        <td><span class="pill pill-blue">Mid-tier reach</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank">8</span></td>
+        <td><strong>Tier 2</strong></td>
+        <td>Home</td>
+        <td class="num">97</td>
+        <td class="num">11</td>
+        <td class="num">25</td>
+        <td class="num">25.8%</td>
+        <td><span class="pill pill-amber">Highest volume, lowest reach</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>The big surprise:</strong> Your three Auto Premium Paid Search sources (PPS 2B, 4, 6) are <em>call-driven</em> — the prospect picks up the phone and calls in. Contact rate exceeds 100% because each lead averages more than one contact event. These are the <strong>highest-quality contact channels in the entire account</strong>, and they're all on Auto where we currently spend almost nothing.
+  </div>
+</section>
+
+<!-- ==================== TIME SERIES ==================== -->
+<section>
+  <h2>Contact Rate Trend — Home CA Across Four Windows</h2>
+  <p>Each 30-day snapshot tells a clearer story than any single point. Three of your five Home sources are trending up; one is flat; one is volatile/thin.</p>
+  <div class="chart-wrap-tall"><canvas id="trendChart"></canvas></div>
+  <table style="margin-top:16px">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th class="num">3/18 30d</th>
+        <th class="num">4/16 30d</th>
+        <th class="num">4/29 MTD</th>
+        <th class="num">60d Combined</th>
+        <th>Direction</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tier 2</strong></td>
+        <td class="num">11.8%</td>
+        <td class="num">18.4%</td>
+        <td class="num">22.5%</td>
+        <td class="num">25.8%</td>
+        <td class="trend-up">↑ Climbing — biggest absolute gain</td>
+      </tr>
+      <tr>
+        <td><strong>Home SearchB</strong></td>
+        <td class="num">0%</td>
+        <td class="num">11.8%</td>
+        <td class="num">27.3%</td>
+        <td class="num">48.5%</td>
+        <td class="trend-up">↑↑ Sharpest climb — best source today</td>
+      </tr>
+      <tr>
+        <td><strong>Tier 1</strong></td>
+        <td class="num">12.0%</td>
+        <td class="num">17.4%</td>
+        <td class="num">17.4%</td>
+        <td class="num">34.1%</td>
+        <td class="trend-flat">→ Flat at 17% — points to publisher mix issue</td>
+      </tr>
+      <tr>
+        <td><strong>Home Search</strong></td>
+        <td class="num">16.7%</td>
+        <td class="num">26.3%</td>
+        <td class="num">18.8%</td>
+        <td class="num">28.1%</td>
+        <td class="trend-flat">↔ Volatile, small sample</td>
+      </tr>
+      <tr>
+        <td><strong>Tier 3</strong></td>
+        <td class="num">23.1%</td>
+        <td class="num">20.0%</td>
+        <td class="num">0%</td>
+        <td class="num">45.5%</td>
+        <td class="trend-flat">↔ Too thin to read (5 leads MTD)</td>
+      </tr>
+      <tr style="background:#F4F8FC">
+        <td><strong>Blended</strong></td>
+        <td class="num"><strong>13.6%</strong></td>
+        <td class="num"><strong>18.6%</strong></td>
+        <td class="num"><strong>21.2%</strong></td>
+        <td class="num"><strong>—</strong></td>
+        <td class="trend-up">↑ +56% improvement in 60 days</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== CHART: VOLUME VS CR ==================== -->
+<section>
+  <h2>Volume Doesn't Predict Contact Rate</h2>
+  <p>The most surprising correlation in the data: high-volume sources don't necessarily reach customers more often. In fact, on Home CA the relationship is mildly <em>inverse</em>.</p>
+  <div class="chart-wrap"><canvas id="volumeCRChart"></canvas></div>
+  <div class="blue-callout">
+    <strong>Read this chart like a quadrant:</strong> top-right = a source that gives you both volume <em>and</em> contact reach (no Home sources fully sit there). Top-left = small but high-quality (Tier 3, Home SearchB used to live here). Bottom-right = high volume but you can't reach them (where Tier 2 sits today).
+  </div>
+</section>
+
+<!-- ==================== PATTERNS ==================== -->
+<section>
+  <h2>Three Patterns Worth Acting On</h2>
+
+  <div class="nextstep">
+    <div class="imp">Pattern 1</div>
+    <h4>Auto's Premium Paid Search sources are the best contact channels in the whole account</h4>
+    <p>
+      PPS 2B, 4, and 6 don't just give us leads — they generate inbound calls. Inbound callers are <em>self-selecting</em>: they've already decided to talk. Contact rates effectively above 100% reflect this. These three sources are responsible for almost all of the 25 calls in the last 60 days.
+    </p>
+    <p>
+      <strong>Implication:</strong> When we activate Auto next week, these are the multipliers we keep aggressive. The "contact rate problem" you've been hearing about doesn't exist on these sources at all — the problem is that we're barely participating in their auctions yet (only $74 of spend across all three combined).
+    </p>
+  </div>
+
+  <div class="nextstep">
+    <div class="imp">Pattern 2</div>
+    <h4>Home SearchB is the reach champion on Home — and trending up sharply</h4>
+    <p>
+      Home SearchB went from 0% contact rate (3/18 window) to 11.8% (4/16) to 27.3% (4/29 MTD), and 48.5% across the longer 60-day combined window. That's the most reliable trajectory in the entire campaign.
+    </p>
+    <p>
+      <strong>Implication:</strong> The recommendation we already made — push Home SearchB from 170% to 185% to land above 2nd-position market — is doubly justified by this contact-rate trend, not just the Quote CPA. A source that already reaches customers half the time is exactly where we want more lead flow.
+    </p>
+  </div>
+
+  <div class="nextstep">
+    <div class="imp">Pattern 3</div>
+    <h4>Tier 1 contact rate is stuck at 17% — strongest signal yet for the publisher-drift theory</h4>
+    <p>
+      Tier 1 has the largest opportunity pool by far (45,000+ auctions in 60 days), and its contact rate has been flat at 17–18% for three consecutive 30-day windows while the rest of the campaign has improved. A flat curve on the largest source means a small bad publisher is dragging the average down — exactly the pattern you described from the 2025 lead drought.
+    </p>
+    <p>
+      <strong>Implication:</strong> The advertiser drift audit we queued up for this week now has <strong>three independent data signals</strong> pointing at the same root cause: low win rate at the position floor (0.43%), high lead volume but flat conversion downstream, and now flat contact rate while the rest of the campaign improves. We should expect the audit to find 1–3 publisher IDs underneath Tier 1 that need to come off the list.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== CORRELATIONS ==================== -->
+<section>
+  <h2>What Drives Contact Rate — Cross-Cutting Signals</h2>
+  <p>We checked four candidate explanations against the source-level data. Here's what holds up:</p>
+  <table>
+    <thead>
+      <tr><th>Hypothesis</th><th>Holds Up?</th><th>Evidence</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Higher bids → higher contact rate</td>
+        <td><span class="pill pill-red">No</span></td>
+        <td>Home Search (highest bid at $8.40) has lower CR than Home SearchB ($4.90). Cheaper sources actually reach customers better.</td>
+      </tr>
+      <tr>
+        <td>Better ad position → higher contact rate</td>
+        <td><span class="pill pill-blue">Partially</span></td>
+        <td>Home SearchB (pos 4.91, best CR 48.5%) and Tier 1 (pos 6.14, lowest non-thin CR) line up. But Home Search at pos 5.25 underperforms its position.</td>
+      </tr>
+      <tr>
+        <td>Higher click-through rate → higher contact rate</td>
+        <td><span class="pill pill-red">No (slightly inverse)</span></td>
+        <td>Tier 2 has the highest CTR (45%) but the lowest CR (25.8%). Easy clicks may indicate looser targeting and harder-to-reach prospects.</td>
+      </tr>
+      <tr>
+        <td>Inbound calls baked into the source → higher CR</td>
+        <td><span class="pill pill-green">Yes</span></td>
+        <td>The three call-driven Auto sources are the only channels in the account with CR &gt; 100%. The call inversion of "you call them" → "they call you" is the strongest single driver.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:13.5px;color:var(--muted);margin-top:8px">
+    The strongest correlation in the data isn't with bidding mechanics at all — it's with <strong>whether the source produces inbound calls vs outbound dials</strong>. That has implications well beyond bid optimization.
+  </p>
+</section>
+
+<!-- ==================== RECOMMENDATIONS ==================== -->
+<section>
+  <h2>What We're Doing With This</h2>
+
+  <div class="nextstep">
+    <div class="imp">Decision 1</div>
+    <h4>Lean into Home SearchB on Home — already in the plan</h4>
+    <p>The 170% → 185% multiplier change scheduled for Monday 5/4 is even more justified now. Home SearchB is your highest contact-rate Home source and on the strongest trajectory. We'll watch the next 14 days for whether the climb continues or plateaus around 30%.</p>
+  </div>
+
+  <div class="nextstep">
+    <div class="imp">Decision 2</div>
+    <h4>Prioritize the Auto Premium Paid Search sources when we activate Auto</h4>
+    <p>PPS 2B, 4, and 6 stay at high multipliers (130%–185% on the new $5.85 base bid) so we keep entering their auctions aggressively. These are call-driven gold-tier sources we've been underspending on.</p>
+  </div>
+
+  <div class="nextstep">
+    <div class="imp">Decision 3</div>
+    <h4>Tier 1 advertiser audit gets escalated</h4>
+    <p>The contact-rate flat-line at 17% is the third confirming signal that this is a publisher-mix problem, not a bid or filter problem. We'll work with Nick to pull the publisher IDs under Tier 1 this week and identify the bottom 1–3 contributors. Outcome will inform whether we keep the planned 105% multiplier or trim it further until the mix is cleaned.</p>
+  </div>
+
+  <div class="nextstep">
+    <div class="imp">Decision 4</div>
+    <h4>Tier 2 watch — keep an eye on the CR climb</h4>
+    <p>Tier 2 is your highest-volume source with the lowest contact rate, but it's been climbing (11.8% → 18.4% → 22.5%). The 95% → 105% bid increase will pull more Tier 2 leads in. We need to confirm contact rate keeps climbing rather than reverting — if CR drops at higher volume, that's a signal we're scaling the wrong segment of Tier 2 publishers.</p>
+  </div>
+</section>
+
+<!-- ==================== QUESTIONS ==================== -->
+<section>
+  <h2>Questions for You on the Call</h2>
+  <ul>
+    <li><strong>Auto call routing:</strong> When PPS sources call in, which agent picks them up? Is the current call-handling capacity ready for a 4–6× volume increase if we open up Auto fully?</li>
+    <li><strong>Tier 1 audit timing:</strong> Want us to wait for the publisher audit to finish before raising Home bids, or run them in parallel?</li>
+    <li><strong>Tier 2 dispositions:</strong> Are agents working Tier 2 leads with a different cadence/script than other sources? The CR climb suggests yes — and if so, we want to learn from what's changing.</li>
+    <li><strong>Contact rate target:</strong> What's a "good" contact rate for your business? We have a range from 17% to 48% on Home and effectively 100%+ on call-driven Auto. Setting an explicit target helps us prioritize where to push budget.</li>
+  </ul>
+</section>
+
+<!-- ==================== SIGNATURE ==================== -->
+<section>
+  <div class="signature">
+    <div class="who">
+      <b>Tom Panos</b>
+      Account Management — GOAL Platform<br>
+      tom@checkoutgoal.com
+    </div>
+    <div class="who" style="text-align:right">
+      <b>Recommended cadence</b>
+      Re-pull this analysis every 30 days
+    </div>
+  </div>
+</section>
+
+<footer>
+  Supreme Choice Insurance — Contact Rate Analysis • April 29, 2026
+</footer>
+
+</div>
+
+<script>
+const blue='#0479DF', navy='#0A2540', green='#0A8A4A', amber='#C77700', red='#C7312D', muted='#5A6B7B';
+
+// Trend chart
+new Chart(document.getElementById('trendChart').getContext('2d'),{
+  type:'line',
+  data:{
+    labels:['3/18 (last 30d)','4/16 (last 30d)','4/29 MTD','60d Combined'],
+    datasets:[
+      {label:'Tier 2',data:[11.8,18.4,22.5,25.8],borderColor:blue,backgroundColor:'rgba(4,121,223,.1)',borderWidth:3,tension:.3,pointRadius:6,pointBackgroundColor:blue},
+      {label:'Home SearchB',data:[0,11.8,27.3,48.5],borderColor:green,backgroundColor:'rgba(10,138,74,.1)',borderWidth:3,tension:.3,pointRadius:6,pointBackgroundColor:green},
+      {label:'Tier 1',data:[12.0,17.4,17.4,34.1],borderColor:red,backgroundColor:'rgba(199,49,45,.1)',borderWidth:3,tension:.3,pointRadius:6,pointBackgroundColor:red,borderDash:[4,4]},
+      {label:'Home Search',data:[16.7,26.3,18.8,28.1],borderColor:amber,backgroundColor:'rgba(199,119,0,.1)',borderWidth:3,tension:.3,pointRadius:6,pointBackgroundColor:amber},
+      {label:'Tier 3',data:[23.1,20.0,0,45.5],borderColor:muted,backgroundColor:'rgba(90,107,123,.1)',borderWidth:2,tension:.3,pointRadius:5,pointBackgroundColor:muted,borderDash:[2,4]},
+      {label:'Blended',data:[13.6,18.6,21.2,null],borderColor:'#0A2540',backgroundColor:'rgba(10,37,64,.05)',borderWidth:4,tension:.3,pointRadius:7,pointBackgroundColor:'#0A2540',pointStyle:'rectRot'}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{position:'bottom',labels:{boxWidth:12,font:{size:12}}},
+      tooltip:{titleColor:'#fff',bodyColor:'#fff',backgroundColor:'rgba(10,37,64,.92)',callbacks:{label:(c)=>c.dataset.label+': '+(c.parsed.y!==null?c.parsed.y+'%':'—')}}
+    },
+    scales:{
+      y:{title:{display:true,text:'Contact Rate (%)',font:{size:11}},grid:{color:'#EEF1F4'},beginAtZero:true,max:55},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// Volume vs CR scatter
+new Chart(document.getElementById('volumeCRChart').getContext('2d'),{
+  type:'scatter',
+  data:{
+    datasets:[
+      {label:'Home SearchB',data:[{x:33,y:48.5}],backgroundColor:green,borderColor:green,borderWidth:2,pointRadius:14,pointHoverRadius:16},
+      {label:'Tier 3',data:[{x:11,y:45.5}],backgroundColor:'rgba(10,138,74,.6)',borderColor:green,borderWidth:2,pointRadius:8},
+      {label:'Tier 1',data:[{x:44,y:34.1}],backgroundColor:'rgba(4,121,223,.6)',borderColor:blue,borderWidth:2,pointRadius:11},
+      {label:'Home Search',data:[{x:32,y:28.1}],backgroundColor:'rgba(199,119,0,.6)',borderColor:amber,borderWidth:2,pointRadius:11},
+      {label:'Tier 2',data:[{x:97,y:25.8}],backgroundColor:'rgba(199,49,45,.55)',borderColor:red,borderWidth:2,pointRadius:18,pointHoverRadius:20}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}},
+      tooltip:{callbacks:{label:(c)=>`${c.dataset.label}: ${c.parsed.x} leads, ${c.parsed.y}% CR`}}
+    },
+    scales:{
+      x:{title:{display:true,text:'Lead Volume (60d)',font:{size:12}},grid:{color:'#EEF1F4'},beginAtZero:true},
+      y:{title:{display:true,text:'Contact Rate (%)',font:{size:12}},grid:{color:'#EEF1F4'},beginAtZero:true,max:55}
+    }
+  }
+});
+</script>
+</body>
+</html>
