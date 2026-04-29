@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — Home CA Performance Update | April 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --goal-blue:#0479DF;
+    --goal-blue-dark:#035FB3;
+    --goal-blue-light:#5BA7E8;
+    --goal-navy:#0A2540;
+    --bg:#F4F7FB;
+    --card:#FFFFFF;
+    --border:#E1E7EF;
+    --text:#1B2733;
+    --muted:#5A6B7B;
+    --green:#0A8A4A;
+    --green-bg:#E6F4EC;
+    --gold:#B8860B;
+    --gold-bg:#FFF8E1;
+    --amber:#C77700;
+    --amber-bg:#FFF4E0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px;line-height:1.55;font-size:14.5px}
+  .wrap{max-width:1080px;margin:0 auto}
+  /* Header */
+  header{background:linear-gradient(135deg,var(--goal-blue) 0%,var(--goal-navy) 100%);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:22px;box-shadow:0 6px 22px rgba(4,121,223,.22)}
+  header h1{margin:0 0 6px 0;font-size:30px;font-weight:700;letter-spacing:-.5px}
+  header .sub{font-size:15px;opacity:.94;margin-bottom:12px}
+  header .meta{font-size:12.5px;opacity:.85}
+  header .meta strong{color:#cce4fa}
+  /* Sections */
+  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 6px rgba(10,37,64,.04)}
+  h2{margin:0 0 16px 0;color:var(--goal-navy);font-size:21px;font-weight:700;letter-spacing:-.2px}
+  h3{margin:18px 0 8px 0;color:var(--goal-navy);font-size:15.5px;font-weight:600}
+  p{margin:8px 0 14px 0}
+  /* Hero summary */
+  .hero{background:linear-gradient(135deg,#EEF7FF,#FFFFFF);border:1px solid #BCDDFB;border-radius:14px;padding:28px 32px;margin-bottom:18px}
+  .hero h2{font-size:20px;color:var(--goal-blue-dark);margin-bottom:10px}
+  .hero p{font-size:15.5px;color:var(--text);margin:6px 0 0 0}
+  /* Win cards */
+  .wins{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+  .win{background:linear-gradient(135deg,var(--green-bg),#FFFFFF);border:1px solid #B7E0C6;border-radius:12px;padding:18px 20px}
+  .win .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--green);font-weight:700;margin-bottom:6px}
+  .win .val{font-size:28px;font-weight:700;color:var(--goal-navy);letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+  .win .ctx{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .win .delta{font-size:13px;font-weight:700;color:var(--green);margin-top:6px}
+  /* KPI */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:5px}
+  .kpi .val{font-size:24px;font-weight:700;color:var(--goal-navy);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+  .kpi .delta{font-size:12.5px;margin-top:4px;font-weight:600}
+  .delta.up{color:var(--green)}
+  .delta.down{color:#C7312D}
+  /* Funnel */
+  .funnel{margin:14px 0 6px 0}
+  .funnel-step{display:grid;grid-template-columns:130px 1fr 100px;align-items:center;gap:12px;padding:8px 0}
+  .funnel-bar{height:36px;background:linear-gradient(90deg,var(--goal-blue),var(--goal-blue-light));border-radius:8px;display:flex;align-items:center;color:#fff;padding-left:14px;font-weight:700;font-size:15px;letter-spacing:-.2px}
+  .funnel-step .label{font-weight:600;font-size:14px;color:var(--goal-navy)}
+  .funnel-step .pct{font-size:13px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:#EEF4FB;color:var(--goal-navy);text-align:left;padding:11px 14px;border-bottom:2px solid var(--goal-blue);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+  td{padding:11px 14px;border-bottom:1px solid var(--border)}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:#FAFCFE}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  /* Chart */
+  .chart-wrap{position:relative;height:280px;margin-top:8px}
+  /* Recommendations */
+  .nextstep{background:#fff;border:1px solid var(--border);border-left:5px solid var(--goal-blue);border-radius:10px;padding:18px 22px;margin-bottom:12px}
+  .nextstep h4{margin:0 0 6px 0;font-size:16px;color:var(--goal-navy)}
+  .nextstep p{margin:4px 0 0 0;font-size:14px;color:var(--text)}
+  .nextstep .imp{display:inline-block;background:var(--green-bg);color:var(--green);font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 10px;border-radius:30px;margin-bottom:6px}
+  /* Callout */
+  .callout{background:#FFF8E1;border:1px solid #F0DA9A;border-left:5px solid var(--gold);padding:16px 20px;border-radius:10px;margin:12px 0}
+  .callout strong{color:#8C6800}
+  .green-callout{background:var(--green-bg);border:1px solid #B7E0C6;border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;margin:12px 0}
+  .green-callout strong{color:var(--green)}
+  /* Misc */
+  ul{margin:6px 0 8px 22px}
+  ul li{margin:4px 0}
+  .signature{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#F4F7FB,#FFFFFF);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-top:14px}
+  .signature .who{font-size:13px;color:var(--muted)}
+  .signature .who b{color:var(--goal-navy);font-size:14.5px;display:block;margin-bottom:2px}
+  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;padding-bottom:8px}
+  /* Pills */
+  .pill{display:inline-block;padding:3px 10px;border-radius:30px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .pill-gold{background:var(--gold-bg);color:var(--gold)}
+  .pill-blue{background:#E6F1FB;color:var(--goal-blue-dark)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <h1>Home CA Performance Update</h1>
+  <div class="sub">Supreme Choice Insurance — April 2026 Review</div>
+  <div class="meta">
+    Prepared for <strong>Monty</strong> by Tom Panos, GOAL Account Management • <strong>Period covered:</strong> 4/16/26 — 4/29/26 (since last review)
+  </div>
+</header>
+
+<!-- ==================== HERO SUMMARY ==================== -->
+<div class="hero">
+  <h2>The Story Since Our Last Review</h2>
+  <p>
+    Since we sat down on <strong>4/6</strong> and re-aligned the campaign around the August/September 2025 peak-era playbook, the leading indicators are <strong>moving the right direction</strong>:
+    lead volume is up <strong>21%</strong> and quotes are up <strong>31%</strong> — all while spend is actually <em>down</em> 15%.
+  </p>
+  <p>
+    On the policy side, <strong>1 new bind</strong> was recorded between the 4/16 review and today — from a lead already in the pipeline. Leads received <em>after</em> the 4/16 reset are still working through the quote stage; that's expected at this point in the cycle.
+  </p>
+  <p>
+    The bigger structural fix — repricing the campaign so we land in front of the highest-intent shoppers, not the residual ones — is queued up for next week.
+    That's where Policy CPA goes from where it sits today ($310) to where you want it ($75 acceptable, $35 gold).
+  </p>
+</div>
+
+<!-- ==================== WINS ==================== -->
+<section>
+  <h2>What's Improved Since 4/16</h2>
+  <div class="wins">
+    <div class="win">
+      <div class="lbl">↑ Lead Volume</div>
+      <div class="val">137</div>
+      <div class="ctx">vs 113 in last 30d window</div>
+      <div class="delta">+21% increase</div>
+    </div>
+    <div class="win">
+      <div class="lbl">↑ Quotes Generated</div>
+      <div class="val">21</div>
+      <div class="ctx">vs 16 prior</div>
+      <div class="delta">+31% increase</div>
+    </div>
+    <div class="win">
+      <div class="lbl">↑ New Policy Bound</div>
+      <div class="val">+1</div>
+      <div class="ctx">since 4/16 (3 total in April MTD)</div>
+      <div class="delta">From existing pipeline</div>
+    </div>
+    <div class="win">
+      <div class="lbl">↓ Spend</div>
+      <div class="val">$930</div>
+      <div class="ctx">vs $1,096 prior</div>
+      <div class="delta">−15% reduction</div>
+    </div>
+  </div>
+
+  <div class="green-callout">
+    <strong>Net effect:</strong> More leads, more quotes, and 1 new bind — for less money. The campaign is producing efficiently again, and we haven't even rolled out the bigger pricing changes yet.
+  </div>
+
+  <h3 style="margin-top:18px">Policies Bound — April Detail</h3>
+  <p style="font-size:13.5px;color:var(--muted);margin-top:0">3 Home CA policies counted in April MTD. All 3 came from leads received between 4/7 and 4/14 (before our 4/16 review). 1 of those binds was recorded between 4/16 and today; the other 2 were already in the 4/16 numbers.</p>
+  <table>
+    <thead>
+      <tr><th>Customer</th><th>Lead Received</th><th>In 4/16 Report?</th><th>New Since 4/16?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>James Harrell</td><td>4/7/2026</td><td>Yes (or 1 of below was)</td><td class="num">—</td></tr>
+      <tr><td>Irma Avila</td><td>4/13/2026</td><td>Yes (or 1 of above/below)</td><td class="num">—</td></tr>
+      <tr><td>Rogelio Adarlo</td><td>4/14/2026</td><td>One of these 3 was newly bound between 4/16 and 4/29</td><td class="num"><strong>+1</strong></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--muted);margin-top:6px">
+    Leads received <strong>after 4/16</strong> haven't produced binds yet — typical given the quote-to-bind cycle and the post-4/6 re-alignment is still recent. The first signal we'll watch on the post-4/16 cohort is quote rate, then bind.
+  </p>
+</section>
+
+<!-- ==================== KPIs ==================== -->
+<section>
+  <h2>Key Metrics — April Month-to-Date</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="lbl">Quote Cost</div>
+      <div class="val">$44.31</div>
+      <div class="delta up">↓ 35% vs prior month</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Lead → Quote Rate</div>
+      <div class="val">15.3%</div>
+      <div class="delta up">↑ 5pp vs prior month</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Quote → Policy Rate</div>
+      <div class="val">14.3%</div>
+      <div class="delta up">↑ 1.8pp vs prior month</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Policy Cost</div>
+      <div class="val">$310</div>
+      <div class="delta up">↓ 43% vs prior month</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Lead → Policy Rate</div>
+      <div class="val">2.2%</div>
+      <div class="delta up">↑ 0.4pp vs prior month</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg Quote Cost (Best Source)</div>
+      <div class="val">$33.95</div>
+      <div class="delta up">Gold-tier territory</div>
+    </div>
+  </div>
+  <p style="margin-top:14px;font-size:13.5px;color:var(--muted)">
+    All conversion rates are calculated against leads (the start of the funnel), and all cost metrics include 100% of campaign spend.
+  </p>
+</section>
+
+<!-- ==================== TREND CHART ==================== -->
+<section>
+  <h2>Lead &amp; Quote Trajectory</h2>
+  <p>Three consecutive 30-day reviews plus the current month show a clear, sustained climb in both leads and quotes.</p>
+  <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+  <table style="margin-top:14px">
+    <thead>
+      <tr><th>Period</th><th class="num">Leads</th><th class="num">Quotes</th><th class="num">Policies</th><th class="num">Quote Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>March (last 30d as of 3/18)</td><td class="num">66</td><td class="num">3</td><td class="num">0</td><td class="num">$117.60</td></tr>
+      <tr><td>Late March (last 30d as of 4/2)</td><td class="num">84</td><td class="num">12</td><td class="num">0</td><td class="num">$68.10</td></tr>
+      <tr><td>Mid-April (last 30d as of 4/16)</td><td class="num">113</td><td class="num">16</td><td class="num">2</td><td class="num">$68.52</td></tr>
+      <tr style="background:#FFF8E1"><td><strong>April month-to-date (4/29)</strong></td><td class="num"><b>137</b></td><td class="num"><b>21</b></td><td class="num"><b>3</b></td><td class="num"><b>$44.31</b></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== FUNNEL ==================== -->
+<section>
+  <h2>How Leads Are Moving Through the Funnel</h2>
+  <p>From auction opportunity to bound policy, here's where each lead ends up this month.</p>
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="label">Leads</div>
+      <div class="funnel-bar" style="width:100%">137</div>
+      <div class="pct">100%</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Contacted</div>
+      <div class="funnel-bar" style="width:21%;background:linear-gradient(90deg,#0270D2,#1583DC)">29</div>
+      <div class="pct">21.2%</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Quoted</div>
+      <div class="funnel-bar" style="width:15%;background:linear-gradient(90deg,#0269C7,#0479DF)">21</div>
+      <div class="pct">15.3%</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Policies Bound</div>
+      <div class="funnel-bar" style="width:6%;background:linear-gradient(90deg,#015AAB,#035FB3)">3</div>
+      <div class="pct">2.2%</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Where we're focused next:</strong> Lead → Quote conversion (15.3%) is solidly within the healthy range. The bigger unlock is on the front end — getting in front of higher-intent shoppers so the leads that <em>do</em> reach you are more likely to bind. That's the entire goal of the bid changes outlined below.
+  </div>
+</section>
+
+<!-- ==================== HONEST FRAMING ==================== -->
+<section>
+  <h2>What's Still Ahead — Closing the Policy CPA Gap</h2>
+  <p>
+    We agreed on 4/6 to a clear scoreboard: <strong>$35 gold standard, $75 acceptable, $100+ in the hot zone</strong>. April Policy CPA is <strong>$310</strong> — better than the prior month's $548, but still well over your line. Here's what's driving it and what we're doing about it.
+  </p>
+  <table>
+    <thead><tr><th>What's Working</th><th>What Still Needs Work</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li>Best-converting source is producing quotes at <strong>$33.95</strong> — gold-tier</li>
+            <li>Quote rate climbed from 10.6% → 15.3%</li>
+            <li>Policy production resumed (3 bound, with 18 quoted leads still in motion)</li>
+            <li>Spend efficiency improved — fewer dollars per outcome</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Most leads are landing on deeper ad-wall positions where intent is lower</li>
+            <li>One of our largest sources isn't winning enough auctions, even at competitive bids — points to a publisher-mix issue we'll audit this week</li>
+            <li>Policy CPA still well above the $75 acceptable line until pricing rebalances</li>
+            <li>Daily-schedule pricing is adding noise — we'll normalize and let source-level pricing do the work</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== NEXT STEPS ==================== -->
+<section>
+  <h2>What's Coming Next Week</h2>
+  <p>Three coordinated moves, sequenced so we isolate the variables and can read the impact cleanly.</p>
+
+  <div class="nextstep">
+    <div class="imp">Step 1 · This Week</div>
+    <h4>Audit the Tier 1 publisher mix for drift</h4>
+    <p>
+      Our largest traffic source has 27,000+ auction opportunities this month but is winning a much smaller share than expected — even at competitive bids. The pattern matches what we saw during the 2025 lead drought, when a single drifted publisher dragged performance down across the source. We'll cross-reference the publisher IDs against the bad-list pattern from peak era and clean the mix before pushing more spend through.
+    </p>
+  </div>
+
+  <div class="nextstep">
+    <div class="imp">Step 2 · Monday 5/4</div>
+    <h4>Re-anchor bids to current market and concentrate budget on proven winners</h4>
+    <p>
+      We'll re-base the campaign to <strong>$4.15</strong> (the current market rate for above-2nd-position on our anchor source) and lift the multipliers on the 4 sources that are converting (Tier 1, Tier 2, Home Search, Home SearchB). Total spend stays roughly flat — we're reallocating, not adding.
+    </p>
+    <p style="margin-top:6px">
+      <strong>Special play on Home Search:</strong> we'll target the 3rd-position market price (~$11/click), not the 1st or 2nd. This mirrors the August/September 2025 pattern where you were paying around $2/click in a $10–12 market and capturing residual high-intent traffic. Same idea, applied to today's pricing.
+    </p>
+  </div>
+
+  <div class="nextstep">
+    <div class="imp">Step 3 · Monday 5/4</div>
+    <h4>Normalize the daily-schedule pricing and free up the manual kick</h4>
+    <p>
+      We'll flatten the day-parting modifiers to 100% and let the source-level pricing do all the bidding work. The off-hours <strong>manual 130% kick</strong> stays available for slower mornings — exactly the lever you described on 4/6. This makes the campaign more predictable and easier to read week-to-week.
+    </p>
+  </div>
+
+  <div class="green-callout">
+    <strong>14-day checkpoint:</strong> We'll re-pull the market pricing report and source-level data on <strong>5/13</strong>. If Quote CPA holds in the $30–50 range and Policy CPA compresses toward $100, the changes are working as expected. If anything trips a stop-loss (Q-CPA &gt; $100 on Home Search, for example), we adjust immediately.
+  </div>
+</section>
+
+<!-- ==================== TARGETS ==================== -->
+<section>
+  <h2>Our Scoreboard (Confirmed 4/6)</h2>
+  <table>
+    <thead><tr><th>Tier</th><th class="num">Quote / Policy CPA</th><th>Where We Stand</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill pill-gold">Gold standard</span></td><td class="num">≤ $35</td><td>Quote CPA <strong>$33.95</strong> on Home SearchB; <strong>$35.93</strong> on Tier 2 — already there on the best sources</td></tr>
+      <tr><td><span class="pill pill-blue">Acceptable</span></td><td class="num">≤ $75</td><td>Blended Quote CPA at <strong>$44.31</strong> — under acceptable, room to push</td></tr>
+      <tr><td><span class="pill pill-gold">Policy CPA target</span></td><td class="num">≤ $75 acceptable / ≤ $35 gold</td><td>Currently <strong>$310</strong> — primary focus of the next-week changes</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:10px;font-size:13.5px;color:var(--muted)">
+    Reminder: these targets are calibrated to non-standard market only — Currently Insured = No, by design.
+  </p>
+</section>
+
+<!-- ==================== SIGNATURE ==================== -->
+<section>
+  <div class="signature">
+    <div class="who">
+      <b>Tom Panos</b>
+      Account Management — GOAL Platform<br>
+      tom@checkoutgoal.com
+    </div>
+    <div class="who" style="text-align:right">
+      <b>Next live review</b>
+      Scheduled within 14 days of bid changes
+    </div>
+  </div>
+</section>
+
+<footer>
+  Supreme Choice Insurance — Home CA Campaign Update • April 29, 2026
+</footer>
+
+</div>
+
+<script>
+const blue='#0479DF', navy='#0A2540', green='#0A8A4A';
+
+new Chart(document.getElementById('trendChart').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['March (3/18)','Late March (4/2)','Mid-April (4/16)','April MTD (4/29)'],
+    datasets:[
+      {type:'bar',label:'Leads',data:[66,84,113,137],backgroundColor:'rgba(4,121,223,.55)',borderColor:blue,borderWidth:1,borderRadius:6,yAxisID:'y',order:2},
+      {type:'line',label:'Quotes',data:[3,12,16,21],borderColor:green,backgroundColor:'rgba(10,138,74,.15)',borderWidth:3,tension:.3,pointRadius:6,pointBackgroundColor:green,yAxisID:'y',order:1},
+      {type:'line',label:'Policies',data:[0,0,2,3],borderColor:'#B8860B',backgroundColor:'rgba(184,134,11,.15)',borderWidth:3,tension:.3,pointRadius:6,pointBackgroundColor:'#B8860B',yAxisID:'y',order:0,borderDash:[6,4]}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{position:'bottom',labels:{boxWidth:12,font:{size:12}}},
+      tooltip:{titleColor:'#fff',bodyColor:'#fff',backgroundColor:'rgba(10,37,64,.92)'}
+    },
+    scales:{
+      y:{title:{display:true,text:'Count',font:{size:11}},grid:{color:'#EEF1F4'},beginAtZero:true},
+      x:{grid:{display:false}}
+    }
+  }
+});
+</script>
+</body>
+</html>
