@@ -31,7 +31,7 @@
             padding: 40px;
         }
 
-        .container { max-width: 880px; width: 100%; }
+        .container { max-width: 1100px; width: 100%; }
 
         .header { text-align: center; margin-bottom: 48px; }
         .header-logo { font-size: 22px; font-weight: 700; color: var(--goal-brand); margin-bottom: 4px; letter-spacing: -0.5px; }
@@ -40,7 +40,7 @@
 
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
@@ -67,6 +67,7 @@
         }
         .report-card.performance::before { background: var(--goal-brand); }
         .report-card.cpa::before { background: var(--goal-accent-1); }
+        .report-card.auto::before { background: #F59E0B; }
 
         .card-title {
             font-size: 18px;
@@ -119,6 +120,12 @@
         <a href="Supreme-Choice-Contact-Rate-Analysis-2026-05-08.html" class="report-card cpa">
             <div class="card-title">Contact Rate Analysis &mdash; May 8, 2026</div>
             <div class="card-description">Deep dive into lead contactability: contact and quote rate trends by source, time-to-call performance, and recommendations to lift conversion.</div>
+            <span class="card-arrow">View report &rarr;</span>
+        </a>
+
+        <a href="Supreme-Choice-Auto-Peak-Recovery-Plan.html" class="report-card auto">
+            <div class="card-title">Auto Peak Recovery Plan</div>
+            <div class="card-description">Diagnosis of the Auto campaign's peak performance and the recovery roadmap: source-level pricing, ICP rebuild status, and projected month-by-month ramp.</div>
             <span class="card-arrow">View report &rarr;</span>
         </a>
     </div>

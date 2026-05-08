@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice Auto — Peak Performance Recovery Plan</title>
+<style>
+  :root {
+    --goal-brand: #077BE5;
+    --goal-dark-blue: #00172D;
+    --goal-accent-teal: #3AEECA;
+    --goal-light-blue: #97C2E8;
+    --goal-light-grey: #F8F9FC;
+    --goal-text: #001020;
+    --green: #10B981;
+    --red: #EF4444;
+    --amber: #F59E0B;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-500: #6B7280;
+    --gray-700: #374151;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background: var(--goal-light-grey);
+    color: var(--goal-text);
+    margin: 0;
+    padding: 40px 20px;
+    line-height: 1.5;
+  }
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  header {
+    background: linear-gradient(135deg, var(--goal-dark-blue) 0%, #002B52 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+  }
+  header .brand {
+    color: var(--goal-accent-teal);
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    margin: 0 0 8px 0;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  header .subtitle {
+    color: var(--goal-light-blue);
+    font-size: 16px;
+    margin: 0 0 24px 0;
+  }
+  header .meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 18px;
+  }
+  header .meta div span {
+    color: var(--goal-light-blue);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 40px;
+    margin-bottom: 24px;
+    border: 1px solid var(--gray-200);
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: var(--goal-dark-blue);
+  }
+  h2 .accent {
+    color: var(--goal-brand);
+  }
+  .section-sub {
+    color: var(--gray-500);
+    font-size: 14px;
+    margin: 0 0 24px 0;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    color: var(--goal-dark-blue);
+  }
+
+  .lede {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--gray-700);
+    margin: 0 0 18px 0;
+  }
+  .lede strong { color: var(--goal-dark-blue); }
+  .pill {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--gray-100);
+    color: var(--gray-700);
+  }
+  .pill.green { background: #ECFDF5; color: #047857; }
+  .pill.red { background: #FEF2F2; color: #B91C1C; }
+  .pill.amber { background: #FEF3C7; color: #92400E; }
+  .pill.blue { background: #EFF6FF; color: #1D4ED8; }
+
+  /* KPI grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .kpi {
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .kpi .label {
+    font-size: 11px;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .kpi .value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--goal-dark-blue);
+    line-height: 1.1;
+  }
+  .kpi .delta {
+    font-size: 12px;
+    color: var(--gray-500);
+    margin-top: 6px;
+  }
+  .kpi .delta.up { color: var(--green); }
+  .kpi .delta.down { color: var(--red); }
+  .kpi.peak .value { color: var(--goal-brand); }
+  .kpi.gap .value { color: var(--red); }
+
+  /* Two-col compare */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .compare .card {
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 22px 24px;
+  }
+  .compare .card.peak {
+    background: #F0F8FF;
+    border-color: #CFE3F8;
+  }
+  .compare .card.current {
+    background: #FFF7ED;
+    border-color: #FED7AA;
+  }
+  .compare .card h4 {
+    margin: 0 0 14px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .compare .card.peak h4 { color: var(--goal-brand); }
+  .compare .card.current h4 { color: var(--amber); }
+  .compare .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    font-size: 14px;
+  }
+  .compare .row:last-child { border-bottom: none; }
+  .compare .row .k { color: var(--gray-500); }
+  .compare .row .v { font-weight: 700; color: var(--goal-dark-blue); }
+
+  /* Monthly bar chart */
+  .month-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 70px 70px 90px;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .month-row:first-child {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 10px;
+  }
+  .month-row.peak { background: #F0F8FF; padding: 10px 8px; border-radius: 6px; }
+  .bar-track {
+    background: var(--gray-100);
+    height: 22px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-fill {
+    background: var(--goal-brand);
+    height: 100%;
+    border-radius: 4px;
+  }
+  .bar-fill.weak { background: var(--gray-200); }
+  .bar-fill.peak { background: var(--goal-brand); }
+  .bar-fill.decay { background: var(--amber); }
+  .bar-fill.collapsed { background: var(--red); }
+  .bar-label {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 2px rgba(0,0,0,0.3);
+  }
+  .bar-label.dark { color: var(--gray-700); text-shadow: none; }
+
+  /* Recipe cards */
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .recipe {
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 18px;
+    background: #fff;
+  }
+  .recipe.success { border-left: 4px solid var(--green); }
+  .recipe.warning { border-left: 4px solid var(--amber); }
+  .recipe.danger { border-left: 4px solid var(--red); }
+  .recipe h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: var(--goal-dark-blue);
+    font-weight: 700;
+  }
+  .recipe p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--gray-700);
+    line-height: 1.55;
+  }
+
+  /* Action plan */
+  .action {
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 12px;
+    background: #fff;
+    border-left: 4px solid var(--goal-brand);
+  }
+  .action.priority-1 { border-left-color: var(--red); }
+  .action.priority-2 { border-left-color: var(--amber); }
+  .action.priority-3 { border-left-color: var(--goal-brand); }
+  .action.priority-monitor { border-left-color: var(--green); }
+
+  .action-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .action-header h3 {
+    margin: 0;
+    font-size: 17px;
+  }
+  .action p {
+    color: var(--gray-700);
+    font-size: 14px;
+    margin: 6px 0 0 0;
+    line-height: 1.6;
+  }
+  .action .why {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* Bid table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  th {
+    background: var(--goal-light-grey);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--gray-500);
+    font-weight: 700;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  td.center { text-align: center; }
+  tr.boost td { background: #F0F8FF; }
+  tr.reactivate td { background: #ECFDF5; }
+  tr.hold td { background: #fff; }
+  tr.cap td { background: #FEF3C7; }
+  .arrow { color: var(--goal-brand); font-weight: 700; }
+
+  /* Projection block */
+  .projection {
+    background: linear-gradient(135deg, #F0F8FF 0%, #E0F2FE 100%);
+    border: 1px solid #CFE3F8;
+    border-radius: 10px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .projection .item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--goal-brand);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .projection .item .now {
+    font-size: 13px;
+    color: var(--gray-500);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .projection .item .target {
+    font-size: 22px;
+    color: var(--goal-dark-blue);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--gray-500);
+    font-size: 12px;
+    padding: 24px 0;
+    margin-top: 12px;
+  }
+  footer span { color: var(--goal-brand); font-weight: 700; }
+
+  @media (max-width: 800px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare { grid-template-columns: 1fr; }
+    .recipe-grid { grid-template-columns: 1fr; }
+    .projection { grid-template-columns: repeat(2, 1fr); }
+    .month-row { grid-template-columns: 70px 1fr 60px 60px; }
+    .month-row > :nth-child(5) { display: none; }
+  }
+
+  .back-to-landing{position:fixed;top:18px;left:18px;z-index:1000;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#FFFFFF;border:1px solid var(--gray-200);border-radius:999px;color:var(--goal-brand);font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(0,23,45,.08);transition:border-color .15s,box-shadow .15s,transform .15s}
+  .back-to-landing:hover{border-color:var(--goal-brand);box-shadow:0 4px 14px rgba(7,123,229,.18);transform:translateY(-1px)}
+  @media print{.back-to-landing{display:none}}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-to-landing">&larr; Back to reports</a>
+<div class="container">
+
+  <header>
+    <div class="brand">GOAL Platform · Performance Review</div>
+    <h1>Supreme Choice Insurance — Auto Campaign</h1>
+    <p class="subtitle">Peak Performance Diagnosis &amp; Recovery Plan</p>
+    <div class="meta">
+      <div><span>Client</span>Supreme Choice Insurance</div>
+      <div><span>Line of Business</span>Auto (Non-Standard)</div>
+      <div><span>Geography</span>California</div>
+      <div><span>Review Date</span>May 8, 2026</div>
+      <div><span>Data Range</span>Jan 2025 – May 2026</div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       EXECUTIVE SUMMARY
+  ============================================================ -->
+  <section>
+    <h2>The <span class="accent">Headline</span></h2>
+    <p class="section-sub">A one-paragraph diagnosis grounded in the data.</p>
+
+    <p class="lede">
+      The Auto campaign hit clear peak performance in <strong>May–June 2025</strong>, generating
+      <strong>~200 leads/month, 8–9 sold policies, and a $3.72 CPL at a $88 policy CPA</strong> — well below
+      the auto benchmark range of $150–400. After June 2025, average bids were pulled down from <strong>$3.09 → $2.06–$2.30</strong>,
+      win rate collapsed from <strong>3.18% → 0.18%</strong>, and ad-wall position drifted from <strong>~4th to 7th</strong>.
+      Three of the most productive sources (Premium Referral 2, Premium Paid Search, Premium Paid Search 7)
+      either went inactive or stopped getting opportunities. <strong>This is a classic bid &amp; allocation
+      problem, not a market or audience problem.</strong> The recovery plan is to restore the May/June 2025
+      conditions: a modest base-bid raise, reactivation of three dormant winners, and concentrated
+      multiplier increases on 6 sources priced to <strong>just above 2nd-position market RPC</strong>.
+    </p>
+
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;">
+      <span class="pill blue">Diagnosis: Bid &amp; Allocation</span>
+      <span class="pill green">Peak proven achievable</span>
+      <span class="pill amber">3 winners currently dormant</span>
+      <span class="pill red">Win rate -94% vs peak</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PEAK vs CURRENT
+  ============================================================ -->
+  <section>
+    <h2>Peak vs <span class="accent">Current</span></h2>
+    <p class="section-sub">Side-by-side snapshot of what we did at peak versus where the campaign sits today.</p>
+
+    <div class="compare">
+      <div class="card peak">
+        <h4>Peak Performance — May/Jun 2025</h4>
+        <div class="row"><span class="k">Avg Monthly Leads</span><span class="v">~200</span></div>
+        <div class="row"><span class="k">Avg Monthly Policies</span><span class="v">8.5</span></div>
+        <div class="row"><span class="k">Win Rate</span><span class="v">3.18%</span></div>
+        <div class="row"><span class="k">Avg Bid</span><span class="v">$2.93</span></div>
+        <div class="row"><span class="k">Avg Ad Wall Position</span><span class="v">3.94</span></div>
+        <div class="row"><span class="k">Cost Per Lead</span><span class="v">$3.72</span></div>
+        <div class="row"><span class="k">Cost Per Policy (CPA)</span><span class="v">$88.64</span></div>
+        <div class="row"><span class="k">Monthly Spend</span><span class="v">~$753</span></div>
+      </div>
+      <div class="card current">
+        <h4>Current — Last 30 Days</h4>
+        <div class="row"><span class="k">Monthly Leads</span><span class="v">4 <span style="color:var(--red); font-size:11px;">(-98%)</span></span></div>
+        <div class="row"><span class="k">Monthly Policies</span><span class="v">0 <span style="color:var(--red); font-size:11px;">(-100%)</span></span></div>
+        <div class="row"><span class="k">Win Rate</span><span class="v">0.18% <span style="color:var(--red); font-size:11px;">(-94%)</span></span></div>
+        <div class="row"><span class="k">Avg Bid</span><span class="v">$2.30 <span style="color:var(--red); font-size:11px;">(-21%)</span></span></div>
+        <div class="row"><span class="k">Avg Ad Wall Position</span><span class="v">7.07 <span style="color:var(--red); font-size:11px;">(+3 spots)</span></span></div>
+        <div class="row"><span class="k">Cost Per Lead</span><span class="v">$9.07 <span style="color:var(--red); font-size:11px;">(+144%)</span></span></div>
+        <div class="row"><span class="k">Cost Per Policy (CPA)</span><span class="v">— <span style="color:var(--gray-500); font-size:11px;">no policies</span></span></div>
+        <div class="row"><span class="k">Monthly Spend</span><span class="v">$36.29 <span style="color:var(--red); font-size:11px;">(-95%)</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MONTHLY TREND CHART
+  ============================================================ -->
+  <section>
+    <h2>Monthly Trend — <span class="accent">Where the Campaign Drifted</span></h2>
+    <p class="section-sub">Lead volume and win rate by month over the last year. Peak band highlighted.</p>
+
+    <div>
+      <div class="month-row">
+        <div>Month</div>
+        <div>Leads (visual)</div>
+        <div>Win Rate</div>
+        <div>Avg Bid</div>
+        <div>Status</div>
+      </div>
+      <!-- Max lead value 204; bars scale to /204 -->
+      <div class="month-row"><div>Jan 2025</div><div class="bar-track"><div class="bar-fill weak" style="width:70%"><span class="bar-label">143</span></div></div><div>1.00%</div><div>$2.77</div><div><span class="pill amber">Pre-peak</span></div></div>
+      <div class="month-row"><div>Feb 2025</div><div class="bar-track"><div class="bar-fill weak" style="width:26%"><span class="bar-label dark">54</span></div></div><div>0.36%</div><div>$3.60</div><div><span class="pill amber">Pre-peak</span></div></div>
+      <div class="month-row"><div>Mar 2025</div><div class="bar-track"><div class="bar-fill weak" style="width:45%"><span class="bar-label">92</span></div></div><div>0.34%</div><div>$3.42</div><div><span class="pill amber">Pre-peak</span></div></div>
+      <div class="month-row"><div>Apr 2025</div><div class="bar-track"><div class="bar-fill weak" style="width:13%"><span class="bar-label dark">27</span></div></div><div>0.34%</div><div>$3.07</div><div><span class="pill amber">Pre-peak</span></div></div>
+      <div class="month-row peak"><div>May 2025</div><div class="bar-track"><div class="bar-fill peak" style="width:99%"><span class="bar-label">201</span></div></div><div><strong>3.26%</strong></div><div><strong>$3.09</strong></div><div><span class="pill green">PEAK</span></div></div>
+      <div class="month-row peak"><div>Jun 2025</div><div class="bar-track"><div class="bar-fill peak" style="width:100%"><span class="bar-label">204</span></div></div><div><strong>3.09%</strong></div><div><strong>$2.76</strong></div><div><span class="pill green">PEAK</span></div></div>
+      <div class="month-row"><div>Jul 2025</div><div class="bar-track"><div class="bar-fill decay" style="width:51%"><span class="bar-label">104</span></div></div><div>1.38%</div><div>$2.17</div><div><span class="pill amber">Decline</span></div></div>
+      <div class="month-row"><div>Aug 2025</div><div class="bar-track"><div class="bar-fill decay" style="width:12%"><span class="bar-label dark">25</span></div></div><div>1.43%</div><div>$2.28</div><div><span class="pill amber">Decline</span></div></div>
+      <div class="month-row"><div>Sep 2025</div><div class="bar-track"><div class="bar-fill collapsed" style="width:6%"><span class="bar-label dark">13</span></div></div><div>0.13%</div><div>$2.07</div><div><span class="pill red">Collapsed</span></div></div>
+      <div class="month-row"><div>Oct 2025</div><div class="bar-track"><div class="bar-fill collapsed" style="width:10%"><span class="bar-label dark">21</span></div></div><div>0.20%</div><div>$2.06</div><div><span class="pill red">Collapsed</span></div></div>
+      <div class="month-row"><div>Nov 2025</div><div class="bar-track"><div class="bar-fill collapsed" style="width:18%"><span class="bar-label dark">37</span></div></div><div>0.57%</div><div>$2.38</div><div><span class="pill red">Collapsed</span></div></div>
+      <div class="month-row"><div>Dec 2025</div><div class="bar-track"><div class="bar-fill collapsed" style="width:2%"><span class="bar-label dark">5</span></div></div><div>1.09%</div><div>$2.89</div><div><span class="pill red">Collapsed</span></div></div>
+      <div class="month-row"><div>Last 30d</div><div class="bar-track"><div class="bar-fill collapsed" style="width:2%"><span class="bar-label dark">4</span></div></div><div>0.18%</div><div>$2.30</div><div><span class="pill red">Today</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PEAK RECIPE (WHAT WORKED)
+  ============================================================ -->
+  <section>
+    <h2>What Drove the <span class="accent">Peak</span></h2>
+    <p class="section-sub">The five factors that made May/June 2025 work — and the recipe to recreate it.</p>
+
+    <div class="recipe-grid">
+      <div class="recipe success">
+        <h4>1. Higher, Confident Bidding</h4>
+        <p>Average bid sat at <strong>$2.76–$3.09</strong> (vs $2.30 today). That extra ~25¢ pushed Supreme Choice into ad-wall positions 3–4, where 50%+ of click volume lives. Win rate ran <strong>3.18%</strong> — 17× today's level.</p>
+      </div>
+      <div class="recipe success">
+        <h4>2. Premium Referral Engine</h4>
+        <p>Premium Referral and Premium Referral 2 together delivered <strong>22 of 29 sold policies</strong> over the past 12 months. Premium Referral 2 alone produced 36 quotes from $632 in spend — a $17 cost per quote.</p>
+      </div>
+      <div class="recipe success">
+        <h4>3. Email Channel Live</h4>
+        <p>Email contributed <strong>120 leads, 8 quotes, 2 sales</strong> on $595 in spend. Currently the multiplier is throttled to 51% — starving 5,147 monthly opportunities of competitive bids.</p>
+      </div>
+      <div class="recipe success">
+        <h4>4. Premium Paid Search 2 Active</h4>
+        <p><strong>15 quotes from $477</strong> spend. Still active but bid multiplier was cut to 69%, meaning effective bid ($2.06) is half the market 2nd-position RPC of $5.05.</p>
+      </div>
+      <div class="recipe success">
+        <h4>5. Tight, Non-Standard Targeting</h4>
+        <p>Filters held to 1-driver/1-vehicle households (96% of all policies came from this segment). Currently Insured = No filter remained intact — preserving the non-standard ICP fit (DUI, accidents, lapsed coverage prospects).</p>
+      </div>
+      <div class="recipe warning">
+        <h4>6. Healthy Spend Pace</h4>
+        <p>Monthly spend of <strong>~$750</strong> was sustained for two consecutive months without CPA breakdown. Today's $36/month pace is too thin to win meaningful auctions across the 200+ source network.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHAT BROKE
+  ============================================================ -->
+  <section>
+    <h2>What <span class="accent">Drifted Away</span></h2>
+    <p class="section-sub">Each of these is fixable in the dashboard today.</p>
+
+    <div class="recipe-grid">
+      <div class="recipe danger">
+        <h4>Bids Pulled Down</h4>
+        <p>Avg bid drifted from <strong>$3.09 (May '25) → $2.30 (May '26)</strong>. A <strong>21% bid cut</strong> while CA market RPCs held steady. Win rate fell <strong>94%</strong> as a direct result.</p>
+      </div>
+      <div class="recipe danger">
+        <h4>Premium Paid Search Deactivated</h4>
+        <p>Currently flagged <strong>INACTIVE</strong>. Last year delivered 7 quotes and 2 sold policies from $277 in spend. No reason in the data for this source to sit dormant.</p>
+      </div>
+      <div class="recipe danger">
+        <h4>Premium Paid Search 7 Deactivated</h4>
+        <p>Currently <strong>INACTIVE</strong>. Last year: 4 quotes, 1 sold policy, $203 spend. Multiplier sits at 301% — ready to fire if reactivated.</p>
+      </div>
+      <div class="recipe danger">
+        <h4>Premium Referral 2 Has Zero Opportunities</h4>
+        <p>Marked Active, but <strong>0 opportunities</strong> in the last 60 days despite producing 8 sold policies and 36 quotes last year. Indicates a routing issue or upstream targeting/eligibility filter to investigate with the GOAL product team.</p>
+      </div>
+      <div class="recipe danger">
+        <h4>Premium Referral Multiplier Cut</h4>
+        <p>Was the #1 source last year (14 sales, $1,200 spend). Multiplier now sits at <strong>86%</strong> — effective bid $2.47 vs market 2nd-position RPC of $5.87. Bidding 58% below market on the top revenue source.</p>
+      </div>
+      <div class="recipe warning">
+        <h4>Email Throttled</h4>
+        <p>Multiplier at <strong>51%</strong> on a source with 5,147 monthly opportunities and proven sale conversion. Effective bid $1.55 vs market 1st-position RPC of $4.79.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RECOVERY ACTION PLAN
+  ============================================================ -->
+  <section>
+    <h2>Recovery Action Plan — <span class="accent">7 Moves</span></h2>
+    <p class="section-sub">Calibrated against the California Auto RightPricing market data. Target: just above 2nd-position RPC plus a 10% volatility buffer.</p>
+
+    <div class="action priority-1">
+      <div class="action-header">
+        <h3>1. Raise Base Bid: $2.86 → $3.00</h3>
+        <span class="pill red">High Priority</span>
+      </div>
+      <p>Restores the May 2025 peak bid level. Single dial that resets the entire campaign closer to market without having to re-tune every source. Expected to lift win rate from 0.18% to the 1.0–2.0% range immediately while we layer in source-level moves.</p>
+      <p class="why">Why now: Avg bid is the strongest single predictor of position and win rate in the trend data. The peak month had avg bid $3.09; today is $2.30.</p>
+    </div>
+
+    <div class="action priority-1">
+      <div class="action-header">
+        <h3>2. Reactivate Premium Paid Search and Premium Paid Search 7</h3>
+        <span class="pill red">High Priority</span>
+      </div>
+      <p>Both currently <strong>Inactive</strong>. Combined last-year contribution: <strong>11 quotes, 3 sold policies on $480 spend</strong>. No data justifies keeping them off. Set Premium Paid Search to <strong>180%</strong> multiplier (target market 2nd-position $5.05 RPC at $3.00 base). Keep Premium Paid Search 7 at its existing 301% multiplier on activation — 2nd-position RPC is $6.73 and 301% of $3.00 = $9.03 (10% buffer above target).</p>
+      <p class="why">Why now: Reactivation is a one-click change. Historical data shows immediate productivity, no ramp.</p>
+    </div>
+
+    <div class="action priority-1">
+      <div class="action-header">
+        <h3>3. Boost Premium Referral: 86% → 200%</h3>
+        <span class="pill red">High Priority</span>
+      </div>
+      <p>Top revenue source last year (14 policies, $1,200 spend, $86 CPA). At 86% multiplier the effective bid is $2.47 — well below the market 2nd-position RPC of $5.87. Move multiplier to <strong>200%</strong> (effective bid $6.00) to land just above 2nd position. Expect this single change to add 4–6 sold policies/month at peak pace.</p>
+      <p class="why">Why now: This is the highest-leverage move in the campaign. Largest historical revenue contribution + largest underbid gap.</p>
+    </div>
+
+    <div class="action priority-2">
+      <div class="action-header">
+        <h3>4. Investigate Premium Referral 2 Opportunity Drought</h3>
+        <span class="pill amber">Medium Priority — Investigation</span>
+      </div>
+      <p>Source is marked Active with a 90% multiplier, but it's received <strong>0 opportunities in 60 days</strong> despite 36 quotes and 8 policies last year. This isn't a bid problem — it's a routing or eligibility problem. Open a ticket with Chris/GOAL product team to confirm the source is properly mapped to Supreme Choice's California non-standard targeting. Once opportunities flow, raise multiplier to <strong>200%</strong> (matches Premium Referral target).</p>
+      <p class="why">Why now: This was the #2 source for sold policies last year. A routing fix could unlock 6+ quotes/month with no additional cost beyond bid spend.</p>
+    </div>
+
+    <div class="action priority-2">
+      <div class="action-header">
+        <h3>5. Boost Email: 51% → 195%</h3>
+        <span class="pill amber">Medium Priority</span>
+      </div>
+      <p>5,147 monthly opportunities are sitting under-bid. Effective bid jumps from $1.55 to $5.85 — just above 2nd-position RPC of $5.78. Expect this to start producing 30–50 leads/month with a contact and quote rate consistent with last year's 6.7% lead-to-quote rate.</p>
+      <p class="why">Why now: Highest opportunity volume of the proven-converter sources. Raising the multiplier here is the cheapest way to recover lead volume.</p>
+    </div>
+
+    <div class="action priority-2">
+      <div class="action-header">
+        <h3>6. Boost Premium Paid Search 2: 69% → 180%</h3>
+        <span class="pill amber">Medium Priority</span>
+      </div>
+      <p>15 quotes and 2 policies last year. Effective bid moves from $2.06 to $5.40, putting us just above 2nd-position RPC of $5.05. Expect ~10 leads/month at this bid level, consistent with last year's average.</p>
+      <p class="why">Why now: A concentrated bet on a known winner — small absolute spend increase, predictable lead volume return.</p>
+    </div>
+
+    <div class="action priority-monitor">
+      <div class="action-header">
+        <h3>7. Hold Steady — Sources Already Aligned</h3>
+        <span class="pill green">Monitor Only</span>
+      </div>
+      <p>Five sources are already priced sensibly relative to market and should not be changed: <strong>Premium Paid Search 4</strong> (301%, max'd out), <strong>Premium Paid Search 6</strong> (164% — aligned with $4.53 RPC), <strong>Premium Paid Search 2B</strong> (197% — aligned with $4.99 RPC), <strong>Premium Email B</strong> (249% — aligned with $6.92 RPC), <strong>Internal SEO</strong> (197% — aligned with $5.67 RPC). Watch for changes after the base-bid raise; trim if any begin to outpace CPA targets.</p>
+      <p class="why">Why now: These are not the bottleneck. Changing them would dilute focus and risk triggering changes that aren't necessary.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MARKET-CALIBRATED BID TABLE
+  ============================================================ -->
+  <section>
+    <h2>Market-Calibrated <span class="accent">Bid Table</span></h2>
+    <p class="section-sub">Every recommendation cross-checked against the California Auto RightPricing report. Target effective bid sits just above 2nd-position market RPC.</p>
+
+    <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th class="center">Action</th>
+          <th class="num">Last Yr Sold</th>
+          <th class="num">Last Yr Spend</th>
+          <th class="num">Current Mult</th>
+          <th class="num">Recommended Mult</th>
+          <th class="num">New Eff. Bid</th>
+          <th class="num">Mkt 2nd RPC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="boost">
+          <td><strong>Premium Referral</strong></td>
+          <td class="center"><span class="pill red">Boost</span></td>
+          <td class="num">14</td>
+          <td class="num">$1,200</td>
+          <td class="num">86%</td>
+          <td class="num"><span class="arrow">→</span> 200%</td>
+          <td class="num">$6.00</td>
+          <td class="num">$5.87</td>
+        </tr>
+        <tr class="reactivate">
+          <td><strong>Premium Referral 2</strong></td>
+          <td class="center"><span class="pill amber">Investigate</span></td>
+          <td class="num">8</td>
+          <td class="num">$632</td>
+          <td class="num">90%</td>
+          <td class="num"><span class="arrow">→</span> 200%*</td>
+          <td class="num">$6.00*</td>
+          <td class="num">$5.87</td>
+        </tr>
+        <tr class="boost">
+          <td><strong>Email</strong></td>
+          <td class="center"><span class="pill red">Boost</span></td>
+          <td class="num">2</td>
+          <td class="num">$595</td>
+          <td class="num">51%</td>
+          <td class="num"><span class="arrow">→</span> 195%</td>
+          <td class="num">$5.85</td>
+          <td class="num">$5.78</td>
+        </tr>
+        <tr class="boost">
+          <td><strong>Premium Paid Search 2</strong></td>
+          <td class="center"><span class="pill red">Boost</span></td>
+          <td class="num">2</td>
+          <td class="num">$477</td>
+          <td class="num">69%</td>
+          <td class="num"><span class="arrow">→</span> 180%</td>
+          <td class="num">$5.40</td>
+          <td class="num">$5.05</td>
+        </tr>
+        <tr class="reactivate">
+          <td><strong>Premium Paid Search</strong></td>
+          <td class="center"><span class="pill green">Reactivate</span></td>
+          <td class="num">2</td>
+          <td class="num">$277</td>
+          <td class="num">74% (off)</td>
+          <td class="num"><span class="arrow">→</span> 180%</td>
+          <td class="num">$5.40</td>
+          <td class="num">$4.75</td>
+        </tr>
+        <tr class="reactivate">
+          <td><strong>Premium Paid Search 7</strong></td>
+          <td class="center"><span class="pill green">Reactivate</span></td>
+          <td class="num">1</td>
+          <td class="num">$203</td>
+          <td class="num">301% (off)</td>
+          <td class="num"><span class="arrow">→</span> 245%</td>
+          <td class="num">$7.35</td>
+          <td class="num">$6.73</td>
+        </tr>
+        <tr class="hold">
+          <td>Premium Paid Search 4</td>
+          <td class="center"><span class="pill blue">Hold</span></td>
+          <td class="num">0</td>
+          <td class="num">$125</td>
+          <td class="num">301%</td>
+          <td class="num">301%</td>
+          <td class="num">$9.03</td>
+          <td class="num">$11.67</td>
+        </tr>
+        <tr class="hold">
+          <td>Premium Paid Search 6</td>
+          <td class="center"><span class="pill blue">Hold</span></td>
+          <td class="num">0</td>
+          <td class="num">$13</td>
+          <td class="num">164%</td>
+          <td class="num">164%</td>
+          <td class="num">$4.92</td>
+          <td class="num">$4.53</td>
+        </tr>
+        <tr class="hold">
+          <td>Premium Paid Search 2B</td>
+          <td class="center"><span class="pill blue">Hold</span></td>
+          <td class="num">0</td>
+          <td class="num">$47</td>
+          <td class="num">197%</td>
+          <td class="num">197%</td>
+          <td class="num">$5.91</td>
+          <td class="num">$4.99</td>
+        </tr>
+        <tr class="hold">
+          <td>Premium Email B</td>
+          <td class="center"><span class="pill blue">Hold</span></td>
+          <td class="num">0</td>
+          <td class="num">$0</td>
+          <td class="num">249%</td>
+          <td class="num">249%</td>
+          <td class="num">$7.47</td>
+          <td class="num">$6.92</td>
+        </tr>
+        <tr class="hold">
+          <td>Internal SEO</td>
+          <td class="center"><span class="pill blue">Hold</span></td>
+          <td class="num">0</td>
+          <td class="num">$130</td>
+          <td class="num">197%</td>
+          <td class="num">197%</td>
+          <td class="num">$5.91</td>
+          <td class="num">$5.67</td>
+        </tr>
+        <tr class="cap">
+          <td>Premium Paid Search 5</td>
+          <td class="center"><span class="pill amber">Cap</span></td>
+          <td class="num">0</td>
+          <td class="num">$0</td>
+          <td class="num">244%</td>
+          <td class="num"><span class="arrow">→</span> 150%</td>
+          <td class="num">$4.50</td>
+          <td class="num">$11.33</td>
+        </tr>
+        <tr class="cap">
+          <td>Premium Paid Search 5A</td>
+          <td class="center"><span class="pill amber">Cap</span></td>
+          <td class="num">0</td>
+          <td class="num">$0</td>
+          <td class="num">198%</td>
+          <td class="num"><span class="arrow">→</span> 120%</td>
+          <td class="num">$3.60</td>
+          <td class="num">$9.87</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p style="font-size:12px; color:var(--gray-500); margin-top:14px;">
+      * Premium Referral 2 multiplier change should follow the routing investigation (Action #4). The bid raise will only matter once opportunities resume flowing.<br>
+      Capped sources: Market 2nd-position RPC is well above what makes sense for Supreme Choice's non-standard ICP. Reduce multipliers to free up budget for the proven winners — but keep them active so quality opportunities are still possible.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       PROJECTED RECOVERY OUTCOMES
+  ============================================================ -->
+  <section>
+    <h2>Projected Recovery — <span class="accent">First 30 Days After Implementation</span></h2>
+    <p class="section-sub">Conservative projections grounded in last year's achieved performance at peak bid levels.</p>
+
+    <div class="projection">
+      <div class="item">
+        <div class="label">Win Rate</div>
+        <div class="now">Now: 0.18%</div>
+        <div class="target">→ 1.5–3.0%</div>
+      </div>
+      <div class="item">
+        <div class="label">Avg Ad Wall Position</div>
+        <div class="now">Now: 7.07</div>
+        <div class="target">→ 4–5</div>
+      </div>
+      <div class="item">
+        <div class="label">Monthly Leads</div>
+        <div class="now">Now: 4</div>
+        <div class="target">→ 100–200</div>
+      </div>
+      <div class="item">
+        <div class="label">Cost Per Lead</div>
+        <div class="now">Now: $9.07</div>
+        <div class="target">→ $3.50–4.50</div>
+      </div>
+      <div class="item">
+        <div class="label">Cost Per Policy</div>
+        <div class="now">Now: —</div>
+        <div class="target">→ $130–180</div>
+      </div>
+      <div class="item">
+        <div class="label">Monthly Policies</div>
+        <div class="now">Now: 0</div>
+        <div class="target">→ 4–8</div>
+      </div>
+      <div class="item">
+        <div class="label">Monthly Spend Pace</div>
+        <div class="now">Now: $36</div>
+        <div class="target">→ $600–800</div>
+      </div>
+      <div class="item">
+        <div class="label">Lead → Sale CVR</div>
+        <div class="now">Last yr: 3.13%</div>
+        <div class="target">→ 3.0–4.0%</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--gray-700); margin-top:18px; line-height:1.65;">
+      <strong>Method:</strong> Targets are anchored to May/June 2025 actuals (the only two consecutive months at peak bid levels) with a 10% safety buffer. The CPA range tracks the trailing-12-month average ($133) and the all-time average ($127), accounting for normal volatility in the non-standard auto market.
+      We will check in at <strong>day 7</strong> (volume signal) and <strong>day 21</strong> (quote/sale signal) before any further tuning.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       NON-STANDARD ICP NOTE
+  ============================================================ -->
+  <section>
+    <h2>Targeting <span class="accent">Stays Lean</span></h2>
+    <p class="section-sub">A reminder of the non-standard ICP — and why we're not changing filters.</p>
+
+    <p class="lede">
+      Supreme Choice serves a <strong>non-standard auto market</strong> that competing agencies typically avoid:
+      consumers with prior accidents, DUIs, lapsed coverage, or who currently have no insurance.
+      The campaign's <strong>"Currently Insured = No"</strong> filter is intentional and stays in place. We do not
+      target standard insured comparison shoppers — that's not the book Supreme Choice is trying to grow.
+    </p>
+    <p class="lede">
+      The bid moves above are aimed exclusively at winning more <em>of the right kind</em> of leads. By concentrating
+      budget on the 6 sources that historically produced policies for this audience, we keep the funnel tight and the
+      lead-to-sale CVR strong (~3% at peak — well above the 2% benchmark).
+    </p>
+  </section>
+
+  <footer>
+    Prepared by <span>GOAL Platform</span> · checkoutgoal.com · Confidential — Supreme Choice Insurance
+  </footer>
+
+</div>
+</body>
+</html>
