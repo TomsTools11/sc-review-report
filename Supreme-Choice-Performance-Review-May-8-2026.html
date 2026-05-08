@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — Performance Review | May 8, 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --goal-blue:#0479DF;
+    --goal-blue-dark:#035FB3;
+    --goal-blue-light:#5BA7E8;
+    --goal-blue-bg:#E6F1FB;
+    --goal-navy:#0A2540;
+    --bg:#F4F7FB;
+    --card:#FFFFFF;
+    --border:#E1E7EF;
+    --text:#1B2733;
+    --muted:#5A6B7B;
+    --green:#0A8A4A;
+    --green-bg:#E6F4EC;
+    --gold:#B8860B;
+    --gold-bg:#FFF8E1;
+    --amber:#C77700;
+    --amber-bg:#FFF4E0;
+    --red:#C7312D;
+    --red-bg:#FCEAEA;
+    --orange:#F59E0B;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px;line-height:1.55;font-size:14.5px}
+  .wrap{max-width:1100px;margin:0 auto}
+
+  header{background:linear-gradient(135deg,var(--goal-blue) 0%,var(--goal-navy) 100%);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:22px;box-shadow:0 6px 22px rgba(4,121,223,.22)}
+  header h1{margin:0 0 6px 0;font-size:30px;font-weight:700;letter-spacing:-.5px}
+  header .sub{font-size:15px;opacity:.94;margin-bottom:12px}
+  header .meta{font-size:12.5px;opacity:.85}
+  header .meta strong{color:#cce4fa}
+
+  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 6px rgba(10,37,64,.04)}
+  h2{margin:0 0 16px 0;color:var(--goal-navy);font-size:21px;font-weight:700;letter-spacing:-.2px}
+  h3{margin:18px 0 8px 0;color:var(--goal-navy);font-size:15.5px;font-weight:600}
+  p{margin:8px 0 14px 0}
+
+  .hero{background:linear-gradient(135deg,#EEF7FF,#FFFFFF);border:1px solid #BCDDFB;border-radius:14px;padding:28px 32px;margin-bottom:18px}
+  .hero h2{font-size:20px;color:var(--goal-blue-dark);margin-bottom:10px}
+  .hero p{font-size:15.5px;color:var(--text);margin:6px 0 0 0}
+
+  .wins{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+  .win{background:linear-gradient(135deg,var(--green-bg),#FFFFFF);border:1px solid #B7E0C6;border-radius:12px;padding:18px 20px}
+  .win .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--green);font-weight:700;margin-bottom:6px}
+  .win .val{font-size:28px;font-weight:700;color:var(--goal-navy);letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+  .win .ctx{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .win .delta{font-size:13px;font-weight:700;color:var(--green);margin-top:6px}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:6px}
+  .kpi-grid.three{grid-template-columns:repeat(3,1fr)}
+  .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:5px}
+  .kpi .val{font-size:23px;font-weight:700;color:var(--goal-navy);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+  .kpi .delta{font-size:12.5px;margin-top:4px;font-weight:600}
+  .delta.up{color:var(--green)}
+  .delta.down{color:var(--red)}
+  .delta.flat{color:var(--muted)}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:880px){.twocol{grid-template-columns:1fr}}
+
+  .panel{border:1px solid var(--border);border-radius:12px;padding:20px 22px;background:#fff}
+  .panel.home{border-top:4px solid var(--goal-blue)}
+  .panel.auto{border-top:4px solid var(--orange)}
+  .panel h3{margin-top:0;font-size:16px}
+
+  .funnel-step{display:grid;grid-template-columns:130px 1fr 110px;align-items:center;gap:12px;padding:8px 0}
+  .funnel-bar{height:34px;background:linear-gradient(90deg,var(--goal-blue),var(--goal-blue-light));border-radius:8px;display:flex;align-items:center;color:#fff;padding-left:14px;font-weight:700;font-size:14.5px;letter-spacing:-.2px}
+  .funnel-step .label{font-weight:600;font-size:14px;color:var(--goal-navy)}
+  .funnel-step .pct{font-size:12.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{background:#EEF4FB;color:var(--goal-navy);text-align:left;padding:10px 12px;border-bottom:2px solid var(--goal-blue);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+  td{padding:10px 12px;border-bottom:1px solid var(--border)}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:#FAFCFE}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+
+  .chart-wrap{position:relative;height:300px;margin-top:8px}
+
+  .rec{background:#fff;border:1px solid var(--border);border-left:5px solid var(--goal-blue);border-radius:10px;padding:18px 22px;margin-bottom:12px}
+  .rec.high{border-left-color:var(--red)}
+  .rec.med{border-left-color:var(--orange)}
+  .rec.monitor{border-left-color:var(--green)}
+  .rec h4{margin:0 0 6px 0;font-size:15.5px;color:var(--goal-navy)}
+  .rec p{margin:4px 0;font-size:14px;color:var(--text)}
+  .rec .meta{font-size:13px;color:var(--muted);margin-top:6px}
+  .rec .priority{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:30px;margin-bottom:8px}
+  .rec.high .priority{background:var(--red-bg);color:var(--red)}
+  .rec.med .priority{background:var(--amber-bg);color:var(--amber)}
+  .rec.monitor .priority{background:var(--green-bg);color:var(--green)}
+  .rec .change{display:inline-block;background:var(--goal-blue-bg);color:var(--goal-blue-dark);font-weight:700;padding:3px 10px;border-radius:6px;font-size:13px;margin:0 4px}
+
+  .callout{background:#FFF8E1;border:1px solid #F0DA9A;border-left:5px solid var(--gold);padding:16px 20px;border-radius:10px;margin:14px 0}
+  .callout strong{color:#8C6800}
+  .green-callout{background:var(--green-bg);border:1px solid #B7E0C6;border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;margin:14px 0}
+  .green-callout strong{color:var(--green)}
+  .red-callout{background:var(--red-bg);border:1px solid #F2BABA;border-left:5px solid var(--red);padding:16px 20px;border-radius:10px;margin:14px 0}
+
+  ul{margin:6px 0 8px 22px}
+  ul li{margin:4px 0}
+
+  .pill{display:inline-block;padding:3px 9px;border-radius:30px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .pill-green{background:var(--green-bg);color:var(--green)}
+  .pill-amber{background:var(--amber-bg);color:var(--amber)}
+  .pill-red{background:var(--red-bg);color:var(--red)}
+  .pill-blue{background:var(--goal-blue-bg);color:var(--goal-blue-dark)}
+  .pill-grey{background:#EEF1F4;color:var(--muted)}
+
+  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;padding-bottom:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <h1>Supreme Choice — Performance Review</h1>
+  <div class="sub">Account Manager: Tom Panos · Reviewed: Friday, May 8, 2026</div>
+  <div class="meta"><strong>Period:</strong> Home (last 30 days)  ·  Auto (last 60 days, post ICP rebuild)  ·  <strong>State:</strong> California</div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+  <h2>Headline</h2>
+  <p><strong>Volume scaled, cost dropped, ICP filters held the line.</strong> Home searches grew 42%, calls grew 31%, and cost-per-click came down 11% versus the prior period. The Tier 2 pull is working — spend redistributed without losing contact rate. Auto volume contracted by design as we rebuilt targeting around your non-standard ICP. The remaining bid moves from our 4/29 plan are queued and ready to ship today.</p>
+</div>
+
+<!-- ==================== KEY WINS ==================== -->
+<section>
+  <h2>Wins this period</h2>
+  <div class="wins">
+    <div class="win">
+      <div class="lbl">Home Searches</div>
+      <div class="val">13,953</div>
+      <div class="ctx">vs 9,803 in April</div>
+      <div class="delta">+42.3% volume</div>
+    </div>
+    <div class="win">
+      <div class="lbl">Inbound Calls</div>
+      <div class="val">17</div>
+      <div class="ctx">vs 13 in April</div>
+      <div class="delta">+30.8% calls</div>
+    </div>
+    <div class="win">
+      <div class="lbl">Cost Per Click</div>
+      <div class="val">$4.70</div>
+      <div class="ctx">vs $5.28 in April</div>
+      <div class="delta">−11.0% efficiency gain</div>
+    </div>
+    <div class="win">
+      <div class="lbl">Total Spend</div>
+      <div class="val">$879</div>
+      <div class="ctx">vs $930 in April</div>
+      <div class="delta">−5.5% cost reduction</div>
+    </div>
+  </div>
+
+  <div class="green-callout">
+    <strong>Tier 2 pull is doing its job.</strong> Spend on Tier 2 dropped from <strong>$521</strong> to <strong>$315</strong> (−40%) after we cut the multiplier from 95% → 70%, and contact rate held at <strong>17.6%</strong>. We're paying less for the same lead quality on the source you flagged.
+  </div>
+</section>
+
+<!-- ==================== KPI MATRIX ==================== -->
+<section>
+  <h2>Home — Month over month</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">April this-month vs Last 30 days. Comparison periods overlap by ~22 days, so trend signals are directional.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="lbl">Searches</div>
+      <div class="val">13,953</div>
+      <div class="delta up">+42.3%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Impressions</div>
+      <div class="val">440</div>
+      <div class="delta flat">+2.6%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Clicks</div>
+      <div class="val">187</div>
+      <div class="delta up">+6.2%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Leads</div>
+      <div class="val">147</div>
+      <div class="delta up">+7.3%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Calls</div>
+      <div class="val">17</div>
+      <div class="delta up">+30.8%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Contacted</div>
+      <div class="val">27</div>
+      <div class="delta down">−6.9%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Quotes</div>
+      <div class="val">18</div>
+      <div class="delta down">−14.3%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Policies</div>
+      <div class="val">2</div>
+      <div class="delta down">−33.3%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Total Spend</div>
+      <div class="val">$879.04</div>
+      <div class="delta up">−5.5%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg CPC</div>
+      <div class="val">$4.70</div>
+      <div class="delta up">−11.0%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg Bid</div>
+      <div class="val">$3.18</div>
+      <div class="delta up">−14.7%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Cost / Contact</div>
+      <div class="val">$32.56</div>
+      <div class="delta flat">+1.5%</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Read the small numbers carefully.</strong> Quotes and policies look red, but the totals are 18 and 2 respectively — single-digit moves swing the percentage hard. Contact rate per click dipped from 16.5% to 14.4% (−2.1 pts) — directionally watchable but inside normal weekly noise.
+  </div>
+</section>
+
+<!-- ==================== HOME FUNNEL ==================== -->
+<section>
+  <h2>Home — Customer journey (last 30 days)</h2>
+  <div>
+    <div class="funnel-step">
+      <div class="label">Searches</div>
+      <div class="funnel-bar" style="width:100%">13,953</div>
+      <div class="pct">100%</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Impressions</div>
+      <div class="funnel-bar" style="width:42%">440</div>
+      <div class="pct">3.15% of searches</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Clicks</div>
+      <div class="funnel-bar" style="width:34%">187</div>
+      <div class="pct">42.5% of impressions</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Leads</div>
+      <div class="funnel-bar" style="width:30%">147</div>
+      <div class="pct">78.6% of clicks</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Contacted</div>
+      <div class="funnel-bar" style="width:22%">27</div>
+      <div class="pct">18.4% of leads</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Quotes</div>
+      <div class="funnel-bar" style="width:18%">18</div>
+      <div class="pct">12.2% of leads</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Policies</div>
+      <div class="funnel-bar" style="width:14%">2</div>
+      <div class="pct">1.4% of leads</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AUTO ==================== -->
+<section>
+  <h2>Auto — 60-day post-ICP-rebuild snapshot</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Since 4/29 the campaign was rebuilt around your non-standard ICP — currently insured = no, plus +5% modifiers on accidents, DUIs, tickets, and SR-22. Volume contraction here is intentional.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="lbl">Searches</div>
+      <div class="val">8,540</div>
+      <div class="delta down">−11.3%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Impressions</div>
+      <div class="val">167</div>
+      <div class="delta down">−33.2%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Clicks</div>
+      <div class="val">14</div>
+      <div class="delta down">−33.3%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Leads</div>
+      <div class="val">9</div>
+      <div class="delta down">−35.7%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Contacted</div>
+      <div class="val">10</div>
+      <div class="delta down">−33.3%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Quotes</div>
+      <div class="val">8</div>
+      <div class="delta down">−38.5%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Total Spend</div>
+      <div class="val">$75.49</div>
+      <div class="delta up">−39.2%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg CPC</div>
+      <div class="val">$5.39</div>
+      <div class="delta up">−8.6%</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Filter effect, not a performance issue.</strong> The Auto bid plan from 4/29 was queued but not shipped — see source recommendations below. Once the queued multipliers go live, expect bid rate to climb on PPS 2B / PPS 6 / PPS 4 (your call-driven sources running 100%+ contact rate) and hard pull-back on the four 0%-CR sources currently absorbing budget.
+  </div>
+</section>
+
+<!-- ==================== SOURCE PERFORMANCE — HOME ==================== -->
+<section>
+  <h2>Home — Source performance (last 30 days)</h2>
+  <p>Active sources ranked by contact rate, your North Star metric. Effective bid is shown alongside the 2nd-position market price to indicate where each source sits in the auction.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th class="num">Mult</th>
+        <th class="num">Eff Bid</th>
+        <th class="num">2nd RPC</th>
+        <th class="num">Position</th>
+        <th class="num">Clicks</th>
+        <th class="num">Contacted</th>
+        <th class="num">Contact Rate</th>
+        <th class="num">Cost / Contact</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tier 2</strong></td>
+        <td class="num">70%</td>
+        <td class="num">$2.90</td>
+        <td class="num">$4.10</td>
+        <td class="num">&lt;3rd</td>
+        <td class="num">91</td>
+        <td class="num">16</td>
+        <td class="num"><strong>17.6%</strong></td>
+        <td class="num">$19.72</td>
+        <td><span class="pill pill-green">Pull holding</span></td>
+      </tr>
+      <tr>
+        <td><strong>Home Search B</strong></td>
+        <td class="num">140%</td>
+        <td class="num">$5.81</td>
+        <td class="num">$7.37</td>
+        <td class="num">&lt;3rd</td>
+        <td class="num">36</td>
+        <td class="num">6</td>
+        <td class="num"><strong>16.7%</strong></td>
+        <td class="num">$34.36</td>
+        <td><span class="pill pill-blue">Top contact source</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tier 3</strong></td>
+        <td class="num">135%</td>
+        <td class="num">$5.60</td>
+        <td class="num">$4.72</td>
+        <td class="num">1–2</td>
+        <td class="num">8</td>
+        <td class="num">1</td>
+        <td class="num">12.5%</td>
+        <td class="num">$23.89</td>
+        <td><span class="pill pill-amber">Light data</span></td>
+      </tr>
+      <tr>
+        <td><strong>Home Search</strong></td>
+        <td class="num">100%</td>
+        <td class="num">$4.15</td>
+        <td class="num">$16.26</td>
+        <td class="num">&lt;3rd</td>
+        <td class="num">13</td>
+        <td class="num">1</td>
+        <td class="num">7.7%</td>
+        <td class="num">$184.27</td>
+        <td><span class="pill pill-red">Premium market, low yield</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tier 1</strong></td>
+        <td class="num">115%</td>
+        <td class="num">$4.77</td>
+        <td class="num">$3.97</td>
+        <td class="num">1–2</td>
+        <td class="num">39</td>
+        <td class="num">3</td>
+        <td class="num">7.7%</td>
+        <td class="num">$49.75</td>
+        <td><span class="pill pill-amber">Investigate publishers</span></td>
+      </tr>
+      <tr>
+        <td>Internal SEO</td>
+        <td class="num">40%</td>
+        <td class="num">$1.66</td>
+        <td class="num">$2.91</td>
+        <td class="num">2–3</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td><span class="pill pill-grey">Dark</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:22px">Contact rate by Home source</h3>
+  <div class="chart-wrap">
+    <canvas id="homeCRChart"></canvas>
+  </div>
+</section>
+
+<!-- ==================== SOURCE PERFORMANCE — AUTO ==================== -->
+<section>
+  <h2>Auto — Source performance (last 60 days)</h2>
+  <p>Two clear winners on contact rate: <strong>Premium PS 2B</strong> and <strong>Premium PS 6</strong>, both delivering 200% contacted-per-click via inbound calls. The four sources currently running 0% contact rate at high effective bids represent your largest leak.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th class="num">Mult</th>
+        <th class="num">Eff Bid</th>
+        <th class="num">2nd RPC</th>
+        <th class="num">Opps</th>
+        <th class="num">Bid Rate</th>
+        <th class="num">Clicks</th>
+        <th class="num">Contacted</th>
+        <th class="num">Contact Rate</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Premium PS 6</strong></td>
+        <td class="num">164%</td>
+        <td class="num">$9.59</td>
+        <td class="num">$4.53</td>
+        <td class="num">2,488</td>
+        <td class="num">6.3%</td>
+        <td class="num">2</td>
+        <td class="num">4</td>
+        <td class="num"><strong>200%</strong></td>
+        <td><span class="pill pill-green">Push — call-driven</span></td>
+      </tr>
+      <tr>
+        <td><strong>Premium PS 2B</strong></td>
+        <td class="num">197%</td>
+        <td class="num">$11.52</td>
+        <td class="num">$4.99</td>
+        <td class="num">557</td>
+        <td class="num">10.2%</td>
+        <td class="num">3</td>
+        <td class="num">6</td>
+        <td class="num"><strong>200%</strong></td>
+        <td><span class="pill pill-green">Push — cheap market</span></td>
+      </tr>
+      <tr>
+        <td>Premium PS 4</td>
+        <td class="num">301%</td>
+        <td class="num">$17.61</td>
+        <td class="num">$11.67</td>
+        <td class="num">1,131</td>
+        <td class="num">20.2%</td>
+        <td class="num">2</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-amber">Trim — overbidding</span></td>
+      </tr>
+      <tr>
+        <td>Premium Email B</td>
+        <td class="num">249%</td>
+        <td class="num">$14.57</td>
+        <td class="num">$6.92</td>
+        <td class="num">1,260</td>
+        <td class="num">4.6%</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-red">Pull — burning spend</span></td>
+      </tr>
+      <tr>
+        <td>Premium PS 5</td>
+        <td class="num">244%</td>
+        <td class="num">$14.27</td>
+        <td class="num">$11.33</td>
+        <td class="num">1,216</td>
+        <td class="num">19.3%</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-red">Pull — burning spend</span></td>
+      </tr>
+      <tr>
+        <td>Internal SEO</td>
+        <td class="num">197%</td>
+        <td class="num">$11.52</td>
+        <td class="num">$5.67</td>
+        <td class="num">6,386</td>
+        <td class="num">10.1%</td>
+        <td class="num">1</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-amber">Bid above 1st, no yield</span></td>
+      </tr>
+      <tr>
+        <td>Paid Search</td>
+        <td class="num">100%</td>
+        <td class="num">$5.85</td>
+        <td class="num">$4.75</td>
+        <td class="num">3,013</td>
+        <td class="num">2.2%</td>
+        <td class="num">2</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-red">Trim</span></td>
+      </tr>
+      <tr>
+        <td>Native/Display/Social</td>
+        <td class="num">48%</td>
+        <td class="num">$2.81</td>
+        <td class="num">$2.24</td>
+        <td class="num">45,243</td>
+        <td class="num">12.8%</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-amber">Hard pull — 45k opps, no yield</span></td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td class="num">51%</td>
+        <td class="num">$2.98</td>
+        <td class="num">$5.78</td>
+        <td class="num">5,147</td>
+        <td class="num">6.1%</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-amber">Open the gate, test</span></td>
+      </tr>
+      <tr>
+        <td>Premium Referral</td>
+        <td class="num">86%</td>
+        <td class="num">$5.03</td>
+        <td class="num">$5.87</td>
+        <td class="num">5,052</td>
+        <td class="num">6.6%</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0%</td>
+        <td><span class="pill pill-blue">Open the gate, test</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:22px">Auto opportunity vs effective bid</h3>
+  <div class="chart-wrap">
+    <canvas id="autoBidChart"></canvas>
+  </div>
+</section>
+
+<!-- ==================== RECOMMENDATIONS ==================== -->
+<section>
+  <h2>Recommendations</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Carrying forward the unfinished items from 4/29 plus refinements based on this period's data. Numbered by priority — top items move budget the most.</p>
+
+  <h3>Bid adjustments — Auto (0 of 10 from 4/29 plan executed)</h3>
+
+  <div class="rec high">
+    <span class="priority">High priority</span>
+    <h4>1. Pull the four 0%-contact-rate sources hard</h4>
+    <p>
+      Premium PS 5: <span class="change">244% → 75%</span>
+      Premium Email B: <span class="change">249% → 75%</span>
+      Paid Search: <span class="change">100% → 75%</span>
+      Native/Display/Social: <span class="change">48% → 30%</span>
+    </p>
+    <p class="meta">These four sources combined for ~$13 in spend with zero contacts over 60 days. Native/Display alone holds 45,243 opportunities — pulling it to 30% caps exposure without removing the source.</p>
+  </div>
+
+  <div class="rec high">
+    <span class="priority">High priority</span>
+    <h4>2. Push the two call-driven winners — Premium PS 2B and Premium PS 6</h4>
+    <p>
+      Premium PS 2B: <span class="change">197% → 200%</span>
+      Premium PS 6: <span class="change">164% → 200%</span>
+    </p>
+    <p class="meta">Both running 200% contact rate (more contacts than clicks via inbound calls). Both already above 1st position market price — the additional push is to dominate the auction and pull more of the existing opportunity flow into impressions.</p>
+  </div>
+
+  <div class="rec med">
+    <span class="priority">Medium priority</span>
+    <h4>3. Open Email and Premium Referral — they're the largest dark sources</h4>
+    <p>
+      Email: <span class="change">51% → 85%</span>
+      Premium Referral: <span class="change">86% → 110%</span>
+    </p>
+    <p class="meta">Email holds 5,147 opportunities at 6.1% bid rate; Premium Referral 5,052 at 6.6%. Both have shown strong call patterns on the Home side. Worth a controlled test at market-band pricing.</p>
+  </div>
+
+  <div class="rec med">
+    <span class="priority">Medium priority</span>
+    <h4>4. Trim Premium PS 4 — paying way above 1st but no yield</h4>
+    <p>Premium PS 4: <span class="change">301% → 200%</span></p>
+    <p class="meta">Effective bid is $17.61 against a 1st-position RPC of $14.21. Spending above market without contact returns. Pull to 200% keeps participation but stops the overpay.</p>
+  </div>
+
+  <h3 style="margin-top:22px">Bid adjustments — Home (carry-forward)</h3>
+
+  <div class="rec med">
+    <span class="priority">Medium priority</span>
+    <h4>5. Investigate Tier 1 publishers before adjusting the bid</h4>
+    <p>Tier 1 currently: <span class="change">115% (held)</span></p>
+    <p class="meta">33,667 opportunities, 28.9% bid rate, but only 7.7% contact rate. Effective bid of $4.77 is already above the 1st-position market RPC of $5.12 — bid is not the lever. This pattern matches the 2025 lead-drought publisher mix. Pull publisher IDs with Nick / Chris before any further changes.</p>
+  </div>
+
+  <div class="rec monitor">
+    <span class="priority">Hold steady</span>
+    <h4>6. Tier 2 at 70% — pull is working, leave it</h4>
+    <p>Tier 2: <span class="change">70% (hold)</span></p>
+    <p class="meta">Spend down 40%, contact rate steady at 17.6%. This was the source you flagged as low contact rate and the cut achieved exactly what we wanted. Reverse if contact rate drops below 18% over a 14-day window.</p>
+  </div>
+
+  <div class="rec monitor">
+    <span class="priority">Monitor</span>
+    <h4>7. Home Search B at 140% — top contact source, current pricing is below market</h4>
+    <p>Home Search B: <span class="change">140% (recommend test push to 175%)</span></p>
+    <p class="meta">Top home contact rate at 16.7%. Effective bid $5.81 sits below the 3rd-position market RPC of $6.18 — meaning we're winning under-market clicks. A controlled push to 175% lifts the effective bid to $7.26, just above 2nd position. Watch the cost-per-contact: trigger at $50 (currently $34).</p>
+  </div>
+
+  <div class="rec monitor">
+    <span class="priority">Hold steady</span>
+    <h4>8. Tier 3 at 135% — too soon to judge</h4>
+    <p>Tier 3: <span class="change">135% (hold)</span></p>
+    <p class="meta">Only 8 clicks and 1 contact in the period. Need 14 more days at current bid before another move.</p>
+  </div>
+
+  <h3 style="margin-top:22px">Items beyond bidding</h3>
+
+  <div class="rec med">
+    <span class="priority">Medium priority</span>
+    <h4>9. Deactivate or replace the Home 1 - CA creative</h4>
+    <p class="meta">Home 1 creative is delivering $6.35 CPC and 1 call from 26 clicks — significantly worse than Home 2 ($4.14 CPC, 7 calls) and Home 3 ($4.72 CPC, 9 calls). The "call verbiage" version (Home 3) is your best performer. Recommend pausing Home 1 entirely.</p>
+  </div>
+
+  <div class="rec med">
+    <span class="priority">Medium priority</span>
+    <h4>10. Confirm Auto call routing capacity before pushing volume</h4>
+    <p class="meta">If we ship the Auto bid plan and Premium PS 2B / 6 deliver as expected, you'll see a 4–6× increase in inbound call volume on Auto. Need to confirm routing destination and team capacity before flipping the switch.</p>
+  </div>
+
+  <div class="rec monitor">
+    <span class="priority">Monitor</span>
+    <h4>11. Disposition cadence on Tier 2</h4>
+    <p class="meta">Contact rate on Tier 2 climbed alongside the bid pull, which is unusual — pulling bid usually pulls down all metrics together. Possible the call team is treating Tier 2 leads with a different cadence or script. Worth a 5-minute check.</p>
+  </div>
+</section>
+
+<!-- ==================== STOP-LOSS TRIGGERS ==================== -->
+<section>
+  <h2>Stop-loss triggers — when to reverse</h2>
+  <table>
+    <thead>
+      <tr><th>Source / Action</th><th>Trigger</th><th>Reversal</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Home Search B push to 175%</td><td>Cost-per-contact above $50 over 14 days</td><td>Pull back to 140%</td></tr>
+      <tr><td>Tier 2 at 70%</td><td>Contact rate drops below 18%</td><td>Soften to 80%</td></tr>
+      <tr><td>Tier 3 at 135%</td><td>Q-CPA breaks $75 or 50 leads / 0 quotes</td><td>Revert to 100%</td></tr>
+      <tr><td>Auto PPS 2B / 6 push to 200%</td><td>Contact rate falls below 80% on either</td><td>Step that one back to 150%</td></tr>
+      <tr><td>Auto PPS 5 / Email B / Paid Search pulls</td><td>Bid rate falls below 1% over 14 days</td><td>Set to 100% (test mode)</td></tr>
+      <tr><td>Tier 1 audit</td><td>1+ bad publishers identified</td><td>Blacklist + re-evaluate multiplier</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== QUESTIONS FOR MONTY ==================== -->
+<section>
+  <h2>Questions for the meeting</h2>
+  <ul>
+    <li><strong>Auto call capacity</strong> — are you set up to handle 4–6× the inbound call volume on Auto if Premium PS 2B / 6 perform after the push? Where do those calls route?</li>
+    <li><strong>Tier 2 disposition cadence</strong> — is the team working Tier 2 leads on a different cadence or script? Contact rate climbed with a bid pull, which is unusual.</li>
+    <li><strong>Tier 1 publisher audit</strong> — Nick and Chris owe me publisher IDs to cross-reference against the 2025 bad-list pattern. Can we confirm the timeline?</li>
+    <li><strong>Home Search B push</strong> — comfortable trying 140% → 175% with a $50 cost-per-contact stop-loss?</li>
+    <li><strong>Home 1 creative</strong> — green light to pause it and let Home 2 / Home 3 carry the impressions?</li>
+  </ul>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  Supreme Choice Insurance Solutions · Performance Review · May 8, 2026 · Prepared by Tom Panos · GOAL Platform
+</footer>
+
+</div>
+
+<script>
+// Home Contact Rate by Source
+const homeCRCtx = document.getElementById('homeCRChart').getContext('2d');
+new Chart(homeCRCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Tier 2', 'Home Search B', 'Tier 3', 'Home Search', 'Tier 1'],
+    datasets: [{
+      label: 'Contact Rate (% of clicks)',
+      data: [17.6, 16.7, 12.5, 7.7, 7.7],
+      backgroundColor: ['#0479DF', '#0479DF', '#5BA7E8', '#97C2E8', '#97C2E8'],
+      borderRadius: 6,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '% contact rate' }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 20,
+        ticks: { callback: v => v + '%' },
+        grid: { color: '#EEF2F7' }
+      },
+      x: {
+        grid: { display: false }
+      }
+    }
+  }
+});
+
+// Auto opportunity volume vs effective bid
+const autoBidCtx = document.getElementById('autoBidChart').getContext('2d');
+new Chart(autoBidCtx, {
+  type: 'bar',
+  data: {
+    labels: [
+      'Native/Display','Internal SEO','Email','Premium Referral','Premium PS 2','Paid Search',
+      'Premium PS 6','Premium PS 3','Premium PS 5D','Premium Email B','Premium PS 5','Premium PS 4',
+      'Premium PS 5B','Internal SEO 2','Premium PS 2B'
+    ],
+    datasets: [
+      {
+        label: 'Opportunity volume',
+        data: [45243, 6386, 5147, 5052, 3464, 3013, 2488, 1851, 1305, 1260, 1216, 1131, 712, 575, 557],
+        backgroundColor: '#97C2E8',
+        yAxisID: 'y'
+      },
+      {
+        label: 'Effective bid ($)',
+        data: [2.81, 11.52, 2.98, 5.03, 4.04, 5.85, 9.59, 8.42, 5.85, 14.57, 14.27, 17.61, 5.85, 6.67, 11.52],
+        backgroundColor: '#F59E0B',
+        yAxisID: 'y1',
+        type: 'line',
+        borderColor: '#F59E0B',
+        borderWidth: 2,
+        pointBackgroundColor: '#F59E0B',
+        pointRadius: 4,
+        tension: 0.2,
+        fill: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        type: 'linear',
+        position: 'left',
+        beginAtZero: true,
+        title: { display: true, text: 'Opportunities (60d)' },
+        grid: { color: '#EEF2F7' }
+      },
+      y1: {
+        type: 'linear',
+        position: 'right',
+        beginAtZero: true,
+        title: { display: true, text: 'Effective Bid ($)' },
+        grid: { drawOnChartArea: false }
+      },
+      x: {
+        grid: { display: false },
+        ticks: { autoSkip: false, maxRotation: 60, minRotation: 45 }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
