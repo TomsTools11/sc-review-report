@@ -324,9 +324,14 @@
     body { background: white; }
     .container { padding: 16px; }
   }
+
+  .back-to-landing{position:fixed;top:18px;left:18px;z-index:1000;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#FFFFFF;border:1px solid var(--border-gray,#E5E7EB);border-radius:999px;color:var(--goal-brand,#077BE5);font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(0,23,45,.08);transition:border-color .15s,box-shadow .15s,transform .15s}
+  .back-to-landing:hover{border-color:var(--goal-brand,#077BE5);box-shadow:0 4px 14px rgba(7,123,229,.18);transform:translateY(-1px)}
+  @media print{.back-to-landing{display:none}}
 </style>
 </head>
 <body>
+<a href="index.html" class="back-to-landing">&larr; Back to reports</a>
 <div class="container">
 
 <header class="brand">
