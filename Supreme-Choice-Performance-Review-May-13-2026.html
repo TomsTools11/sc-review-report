@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — Performance Review | May 13, 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --goal-blue:#0479DF;
+    --goal-blue-dark:#035FB3;
+    --goal-blue-light:#5BA7E8;
+    --goal-blue-bg:#E6F1FB;
+    --goal-navy:#0A2540;
+    --bg:#F4F7FB;
+    --card:#FFFFFF;
+    --border:#E1E7EF;
+    --text:#1B2733;
+    --muted:#5A6B7B;
+    --green:#0A8A4A;
+    --green-bg:#E6F4EC;
+    --gold:#B8860B;
+    --gold-bg:#FFF8E1;
+    --amber:#C77700;
+    --amber-bg:#FFF4E0;
+    --red:#C7312D;
+    --red-bg:#FCEAEA;
+    --orange:#F59E0B;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px;line-height:1.55;font-size:14.5px}
+  .wrap{max-width:1100px;margin:0 auto}
+
+  header{background:linear-gradient(135deg,var(--goal-blue) 0%,var(--goal-navy) 100%);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:22px;box-shadow:0 6px 22px rgba(4,121,223,.22)}
+  header h1{margin:0 0 6px 0;font-size:30px;font-weight:700;letter-spacing:-.5px}
+  header .sub{font-size:15px;opacity:.94;margin-bottom:12px}
+  header .meta{font-size:12.5px;opacity:.85}
+  header .meta strong{color:#cce4fa}
+
+  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 6px rgba(10,37,64,.04)}
+  h2{margin:0 0 16px 0;color:var(--goal-navy);font-size:21px;font-weight:700;letter-spacing:-.2px}
+  h3{margin:18px 0 8px 0;color:var(--goal-navy);font-size:15.5px;font-weight:600}
+  p{margin:8px 0 14px 0}
+
+  .hero{background:linear-gradient(135deg,#EEF7FF,#FFFFFF);border:1px solid #BCDDFB;border-radius:14px;padding:28px 32px;margin-bottom:18px}
+  .hero h2{font-size:20px;color:var(--goal-blue-dark);margin-bottom:10px}
+  .hero p{font-size:15.5px;color:var(--text);margin:6px 0 0 0}
+
+  .wins{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+  .win{background:linear-gradient(135deg,var(--green-bg),#FFFFFF);border:1px solid #B7E0C6;border-radius:12px;padding:18px 20px}
+  .win .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--green);font-weight:700;margin-bottom:6px}
+  .win .val{font-size:28px;font-weight:700;color:var(--goal-navy);letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+  .win .ctx{font-size:12.5px;color:var(--muted);margin-top:4px}
+  .win .delta{font-size:13px;font-weight:700;color:var(--green);margin-top:6px}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:6px}
+  .kpi-grid.three{grid-template-columns:repeat(3,1fr)}
+  .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:5px}
+  .kpi .val{font-size:23px;font-weight:700;color:var(--goal-navy);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+  .kpi .delta{font-size:12.5px;margin-top:4px;font-weight:600}
+  .delta.up{color:var(--green)}
+  .delta.down{color:var(--red)}
+  .delta.flat{color:var(--muted)}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:880px){.twocol{grid-template-columns:1fr}}
+
+  .panel{border:1px solid var(--border);border-radius:12px;padding:20px 22px;background:#fff}
+  .panel.home{border-top:4px solid var(--goal-blue)}
+  .panel.auto{border-top:4px solid var(--orange)}
+  .panel h3{margin-top:0;font-size:16px}
+
+  .funnel-step{display:grid;grid-template-columns:130px 1fr 110px;align-items:center;gap:12px;padding:8px 0}
+  .funnel-bar{height:34px;background:linear-gradient(90deg,var(--goal-blue),var(--goal-blue-light));border-radius:8px;display:flex;align-items:center;color:#fff;padding-left:14px;font-weight:700;font-size:14.5px;letter-spacing:-.2px}
+  .funnel-step .label{font-weight:600;font-size:14px;color:var(--goal-navy)}
+  .funnel-step .pct{font-size:12.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{background:#EEF4FB;color:var(--goal-navy);text-align:left;padding:10px 12px;border-bottom:2px solid var(--goal-blue);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+  td{padding:10px 12px;border-bottom:1px solid var(--border)}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:#FAFCFE}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+
+  .chart-wrap{position:relative;height:300px;margin-top:8px}
+
+  .rec{background:#fff;border:1px solid var(--border);border-left:5px solid var(--goal-blue);border-radius:10px;padding:18px 22px;margin-bottom:12px}
+  .rec.high{border-left-color:var(--red)}
+  .rec.med{border-left-color:var(--orange)}
+  .rec.monitor{border-left-color:var(--green)}
+  .rec h4{margin:0 0 6px 0;font-size:15.5px;color:var(--goal-navy)}
+  .rec p{margin:4px 0;font-size:14px;color:var(--text)}
+  .rec .meta{font-size:13px;color:var(--muted);margin-top:6px}
+  .rec .priority{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border-radius:30px;margin-bottom:8px}
+  .rec.high .priority{background:var(--red-bg);color:var(--red)}
+  .rec.med .priority{background:var(--amber-bg);color:var(--amber)}
+  .rec.monitor .priority{background:var(--green-bg);color:var(--green)}
+  .rec .change{display:inline-block;background:var(--goal-blue-bg);color:var(--goal-blue-dark);font-weight:700;padding:3px 10px;border-radius:6px;font-size:13px;margin:0 4px}
+
+  .callout{background:#FFF8E1;border:1px solid #F0DA9A;border-left:5px solid var(--gold);padding:16px 20px;border-radius:10px;margin:14px 0}
+  .callout strong{color:#8C6800}
+  .green-callout{background:var(--green-bg);border:1px solid #B7E0C6;border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;margin:14px 0}
+  .green-callout strong{color:var(--green)}
+  .red-callout{background:var(--red-bg);border:1px solid #F2BABA;border-left:5px solid var(--red);padding:16px 20px;border-radius:10px;margin:14px 0}
+
+  ul{margin:6px 0 8px 22px}
+  ul li{margin:4px 0}
+
+  .pill{display:inline-block;padding:3px 9px;border-radius:30px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .pill-green{background:var(--green-bg);color:var(--green)}
+  .pill-amber{background:var(--amber-bg);color:var(--amber)}
+  .pill-red{background:var(--red-bg);color:var(--red)}
+  .pill-blue{background:var(--goal-blue-bg);color:var(--goal-blue-dark)}
+  .pill-grey{background:#EEF1F4;color:var(--muted)}
+
+  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;padding-bottom:8px}
+
+  .back-to-landing{position:fixed;top:18px;left:18px;z-index:1000;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#FFFFFF;border:1px solid var(--border);border-radius:999px;color:var(--goal-blue-dark);font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(10,37,64,.08);transition:border-color .15s,box-shadow .15s,transform .15s}
+  .back-to-landing:hover{border-color:var(--goal-blue);box-shadow:0 4px 14px rgba(4,121,223,.18);transform:translateY(-1px)}
+  @media print{.back-to-landing{display:none}}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-to-landing">&larr; Back to reports</a>
+<div class="wrap">
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <h1>Supreme Choice — Performance Review</h1>
+  <div class="sub">Account Manager: Tom Panos &middot; Reviewed: Wednesday, May 13, 2026</div>
+  <div class="meta"><strong>Period:</strong> Home CA (last 30 days)  &middot;  <strong>State:</strong> California  &middot;  <strong>Non-standard ICP active</strong></div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+  <h2>Headline</h2>
+  <p><strong>The 5/4 bid plan is paying off &mdash; and Quote CPA is moving toward gold.</strong> Quote CPA dropped from $67.62 to <strong>$43.87</strong> (&minus;35%) in five days, landing comfortably inside your $75 acceptable band and within striking distance of the $35 gold standard. Tier 2 alone is already there: Quote CPA $23.96 &mdash; below gold. Nine more contacts, five more quotes, one more bound policy, and spend down 10% vs. the period ending May 8. Contact rate recovered from 13.6% to 20.7%. We're walking the campaign back toward the Aug-Oct 2025 "peak era" pattern. The Tier 1 publisher audit is still the largest unfinished item.</p>
+</div>
+
+<!-- ==================== CPA BENCHMARK BANNER ==================== -->
+<section style="background:linear-gradient(135deg,#FFFBE6,#FFF);border:1px solid #F0DA9A">
+  <h2 style="color:#8C6800">CPA scorecard &mdash; the bottom-line read</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Two CPA lenses for this review: <strong>Policy CPA</strong> (cost per bound policy &mdash; the real economic CPA) and <strong>Quote CPA</strong> (cost per quote &mdash; the leading indicator). Quote CPA benchmarks from 4/17 review: $35 gold / $75 acceptable / $100+ running hot.</p>
+
+  <h3 style="margin-top:18px;color:var(--goal-navy)">Policy CPA &mdash; cost per policy sold</h3>
+  <div class="kpi-grid three" style="margin-top:6px">
+    <div class="kpi" style="border-left:5px solid var(--green)">
+      <div class="lbl">Policy CPA &mdash; campaign</div>
+      <div class="val">$263.23</div>
+      <div class="delta up">&minus;40.2% vs $439.52 on 5/8</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--green)">
+      <div class="lbl">Policy CPA &mdash; Tier 2</div>
+      <div class="val">$87.87</div>
+      <div class="delta up">3 of 3 policies came from Tier 2</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--muted)">
+      <div class="lbl">Industry Home CPA band</div>
+      <div class="val">$100&ndash;$300</div>
+      <div class="delta flat">Campaign blended sits at top of band</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:22px;color:var(--goal-navy)">Quote CPA &mdash; vs. Monty's $35 / $75 / $100 thresholds</h3>
+  <div class="kpi-grid three" style="margin-top:6px">
+    <div class="kpi" style="border-left:5px solid var(--green)">
+      <div class="lbl">Quote CPA &mdash; campaign</div>
+      <div class="val">$43.87</div>
+      <div class="delta up">&minus;35.1% vs $67.62 on 5/8 &middot; inside acceptable</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--green)">
+      <div class="lbl">Quote CPA &mdash; Tier 2</div>
+      <div class="val">$23.96</div>
+      <div class="delta up">Below gold ($35) &mdash; workhorse</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--amber)">
+      <div class="lbl">Quote CPA &mdash; Home SearchB</div>
+      <div class="val">$50.08</div>
+      <div class="delta flat">Inside acceptable, needs policy proof</div>
+    </div>
+  </div>
+
+  <div class="green-callout" style="margin-top:14px">
+    <strong>Both CPAs improved in lockstep.</strong> Policy CPA dropped <strong>$176</strong> per bound policy (from $440 to $263, &minus;40%) and Quote CPA dropped <strong>$24</strong> per quote (from $68 to $44, &minus;35%). Tier 2 alone is producing policies at <strong>$87.87</strong> &mdash; better than the industry Home Insurance benchmark of $100&ndash;$300. The 5/4 plan delivered on both lenses.
+  </div>
+</section>
+
+<!-- ==================== KEY WINS ==================== -->
+<section>
+  <h2>Wins this period</h2>
+  <div class="wins">
+    <div class="win">
+      <div class="lbl">Contacted</div>
+      <div class="val">29</div>
+      <div class="ctx">vs 20 on 5/8 (last 30d)</div>
+      <div class="delta">+45.0% in 5 days</div>
+    </div>
+    <div class="win">
+      <div class="lbl">Quotes</div>
+      <div class="val">18</div>
+      <div class="ctx">vs 13 on 5/8</div>
+      <div class="delta">+38.5% quotes</div>
+    </div>
+    <div class="win">
+      <div class="lbl">Policy CPA (cost / sold)</div>
+      <div class="val">$263</div>
+      <div class="ctx">vs $440 on 5/8</div>
+      <div class="delta">&minus;40.2% Policy CPA</div>
+    </div>
+    <div class="win">
+      <div class="lbl">Quote CPA</div>
+      <div class="val">$43.87</div>
+      <div class="ctx">vs $67.62 on 5/8 &middot; inside acceptable</div>
+      <div class="delta">&minus;35.1% Quote CPA</div>
+    </div>
+  </div>
+
+  <div class="green-callout">
+    <strong>Tier 2 is carrying the win on both CPA lenses.</strong> All three bound policies came from Tier 2 in this period. Tier 2 alone: <strong>Policy CPA $87.87</strong> (industry Home benchmark $100-$300) and <strong>Quote CPA $23.96</strong> (below your $35 gold standard). The 70% multiplier pull from 4/29 took spend on this source down 40% while contact rate climbed from 17.6% to 22.2%. The cheap-volume, lean-targeting strategy is working as designed.
+  </div>
+</section>
+
+<!-- ==================== KPI MATRIX ==================== -->
+<section>
+  <h2>Home CA &mdash; Last 30 days vs. period ending 5/8</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Periods overlap by ~25 days but the 5-day delta isolates the impact of the 5/4 bid plan ship.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="lbl">Searches</div>
+      <div class="val">14,655</div>
+      <div class="delta up">+5.2%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Impressions</div>
+      <div class="val">440</div>
+      <div class="delta flat">0%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Clicks</div>
+      <div class="val">180</div>
+      <div class="delta down">&minus;3.7%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Leads</div>
+      <div class="val">140</div>
+      <div class="delta down">&minus;4.8%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Calls</div>
+      <div class="val">18</div>
+      <div class="delta up">+5.9%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Contacted</div>
+      <div class="val">29</div>
+      <div class="delta up">+45.0%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Quotes</div>
+      <div class="val">18</div>
+      <div class="delta up">+38.5%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Policies</div>
+      <div class="val">3</div>
+      <div class="delta up">+50.0%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Total Spend</div>
+      <div class="val">$789.70</div>
+      <div class="delta up">&minus;10.2%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg CPC</div>
+      <div class="val">$4.38</div>
+      <div class="delta up">&minus;6.8%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Quote CPA</div>
+      <div class="val">$43.87</div>
+      <div class="delta up">&minus;35.1%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Cost / Contact</div>
+      <div class="val">$27.23</div>
+      <div class="delta up">&minus;38.0%</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Cost-per-contact is the cleanest signal of the period.</strong> Down from $43.95 to $27.23 in five days. Same spend bucket, materially more reached prospects. The Tier 2 cut paired with Home SearchB push redistributed budget exactly where contact rate is highest.
+  </div>
+</section>
+
+<!-- ==================== HOME FUNNEL ==================== -->
+<section>
+  <h2>Home CA &mdash; Customer journey (last 30 days)</h2>
+  <div>
+    <div class="funnel-step">
+      <div class="label">Searches</div>
+      <div class="funnel-bar" style="width:100%">14,655</div>
+      <div class="pct">100%</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Impressions</div>
+      <div class="funnel-bar" style="width:42%">440</div>
+      <div class="pct">3.00% of searches</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Clicks</div>
+      <div class="funnel-bar" style="width:34%">180</div>
+      <div class="pct">40.9% of impressions</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Leads</div>
+      <div class="funnel-bar" style="width:30%">140</div>
+      <div class="pct">77.8% of clicks</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Contacted</div>
+      <div class="funnel-bar" style="width:23%">29</div>
+      <div class="pct">20.7% of leads</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Quotes</div>
+      <div class="funnel-bar" style="width:18%">18</div>
+      <div class="pct">12.9% of leads</div>
+    </div>
+    <div class="funnel-step">
+      <div class="label">Policies</div>
+      <div class="funnel-bar" style="width:14%">3</div>
+      <div class="pct">2.1% of leads</div>
+    </div>
+  </div>
+
+  <div class="green-callout" style="margin-top:18px">
+    <strong>The funnel is rebuilding through the contact step.</strong> Contact rate on leads moved from 13.6% (5/8) to 20.7% (5/13) &mdash; back inside the 20-40% normal range. Quote-of-contacted held at 62.1%, which is consistent with the strong-period ~68% range. The leak that opened in April is closing.
+  </div>
+</section>
+
+<!-- ==================== ICP CONFIRMATION ==================== -->
+<section>
+  <h2>ICP &mdash; non-standard market, locked in</h2>
+  <p>Targeting filter: <strong>Currently Insured = No</strong> (with "If data is unknown: Reject"). Bid modifiers neutral on accidents, DUIs, tickets, SR-22 for now &mdash; we'll test SR-22 as a positive on Auto first.</p>
+  <p style="color:var(--muted);font-size:13px">No changes recommended to ICP this period. The thesis is right: write the risks preferred carriers decline. Standard-market benchmarks do not apply to this account.</p>
+</section>
+
+<!-- ==================== SOURCE PERFORMANCE &mdash; HOME ==================== -->
+<section>
+  <h2>Home CA &mdash; Source performance (last 30 days)</h2>
+  <p>Active sources ranked by Quote CPA, your North Star economic metric. Effective bid is shown alongside the 2nd-position market price to indicate where each source sits in the auction.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th class="num">Mult</th>
+        <th class="num">Eff Bid</th>
+        <th class="num">Leads</th>
+        <th class="num">Contact Rate</th>
+        <th class="num">Quotes</th>
+        <th class="num">Quote CPA</th>
+        <th class="num">Policies</th>
+        <th class="num">Policy CPA</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tier 2</strong></td>
+        <td class="num">70%</td>
+        <td class="num">$2.16</td>
+        <td class="num">61</td>
+        <td class="num"><strong>22.2%</strong></td>
+        <td class="num">11</td>
+        <td class="num"><strong>$23.96</strong></td>
+        <td class="num"><strong>3</strong></td>
+        <td class="num"><strong>$87.87</strong></td>
+        <td><span class="pill pill-green">Workhorse &mdash; 3/3 policies</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tier 3</strong></td>
+        <td class="num">135%</td>
+        <td class="num">$4.17</td>
+        <td class="num">10</td>
+        <td class="num">16.7%</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td><span class="pill pill-amber">Light data, monitor</span></td>
+      </tr>
+      <tr>
+        <td><strong>Home SearchB</strong></td>
+        <td class="num">140%</td>
+        <td class="num">$4.33</td>
+        <td class="num">26</td>
+        <td class="num">13.9%</td>
+        <td class="num">4</td>
+        <td class="num">$50.08</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td><span class="pill pill-blue">Producing quotes</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tier 1</strong></td>
+        <td class="num">115%</td>
+        <td class="num">$3.55</td>
+        <td class="num">35</td>
+        <td class="num">9.5%</td>
+        <td class="num">3</td>
+        <td class="num">$53.15</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td><span class="pill pill-red">Publisher audit needed</span></td>
+      </tr>
+      <tr>
+        <td>Home Search</td>
+        <td class="num">100%</td>
+        <td class="num">$3.09</td>
+        <td class="num">8</td>
+        <td class="num">0%</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td><span class="pill pill-grey">Priced out of market</span></td>
+      </tr>
+      <tr>
+        <td>Internal SEO</td>
+        <td class="num">40%</td>
+        <td class="num">$1.24</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td class="num">0</td>
+        <td class="num">&mdash;</td>
+        <td><span class="pill pill-grey">Dark</span></td>
+      </tr>
+      <tr style="background:#EEF7FF !important">
+        <td><strong>CAMPAIGN BLEND</strong></td>
+        <td class="num">&mdash;</td>
+        <td class="num">$3.09</td>
+        <td class="num"><strong>140</strong></td>
+        <td class="num"><strong>20.7%</strong></td>
+        <td class="num"><strong>18</strong></td>
+        <td class="num"><strong>$43.87</strong></td>
+        <td class="num"><strong>3</strong></td>
+        <td class="num"><strong>$263.23</strong></td>
+        <td><span class="pill pill-blue">Recovering</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:22px">Contact rate by Home source</h3>
+  <div class="chart-wrap">
+    <canvas id="homeCRChart"></canvas>
+  </div>
+
+  <h3 style="margin-top:22px">Source contribution &mdash; spend vs. policies bound</h3>
+  <div class="chart-wrap">
+    <canvas id="sourceContribChart"></canvas>
+  </div>
+
+  <h3 style="margin-top:22px">Quote CPA by source &mdash; against the $35 / $75 thresholds</h3>
+  <div class="chart-wrap">
+    <canvas id="cpaChart"></canvas>
+  </div>
+  <p style="color:var(--muted);font-size:13px;margin-top:8px">Sources with no quotes in the period (Tier 3, Home Search, Internal SEO) are excluded from this chart. Tier 2 sits 32% below gold; Home SearchB and Tier 1 are in the upper-acceptable zone.</p>
+</section>
+
+<!-- ==================== CPA TREND ==================== -->
+<section>
+  <h2>CPA trend &mdash; period over period</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Both CPA lenses dropped together over the 5-day window. Policy CPA is the bottom-line economic outcome; Quote CPA is the leading indicator measured against Monty's $35/$75/$100 thresholds.</p>
+
+  <h3 style="margin-top:14px">Policy CPA (cost per policy sold)</h3>
+  <div class="kpi-grid three">
+    <div class="kpi" style="border-left:5px solid var(--red)">
+      <div class="lbl">5/8 reading</div>
+      <div class="val">$439.52</div>
+      <div class="delta down">2 policies / $879 spend</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--amber)">
+      <div class="lbl">5/13 reading</div>
+      <div class="val">$263.23</div>
+      <div class="delta up">3 policies / $790 spend &middot; &minus;40.2%</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--green)">
+      <div class="lbl">Tier 2 alone</div>
+      <div class="val">$87.87</div>
+      <div class="delta up">Below Home industry band ($100-$300)</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:22px">Quote CPA (against Monty's thresholds)</h3>
+  <div class="kpi-grid three">
+    <div class="kpi" style="border-left:5px solid var(--red)">
+      <div class="lbl">5/8 reading &mdash; running hot</div>
+      <div class="val">$67.62</div>
+      <div class="delta down">Above $50 &middot; below catastrophe</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--amber)">
+      <div class="lbl">5/13 reading &mdash; acceptable</div>
+      <div class="val">$43.87</div>
+      <div class="delta up">Inside $35-$75 acceptable band</div>
+    </div>
+    <div class="kpi" style="border-left:5px solid var(--green)">
+      <div class="lbl">Tier 2 alone &mdash; gold</div>
+      <div class="val">$23.96</div>
+      <div class="delta up">Below $35 gold standard</div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px">
+    <strong>What this trajectory means.</strong> If we hold the current source mix and Home SearchB binds even one policy in the next 14 days, the bound count moves from 3 to 4, dropping campaign Policy CPA below <strong>$200</strong> and blended Quote CPA below <strong>$40</strong>. The path to a sustained gold-standard month is now visible: defended Tier 2 + Home SearchB converting quotes to policies + Tier 1 publisher audit cutting the no-contact spend.
+  </div>
+</section>
+
+<!-- ==================== MARKET POSITION MAP ==================== -->
+<section>
+  <h2>Market position map &mdash; where each source sits in the auction</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">RightPricing 5/13 vs. effective bid (base bid $3.09 &times; current multiplier).</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th class="num">1st RPC</th>
+        <th class="num">2nd RPC</th>
+        <th class="num">3rd RPC</th>
+        <th class="num">4+ RPC</th>
+        <th class="num">Our Eff Bid</th>
+        <th>Lever to reach 2nd</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tier 2</strong></td>
+        <td class="num">$5.76</td>
+        <td class="num">$4.32</td>
+        <td class="num">$3.85</td>
+        <td class="num">&mdash;</td>
+        <td class="num">$2.16</td>
+        <td>140% multiplier to land on 2nd &mdash; <strong>not recommended</strong>, current price wins enough at lower cost</td>
+      </tr>
+      <tr>
+        <td><strong>Tier 3</strong></td>
+        <td class="num">$6.72</td>
+        <td class="num">$4.84</td>
+        <td class="num">$4.50</td>
+        <td class="num">$4.48</td>
+        <td class="num">$4.17</td>
+        <td>157% (currently 135%) &mdash; hold for more data first</td>
+      </tr>
+      <tr>
+        <td><strong>Home SearchB</strong></td>
+        <td class="num">$7.70</td>
+        <td class="num">$6.78</td>
+        <td class="num">$5.84</td>
+        <td class="num">$4.00</td>
+        <td class="num">$4.33</td>
+        <td>220% (currently 140%) to hit 2nd &mdash; consider modest push to 175% to hit just above 3rd ($5.41)</td>
+      </tr>
+      <tr>
+        <td><strong>Tier 1</strong></td>
+        <td class="num">$5.08</td>
+        <td class="num">$4.25</td>
+        <td class="num">$4.09</td>
+        <td class="num">$3.73</td>
+        <td class="num">$3.55</td>
+        <td>138% to hit 2nd &mdash; <strong>do not raise</strong> until publisher audit finishes</td>
+      </tr>
+      <tr>
+        <td>Home Search</td>
+        <td class="num">$18.10</td>
+        <td class="num">$15.46</td>
+        <td class="num">$11.38</td>
+        <td class="num">&mdash;</td>
+        <td class="num">$3.09</td>
+        <td>500%+ to hit market &mdash; not viable, leave priced out</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== RECOMMENDATIONS ==================== -->
+<section>
+  <h2>Recommendations</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Conservative this period &mdash; the 5/4 bid plan is producing. Don't move what's moving. Top of the list is closing the one item from 4/29 that's still open.</p>
+
+  <h3>Investigation items (highest leverage)</h3>
+
+  <div class="rec high">
+    <span class="priority">High priority</span>
+    <h4>1. Close the Tier 1 publisher audit with Nick / Chris</h4>
+    <p>Tier 1: <span class="change">115% (hold pending audit)</span></p>
+    <p class="meta">Tier 1 is delivering 35 leads at 9.5% contact rate and zero policies in 30 days &mdash; the lowest contact rate of any active source. Effective bid $3.55 sits just below 4th position market RPC ($3.73), so this is not a bid problem. The 2025 lead-drought pattern recurred when bad publisher IDs entered Tier 1's mix; cross-referencing the current Tier 1 publisher list against the 2025 blacklist remains the single biggest unfinished item on this account. Action: escalate to Nick this week.</p>
+  </div>
+
+  <div class="rec med">
+    <span class="priority">Medium priority</span>
+    <h4>2. Restore the off-hours "Derek era" bid kick pattern</h4>
+    <p>Schedule: <span class="change">100% base, 130% manual kick on slow first 90 minutes</span></p>
+    <p class="meta">Monty flagged this in the 4/17 review &mdash; in the Aug-Oct 2025 peak era, the campaign ran a 100% base bid with a 130% manual kick when the morning was slow. We flattened the schedule somewhere along the way. Restoring it gives Monty back his "hit the gas" lever without a permanent multiplier change. Low risk, high upside on volume-control.</p>
+  </div>
+
+  <h3 style="margin-top:22px">Bid adjustments</h3>
+
+  <div class="rec monitor">
+    <span class="priority">Hold steady</span>
+    <h4>3. Tier 2 at 70% &mdash; do not touch (Quote CPA $23.96, below gold)</h4>
+    <p>Tier 2: <span class="change">70% (hold)</span></p>
+    <p class="meta">3 of 3 policies. Quote CPA $23.96 &mdash; below your $35 gold standard. Contact rate up from 17.6% to 22.2%. Effective bid $2.16 wins below 4th position but the lean ICP is filtering the right risks. This is the cheapest, highest-converting source in the account. Reversal trigger: Quote CPA breaks $50 OR contact rate drops below 18% on a 14-day window &mdash; in either case, soften to 80%.</p>
+  </div>
+
+  <div class="rec monitor">
+    <span class="priority">Hold steady</span>
+    <h4>4. Home SearchB at 140% &mdash; producing, give it another 14 days before pushing</h4>
+    <p>Home SearchB: <span class="change">140% (hold)</span></p>
+    <p class="meta">26 leads, 5 contacts, 4 quotes, 0 policies yet. Effective bid $4.33 sits below 3rd-position RPC of $5.84. The push from 175% to 225% in the 5/8 plan was rolled back to 140%; current 140% is producing quotes at $50 CPA. Consider a test push to 175% (eff bid $5.41, just above 4th) at the next review if we see a policy bound from this source.</p>
+  </div>
+
+  <div class="rec monitor">
+    <span class="priority">Monitor</span>
+    <h4>5. Tier 3 at 135% &mdash; light data, hold</h4>
+    <p>Tier 3: <span class="change">135% (hold)</span></p>
+    <p class="meta">10 leads, 2 contacts, 0 quotes. Contact rate 16.7% is healthy in context but too thin to act on. Effective bid $4.17 is right at 4th position ($4.48). Give it 14 more days before another move.</p>
+  </div>
+
+  <div class="rec monitor">
+    <span class="priority">Hold steady</span>
+    <h4>6. Home Search at 100% &mdash; priced out, leave dark</h4>
+    <p>Home Search: <span class="change">100% (hold)</span></p>
+    <p class="meta">Home Search 3rd-position RPC is $11.38; effective bid is $3.09. We'd need a 368% multiplier to compete &mdash; not viable. Leave priced out. Source remains active for the rare arbitrage opportunity but isn't pulling weight in normal market conditions.</p>
+  </div>
+
+  <h3 style="margin-top:22px">Tests to queue for May 27 review</h3>
+
+  <div class="rec med">
+    <span class="priority">Test</span>
+    <h4>7. SR-22 as a positive bid modifier (Auto first, then Home)</h4>
+    <p class="meta">Per the 4/17 review &mdash; "non-standard means we want the guys with problems." Auto rebuild already de-emphasizes bundlers and clean records. Next test: layer a +5-10% modifier on SR-22 / DUI / prior incidents as positives rather than neutrals. Run on Auto for 14 days, measure contact rate and policy CPA against the post-4/29 baseline, then port to Home if the read is positive.</p>
+  </div>
+
+  <div class="rec med">
+    <span class="priority">Test</span>
+    <h4>8. Tighten Home creative on call CTA pattern</h4>
+    <p class="meta">From the 4/17 review &mdash; Home 3-C ("call us now for a free quote") drove a 5.5&times; spike in inbound calls in September 2025. Current creative mix doesn't lean on call CTA. Recommend rotating the strongest call-CTA copy back in and measuring inbound calls vs. the current 18/month baseline.</p>
+  </div>
+</section>
+
+<!-- ==================== STOP-LOSS TRIGGERS ==================== -->
+<section>
+  <h2>Stop-loss triggers &mdash; when to reverse</h2>
+  <table>
+    <thead>
+      <tr><th>Source / Action</th><th>Trigger</th><th>Reversal</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Tier 2 at 70%</td><td>Contact rate drops below 18% over 14 days</td><td>Soften to 80%</td></tr>
+      <tr><td>Tier 3 at 135%</td><td>50 leads &amp; 0 quotes, or Quote CPA &gt; $75</td><td>Revert to 100%</td></tr>
+      <tr><td>Home SearchB at 140%</td><td>Cost-per-contact above $50 over 14 days</td><td>Pull to 115%</td></tr>
+      <tr><td>Tier 1 hold</td><td>Audit finds 1+ bad publishers</td><td>Blacklist + re-evaluate multiplier</td></tr>
+      <tr><td>Off-hours bid kick</td><td>Morning spend &gt; 2&times; daily avg without contact lift</td><td>Drop back to flat schedule</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== QUESTIONS FOR MONTY ==================== -->
+<section>
+  <h2>Questions for the meeting</h2>
+  <ul>
+    <li><strong>Tier 1 audit</strong> &mdash; can we get Nick on the line, or commit a date for the publisher cross-reference? This is the only major item still open from 4/17.</li>
+    <li><strong>Off-hours kick</strong> &mdash; comfortable letting me restore the 100% base / 130% manual schedule so you have the morning lever back?</li>
+    <li><strong>Tier 2 disposition cadence</strong> &mdash; contact rate keeps climbing with the bid pull. Is the team running Tier 2 leads on a different script or speed-to-lead? Worth knowing before we tune anything else.</li>
+    <li><strong>SR-22 positive modifier test</strong> &mdash; green light to start on Auto for 14 days?</li>
+    <li><strong>Home creative</strong> &mdash; want me to rotate the Sept 2025 call-CTA copy back in this week?</li>
+  </ul>
+</section>
+
+<!-- ==================== METHODOLOGY ==================== -->
+<section>
+  <h2>Methodology &amp; data sources</h2>
+  <p style="color:var(--muted);font-size:13px">All numbers in this report are pulled from GOAL platform exports dated <strong>May 13, 2026</strong>. Last 30 days = April 14 - May 13. Comparisons reference the 5/8 export (the prior period &mdash; April 9 to May 8). RightPricing data is pulled fresh on 5/13 from Periscope. Effective bid = base bid ($3.09) &times; source multiplier. Position bands are read from the RightPricing RPC table. <strong>Quote CPA = Cost / Quotes</strong>; <strong>Policy CPA = Cost / Policies bound</strong>; <strong>Contact rate = Contacted / Leads</strong>. Targeting filter "Currently Insured = No" remains in place per the non-standard ICP.</p>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  Supreme Choice Insurance Solutions &middot; Performance Review &middot; May 13, 2026 &middot; Prepared by Tom Panos &middot; GOAL Platform
+</footer>
+
+</div>
+
+<script>
+// Home Contact Rate by Source
+const homeCRCtx = document.getElementById('homeCRChart').getContext('2d');
+new Chart(homeCRCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Tier 2', 'Tier 3', 'Home SearchB', 'Tier 1', 'Home Search'],
+    datasets: [{
+      label: 'Contact Rate (% of leads)',
+      data: [22.2, 16.7, 13.9, 9.5, 0],
+      backgroundColor: ['#0479DF', '#5BA7E8', '#5BA7E8', '#F59E0B', '#C7312D'],
+      borderRadius: 6,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + '% contact rate' }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, max: 35, ticks: { callback: v => v + '%' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// Quote CPA by source vs $35 / $75 thresholds
+const cpaCtx = document.getElementById('cpaChart').getContext('2d');
+new Chart(cpaCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Tier 2', 'Home SearchB', 'Tier 1'],
+    datasets: [{
+      label: 'Quote CPA ($)',
+      data: [23.96, 50.08, 53.15],
+      backgroundColor: ['#0A8A4A', '#F59E0B', '#F59E0B'],
+      borderRadius: 6,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      annotation: {},
+      tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toFixed(2) + ' Quote CPA' } }
+    },
+    scales: {
+      y: {
+        beginAtZero: true, max: 120,
+        ticks: { callback: v => '$' + v },
+        title: { display: true, text: 'Quote CPA' }
+      },
+      x: { grid: { display: false } }
+    }
+  },
+  plugins: [{
+    id: 'thresholds',
+    afterDraw(chart) {
+      const {ctx, chartArea, scales: {y}} = chart;
+      const draw = (val, label, color) => {
+        const ypx = y.getPixelForValue(val);
+        ctx.save();
+        ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.setLineDash([6,4]);
+        ctx.beginPath(); ctx.moveTo(chartArea.left, ypx); ctx.lineTo(chartArea.right, ypx); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = color; ctx.font = '600 11px -apple-system,sans-serif';
+        ctx.fillText(label, chartArea.left + 6, ypx - 4);
+        ctx.restore();
+      };
+      draw(35, '$35 gold standard', '#0A8A4A');
+      draw(75, '$75 acceptable ceiling', '#C77700');
+      draw(100, '$100 catastrophe', '#C7312D');
+    }
+  }]
+});
+
+// Source contribution chart: spend (left) vs policies bound (right)
+const sourceContribCtx = document.getElementById('sourceContribChart').getContext('2d');
+new Chart(sourceContribCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Tier 2', 'Home SearchB', 'Tier 1', 'Tier 3', 'Home Search'],
+    datasets: [
+      {
+        label: 'Spend ($)',
+        data: [263.61, 200.30, 159.44, 41.82, 124.53],
+        backgroundColor: '#5BA7E8',
+        borderRadius: 6,
+        yAxisID: 'y'
+      },
+      {
+        label: 'Policies Bound',
+        data: [3, 0, 0, 0, 0],
+        backgroundColor: '#0A8A4A',
+        borderRadius: 6,
+        yAxisID: 'y1'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { position: 'left', beginAtZero: true, title: { display: true, text: 'Spend ($)' }, ticks: { callback: v => '$' + v } },
+      y1: { position: 'right', beginAtZero: true, max: 5, title: { display: true, text: 'Policies' }, grid: { drawOnChartArea: false } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
