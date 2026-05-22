@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice Auto — Recovery Progress | May 22, 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --goal-blue:#0479DF;
+    --goal-blue-dark:#035FB3;
+    --goal-blue-light:#5BA7E8;
+    --goal-blue-bg:#E6F1FB;
+    --goal-navy:#0A2540;
+    --bg:#F4F7FB;
+    --card:#FFFFFF;
+    --border:#E1E7EF;
+    --text:#1B2733;
+    --muted:#5A6B7B;
+    --green:#0A8A4A;
+    --green-bg:#E6F4EC;
+    --gold:#B8860B;
+    --gold-bg:#FFF8E1;
+    --amber:#C77700;
+    --amber-bg:#FFF4E0;
+    --red:#C7312D;
+    --red-bg:#FCEAEA;
+    --orange:#F59E0B;
+    --orange-bg:#FFF4E0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px;line-height:1.55;font-size:14.5px}
+  .wrap{max-width:1100px;margin:0 auto}
+
+  header{background:linear-gradient(135deg,#F59E0B 0%,#B45309 100%);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:22px;box-shadow:0 6px 22px rgba(245,158,11,.22)}
+  .brand{font-size:13px;letter-spacing:.4px;font-weight:700;opacity:.9;margin-bottom:6px}
+  header h1{margin:0 0 6px 0;font-size:30px;font-weight:700;letter-spacing:-.5px}
+  header .sub{font-size:15px;opacity:.95;margin-bottom:12px}
+  header .meta{font-size:12.5px;opacity:.9}
+  header .meta strong{color:#FFE6BD}
+
+  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 6px rgba(10,37,64,.04)}
+  h2{margin:0 0 16px 0;color:var(--goal-navy);font-size:21px;font-weight:700;letter-spacing:-.2px}
+  h3{margin:18px 0 8px 0;color:var(--goal-navy);font-size:15.5px;font-weight:600}
+  h4{margin:14px 0 6px 0;color:var(--goal-navy);font-size:14.5px;font-weight:600}
+  p{margin:8px 0 14px 0}
+
+  .hero{background:linear-gradient(135deg,#FFF4E0,#FFFFFF);border:1px solid #FBD89A;border-radius:14px;padding:28px 32px;margin-bottom:18px}
+  .hero h2{font-size:20px;color:#7C4A03;margin-bottom:10px}
+  .hero p{font-size:15.5px;color:var(--text);margin:6px 0 0 0}
+
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0 16px 0}
+  .stat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;text-align:center}
+  .stat.done{background:linear-gradient(135deg,#E6F4EC,#FFFFFF);border-color:#B7E0C6}
+  .stat.partial{background:linear-gradient(135deg,#FFF4E0,#FFFFFF);border-color:#FBD89A}
+  .stat.todo{background:linear-gradient(135deg,#FCEAEA,#FFFFFF);border-color:#F2BABA}
+  .stat .num{font-size:36px;font-weight:700;color:var(--goal-navy);letter-spacing:-.4px;font-variant-numeric:tabular-nums;line-height:1}
+  .stat .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px;font-weight:600}
+
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:5px}
+  .kpi .val{font-size:23px;font-weight:700;color:var(--goal-navy);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+  .kpi .delta{font-size:12.5px;margin-top:4px;font-weight:600}
+  .delta.up{color:var(--green)}
+  .delta.down{color:var(--red)}
+  .delta.flat{color:var(--muted)}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{background:#EEF4FB;color:var(--goal-navy);text-align:left;padding:10px 12px;border-bottom:2px solid var(--orange);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+  td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:#FAFCFE}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+
+  .status-pill{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 9px;border-radius:30px;white-space:nowrap}
+  .status-pill.done{background:var(--green-bg);color:var(--green)}
+  .status-pill.partial{background:var(--amber-bg);color:var(--amber)}
+  .status-pill.todo{background:var(--red-bg);color:var(--red)}
+  .status-pill.hold{background:var(--goal-blue-bg);color:var(--goal-blue-dark)}
+
+  .move{background:#fff;border:1px solid var(--border);border-left:5px solid var(--orange);border-radius:10px;padding:18px 22px;margin-bottom:12px}
+  .move.done{border-left-color:var(--green)}
+  .move.partial{border-left-color:var(--amber)}
+  .move.todo{border-left-color:var(--red)}
+  .move h4{margin:0 0 6px 0;font-size:15.5px;color:var(--goal-navy);display:flex;align-items:center;gap:10px}
+  .move p{margin:4px 0;font-size:14px}
+  .move .meta{font-size:13px;color:var(--muted);margin-top:6px}
+  .move .change{display:inline-block;background:var(--goal-blue-bg);color:var(--goal-blue-dark);font-weight:700;padding:3px 10px;border-radius:6px;font-size:13px;margin:0 4px}
+
+  .callout{background:#FFF8E1;border:1px solid #F0DA9A;border-left:5px solid var(--gold);padding:16px 20px;border-radius:10px;margin:14px 0}
+  .callout strong{color:#8C6800}
+  .green-callout{background:var(--green-bg);border:1px solid #B7E0C6;border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;margin:14px 0}
+  .green-callout strong{color:var(--green)}
+  .red-callout{background:var(--red-bg);border:1px solid #F2BABA;border-left:5px solid var(--red);padding:16px 20px;border-radius:10px;margin:14px 0}
+  .red-callout strong{color:var(--red)}
+
+  .chart-wrap{position:relative;height:300px;margin-top:8px}
+
+  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;padding-bottom:8px}
+
+  .back-to-landing{position:fixed;top:18px;left:18px;z-index:1000;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#FFFFFF;border:1px solid var(--border);border-radius:999px;color:var(--goal-blue-dark);font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(10,37,64,.08);transition:border-color .15s,box-shadow .15s,transform .15s}
+  .back-to-landing:hover{border-color:var(--goal-blue);box-shadow:0 4px 14px rgba(4,121,223,.18);transform:translateY(-1px)}
+  @media print{.back-to-landing{display:none}}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-to-landing">&larr; Back to reports</a>
+<div class="wrap">
+
+<!-- ==================== HEADER ==================== -->
+<header>
+  <div class="brand">GOAL Platform &middot; Auto Recovery Plan &middot; Progress Update</div>
+  <h1>Supreme Choice Auto &mdash; Recovery Progress</h1>
+  <div class="sub">14-day check-in on the May 8 Auto Peak Recovery Plan</div>
+  <div class="meta">Prepared May 22, 2026 &middot; <strong>Client:</strong> Supreme Choice Insurance &middot; <strong>LOB:</strong> Auto (Non-Standard) &middot; <strong>State:</strong> California</div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+  <h2>Where we are</h2>
+  <p><strong>Plan partially executed &mdash; three items still owed before volume can return.</strong> The 5/8 Auto Peak Recovery Plan called for seven moves. Four are done, three are still open: <strong>Premium Paid Search is still inactive</strong>, <strong>Premium Referral 2 still shows 0 opportunities</strong> (routing not yet fixed), and <strong>Email is at 165% (target 195%)</strong>. The current 22-day window confirms what we expected from a partial-execution state: <strong>7 leads, 0 contacts, 0 quotes, 0 policies on $40 spend</strong>. We do not need new bids; we need to finish the bid plan. Once the three open items close, the day 7 / day 21 measurement starts. Until then, this is a "finish the to-do list" period, not a tuning period.</p>
+</div>
+
+<!-- ==================== STATUS SUMMARY ==================== -->
+<section>
+  <h2>7 moves &mdash; status at a glance</h2>
+  <div class="summary-grid">
+    <div class="stat done">
+      <div class="num">4</div>
+      <div class="lbl">Moves done</div>
+    </div>
+    <div class="stat partial">
+      <div class="num">1</div>
+      <div class="lbl">Partial / under target</div>
+    </div>
+    <div class="stat todo">
+      <div class="num">2</div>
+      <div class="lbl">Still open</div>
+    </div>
+  </div>
+
+  <div class="red-callout">
+    <strong>The three open items are blocking the recovery.</strong> Without Premium Paid Search reactivation, the Email push, and the Premium Referral 2 routing fix, we're trying to recover Auto on bid moves alone &mdash; and the dormant winners are what produced the 2025 peak. Day 7 / day 21 measurement clock has not yet started because the plan isn't fully shipped.
+  </div>
+</section>
+
+<!-- ==================== CURRENT STATE ==================== -->
+<section>
+  <h2>Current Auto state (May 1&ndash;22, 2026)</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">22-day partial month. Still pre-recovery on every metric vs. the May/June 2025 peak.</p>
+
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="lbl">Leads (22d)</div>
+      <div class="val">7</div>
+      <div class="delta down">vs. ~200 / mo at peak</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Contacted</div>
+      <div class="val">0</div>
+      <div class="delta down">No volume to read yet</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Quotes</div>
+      <div class="val">0</div>
+      <div class="delta down">No volume to read yet</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Policies</div>
+      <div class="val">0</div>
+      <div class="delta down">vs. 8&ndash;9 / mo at peak</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Total Spend</div>
+      <div class="val">$40.37</div>
+      <div class="delta down">vs. ~$753 / mo at peak</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg CPC</div>
+      <div class="val">$4.48</div>
+      <div class="delta flat">vs. $3.72 CPL at peak</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Win Rate</div>
+      <div class="val">0.30%</div>
+      <div class="delta down">vs. 3.18% at peak</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg Ad Wall Position</div>
+      <div class="val">8.31</div>
+      <div class="delta down">vs. 3.94 at peak</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Win rate and position confirm the bid math hasn't fully landed.</strong> The bid plan pushed most active sources to peak-era levels, but the missing sources (Premium Paid Search, Premium Referral 2) are the ones that historically delivered the auctions. The numerator (auctions we win) is small because the denominator (auctions we're eligible to bid in) is still smaller than peak.
+  </div>
+</section>
+
+<!-- ==================== STATUS TABLE ==================== -->
+<section>
+  <h2>Status of all 7 recovery moves</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Recovery move</th>
+        <th>Plan target</th>
+        <th>Current state</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td><strong>Raise base bid</strong> $2.86 &rarr; $3.00</td>
+        <td>$3.00 base bid</td>
+        <td>Base bid reset (confirmed via realized avg bids on top sources)</td>
+        <td><span class="status-pill done">Done</span></td>
+      </tr>
+      <tr>
+        <td class="num">2a</td>
+        <td><strong>Reactivate Premium Paid Search</strong> at 180%</td>
+        <td>Active, 180% mult</td>
+        <td><strong>Still INACTIVE</strong> in source settings</td>
+        <td><span class="status-pill todo">Open</span></td>
+      </tr>
+      <tr>
+        <td class="num">2b</td>
+        <td><strong>Reactivate Premium Paid Search 7</strong> at 301%</td>
+        <td>Active, 301% mult</td>
+        <td>Active at 301% &mdash; 6 opportunities, 0 leads</td>
+        <td><span class="status-pill done">Done</span></td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td><strong>Boost Premium Referral</strong> 86% &rarr; 200%</td>
+        <td>200% mult</td>
+        <td>210% mult &mdash; 2,409 opportunities, 0 leads yet</td>
+        <td><span class="status-pill done">Done (+10pp over plan)</span></td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td><strong>Investigate Premium Referral 2</strong> opportunity drought</td>
+        <td>Routing fix, then mult to 200%</td>
+        <td><strong>Still 0 opportunities</strong> at 90% mult &mdash; routing not yet investigated with Chris / product</td>
+        <td><span class="status-pill todo">Open</span></td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td><strong>Boost Email</strong> 51% &rarr; 195%</td>
+        <td>195% mult</td>
+        <td>165% mult &mdash; <strong>30 pts below plan target</strong></td>
+        <td><span class="status-pill partial">Partial</span></td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td><strong>Boost Premium Paid Search 2</strong> 69% &rarr; 180%</td>
+        <td>180% mult</td>
+        <td>180% mult &mdash; 2,903 opportunities, 3 leads, 0 contacts</td>
+        <td><span class="status-pill done">Done</span></td>
+      </tr>
+      <tr>
+        <td class="num">7</td>
+        <td><strong>Hold</strong> Premium Paid Search 4, 6, 2B, Email B, Internal SEO</td>
+        <td>No change</td>
+        <td>All held at plan levels</td>
+        <td><span class="status-pill hold">Hold &mdash; in place</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== OPEN ITEMS &mdash; DETAIL ==================== -->
+<section>
+  <h2>What's still owed &mdash; finish-the-plan checklist</h2>
+
+  <div class="move todo">
+    <h4>1. Reactivate Premium Paid Search at 180% multiplier <span class="status-pill todo">Open</span></h4>
+    <p>Source state: <span class="change">INACTIVE &rarr; ACTIVE, 180% mult</span></p>
+    <p class="meta"><strong>Why it matters:</strong> Last year delivered <strong>2 sold policies on $277 spend</strong>. One-click reactivation; there is no data justifying keeping this source off. With base bid at $3.00, 180% gives an effective bid of $5.40, just above the 2nd-position market RPC of $4.75. Expected output: a steady trickle of leads within 7 days of reactivation.</p>
+    <p class="meta"><strong>Action:</strong> Tom to reactivate this week. Document the activation timestamp so the day-7/day-21 clock can start from a clean reading.</p>
+  </div>
+
+  <div class="move todo">
+    <h4>2. Open Premium Referral 2 routing investigation with Chris / product <span class="status-pill todo">Open</span></h4>
+    <p>Source state: <span class="change">Active, 90% mult, 0 opportunities in 60+ days</span></p>
+    <p class="meta"><strong>Why it matters:</strong> Premium Referral 2 was the <strong>#2 sales source last year</strong> (8 policies, 36 quotes, $632 spend, $17 cost per quote). The source is marked Active but receiving zero opportunities &mdash; this is not a bid problem, it's a routing or eligibility-filter problem. Until opportunities flow, raising the multiplier accomplishes nothing.</p>
+    <p class="meta"><strong>Action:</strong> Tom to file a ticket with Chris / GOAL product team this week. Ask: is Supreme Choice's California non-standard targeting properly mapped to this source? Once routing is fixed and opportunities resume, push multiplier from 90% to 200% to match the Premium Referral target. Expected unlock: 6+ quotes/month at the historical CPA.</p>
+  </div>
+
+  <div class="move partial">
+    <h4>3. Push Auto Email from 165% to 195% multiplier <span class="status-pill partial">Partial</span></h4>
+    <p>Source state: <span class="change">165% &rarr; 195%</span></p>
+    <p class="meta"><strong>Why it matters:</strong> Email has <strong>5,147 monthly opportunities</strong> &mdash; the highest-volume Auto source by far. At 165% with a $3.00 base, effective bid is ~$4.95. The plan target was 195% to lift effective bid to ~$5.85, just above the 2nd-position RPC of $5.78. This is the cheapest way to recover lead volume on Auto &mdash; one multiplier change taps into a 5K-opportunity pool.</p>
+    <p class="meta"><strong>Action:</strong> Tom to push to 195% this week. Layer in alongside the Premium Paid Search reactivation so the day-7 reading captures both changes.</p>
+  </div>
+</section>
+
+<!-- ==================== PEAK vs CURRENT (REFRESHED) ==================== -->
+<section>
+  <h2>Peak vs current (refreshed)</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Side-by-side snapshot. The May/June 2025 peak remains the destination &mdash; bids are mostly there, but the source mix is missing two of last year's biggest contributors.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px">
+    <div style="border:1px solid var(--border);border-radius:12px;padding:20px;background:#fff;border-top:4px solid var(--green)">
+      <h3 style="margin-top:0">Peak Performance &mdash; May/Jun 2025</h3>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:6px;font-size:13.5px;margin-top:8px">
+        <div>Avg Monthly Leads</div><div style="font-weight:700;font-variant-numeric:tabular-nums">~200</div>
+        <div>Avg Monthly Policies</div><div style="font-weight:700;font-variant-numeric:tabular-nums">8.5</div>
+        <div>Win Rate</div><div style="font-weight:700;font-variant-numeric:tabular-nums">3.18%</div>
+        <div>Avg Bid</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$2.93</div>
+        <div>Avg Ad Wall Position</div><div style="font-weight:700;font-variant-numeric:tabular-nums">3.94</div>
+        <div>Cost Per Lead</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$3.72</div>
+        <div>Cost Per Policy (CPA)</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$88.64</div>
+        <div>Monthly Spend</div><div style="font-weight:700;font-variant-numeric:tabular-nums">~$753</div>
+      </div>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:12px;padding:20px;background:#fff;border-top:4px solid var(--orange)">
+      <h3 style="margin-top:0">Current &mdash; May 1&ndash;22, 2026 (22d)</h3>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:6px;font-size:13.5px;margin-top:8px">
+        <div>Leads</div><div style="font-weight:700;font-variant-numeric:tabular-nums">7 (&minus;97%)</div>
+        <div>Policies</div><div style="font-weight:700;font-variant-numeric:tabular-nums">0 (&minus;100%)</div>
+        <div>Win Rate</div><div style="font-weight:700;font-variant-numeric:tabular-nums">0.30%</div>
+        <div>Avg Bid</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$2.64</div>
+        <div>Avg Ad Wall Position</div><div style="font-weight:700;font-variant-numeric:tabular-nums">8.31</div>
+        <div>Cost Per Lead</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$5.77</div>
+        <div>Cost Per Policy (CPA)</div><div style="font-weight:700;font-variant-numeric:tabular-nums">&mdash; no policies</div>
+        <div>Monthly Spend (pace)</div><div style="font-weight:700;font-variant-numeric:tabular-nums">~$55</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:14px">
+    <strong>The bid plan moved Auto from 7.07 to 8.31 ad wall position &mdash; wrong direction.</strong> This is the tell that the missing sources matter. Premium Paid Search and Premium Referral 2 historically pulled position into the 3&ndash;4 band. With them out, the bid increases on remaining sources can't compensate &mdash; we're spreading thin bids across smaller-opportunity sources instead of concentrating on the winners. Finish the plan and the position math will normalize.
+  </div>
+</section>
+
+<!-- ==================== PROJECTIONS POST-EXECUTION ==================== -->
+<section>
+  <h2>Projected recovery once the plan is fully executed</h2>
+  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Conservative projections from the original 5/8 plan, repeated here for reference. Day 7 / day 21 measurements should be taken from the moment the three open items close.</p>
+
+  <div class="kpi-grid" style="margin-top:14px">
+    <div class="kpi">
+      <div class="lbl">Win Rate</div>
+      <div class="val">1.5&ndash;3.0%</div>
+      <div class="delta up">Now: 0.30%</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Avg Ad Wall Position</div>
+      <div class="val">4&ndash;5</div>
+      <div class="delta up">Now: 8.31</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Monthly Leads</div>
+      <div class="val">100&ndash;200</div>
+      <div class="delta up">Now: 7 (22d)</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Cost Per Lead</div>
+      <div class="val">$3.50&ndash;4.50</div>
+      <div class="delta up">Now: $5.77</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Cost Per Policy</div>
+      <div class="val">$130&ndash;180</div>
+      <div class="delta up">Now: &mdash;</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Monthly Policies</div>
+      <div class="val">4&ndash;8</div>
+      <div class="delta up">Now: 0</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Monthly Spend Pace</div>
+      <div class="val">$600&ndash;800</div>
+      <div class="delta up">Now: ~$55</div>
+    </div>
+    <div class="kpi">
+      <div class="lbl">Lead &rarr; Sale CVR</div>
+      <div class="val">3.0&ndash;4.0%</div>
+      <div class="delta up">Last yr: 3.13%</div>
+    </div>
+  </div>
+
+  <p style="color:var(--muted);font-size:13px;margin-top:14px"><strong>Method:</strong> Targets anchored to May/June 2025 actuals (the only two consecutive months at peak bid levels) with a 10% safety buffer. The CPA range tracks the trailing-12-month average ($133) and the all-time average ($127). Day 7 = volume signal (leads pacing); day 21 = quote/sale signal. Both clocks start when the three open items close.</p>
+</section>
+
+<!-- ==================== NEXT 14 DAYS ==================== -->
+<section>
+  <h2>Next 14 days &mdash; what to ship and when to measure</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>When</th>
+        <th>Action</th>
+        <th>Owner</th>
+        <th>Trigger / measurement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>This week</strong></td>
+        <td>Reactivate Premium Paid Search at 180%</td>
+        <td>Tom</td>
+        <td>Activation timestamp logged &mdash; starts day-7 clock for this source</td>
+      </tr>
+      <tr>
+        <td><strong>This week</strong></td>
+        <td>Push Auto Email from 165% to 195%</td>
+        <td>Tom</td>
+        <td>Same window, captured on day-7 read</td>
+      </tr>
+      <tr>
+        <td><strong>This week</strong></td>
+        <td>Open Premium Referral 2 routing ticket with Chris / product</td>
+        <td>Tom</td>
+        <td>Awaiting product team triage; multiplier raise queued for after routing fix</td>
+      </tr>
+      <tr>
+        <td><strong>Day 7 after activation</strong></td>
+        <td>Pull lead volume + ad wall position from active sources</td>
+        <td>Tom</td>
+        <td>Lead volume pacing &ge; 50/mo equivalent = on track; &lt; 25/mo = troubleshoot</td>
+      </tr>
+      <tr>
+        <td><strong>Day 21 after activation</strong></td>
+        <td>Pull contact rate, Quote CPA, policies bound</td>
+        <td>Tom</td>
+        <td>Targets: Quote CPA &lt; $50, &ge; 1 policy bound, contact rate &gt; 15%</td>
+      </tr>
+      <tr>
+        <td><strong>14 days after Premium Referral 2 routing fix</strong></td>
+        <td>Raise Premium Referral 2 multiplier 90% &rarr; 200%</td>
+        <td>Tom</td>
+        <td>Only after opportunities resume flowing &mdash; bid raise is meaningless without auctions</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================== ICP REMINDER ==================== -->
+<section>
+  <h2>ICP &mdash; non-standard, unchanged</h2>
+  <p>Supreme Choice serves a <strong>non-standard auto market</strong> that competing agencies typically avoid: consumers with prior accidents, DUIs, lapsed coverage, or who currently have no insurance. The campaign's <strong>"Currently Insured = No"</strong> filter is intentional and stays in place. We do not target standard insured comparison shoppers &mdash; that's not the book Supreme Choice is trying to grow.</p>
+  <p style="color:var(--muted);font-size:13px">The bid moves above are aimed exclusively at winning more <em>of the right kind</em> of leads. By concentrating budget on the 6 sources that historically produced policies for this audience, we keep the funnel tight and the lead-to-sale CVR strong (~3% at peak &mdash; well above the 2% benchmark). The SR-22 / DUI positive-modifier test is queued for after Premium Referral 2 routing is fixed and Auto volume returns.</p>
+</section>
+
+<!-- ==================== METHODOLOGY ==================== -->
+<section>
+  <h2>Methodology &amp; data sources</h2>
+  <p style="color:var(--muted);font-size:13px">Numbers in this update are pulled from GOAL platform exports dated <strong>May 22, 2026</strong>. Current period: May 1&ndash;22, 2026 (22 days, partial month). Comparison to May/June 2025 peak uses the historical data referenced in the 5/8 Auto Peak Recovery Plan. Multiplier targets and 2nd-position RPCs carried forward from the original plan. <strong>The day-7 / day-21 measurement clock has not yet started</strong> because the plan isn't fully shipped &mdash; this report is a 14-day check-in on execution status, not a performance read.</p>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  Prepared by GOAL Platform &middot; checkoutgoal.com &middot; Confidential &mdash; Supreme Choice Insurance &middot; Auto Recovery Progress &middot; May 22, 2026
+</footer>
+
+</div>
+
+</body>
+</html>
