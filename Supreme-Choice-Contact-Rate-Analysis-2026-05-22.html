@@ -4,626 +4,461 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Supreme Choice — Contact Rate Analysis | May 22, 2026</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --goal-blue:#0479DF;
-    --goal-blue-dark:#035FB3;
-    --goal-blue-light:#5BA7E8;
-    --goal-blue-bg:#E6F1FB;
-    --goal-navy:#0A2540;
-    --bg:#F4F7FB;
-    --card:#FFFFFF;
-    --border:#E1E7EF;
-    --text:#1B2733;
-    --muted:#5A6B7B;
-    --green:#0A8A4A;
-    --green-bg:#E6F4EC;
-    --gold:#B8860B;
-    --gold-bg:#FFF8E1;
-    --amber:#C77700;
-    --amber-bg:#FFF4E0;
-    --red:#C7312D;
-    --red-bg:#FCEAEA;
-    --orange:#F59E0B;
-  }
-  *{box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px;line-height:1.55;font-size:14.5px}
-  .wrap{max-width:1100px;margin:0 auto}
+:root{
+  --blue:#057BE5; --blue-hover:#0C6EC5; --sky:#308ED6; --mint:#3BEECA; --mint-d:#0fae8f;
+  --navy:#00172D; --navy-2:#062c4e; --navy-deep:#001020;
+  --ink:#0F1B2D; --body:#2B3442; --muted:#6A7482;
+  --white:#fff; --off:#F8FAFC; --gray:#EFF2F7; --divider:#EDF1F5; --line:#E2E8F0;
+  --success:#2BBF7A; --warning:#F0A93B; --error:#E5484D;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(--body);line-height:1.55;}
+.shell{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:288px 1fr;min-height:100vh;background:var(--white);}
 
-  header{background:linear-gradient(135deg,var(--goal-blue) 0%,var(--goal-navy) 100%);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:22px;box-shadow:0 6px 22px rgba(4,121,223,.22)}
-  .brand{font-size:13px;letter-spacing:.4px;font-weight:700;opacity:.85;margin-bottom:6px}
-  header h1{margin:0 0 6px 0;font-size:30px;font-weight:700;letter-spacing:-.5px}
-  header .sub{font-size:15px;opacity:.94;margin-bottom:12px}
-  header .meta{font-size:12.5px;opacity:.85}
-  header .meta strong{color:#cce4fa}
+/* Sidebar */
+.side{background:var(--navy);color:#cfe0ee;padding:34px 30px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;}
+.side .logo{height:28px;width:auto;align-self:flex-start;margin-bottom:8px;}
+.side .back{font-size:11.5px;color:#7fa6c8;text-decoration:none;margin-bottom:30px;display:inline-flex;align-items:center;gap:6px;transition:color .15s;}
+.side .back:hover{color:#fff;}
+.side .eb{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2D90EE;}
+.side h1{font-size:24px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.02em;margin:10px 0 14px;}
+.side .who{font-size:13px;color:#a7c2da;line-height:1.6;}
+.side .who b{color:#fff;font-weight:600;}
+.side nav{margin-top:30px;display:flex;flex-direction:column;gap:1px;overflow-y:auto;}
+.side nav a{font-size:13px;color:#9fbcd6;text-decoration:none;padding:8px 12px;border-radius:8px;display:flex;align-items:center;gap:11px;transition:background .15s,color .15s;}
+.side nav a:hover{background:rgba(255,255,255,.06);color:#fff;text-decoration:none;}
+.side nav a .dot{width:6px;height:6px;border-radius:50%;background:#3a6386;flex-shrink:0;}
+.side nav a:hover .dot{background:var(--mint);}
+.side .foot{margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#6f93b3;line-height:1.6;}
 
-  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 6px rgba(10,37,64,.04)}
-  h2{margin:0 0 16px 0;color:var(--goal-navy);font-size:21px;font-weight:700;letter-spacing:-.2px}
-  h3{margin:18px 0 8px 0;color:var(--goal-navy);font-size:15.5px;font-weight:600}
-  h4{margin:14px 0 6px 0;color:var(--goal-navy);font-size:14.5px;font-weight:600}
-  p{margin:8px 0 14px 0}
+/* Main */
+.main{padding:44px 50px 64px;min-width:0;}
+.block{margin-bottom:44px;scroll-margin-top:24px;}
+.bhead{display:flex;align-items:flex-start;gap:12px;margin-bottom:20px;}
+.bhead .ix{font-size:12px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;background:#E6F1FD;padding:4px 9px;border-radius:6px;flex-shrink:0;margin-top:2px;}
+.bhead h2{font-size:21px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+.bhead p{font-size:13.5px;color:var(--muted);margin-top:3px;}
 
-  .hero{background:linear-gradient(135deg,#EEF7FF,#FFFFFF);border:1px solid #BCDDFB;border-radius:14px;padding:28px 32px;margin-bottom:18px}
-  .hero h2{font-size:20px;color:var(--goal-blue-dark);margin-bottom:10px}
-  .hero p{font-size:15.5px;color:var(--text);margin:6px 0 0 0}
+/* Exec */
+.exec{background:var(--off);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:42px;}
+.exec .eb{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+.exec p{font-size:15px;line-height:1.62;color:var(--body);}
+.exec p b{color:var(--ink);font-weight:700;}
 
-  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:6px}
-  .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px}
-  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:5px}
-  .kpi .val{font-size:24px;font-weight:700;color:var(--goal-navy);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
-  .kpi .delta{font-size:12.5px;margin-top:4px;font-weight:600}
-  .delta.up{color:var(--green)}
-  .delta.down{color:var(--red)}
-  .delta.flat{color:var(--muted)}
+/* group labels */
+.grouplab{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 12px;}
+.grouplab.t2{margin-top:24px;}
 
-  .reading-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:12px 0}
-  .reading{border:1px solid var(--border);border-radius:12px;padding:18px 20px;background:#fff}
-  .reading.now{background:linear-gradient(135deg,#E6F4EC,#FFFFFF);border:1px solid #B7E0C6}
-  .reading .tag{display:inline-block;font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;font-weight:700;padding:3px 9px;border-radius:30px;margin-bottom:8px}
-  .reading.now .tag{background:var(--green);color:#fff}
-  .reading.prev .tag{background:#EEF1F4;color:var(--muted)}
-  .reading.ref .tag{background:var(--goal-blue-bg);color:var(--goal-blue-dark)}
-  .reading .big{font-size:32px;font-weight:700;color:var(--goal-navy);letter-spacing:-.4px;font-variant-numeric:tabular-nums;line-height:1.1}
-  .reading .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px;font-weight:600}
-  .reading .trend{font-size:13px;margin-top:8px;font-weight:600}
-  .reading .trend.up{color:var(--green)}
-  .reading .trend.down{color:var(--red)}
-  .reading .ctx{font-size:13px;color:var(--text);margin-top:10px;border-top:1px solid var(--border);padding-top:10px;display:grid;grid-template-columns:1fr auto;gap:4px 14px}
-  .reading .ctx .k{color:var(--muted)}
-  .reading .ctx .v{font-weight:700;font-variant-numeric:tabular-nums}
+/* Trend cards */
+.trend{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.trow{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--white);}
+.trow .when{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+.trow .val{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:-.02em;margin:8px 0 4px;line-height:1;}
+.trow.now{border-color:var(--mint-d);box-shadow:0 0 0 1px var(--mint-d) inset;}
+.trow.now .val{color:var(--mint-d);}
+.trow.hot .val{color:var(--error);}
+.trow .meta{font-size:12px;color:var(--muted);line-height:1.45;}
 
-  .source-bars .source-row{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-  .source-bars .source-row:last-child{border-bottom:none}
-  .source-bars .source-name{font-weight:700;font-size:15px;color:var(--goal-navy);margin-bottom:8px}
-  .bar-line{display:grid;grid-template-columns:100px 1fr 200px;gap:10px;align-items:center;margin:6px 0}
-  .bar-line .when{font-size:12px;color:var(--muted);font-weight:600}
-  .bar-line .when.now{color:var(--green)}
-  .bar-line .bar-wrap{background:#EEF1F4;border-radius:8px;height:24px;position:relative}
-  .bar-line .bar{height:100%;border-radius:8px;display:flex;align-items:center;color:#fff;padding-left:10px;font-weight:700;font-size:12px}
-  .bar-line .bar.now{background:linear-gradient(90deg,var(--goal-blue),var(--goal-blue-light))}
-  .bar-line .bar.prev{background:#9CB4C8}
-  .bar-line .data{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+/* Reading cards (4-up) */
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.rdcard{border:1px solid var(--line);border-radius:12px;padding:18px 18px;background:var(--white);}
+.rdcard.now{border-color:var(--mint-d);box-shadow:0 0 0 1px var(--mint-d) inset;}
+.rdcard .when{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;}
+.rdcard .big{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1;margin:7px 0 2px;}
+.rdcard.now .big{color:var(--mint-d);}
+.rdcard .lbl{font-size:11.5px;color:var(--muted);font-weight:600;}
+.rdcard .chg{display:inline-block;font-size:10.5px;font-weight:800;margin-top:8px;padding:2px 7px;border-radius:5px;}
+.chg.up{background:#D6F7EE;color:#0fae8f;} .chg.down{background:#FCE8E9;color:#C13438;}
+.rdcard .ml{margin-top:13px;border-top:1px solid var(--divider);padding-top:11px;display:flex;flex-direction:column;gap:5px;}
+.rdcard .ml .mi{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);}
+.rdcard .ml .mi b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums;}
 
-  table{width:100%;border-collapse:collapse;font-size:13.5px}
-  th{background:#EEF4FB;color:var(--goal-navy);text-align:left;padding:10px 12px;border-bottom:2px solid var(--goal-blue);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
-  td{padding:10px 12px;border-bottom:1px solid var(--border)}
-  tr:last-child td{border-bottom:none}
-  tr:nth-child(even) td{background:#FAFCFE}
-  .num{text-align:right;font-variant-numeric:tabular-nums}
+/* Panels & tables */
+.panel{border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:var(--white);}
+.tnote{font-size:13px;color:var(--muted);line-height:1.6;margin-top:16px;padding-top:14px;border-top:1px solid var(--divider);}
+.tnote b{color:var(--ink);font-weight:700;}
+.tscroll{overflow-x:auto;}
+.dtable{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+.dtable th{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;text-align:right;padding:0 10px 11px;border-bottom:1px solid var(--line);white-space:nowrap;}
+.dtable th:first-child{text-align:left;padding-left:2px;}
+.dtable th.l{text-align:left;}
+.dtable td{padding:12px 10px;border-bottom:1px solid var(--divider);font-size:13px;color:var(--body);text-align:right;white-space:nowrap;}
+.dtable td:first-child{text-align:left;padding-left:2px;font-weight:700;color:var(--ink);}
+.dtable td.l{text-align:left;white-space:normal;}
+.dtable tr:last-child td{border-bottom:none;}
+.dtable tr.blend td{background:var(--off);font-weight:800;color:var(--ink);border-top:2px solid var(--line);}
+.dtable tr.muted td{color:var(--muted);}
+.dtable tr.muted td:first-child{color:var(--muted);}
+.pos{color:var(--mint-d);font-weight:700;}
 
-  .chart-wrap{position:relative;height:340px;margin-top:8px}
+/* Source paired bars */
+.srcbars{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--white);}
+.srcrow{padding:16px 0;border-top:1px solid var(--divider);}
+.srcrow:first-child{padding-top:0;border-top:none;}
+.srcrow .sname{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:10px;}
+.srcrow .sname small{font-weight:600;color:var(--mint-d);text-transform:none;letter-spacing:0;font-size:11.5px;margin-left:6px;}
+.barline{display:flex;align-items:center;gap:12px;margin-bottom:7px;}
+.barline .bl{width:92px;flex-shrink:0;font-size:11px;color:var(--muted);font-weight:600;text-align:right;}
+.barline .track{flex:1;height:26px;background:var(--gray);border-radius:6px;overflow:hidden;}
+.barline .track i{display:block;height:100%;width:0;border-radius:6px;transition:width 1.05s cubic-bezier(.2,.7,.2,1);}
+.barline .track i.cur{background:var(--blue);}
+.barline .track i.prev{background:#9cc4ec;}
+.barline .pv{width:142px;flex-shrink:0;font-size:11.5px;color:var(--body);}
+.barline .pv b{font-size:14px;color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums;margin-right:6px;}
 
-  .funnel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
-  .funnel-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
-  .funnel-card.now{background:linear-gradient(135deg,#E6F4EC,#FFFFFF);border-color:#B7E0C6}
-  .funnel-card h4{margin:0 0 6px 0;font-size:13px;color:var(--goal-navy);text-transform:uppercase;letter-spacing:.4px}
-  .funnel-card .cr{font-size:24px;font-weight:700;color:var(--goal-navy);font-variant-numeric:tabular-nums;margin-bottom:10px}
-  .funnel-card .step{display:grid;grid-template-columns:90px 1fr 90px;align-items:center;gap:8px;padding:4px 0;font-size:12.5px}
-  .funnel-card .step .name{font-weight:600;color:var(--goal-navy)}
-  .funnel-card .step .barlet{height:18px;background:linear-gradient(90deg,var(--goal-blue),var(--goal-blue-light));border-radius:5px;color:#fff;font-weight:700;padding-left:8px;font-size:11.5px;display:flex;align-items:center}
-  .funnel-card .step .val{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+/* Mini funnels (3-up) */
+.mfgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.mf{border:1px solid var(--line);border-radius:14px;padding:20px 22px;background:var(--white);}
+.mf.now{border-color:var(--mint-d);}
+.mf .mh{font-size:13px;font-weight:800;color:var(--ink);}
+.mf .ms{font-size:12px;color:var(--muted);margin:3px 0 16px;}
+.mf .mstep{margin-bottom:9px;}
+.mf .mtop{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;}
+.mf .mtop .sl{color:var(--body);font-weight:600;} .mf .mtop .sv{color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums;}
+.mf .mtrack{height:9px;background:var(--gray);border-radius:5px;overflow:hidden;}
+.mf .mtrack i{display:block;height:100%;width:0;border-radius:5px;background:var(--blue);transition:width 1s cubic-bezier(.2,.7,.2,1);}
+.mf .mtrack i.end{background:var(--mint-d);}
+.mf .mpct{font-size:10.5px;color:var(--muted);font-weight:700;text-align:right;margin-top:2px;}
 
-  .callout{background:#FFF8E1;border:1px solid #F0DA9A;border-left:5px solid var(--gold);padding:16px 20px;border-radius:10px;margin:14px 0}
-  .callout strong{color:#8C6800}
-  .green-callout{background:var(--green-bg);border:1px solid #B7E0C6;border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;margin:14px 0}
-  .green-callout strong{color:var(--green)}
+/* Line chart */
+.linechart{border:1px solid var(--line);border-radius:14px;padding:24px 26px 18px;background:var(--white);}
+.linechart svg{width:100%;height:auto;display:block;}
+.trendline{fill:none;stroke:var(--blue);stroke-width:3;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1300;stroke-dashoffset:0;animation:draw 1.6s ease-out;}
+@keyframes draw{from{stroke-dashoffset:1300;}to{stroke-dashoffset:0;}}
+.tpt{opacity:1;animation:fadept 1.3s ease;}
+@keyframes fadept{0%,45%{opacity:0;}100%{opacity:1;}}
+.tlbl{font:700 12px 'Inter',sans-serif;fill:var(--ink);}
+.xlbl{font:600 11px 'Inter',sans-serif;fill:var(--muted);}
+.bandlbl{font:600 10.5px 'Inter',sans-serif;fill:var(--mint-d);}
 
-  .findings{counter-reset:fnum}
-  .finding{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)}
-  .finding:last-child{border-bottom:none}
-  .finding .num{background:var(--goal-blue);color:#fff;font-weight:700;font-size:18px;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
-  .finding h3{margin:0 0 6px 0;font-size:15.5px}
-  .finding p{margin:6px 0 0 0;font-size:14px}
+/* Callout */
+.callout{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:22px 26px;background:var(--white);}
+.callout h4{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:9px;}
+.callout p{font-size:13.5px;color:var(--body);line-height:1.6;}
+.callout p+p{margin-top:10px;}
+.callout p b{color:var(--ink);font-weight:700;}
 
-  ol{margin:8px 0 0 22px}
-  ol li{margin:8px 0;line-height:1.55}
+/* Findings / steps (numbered) */
+.plan{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;}
+.pstep{display:flex;gap:16px;padding:18px 22px;border-top:1px solid var(--divider);background:var(--white);}
+.pstep:first-child{border-top:none;}
+.pstep .num{flex-shrink:0;width:34px;height:34px;border-radius:9px;background:#E6F1FD;color:var(--blue);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;}
+.pstep .h{font-size:14.5px;font-weight:800;color:var(--ink);}
+.pstep .b{font-size:13px;color:var(--body);line-height:1.55;margin-top:5px;}
+.pstep .b b{color:var(--ink);font-weight:700;}
 
-  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;padding-bottom:8px}
+/* Method */
+.method{font-size:12px;color:var(--muted);line-height:1.65;border-top:1px solid var(--line);padding-top:20px;margin-top:8px;}
+.method b{color:var(--ink);font-weight:700;}
+.sigfoot{margin-top:26px;font-size:11.5px;color:var(--muted);}
 
-  .back-to-landing{position:fixed;top:18px;left:18px;z-index:1000;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#FFFFFF;border:1px solid var(--border);border-radius:999px;color:var(--goal-blue-dark);font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(10,37,64,.08);transition:border-color .15s,box-shadow .15s,transform .15s}
-  .back-to-landing:hover{border-color:var(--goal-blue);box-shadow:0 4px 14px rgba(4,121,223,.18);transform:translateY(-1px)}
-  @media print{.back-to-landing{display:none}}
+@media print{
+  body{background:#fff;} .shell{display:block;max-width:none;}
+  .side{position:static;height:auto;padding:20px 30px;}
+  .side nav,.side .back{display:none;} .side h1{margin:8px 0;}
+  .panel,.plan,.callout,.trow,.rdcard,.srcbars,.mf,.linechart{break-inside:avoid;}
+  .block{margin-bottom:30px;}
+  .trendline{animation:none;stroke-dashoffset:0;} .tpt{animation:none;opacity:1;}
+}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;}
+  .side{position:static;height:auto;} .side nav{display:none;}
+  .main{padding:32px 22px;}
+  .trend,.rgrid,.mfgrid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){ .barline .pv{width:118px;} }
 </style>
 </head>
 <body>
-<a href="index.html" class="back-to-landing">&larr; Back to reports</a>
-<div class="wrap">
+<div class="shell">
 
-<!-- ==================== HEADER ==================== -->
-<header>
-  <div class="brand">GOAL.</div>
-  <h1>Contact Rate &amp; CPA &mdash; Full Recovery Reading</h1>
-  <div class="sub"><strong>Supreme Choice Insurance</strong> &middot; Account: John Hunt (Monty)</div>
-  <div class="meta">Prepared May 22, 2026  &middot;  Home CA campaign  &middot;  Period: May 1&ndash;22, 2026</div>
-</header>
+  <aside class="side">
+    <svg class="logo" viewBox="0 0 224 68" role="img" aria-label="GOAL" xmlns="http://www.w3.org/2000/svg"><g font-family="Inter, Arial, sans-serif" font-weight="900" font-size="74" fill="#ffffff" letter-spacing="-2"><text x="0" y="57">G</text><text x="120" y="57">A</text><text x="180" y="57">L</text></g><g fill="none" stroke="#2D90EE" stroke-width="5.2" stroke-linecap="round"><circle cx="92" cy="31" r="25.5" stroke-dasharray="120 42" transform="rotate(70 92 31)"/><circle cx="92" cy="31" r="18.5" stroke-dasharray="86 30" transform="rotate(150 92 31)"/><circle cx="92" cy="31" r="11.5" stroke-dasharray="52 20" transform="rotate(20 92 31)"/></g><circle cx="92" cy="31" r="6.6" fill="#2D90EE"/></svg>
+    <a class="back" href="index.html">← All reports</a>
+    <div class="eb">Contact Rate &amp; CPA</div>
+    <h1>Supreme Choice Insurance Solutions</h1>
+    <div class="who">Account: <b>John Hunt (Monty)</b><br>California · Home CA campaign<br>May 1–22, 2026 (full recovery reading)</div>
+    <nav>
+      <a href="#s1"><span class="dot"></span>Recovery summary</a>
+      <a href="#s2"><span class="dot"></span>Quote CPA scorecard</a>
+      <a href="#s3"><span class="dot"></span>Four points in time</a>
+      <a href="#s4"><span class="dot"></span>Contact rate by source</a>
+      <a href="#s5"><span class="dot"></span>Tier 1 turnaround</a>
+      <a href="#s6"><span class="dot"></span>Quote CPA by source</a>
+      <a href="#s7"><span class="dot"></span>Strong vs trough vs now</a>
+      <a href="#s8"><span class="dot"></span>Funnel comparison</a>
+      <a href="#s9"><span class="dot"></span>7-month trend</a>
+      <a href="#s10"><span class="dot"></span>What we know</a>
+      <a href="#s11"><span class="dot"></span>Next steps</a>
+    </nav>
+    <div class="foot">Prepared by Tom Panos · GOAL Platform<br>All conversion metrics calculated based on Leads, not Clicks.</div>
+  </aside>
 
-<!-- ==================== HERO ==================== -->
-<div class="hero">
-  <h2>The recovery has fully landed</h2>
-  <p>Blended contact rate climbed from <strong>20.7% (5/13) to 28.6% (5/22)</strong> &mdash; a third consecutive reading higher than the last, and back in healthy mid-band territory. Quote CPA fell from <strong>$43.87 to $20.70 (&minus;52.8%)</strong> &mdash; cleanly <strong>below Monty's $35 gold standard</strong> for the first time since the trough opened in April. The bigger surprise: <strong>Tier 1 contact rate jumped from 9.5% to 28.1%</strong> with no intervention &mdash; the publisher audit that was deemed impossible appears to have resolved itself via upstream rotation. Tier 2 keeps climbing (22.2% &rarr; 35.5%) and continues to carry every bound policy. Three of four producing sources now sit under the $35 gold line.</p>
-</div>
+  <main class="main">
 
-<!-- ==================== QUOTE CPA SCORECARD ==================== -->
-<section style="background:linear-gradient(135deg,#FFFBE6,#FFF);border:1px solid #F0DA9A">
-  <h2 style="color:#8C6800">Quote CPA scorecard &mdash; against Monty's thresholds</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Targets from the 4/17 review: <strong>$35</strong> gold standard &middot; <strong>$75</strong> acceptable &middot; <strong>$100+</strong> running hot (catastrophe).</p>
-
-  <div class="kpi-grid" style="margin-top:14px">
-    <div class="kpi" style="border-left:5px solid var(--red)">
-      <div class="lbl">5/8 reading</div>
-      <div class="val">$67.62</div>
-      <div class="delta down">Running hot</div>
-    </div>
-    <div class="kpi" style="border-left:5px solid var(--amber)">
-      <div class="lbl">5/13 reading</div>
-      <div class="val">$43.87</div>
-      <div class="delta flat">Inside acceptable</div>
-    </div>
-    <div class="kpi" style="border-left:5px solid var(--green)">
-      <div class="lbl">5/22 reading &mdash; BELOW GOLD</div>
-      <div class="val">$20.70</div>
-      <div class="delta up">41% below $35 gold</div>
-    </div>
-  </div>
-
-  <div class="green-callout" style="margin-top:14px">
-    <strong>The campaign-blended Quote CPA is now in peak-era territory.</strong> Two weeks ago we were running hot &mdash; today the blended number sits cleanly below the gold standard. Tier 2 leads the way at $8.23 (76% below gold); Tier 1 at $24.58 closed the gap from $53.15 in 9 days. Don't move what's moving &mdash; per Monty's 5/8 directive, all multipliers stayed put this period. The market did the work.
-  </div>
-</section>
-
-<!-- ==================== READINGS &mdash; THREE POINTS IN TIME ==================== -->
-<section>
-  <h2>The reading &mdash; four points in time</h2>
-  <div class="reading-grid" style="grid-template-columns:repeat(4,1fr)">
-    <div class="reading now">
-      <span class="tag">5/22 MTD &middot; Today</span>
-      <div class="big">28.6%</div>
-      <div class="lbl">Blended contact rate</div>
-      <div class="trend up">&#9650; +7.9 pts vs. May 13</div>
-      <div class="ctx">
-        <div class="k">Leads</div><div class="v">91</div>
-        <div class="k">Contacted</div><div class="v">26</div>
-        <div class="k">Quotes</div><div class="v">20</div>
-        <div class="k">Policies bound</div><div class="v">3</div>
-        <div class="k">Cost / contact</div><div class="v">$15.93</div>
+    <section class="block" id="s1" style="margin-bottom:0;">
+      <div class="exec">
+        <div class="eb">The recovery has fully landed</div>
+        <p>Blended contact rate climbed from 20.7% (5/13) to <b>28.6%</b> (5/22) — a third consecutive reading higher than the last, back in healthy mid-band territory. Quote CPA fell from $43.87 to <b>$20.70</b> (−52.8%) — cleanly below Monty's $35 gold standard for the first time since the trough opened in April. The bigger surprise: Tier 1 contact rate jumped from 9.5% to 28.1% with no intervention — the publisher audit deemed impossible appears to have resolved itself via upstream rotation. Tier 2 keeps climbing (22.2% → 35.5%) and continues to carry every bound policy. Three of four producing sources now sit under the $35 gold line.</p>
       </div>
+    </section>
+
+    <section class="block" id="s2">
+      <div class="bhead"><span class="ix">01</span><div><h2>Quote CPA scorecard</h2><p>Against Monty's thresholds from the 4/17 review — $35 gold · $75 acceptable · $100+ running hot</p></div></div>
+      <div class="trend">
+        <div class="trow hot"><div class="when">5/8 reading</div><div class="val">$67.62</div><div class="meta">Running hot</div></div>
+        <div class="trow"><div class="when">5/13 reading</div><div class="val">$43.87</div><div class="meta">Inside acceptable band</div></div>
+        <div class="trow now"><div class="when">5/22 reading — below gold</div><div class="val">$20.70</div><div class="meta">41% below the $35 gold</div></div>
+      </div>
+      <p class="tnote">The campaign-blended Quote CPA is now in peak-era territory. Two weeks ago we were running hot; today the blended number sits cleanly below gold. Tier 2 leads at $8.23 (76% below gold); Tier 1 at $24.58 closed the gap from $53.15 in 9 days. <b>Don't move what's moving</b> — per Monty's 5/8 directive, all multipliers stayed put this period. The market did the work.</p>
+    </section>
+
+    <section class="block" id="s3">
+      <div class="bhead"><span class="ix">02</span><div><h2>The reading — four points in time</h2></div></div>
+      <div class="rgrid">
+        <div class="rdcard now">
+          <div class="when">5/22 · MTD (today)</div>
+          <div class="big">28.6%</div><div class="lbl">Blended contact rate</div>
+          <span class="chg up">▲ +7.9 pts vs May 13</span>
+          <div class="ml">
+            <div class="mi"><span>Leads</span><b>91</b></div>
+            <div class="mi"><span>Contacted</span><b>26</b></div>
+            <div class="mi"><span>Quotes</span><b>20</b></div>
+            <div class="mi"><span>Policies bound</span><b>3</b></div>
+            <div class="mi"><span>Cost / contact</span><b>$15.93</b></div>
+          </div>
+        </div>
+        <div class="rdcard">
+          <div class="when">5/13 · Trailing 30d</div>
+          <div class="big">20.7%</div><div class="lbl">Blended contact rate</div>
+          <span class="chg up">▲ +7.1 pts vs May 8</span>
+          <div class="ml">
+            <div class="mi"><span>Leads</span><b>140</b></div>
+            <div class="mi"><span>Contacted</span><b>29</b></div>
+            <div class="mi"><span>Quotes</span><b>18</b></div>
+            <div class="mi"><span>Policies bound</span><b>3</b></div>
+            <div class="mi"><span>Cost / contact</span><b>$27.23</b></div>
+          </div>
+        </div>
+        <div class="rdcard">
+          <div class="when">5/8 · Trailing 30d</div>
+          <div class="big">13.6%</div><div class="lbl">Blended contact rate</div>
+          <span class="chg down">▼ −10.0 pts vs April</span>
+          <div class="ml">
+            <div class="mi"><span>Leads</span><b>147</b></div>
+            <div class="mi"><span>Contacted</span><b>20</b></div>
+            <div class="mi"><span>Quotes</span><b>13</b></div>
+            <div class="mi"><span>Policies bound</span><b>2</b></div>
+            <div class="mi"><span>Cost / contact</span><b>$43.95</b></div>
+          </div>
+        </div>
+        <div class="rdcard">
+          <div class="when">April 2026 · reference</div>
+          <div class="big">23.6%</div><div class="lbl">Blended contact rate</div>
+          <span class="chg down">▼ −28 pts vs March</span>
+          <div class="ml">
+            <div class="mi"><span>Leads</span><b>144</b></div>
+            <div class="mi"><span>Contacted</span><b>34</b></div>
+            <div class="mi"><span>Quotes</span><b>23</b></div>
+            <div class="mi"><span>Policies bound</span><b>3</b></div>
+            <div class="mi"><span>Cost / contact</span><b>$28.40</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="tnote">22 days, half the spend, every leading indicator up. Spend on Home dropped from $789.70 (5/13 T30d) to $414.06 (5/22 MTD). Even paced to a 30-day equivalent (~$565), spend is materially below the prior period. Cost per contact dropped 41.5% to $15.93. Quotes pacing to ~27/30d (vs 18 prior). <b>The 5/4 plan and the late-April Tier 2 multiplier pull are compounding now.</b></p>
+    </section>
+
+    <section class="block" id="s4">
+      <div class="bhead"><span class="ix">03</span><div><h2>Contact rate by source — 5/22 vs 5/13</h2><p>Top bar is the latest period (May 1–22); bottom bar is the prior reading (trailing 30d through 5/13). Tier 1 is the breakout — up nearly 3× with no bid change.</p></div></div>
+      <div class="srcbars">
+        <div class="srcrow">
+          <div class="sname">Tier 2</div>
+          <div class="barline"><span class="bl">5/22 (MTD)</span><span class="track"><i class="cur" data-w="89"></i></span><span class="pv"><b>35.5%</b>11 contacted / 38 clicks</span></div>
+          <div class="barline"><span class="bl">5/13 (T30d)</span><span class="track"><i class="prev" data-w="56"></i></span><span class="pv"><b>22.2%</b>18 contacted / 81 clicks</span></div>
+        </div>
+        <div class="srcrow">
+          <div class="sname">Tier 1 <small>organic recovery</small></div>
+          <div class="barline"><span class="bl">5/22 (MTD)</span><span class="track"><i class="cur" data-w="70"></i></span><span class="pv"><b>28.1%</b>9 contacted / 37 clicks</span></div>
+          <div class="barline"><span class="bl">5/13 (T30d)</span><span class="track"><i class="prev" data-w="24"></i></span><span class="pv"><b>9.5%</b>4 contacted / 42 clicks</span></div>
+        </div>
+        <div class="srcrow">
+          <div class="sname">Tier 3</div>
+          <div class="barline"><span class="bl">5/22 (MTD)</span><span class="track"><i class="cur" data-w="56"></i></span><span class="pv"><b>22.2%</b>4 contacted / 25 clicks</span></div>
+          <div class="barline"><span class="bl">5/13 (T30d)</span><span class="track"><i class="prev" data-w="42"></i></span><span class="pv"><b>16.7%</b>2 contacted / 12 clicks</span></div>
+        </div>
+        <div class="srcrow">
+          <div class="sname">Home SearchB</div>
+          <div class="barline"><span class="bl">5/22 (MTD)</span><span class="track"><i class="cur" data-w="50"></i></span><span class="pv"><b>20.0%</b>2 contacted / 15 clicks</span></div>
+          <div class="barline"><span class="bl">5/13 (T30d)</span><span class="track"><i class="prev" data-w="35"></i></span><span class="pv"><b>13.9%</b>5 contacted / 36 clicks</span></div>
+        </div>
+        <div class="srcrow">
+          <div class="sname">Home Search</div>
+          <div class="barline"><span class="bl">5/22 (MTD)</span><span class="track"><i class="cur" data-w="0"></i></span><span class="pv"><b>0.0%</b>0 leads — priced out</span></div>
+          <div class="barline"><span class="bl">5/13 (T30d)</span><span class="track"><i class="prev" data-w="0"></i></span><span class="pv"><b>0.0%</b>0 contacted / 9 clicks</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="s5">
+      <div class="bhead"><span class="ix">04</span><div><h2>Tier 1 — the unexpected turnaround</h2></div></div>
+      <div class="callout">
+        <h4>The fix happened on its own — the publisher audit was unnecessary.</h4>
+        <p>Tier 1 had been the single largest open item from the 4/17 review. The plan was a publisher audit through Nick and Chris to cross-reference current publisher IDs against the 2025 blacklist. On the 5/8 call, Monty was told the publisher pins are rolled regularly (like API keys), making any audit effectively impossible to action.</p>
+        <p>Tier 1 contact rate jumped <b>9.5% → 28.1%</b> with no bid change and no audit. Effective bid unchanged at $3.55. Lead volume nearly unchanged (35 → 32). What changed is which publishers actually delivered — and they're suddenly answering. Quote CPA fell from $53.15 to $24.58 (below gold). 6 quotes from this source in 22 days, materially above prior pace.</p>
+        <p><b>Working hypothesis:</b> the same upstream publisher rotation that made the audit impossible also rotated the bad publishers out this cycle. Hold the multiplier and watch — if Tier 1 holds 25%+ contact rate for the next 14 days, the recovery is real. If it slips below 15%, the bad publishers rotated back in and we re-escalate to Nick and Chris with this data as evidence.</p>
+      </div>
+    </section>
+
+    <section class="block" id="s6">
+      <div class="bhead"><span class="ix">05</span><div><h2>Quote CPA by source — the economic read</h2><p>Contact rate is the leading signal; Quote CPA is the economic outcome. The two moved in lockstep this period.</p></div></div>
+      <div class="panel tscroll">
+        <table class="dtable">
+          <thead><tr><th class="l">Source</th><th>Contact rate</th><th>Quotes</th><th>Spend</th><th>Quote CPA</th><th class="l">CPA band</th></tr></thead>
+          <tbody>
+            <tr><td>Tier 2</td><td>35.5%</td><td>9</td><td>$74.10</td><td class="pos">$8.23</td><td class="l">76% below gold ($35)</td></tr>
+            <tr><td>Tier 1</td><td>28.1%</td><td>6</td><td>$147.47</td><td class="pos">$24.58</td><td class="l">Below gold ($35)</td></tr>
+            <tr><td>Home SearchB</td><td>20.0%</td><td>2</td><td>$75.07</td><td>$37.54</td><td class="l">Acceptable ($35–$75)</td></tr>
+            <tr><td>Tier 3</td><td>22.2%</td><td>3</td><td>$117.42</td><td>$39.14</td><td class="l">Just outside gold ($35–$75)</td></tr>
+            <tr class="blend"><td>Campaign blend</td><td>28.6%</td><td>20</td><td>$414.06</td><td>$20.70</td><td class="l">Below gold ($35)</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote">The economic recovery is now broad-based. Two sources (Tier 2, Tier 1) are well below gold; two more (Home SearchB, Tier 3) are in the acceptable band; campaign blended is below gold. The lean-ICP / cheap-volume thesis on Tier 2 is intact and now joined by Tier 1's organic recovery. <b>Home SearchB and Tier 3 are the next two to convert quotes into binds</b> — another 14 days of data will tell us if they can.</p>
+      </div>
+    </section>
+
+    <section class="block" id="s7">
+      <div class="bhead"><span class="ix">06</span><div><h2>Strong run vs. trough vs. now</h2><p>Strong run (Jan–Mar) vs. trough (mid-April through early May) vs. the latest reading. All five active sources are directionally up vs. the trough.</p></div></div>
+      <div class="panel tscroll">
+        <table class="dtable">
+          <thead><tr><th class="l">Source</th><th>Strong CR (Jan–Mar)</th><th>Trough CR (5/8)</th><th>5/13</th><th>5/22</th><th class="l">Δ vs 5/13</th></tr></thead>
+          <tbody>
+            <tr><td>Tier 2</td><td>54.7%</td><td>17.6%</td><td>22.2%</td><td>35.5%</td><td class="l"><span class="pos">▲ +13.3 pts</span></td></tr>
+            <tr><td>Tier 1</td><td>83.5%</td><td>7.7%</td><td>9.5%</td><td>28.1%</td><td class="l"><span class="pos">▲ +18.6 pts</span></td></tr>
+            <tr><td>Tier 3</td><td>73.3%</td><td>12.5%</td><td>16.7%</td><td>22.2%</td><td class="l"><span class="pos">▲ +5.5 pts</span></td></tr>
+            <tr><td>Home SearchB</td><td>67.2%</td><td>16.7%</td><td>13.9%</td><td>20.0%</td><td class="l"><span class="pos">▲ +6.1 pts</span></td></tr>
+            <tr class="muted"><td>Home Search</td><td>78.6%</td><td>7.7%</td><td>0.0%</td><td>0.0%</td><td class="l">priced out</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="s8">
+      <div class="bhead"><span class="ix">07</span><div><h2>Funnel comparison — three readings</h2><p>Same campaign, three reads on the contact step. Volume is partial for May (22 days vs 30); the rate-level read is what matters.</p></div></div>
+      <div class="mfgrid">
+        <div class="mf now">
+          <div class="mh">5/22 (MTD · 22 days)</div><div class="ms">28.6% contact rate</div>
+          <div class="mstep"><div class="mtop"><span class="sl">Leads</span><span class="sv">91</span></div><div class="mtrack"><i data-w="100"></i></div><div class="mpct">100.0%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Contacted</span><span class="sv">26</span></div><div class="mtrack"><i data-w="29"></i></div><div class="mpct">28.6%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Quoted</span><span class="sv">20</span></div><div class="mtrack"><i data-w="22"></i></div><div class="mpct">22.0%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Policies</span><span class="sv">3</span></div><div class="mtrack"><i class="end" data-w="9"></i></div><div class="mpct">3.3%</div></div>
+        </div>
+        <div class="mf">
+          <div class="mh">5/13 (Trailing 30d)</div><div class="ms">20.7% contact rate</div>
+          <div class="mstep"><div class="mtop"><span class="sl">Leads</span><span class="sv">140</span></div><div class="mtrack"><i data-w="100"></i></div><div class="mpct">100.0%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Contacted</span><span class="sv">29</span></div><div class="mtrack"><i data-w="21"></i></div><div class="mpct">20.7%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Quoted</span><span class="sv">18</span></div><div class="mtrack"><i data-w="13"></i></div><div class="mpct">12.9%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Policies</span><span class="sv">3</span></div><div class="mtrack"><i class="end" data-w="6"></i></div><div class="mpct">2.1%</div></div>
+        </div>
+        <div class="mf">
+          <div class="mh">April 2026 (Calendar)</div><div class="ms">23.6% contact rate</div>
+          <div class="mstep"><div class="mtop"><span class="sl">Leads</span><span class="sv">144</span></div><div class="mtrack"><i data-w="100"></i></div><div class="mpct">100.0%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Contacted</span><span class="sv">34</span></div><div class="mtrack"><i data-w="24"></i></div><div class="mpct">23.6%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Quoted</span><span class="sv">23</span></div><div class="mtrack"><i data-w="16"></i></div><div class="mpct">16.0%</div></div>
+          <div class="mstep"><div class="mtop"><span class="sl">Policies</span><span class="sv">3</span></div><div class="mtrack"><i class="end" data-w="6"></i></div><div class="mpct">2.1%</div></div>
+        </div>
+      </div>
+      <p class="tnote">Quote-of-contacted hit <b>76.9%</b> — above peak. Of the 26 leads reached in the May MTD window, 20 became quotes. This is materially above the March/April 68% range and confirms the leads coming in are the right risks. The funnel is doing more at every step.</p>
+    </section>
+
+    <section class="block" id="s9">
+      <div class="bhead"><span class="ix">08</span><div><h2>7-month blended contact rate trend</h2><p>Last six full months plus the trailing readings and the May MTD reading. The April–early-May trough closed and reversed cleanly.</p></div></div>
+      <div class="linechart">
+        <svg viewBox="0 0 800 290" role="img" aria-label="7-month blended contact rate trend">
+          <!-- benchmark band 20-40% -->
+          <rect x="52" y="164" width="696" height="40" fill="rgba(43,191,122,.10)"></rect>
+          <line x1="52" y1="164" x2="748" y2="164" stroke="rgba(43,191,122,.45)" stroke-width="1" stroke-dasharray="4 4"></line>
+          <line x1="52" y1="204" x2="748" y2="204" stroke="rgba(43,191,122,.45)" stroke-width="1" stroke-dasharray="4 4"></line>
+          <text class="bandlbl" x="58" y="158">20–40% healthy benchmark band</text>
+          <!-- axis baseline -->
+          <line x1="52" y1="244" x2="748" y2="244" stroke="#E2E8F0" stroke-width="1"></line>
+          <!-- trend line -->
+          <polyline class="trendline" fill="none" stroke="#057BE5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" points="52,110 151.43,44 250.86,132 350.29,140 449.71,196 549.14,216 648.57,202 748,186.8"></polyline>
+          <!-- points + value labels -->
+          <g class="tpt">
+            <circle cx="52" cy="110" r="5" fill="#057BE5" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="52" y="98" text-anchor="start">67%</text>
+            <circle cx="151.43" cy="44" r="5" fill="#057BE5" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="151.43" y="34" text-anchor="middle">100%</text>
+            <circle cx="250.86" cy="132" r="5" fill="#057BE5" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="250.86" y="120" text-anchor="middle">56%</text>
+            <circle cx="350.29" cy="140" r="5" fill="#057BE5" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="350.29" y="128" text-anchor="middle">52%</text>
+            <circle cx="449.71" cy="196" r="5" fill="#F0A93B" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="449.71" y="184" text-anchor="middle">24%</text>
+            <circle cx="549.14" cy="216" r="5" fill="#E5484D" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="549.14" y="232" text-anchor="middle">14%</text>
+            <circle cx="648.57" cy="202" r="5" fill="#F0A93B" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="648.57" y="190" text-anchor="middle">21%</text>
+            <circle cx="748" cy="186.8" r="6" fill="#2BBF7A" stroke="#fff" stroke-width="2"></circle>
+            <text class="tlbl" x="748" y="174" text-anchor="end">28.6%</text>
+          </g>
+          <!-- x labels -->
+          <g>
+            <text class="xlbl" x="52" y="262" text-anchor="start">Dec 25</text>
+            <text class="xlbl" x="151.43" y="262" text-anchor="middle">Jan 26</text>
+            <text class="xlbl" x="250.86" y="262" text-anchor="middle">Feb 26</text>
+            <text class="xlbl" x="350.29" y="262" text-anchor="middle">Mar 26</text>
+            <text class="xlbl" x="449.71" y="262" text-anchor="middle">Apr 26</text>
+            <text class="xlbl" x="549.14" y="262" text-anchor="middle">May 8</text>
+            <text class="xlbl" x="648.57" y="262" text-anchor="middle">May 13</text>
+            <text class="xlbl" x="748" y="262" text-anchor="end">May 22</text>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="block" id="s10">
+      <div class="bhead"><span class="ix">09</span><div><h2>What we know — five findings</h2></div></div>
+      <div class="plan">
+        <div class="pstep"><div class="num">1</div><div><div class="h">The recovery is complete on the leading indicator and just landed on the lagging one.</div><div class="b">Contact rate climbed for the third consecutive reading: 13.6% (5/8) → 20.7% (5/13) → 28.6% (5/22). Quote CPA dropped through the gold line: $67.62 → $43.87 → $20.70. Spend dropped from $879 to $790 to $414 over the same three readings. Same multiplier set as 5/13. The 5/4 plan plus late-April Tier 2 pull is now compounding.</div></div></div>
+        <div class="pstep"><div class="num">2</div><div><div class="h">Tier 2 contact rate at 35.5% — the workhorse keeps getting stronger.</div><div class="b">Tier 2 contact rate climbed again, from 22.2% to 35.5%. Quote CPA of <b>$8.23 is 76% below the $35 gold standard</b> — the lowest reading on record. All 3 bound policies came from Tier 2. Effective bid of $2.16 wins below 4th-position market, but the lean ICP filter is doing the work — floor prices for risks that match Supreme Choice's book.</div></div></div>
+        <div class="pstep"><div class="num">3</div><div><div class="h">Tier 1 recovered organically — the publisher audit was unnecessary.</div><div class="b">Tier 1 contact rate jumped from 9.5% to 28.1% with no bid change, no audit, no intervention. Effective bid unchanged at $3.55. The working hypothesis: the same upstream publisher rotation that made the audit impossible to action also rotated the bad publishers out this cycle. 6 quotes from this source in 22 days. Quote CPA fell from $53.15 to $24.58 (below gold). Watch for slippage at the next reading.</div></div></div>
+        <div class="pstep"><div class="num">4</div><div><div class="h">Lead quality is at peak-era levels. Quote-of-contacted at 76.9%.</div><div class="b">Once the conversation happens, conversion is materially better than the strong-period 68% range. The non-standard ICP filter is filtering exactly the risks Monty wants written. Lead-to-sale CVR at 3.3% (vs. peak ~3.0% and benchmark 2.0%). The funnel is winning at every step.</div></div></div>
+        <div class="pstep"><div class="num">5</div><div><div class="h">The Aug–Oct 2025 peak playbook is now operational.</div><div class="b">Defended Tier 2, restored Tier 1 contact rate, controlled Home SearchB push, ICP filter intact — four of the five peak-era elements are in place. The remaining items: off-hours bid-kick schedule (still owed), Home call-CTA creative rotation, and the SR-22 positive-modifier test on Auto. Auto execution still has Premium Paid Search to reactivate and Premium Referral 2 routing to chase.</div></div></div>
+      </div>
+    </section>
+
+    <section class="block" id="s11">
+      <div class="bhead"><span class="ix">10</span><div><h2>Recommended next steps</h2></div></div>
+      <div class="plan">
+        <div class="pstep"><div class="num">1</div><div><div class="h">Hold all Home multipliers.</div><div class="b">Per Monty's 5/8 directive: "If it ain't broken, don't fix it." Tier 2 at 70%, Tier 1 at 115%, Tier 3 at 135%, Home SearchB at 140%, Home Search at 100%. No moves on Home this period.</div></div></div>
+        <div class="pstep"><div class="num">2</div><div><div class="h">Tier 1 watch — protect against slippage.</div><div class="b">If Tier 1 contact rate drops below 15% on the next 14-day window, pull the multiplier to 90% and re-escalate to Nick / Chris with this period's data as evidence that the audit is needed when bad publishers rotate back in.</div></div></div>
+        <div class="pstep"><div class="num">3</div><div><div class="h">Auto execution — finish the three open items.</div><div class="b">Reactivate Premium Paid Search (180% multiplier). Push Email from 165% to 195%. Open a ticket with Chris / product on Premium Referral 2 routing (still 0 opportunities). Once routing is fixed, push to 200%.</div></div></div>
+        <div class="pstep"><div class="num">4</div><div><div class="h">Restore the off-hours bid-kick schedule.</div><div class="b">100% base, 130% manual kick when the first 90 minutes are slow. Gives Monty the morning lever back. Still owed from two reviews ago.</div></div></div>
+        <div class="pstep"><div class="num">5</div><div><div class="h">Re-measure on June 5 against the CPA scorecard.</div><div class="b">Targets to confirm sustained recovery: contact rate ≥ 25% blended and blended Quote CPA ≤ $30. Hitting both confirms the path forward and unlocks the next round of optimization (Home SearchB push from 140% to 175% if it binds a policy).</div></div></div>
+        <div class="pstep"><div class="num">6</div><div><div class="h">Rotate Home creative toward the call-CTA pattern.</div><div class="b">The Sept 2025 5.5× call lift traces back to "call us now for a free quote" copy. Worth testing back in now that the funnel economics support it.</div></div></div>
+        <div class="pstep"><div class="num">7</div><div><div class="h">Queue the SR-22 / non-standard positive-modifier test on Auto.</div><div class="b">Once Premium Paid Search reactivation and Premium Referral 2 routing are sorted, layer the test for a 14-day measurement window.</div></div></div>
+      </div>
+    </section>
+
+    <div class="method">
+      <b>Methodology.</b> Home CA campaign only. Contact rate = Contacted ÷ Leads, calculated per source per period from GOAL platform exports. Comparison points: May 1–22 2026 MTD (latest, 22 days), trailing 30 days through 5/13 (last review), trailing 30 days through 5/8, and April 2026 (calendar month). Months with strong inbound calls can produce contact-rate values above 100% in the underlying data; those are capped at 100% on charts for readability. Quote CPA = Cost ÷ Quotes; Policy CPA = Cost ÷ Policies bound. Sources with fewer than 5 clicks in a window are excluded from per-source charts. ICP filter "Currently Insured = No" remains in place — this is the non-standard-market design and is not a defect. Volume-metric comparisons across periods of different lengths (22d vs 30d) are not directly comparable; rate metrics are. All conversion metrics calculated based on Leads, not Clicks.
+      <div class="sigfoot">Supreme Choice Insurance Solutions · Contact Rate &amp; CPA Analysis · May 22, 2026 · Prepared by Tom Panos · GOAL Platform</div>
     </div>
-    <div class="reading prev">
-      <span class="tag">5/13 T30d</span>
-      <div class="big">20.7%</div>
-      <div class="lbl">Blended contact rate</div>
-      <div class="trend up">&#9650; +7.1 pts vs. May 8</div>
-      <div class="ctx">
-        <div class="k">Leads</div><div class="v">140</div>
-        <div class="k">Contacted</div><div class="v">29</div>
-        <div class="k">Quotes</div><div class="v">18</div>
-        <div class="k">Policies bound</div><div class="v">3</div>
-        <div class="k">Cost / contact</div><div class="v">$27.23</div>
-      </div>
-    </div>
-    <div class="reading prev">
-      <span class="tag">5/8 T30d</span>
-      <div class="big">13.6%</div>
-      <div class="lbl">Blended contact rate</div>
-      <div class="trend down">&#9660; -10.0 pts vs. April</div>
-      <div class="ctx">
-        <div class="k">Leads</div><div class="v">147</div>
-        <div class="k">Contacted</div><div class="v">20</div>
-        <div class="k">Quotes</div><div class="v">13</div>
-        <div class="k">Policies bound</div><div class="v">2</div>
-        <div class="k">Cost / contact</div><div class="v">$43.95</div>
-      </div>
-    </div>
-    <div class="reading ref">
-      <span class="tag">April 2026 ref</span>
-      <div class="big">23.6%</div>
-      <div class="lbl">Blended contact rate</div>
-      <div class="trend down">&#9660; -28 pts vs. March</div>
-      <div class="ctx">
-        <div class="k">Leads</div><div class="v">144</div>
-        <div class="k">Contacted</div><div class="v">34</div>
-        <div class="k">Quotes</div><div class="v">23</div>
-        <div class="k">Policies bound</div><div class="v">3</div>
-        <div class="k">Cost / contact</div><div class="v">$28.40</div>
-      </div>
-    </div>
-  </div>
 
-  <div class="green-callout" style="margin-top:14px">
-    <strong>22 days, half the spend, every leading indicator up.</strong> Spend on Home dropped from $789.70 (5/13 T30d) to $414.06 (5/22 MTD). Even paced to a 30-day equivalent ($565), spend is materially below the prior period. Cost per contact dropped 41.5% to $15.93. Quotes pacing to ~27/30d (vs 18 in the prior period). The 5/4 plan and the late-April Tier 2 multiplier pull are compounding now.
-  </div>
-</section>
-
-<!-- ==================== CONTACT RATE BY SOURCE ==================== -->
-<section>
-  <h2>Contact rate by source &mdash; 5/22 MTD vs. 5/13 reading</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">For each source, the top bar is the latest period (May 1&ndash;22), and the bottom bar is the prior reading (trailing 30d through 5/13). Tier 1 is the unexpected breakout &mdash; up nearly 3&times; without a bid change.</p>
-
-  <div class="source-bars">
-    <div class="source-row">
-      <div class="source-name">Tier 2</div>
-      <div class="bar-line">
-        <div class="when now">5/22 (MTD)</div>
-        <div class="bar-wrap"><div class="bar now" style="width:78%">35.5%</div></div>
-        <div class="data">11 contacted / 38 clicks</div>
-      </div>
-      <div class="bar-line">
-        <div class="when">5/13 (T30d)</div>
-        <div class="bar-wrap"><div class="bar prev" style="width:50%">22.2%</div></div>
-        <div class="data">18 contacted / 81 clicks</div>
-      </div>
-    </div>
-
-    <div class="source-row">
-      <div class="source-name">Tier 1 &mdash; organic recovery</div>
-      <div class="bar-line">
-        <div class="when now">5/22 (MTD)</div>
-        <div class="bar-wrap"><div class="bar now" style="width:62%">28.1%</div></div>
-        <div class="data">9 contacted / 37 clicks</div>
-      </div>
-      <div class="bar-line">
-        <div class="when">5/13 (T30d)</div>
-        <div class="bar-wrap"><div class="bar prev" style="width:23%">9.5%</div></div>
-        <div class="data">4 contacted / 42 clicks</div>
-      </div>
-    </div>
-
-    <div class="source-row">
-      <div class="source-name">Tier 3</div>
-      <div class="bar-line">
-        <div class="when now">5/22 (MTD)</div>
-        <div class="bar-wrap"><div class="bar now" style="width:49%">22.2%</div></div>
-        <div class="data">4 contacted / 25 clicks</div>
-      </div>
-      <div class="bar-line">
-        <div class="when">5/13 (T30d)</div>
-        <div class="bar-wrap"><div class="bar prev" style="width:40%">16.7%</div></div>
-        <div class="data">2 contacted / 12 clicks</div>
-      </div>
-    </div>
-
-    <div class="source-row">
-      <div class="source-name">Home SearchB</div>
-      <div class="bar-line">
-        <div class="when now">5/22 (MTD)</div>
-        <div class="bar-wrap"><div class="bar now" style="width:45%">20.0%</div></div>
-        <div class="data">2 contacted / 15 clicks</div>
-      </div>
-      <div class="bar-line">
-        <div class="when">5/13 (T30d)</div>
-        <div class="bar-wrap"><div class="bar prev" style="width:34%">13.9%</div></div>
-        <div class="data">5 contacted / 36 clicks</div>
-      </div>
-    </div>
-
-    <div class="source-row">
-      <div class="source-name">Home Search</div>
-      <div class="bar-line">
-        <div class="when now">5/22 (MTD)</div>
-        <div class="bar-wrap"><div class="bar now" style="width:2%">0.0%</div></div>
-        <div class="data">0 leads &mdash; priced out</div>
-      </div>
-      <div class="bar-line">
-        <div class="when">5/13 (T30d)</div>
-        <div class="bar-wrap"><div class="bar prev" style="width:2%">0.0%</div></div>
-        <div class="data">0 contacted / 9 clicks</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== TIER 1 ORGANIC RECOVERY ==================== -->
-<section>
-  <h2>Tier 1 &mdash; the unexpected turnaround</h2>
-  <p>Tier 1 had been the single largest open item from the 4/17 review. The plan was a publisher audit through Nick and Chris to cross-reference current publisher IDs against the 2025 blacklist. On the 5/8 call, Monty was told that the publisher pins are rolled regularly (like API keys), making any audit effectively impossible to action.</p>
-
-  <div class="green-callout">
-    <strong>Tier 1 contact rate jumped 9.5% &rarr; 28.1% with no bid change and no audit.</strong> Effective bid unchanged at $3.55. Lead volume nearly unchanged (35 &rarr; 32). What changed is which publishers actually delivered &mdash; and they're suddenly answering. Quote CPA fell from $53.15 to $24.58 (below gold). 6 quotes from this source in 22 days, materially above prior pace.
-  </div>
-
-  <p>Working hypothesis: the same upstream publisher rotation that made the audit impossible also rotated the bad publishers out of the mix this cycle. The fix happened on its own. <strong>What we do now</strong> is hold the multiplier and watch &mdash; if Tier 1 holds 25%+ contact rate for the next 14 days, the recovery is real. If it slips back below 15%, the bad publishers rotated back in and we re-escalate to Nick and Chris with this data as evidence.</p>
-</section>
-
-<!-- ==================== QUOTE CPA BY SOURCE ==================== -->
-<section>
-  <h2>Quote CPA by source &mdash; the economic read on the recovery</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Contact rate is the leading signal; Quote CPA is the economic outcome. The two moved together in lockstep this period. Three of the four producing sources now sit below gold.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">Contact Rate</th>
-        <th class="num">Quotes</th>
-        <th class="num">Spend</th>
-        <th class="num">Quote CPA</th>
-        <th>CPA band</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Tier 2</strong></td>
-        <td class="num">35.5%</td>
-        <td class="num">9</td>
-        <td class="num">$74.10</td>
-        <td class="num"><strong>$8.23</strong></td>
-        <td><span style="color:var(--green);font-weight:700">76% below gold ($35)</span></td>
-      </tr>
-      <tr>
-        <td><strong>Tier 1</strong></td>
-        <td class="num">28.1%</td>
-        <td class="num">6</td>
-        <td class="num">$147.47</td>
-        <td class="num"><strong>$24.58</strong></td>
-        <td><span style="color:var(--green);font-weight:700">Below gold ($35)</span></td>
-      </tr>
-      <tr>
-        <td><strong>Home SearchB</strong></td>
-        <td class="num">20.0%</td>
-        <td class="num">2</td>
-        <td class="num">$75.07</td>
-        <td class="num"><strong>$37.54</strong></td>
-        <td><span style="color:var(--amber);font-weight:700">Acceptable ($35-$75)</span></td>
-      </tr>
-      <tr>
-        <td><strong>Tier 3</strong></td>
-        <td class="num">22.2%</td>
-        <td class="num">3</td>
-        <td class="num">$117.42</td>
-        <td class="num"><strong>$39.14</strong></td>
-        <td><span style="color:var(--amber);font-weight:700">Just outside gold ($35-$75)</span></td>
-      </tr>
-      <tr style="background:#EEF7FF !important">
-        <td><strong>Campaign blend</strong></td>
-        <td class="num">28.6%</td>
-        <td class="num">20</td>
-        <td class="num">$414.06</td>
-        <td class="num"><strong>$20.70</strong></td>
-        <td><span style="color:var(--green);font-weight:700">Below gold ($35)</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="green-callout" style="margin-top:14px">
-    <strong>The economic recovery is now broad-based.</strong> Two sources (Tier 2, Tier 1) are well below gold. Two more (Home SearchB, Tier 3) are in the acceptable band. Campaign blended is below gold. The lean-ICP / cheap-volume thesis on Tier 2 is intact and now joined by Tier 1's organic recovery. Home SearchB and Tier 3 are the next two to convert quotes into binds &mdash; another 14 days of data will tell us if they can.
-  </div>
-</section>
-
-<!-- ==================== WHAT WORKED VS WHAT SHIFTED ==================== -->
-<section>
-  <h2>Strong run vs. trough vs. now</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Strong run (Jan&ndash;Mar) vs. trough (mid-April through early May) vs. the latest reading. All five active sources directionally up vs. the trough, with Tier 1 and Tier 2 leading the recovery.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">Strong CR<br>(Jan&ndash;Mar)</th>
-        <th class="num">Trough CR<br>(5/8 reading)</th>
-        <th class="num">5/13 reading</th>
-        <th class="num">5/22 reading</th>
-        <th class="num">&Delta; vs. 5/13</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Tier 2</strong></td>
-        <td class="num">54.7%</td>
-        <td class="num">17.6%</td>
-        <td class="num">22.2%</td>
-        <td class="num"><strong>35.5%</strong></td>
-        <td class="num" style="color:var(--green);font-weight:700">&#9650; +13.3 pts</td>
-      </tr>
-      <tr>
-        <td><strong>Tier 1</strong></td>
-        <td class="num">83.5%</td>
-        <td class="num">7.7%</td>
-        <td class="num">9.5%</td>
-        <td class="num"><strong>28.1%</strong></td>
-        <td class="num" style="color:var(--green);font-weight:700">&#9650; +18.6 pts</td>
-      </tr>
-      <tr>
-        <td><strong>Tier 3</strong></td>
-        <td class="num">73.3%</td>
-        <td class="num">12.5%</td>
-        <td class="num">16.7%</td>
-        <td class="num"><strong>22.2%</strong></td>
-        <td class="num" style="color:var(--green);font-weight:700">&#9650; +5.5 pts</td>
-      </tr>
-      <tr>
-        <td><strong>Home SearchB</strong></td>
-        <td class="num">67.2%</td>
-        <td class="num">16.7%</td>
-        <td class="num">13.9%</td>
-        <td class="num"><strong>20.0%</strong></td>
-        <td class="num" style="color:var(--green);font-weight:700">&#9650; +6.1 pts</td>
-      </tr>
-      <tr>
-        <td><strong>Home Search</strong></td>
-        <td class="num">78.6%</td>
-        <td class="num">7.7%</td>
-        <td class="num">0.0%</td>
-        <td class="num">0.0%</td>
-        <td class="num" style="color:var(--muted)">priced out</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ==================== FUNNEL COMPARISON ==================== -->
-<section>
-  <h2>Funnel comparison &mdash; three readings</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Same campaign, three different reads on the contact step. Volume is partial for May (22 days vs 30); the rate-level read is what matters here.</p>
-
-  <div class="funnel-grid">
-    <div class="funnel-card now">
-      <h4>5/22 (MTD &middot; 22 days)</h4>
-      <div class="cr">28.6% contact rate</div>
-      <div class="step"><div class="name">Leads</div><div class="barlet" style="width:100%">91</div><div class="val">100.0%</div></div>
-      <div class="step"><div class="name">Contacted</div><div class="barlet" style="width:32%">26</div><div class="val">28.6%</div></div>
-      <div class="step"><div class="name">Quoted</div><div class="barlet" style="width:24%">20</div><div class="val">22.0%</div></div>
-      <div class="step"><div class="name">Policies</div><div class="barlet" style="width:14%">3</div><div class="val">3.3%</div></div>
-    </div>
-    <div class="funnel-card">
-      <h4>5/13 (Trailing 30d)</h4>
-      <div class="cr">20.7% contact rate</div>
-      <div class="step"><div class="name">Leads</div><div class="barlet" style="width:100%">140</div><div class="val">100.0%</div></div>
-      <div class="step"><div class="name">Contacted</div><div class="barlet" style="width:23%">29</div><div class="val">20.7%</div></div>
-      <div class="step"><div class="name">Quoted</div><div class="barlet" style="width:15%">18</div><div class="val">12.9%</div></div>
-      <div class="step"><div class="name">Policies</div><div class="barlet" style="width:8%">3</div><div class="val">2.1%</div></div>
-    </div>
-    <div class="funnel-card">
-      <h4>April 2026 (Calendar)</h4>
-      <div class="cr">23.6% contact rate</div>
-      <div class="step"><div class="name">Leads</div><div class="barlet" style="width:100%">144</div><div class="val">100.0%</div></div>
-      <div class="step"><div class="name">Contacted</div><div class="barlet" style="width:26%">34</div><div class="val">23.6%</div></div>
-      <div class="step"><div class="name">Quoted</div><div class="barlet" style="width:18%">23</div><div class="val">16.0%</div></div>
-      <div class="step"><div class="name">Policies</div><div class="barlet" style="width:8%">3</div><div class="val">2.1%</div></div>
-    </div>
-  </div>
-
-  <div class="green-callout" style="margin-top:14px">
-    <strong>Quote-of-contacted hit 76.9% &mdash; above peak.</strong> Of the 26 leads reached in the May MTD window, 20 became quotes. This is materially above the March/April 68% range and confirms the leads coming in are the right risks. The funnel is doing more at every step.
-  </div>
-</section>
-
-<!-- ==================== 7-MONTH TREND ==================== -->
-<section>
-  <h2>7-month blended contact rate trend</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Last six full months plus the trailing readings and the May MTD reading. The April&ndash;early-May trough closed and reversed cleanly.</p>
-
-  <div class="chart-wrap">
-    <canvas id="trendChart"></canvas>
-  </div>
-</section>
-
-<!-- ==================== FINDINGS ==================== -->
-<section>
-  <h2>What we know &mdash; five findings</h2>
-  <div class="findings">
-    <div class="finding">
-      <div class="num">1</div>
-      <div>
-        <h3>The recovery is complete on the leading indicator and just landed on the lagging one.</h3>
-        <p>Contact rate climbed for the third consecutive reading: 13.6% (5/8) &rarr; 20.7% (5/13) &rarr; 28.6% (5/22). Quote CPA dropped through the gold line: $67.62 &rarr; $43.87 &rarr; $20.70. Spend dropped from $879 to $790 to $414 over the same three readings. Same multiplier set as 5/13. The 5/4 plan plus late-April Tier 2 pull is now compounding.</p>
-      </div>
-    </div>
-    <div class="finding">
-      <div class="num">2</div>
-      <div>
-        <h3>Tier 2 contact rate at 35.5% &mdash; the workhorse keeps getting stronger.</h3>
-        <p>Tier 2 contact rate climbed again, from 22.2% to 35.5%. Quote CPA of <strong>$8.23 is 76% below the $35 gold standard</strong> &mdash; the lowest reading on record. All 3 bound policies came from Tier 2. Effective bid of $2.16 wins below 4th position market, but the lean ICP filter is doing the work &mdash; floor prices for risks that match Supreme Choice's book.</p>
-      </div>
-    </div>
-    <div class="finding">
-      <div class="num">3</div>
-      <div>
-        <h3>Tier 1 recovered organically &mdash; the publisher audit was unnecessary.</h3>
-        <p>Tier 1 contact rate jumped from 9.5% to 28.1% with no bid change, no audit, no intervention. Effective bid unchanged at $3.55. The working hypothesis: the same upstream publisher rotation that made the audit impossible to action also rotated the bad publishers out this cycle. 6 quotes from this source in 22 days. Quote CPA fell from $53.15 to $24.58 (below gold). Watch for slippage at the next reading.</p>
-      </div>
-    </div>
-    <div class="finding">
-      <div class="num">4</div>
-      <div>
-        <h3>Lead quality is at peak-era levels. Quote-of-contacted at 76.9%.</h3>
-        <p>Once the conversation happens, conversion is materially better than the strong-period 68% range. The non-standard ICP filter is filtering exactly the risks Monty wants written. Lead-to-sale CVR at 3.3% (vs. peak ~3.0% and benchmark 2.0%). The funnel is winning at every step.</p>
-      </div>
-    </div>
-    <div class="finding">
-      <div class="num">5</div>
-      <div>
-        <h3>The Aug&ndash;Oct 2025 peak playbook is now operational.</h3>
-        <p>Defended Tier 2, restored Tier 1 contact rate, controlled Home SearchB push, ICP filter intact &mdash; four of the five peak-era elements are in place. The remaining items: off-hours bid-kick schedule (still owed), Home call-CTA creative rotation, and the SR-22 positive-modifier test on Auto. Auto execution still has Premium Paid Search to reactivate and Premium Referral 2 routing to chase.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== RECOMMENDED NEXT STEPS ==================== -->
-<section>
-  <h2>Recommended next steps</h2>
-  <ol>
-    <li><strong>Hold all Home multipliers.</strong> Per Monty's 5/8 directive: "If it ain't broken, don't fix it." Tier 2 at 70%, Tier 1 at 115%, Tier 3 at 135%, Home SearchB at 140%, Home Search at 100%. No moves on Home this period.</li>
-    <li><strong>Tier 1 watch &mdash; protect against slippage.</strong> If Tier 1 contact rate drops below 15% on the next 14-day window, pull multiplier to 90% and re-escalate to Nick / Chris with this period's data as evidence that the audit is needed when bad publishers rotate back in.</li>
-    <li><strong>Auto execution &mdash; finish the three open items.</strong> Reactivate Premium Paid Search (180% multiplier). Push Email from 165% to 195%. Open a ticket with Chris / product on Premium Referral 2 routing (still 0 opportunities). Once routing fixed, push to 200%.</li>
-    <li><strong>Restore the off-hours bid-kick schedule.</strong> 100% base, 130% manual kick when the first 90 minutes are slow. Gives Monty the morning lever back. Still owed from two reviews ago.</li>
-    <li><strong>Re-measure on June 5 against the CPA scorecard.</strong> Targets to confirm sustained recovery: contact rate &ge; 25% blended and blended Quote CPA &le; $30. Hitting both confirms the path forward and unlocks the next round of optimization (Home SearchB push from 140% to 175% if it binds a policy).</li>
-    <li><strong>Rotate Home creative toward call-CTA pattern.</strong> The Sept 2025 5.5&times; call lift traces back to "call us now for a free quote" copy. Worth testing back in now that the funnel economics support it.</li>
-    <li><strong>Queue the SR-22 / non-standard positive-modifier test on Auto.</strong> Once Premium Paid Search reactivation and Premium Referral 2 routing are sorted, layer the test for a 14-day measurement window.</li>
-  </ol>
-</section>
-
-<!-- ==================== METHODOLOGY ==================== -->
-<section>
-  <h2>Methodology</h2>
-  <p style="color:var(--muted);font-size:13px">Home CA campaign only. <em>Contact Rate</em> = Contacted &divide; Leads, calculated per source per period from GOAL platform exports. Comparison points: May 1&ndash;22 2026 MTD (latest, 22 days), trailing 30 days through 5/13 (last review), trailing 30 days through 5/8, April 2026 (calendar month). Months with strong inbound calls can produce contact-rate values above 100% in the underlying data; those are capped at 100% on charts for readability. <em>Quote CPA</em> = Cost &divide; Quotes; <em>Policy CPA</em> = Cost &divide; Policies bound. Sources with fewer than 5 clicks in a window are excluded from per-source charts. ICP filter "Currently Insured = No" remains in place &mdash; this is the non-standard-market design and is not a defect. Volume-metric comparisons across periods of different lengths (22d vs 30d) are not directly comparable; rate metrics are.</p>
-</section>
-
-<!-- ==================== FOOTER ==================== -->
-<footer>
-  Prepared by GOAL &middot; Account Management &middot; For Supreme Choice Insurance review meeting &middot; May 22, 2026
-</footer>
-
+  </main>
 </div>
 
 <script>
-const trendCtx = document.getElementById('trendChart').getContext('2d');
-new Chart(trendCtx, {
-  type: 'line',
-  data: {
-    labels: ['Dec 25', 'Jan 26', 'Feb 26', 'Mar 26', 'Apr 26', 'May 8 (T30d)', 'May 13 (T30d)', 'May 22 (MTD)'],
-    datasets: [
-      {
-        label: 'Blended Contact Rate',
-        data: [67, 100, 56, 52, 24, 14, 21, 28.6],
-        borderColor: '#0479DF',
-        backgroundColor: 'rgba(4,121,223,.08)',
-        borderWidth: 3,
-        tension: .25,
-        pointRadius: 6,
-        pointBackgroundColor: ['#0479DF','#0479DF','#0479DF','#0479DF','#C77700','#C7312D','#C77700','#0A8A4A'],
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: { callbacks: { label: ctx => ctx.parsed.y + '% contact rate' } }
-    },
-    scales: {
-      y: {
-        beginAtZero: true, max: 110,
-        ticks: { callback: v => v + '%' },
-        title: { display: true, text: 'Blended Contact Rate' }
-      },
-      x: { grid: { display: false } }
-    }
-  },
-  plugins: [{
-    id: 'benchmarkBand',
-    beforeDatasetsDraw(chart) {
-      const {ctx, chartArea, scales:{y}} = chart;
-      const top = y.getPixelForValue(40);
-      const bottom = y.getPixelForValue(20);
-      ctx.save();
-      ctx.fillStyle = 'rgba(10,138,74,.08)';
-      ctx.fillRect(chartArea.left, top, chartArea.right - chartArea.left, bottom - top);
-      ctx.strokeStyle = 'rgba(10,138,74,.35)';
-      ctx.setLineDash([4,4]);
-      ctx.beginPath(); ctx.moveTo(chartArea.left, top); ctx.lineTo(chartArea.right, top); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(chartArea.left, bottom); ctx.lineTo(chartArea.right, bottom); ctx.stroke();
-      ctx.fillStyle = '#0A8A4A'; ctx.font = '600 11px -apple-system,sans-serif'; ctx.setLineDash([]);
-      ctx.fillText('20–40% healthy benchmark band', chartArea.left + 8, top - 4);
-      ctx.restore();
-    }
-  }]
-});
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  e.target.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';});
+  io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.srcbars,.mfgrid,.rgrid,.trend').forEach(el=>io.observe(el));
 </script>
-
 </body>
 </html>
