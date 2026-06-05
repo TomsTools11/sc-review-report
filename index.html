@@ -1,136 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supreme Choice Insurance Solutions — Dashboards</title>
-    <style>
-        :root {
-            --goal-brand: #077BE5;
-            --goal-dark-blue: #00172D;
-            --goal-accent-1: #3AEECA;
-            --goal-light-grey: #F8F9FC;
-            --goal-text: #001020;
-            --neutral-gray: #6B7280;
-            --light-gray: #9CA3AF;
-            --border-gray: #E5E7EB;
-            --white: #FFFFFF;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice Insurance Solutions — Performance Reports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#057BE5; --blue-hover:#0C6EC5; --sky:#2D90EE; --mint:#3BEECA; --mint-d:#0fae8f;
+  --navy:#00172D; --navy-deep:#001020;
+  --ink:#0F1B2D; --body:#2B3442; --muted:#6A7482;
+  --white:#fff; --off:#F8FAFC; --gray:#EFF2F7; --line:#E2E8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(--body);line-height:1.55;min-height:100vh;display:flex;flex-direction:column;}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+.top{background:var(--navy);color:#cfe0ee;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;}
+.top .logo{height:24px;width:auto;display:block;}
+.top .r{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);font-weight:700;}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-            background: var(--white);
-            color: var(--goal-text);
-            line-height: 1.5;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
+.wrap{max-width:1180px;width:100%;margin:0 auto;padding:60px 48px 40px;flex:1;}
+.lead{max-width:760px;margin-bottom:44px;}
+.lead .eb{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);}
+.lead h1{font-size:38px;font-weight:900;letter-spacing:-.02em;color:var(--ink);line-height:1.1;margin:13px 0 14px;}
+.lead p{font-size:16px;color:var(--body);line-height:1.62;}
+.lead p b{color:var(--ink);font-weight:700;}
 
-        .container { max-width: 1100px; width: 100%; }
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:26px 26px 24px;text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,23,45,.05);transition:transform .18s,box-shadow .18s,border-color .18s;}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(0,23,45,.12);border-color:var(--blue);}
+.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
+.card.c1::before{background:var(--blue);}
+.card.c2::before{background:var(--sky);}
+.card.c3::before{background:var(--mint-d);}
+.card .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);}
+.card.c3 .tag{color:var(--mint-d);}
+.card h3{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;margin:9px 0 10px;line-height:1.25;}
+.card p{font-size:13.5px;color:var(--muted);line-height:1.6;flex:1;}
+.card .traits{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 18px;}
+.card .traits span{font-size:11px;font-weight:600;color:var(--body);background:var(--gray);border:1px solid var(--line);padding:4px 9px;border-radius:20px;}
+.card .go{font-size:13.5px;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px;}
+.card.c3 .go{color:var(--mint-d);}
 
-        .header { text-align: center; margin-bottom: 48px; }
-        .header-logo { font-size: 22px; font-weight: 700; color: var(--goal-brand); margin-bottom: 4px; letter-spacing: -0.5px; }
-        .header h1 { font-size: 28px; font-weight: 700; color: var(--goal-text); margin-bottom: 4px; }
-        .header p { font-size: 14px; color: var(--neutral-gray); }
+.note{max-width:760px;margin-top:40px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px;}
+.note b{color:var(--ink);font-weight:700;}
+.foot{padding:22px 48px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);background:var(--white);}
 
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .report-card {
-            background: var(--white);
-            border: 1px solid var(--border-gray);
-            border-radius: 12px;
-            padding: 32px;
-            text-decoration: none;
-            color: inherit;
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .report-card:hover {
-            border-color: var(--goal-brand);
-            box-shadow: 0 4px 24px rgba(7, 123, 229, 0.1);
-        }
-        .report-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-        }
-        .report-card.performance::before { background: var(--goal-brand); }
-        .report-card.cpa::before { background: var(--goal-accent-1); }
-        .report-card.auto::before { background: #F59E0B; }
-
-        .card-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--goal-text);
-            margin-bottom: 8px;
-        }
-
-        .card-description {
-            font-size: 14px;
-            color: var(--neutral-gray);
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-
-        .card-arrow {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--goal-brand);
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 48px;
-            font-size: 12px;
-            color: var(--light-gray);
-        }
-
-        @media (max-width: 600px) {
-            .card-grid { grid-template-columns: 1fr !important; }
-            body { padding: 20px; align-items: flex-start; }
-        }
-    </style>
+@media(max-width:920px){ .grid{grid-template-columns:1fr;} .wrap{padding:44px 26px 30px;} .top,.foot{padding-left:26px;padding-right:26px;} .lead h1{font-size:30px;} }
+</style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <div class="header-logo">GOAL</div>
-        <h1>Supreme Choice Insurance Solutions</h1>
-        <p>Performance Review &middot; May 22, 2026</p>
-    </div>
-
-    <div class="card-grid">
-        <a href="Supreme-Choice-Performance-Review-May-22-2026.html" class="report-card performance">
-            <div class="card-title">Performance Review &mdash; May 22, 2026</div>
-            <div class="card-description">Latest client review of the CA Home campaign: Quote CPA broke below the $35 gold standard at $20.70, Tier 1 recovered organically (9.5% &rarr; 28.1%), Tier 2 carrying every policy.</div>
-            <span class="card-arrow">View report &rarr;</span>
-        </a>
-
-        <a href="Supreme-Choice-Contact-Rate-Analysis-2026-05-22.html" class="report-card cpa">
-            <div class="card-title">Contact Rate Analysis &mdash; May 22, 2026</div>
-            <div class="card-description">Full recovery reading: blended contact rate 28.6%, three of four producing sources now under gold-standard Quote CPA. 7-month trend rebuilt with the new May reading.</div>
-            <span class="card-arrow">View report &rarr;</span>
-        </a>
-
-        <a href="Supreme-Choice-Auto-Recovery-Plan-May-22-2026.html" class="report-card auto">
-            <div class="card-title">Auto Recovery Plan v2 &mdash; May 22, 2026</div>
-            <div class="card-description">All recommended changes shipped: 5 pushes, 3 cost-cutting pulls, and the Premium Referral 2 routing ticket filed. Day-7 / day-21 measurement clock started. Internal SEO 2 latent-winner push live; stale v1 Email 195% push retired.</div>
-            <span class="card-arrow">View report &rarr;</span>
-        </a>
-    </div>
-
-    <div class="footer">GOAL Platform &middot; Prepared May 2026</div>
+<div class="top">
+  <svg class="logo" viewBox="0 0 224 68" role="img" aria-label="GOAL" xmlns="http://www.w3.org/2000/svg"><g font-family="Inter, Arial, sans-serif" font-weight="900" font-size="74" fill="#ffffff" letter-spacing="-2"><text x="0" y="57">G</text><text x="120" y="57">A</text><text x="180" y="57">L</text></g><g fill="none" stroke="#2D90EE" stroke-width="5.2" stroke-linecap="round"><circle cx="92" cy="31" r="25.5" stroke-dasharray="120 42" transform="rotate(70 92 31)"/><circle cx="92" cy="31" r="18.5" stroke-dasharray="86 30" transform="rotate(150 92 31)"/><circle cx="92" cy="31" r="11.5" stroke-dasharray="52 20" transform="rotate(20 92 31)"/></g><circle cx="92" cy="31" r="6.6" fill="#2D90EE"/></svg>
+  <div class="r">Supreme Choice Insurance Solutions · Performance Review</div>
 </div>
+
+<div class="wrap">
+  <div class="lead">
+    <div class="eb">Account Review · May 22, 2026</div>
+    <h1>Supreme Choice Insurance Solutions</h1>
+    <p>Three performance reports for the <b>May 22, 2026</b> review — covering the California Home campaign recovery and the Auto right-pricing plan. Open any report below.</p>
+  </div>
+
+  <div class="grid">
+    <a class="card c1" href="Supreme-Choice-Performance-Review-May-22-2026.html">
+      <div class="tag">Home CA · Client review</div>
+      <h3>Performance Review — May 22, 2026</h3>
+      <p>Latest client review of the CA Home campaign: Quote CPA broke below the $35 gold standard at $20.70, Tier 1 recovered organically (9.5% → 28.1%), and Tier 2 is carrying every policy.</p>
+      <div class="traits"><span>CPA scorecard</span><span>Source table</span><span>Recommendations</span></div>
+      <span class="go">Open report →</span>
+    </a>
+
+    <a class="card c2" href="Supreme-Choice-Contact-Rate-Analysis-2026-05-22.html">
+      <div class="tag">Home CA · Analysis</div>
+      <h3>Contact Rate Analysis — May 22, 2026</h3>
+      <p>Full recovery reading: blended contact rate 28.6%, three of four producing sources now under the gold-standard Quote CPA. The 7-month trend rebuilt with the new May reading.</p>
+      <div class="traits"><span>7-month trend</span><span>By-source bars</span><span>Funnel compare</span></div>
+      <span class="go">Open report →</span>
+    </a>
+
+    <a class="card c3" href="Supreme-Choice-Auto-Recovery-Plan-May-22-2026.html">
+      <div class="tag">Auto · Right-priced v2</div>
+      <h3>Auto Recovery Plan v2 — May 22, 2026</h3>
+      <p>All recommended changes shipped: 5 pushes, 3 cost-cutting pulls, and the Premium Referral 2 routing ticket filed. The day-7 / day-21 measurement clock has started.</p>
+      <div class="traits"><span>Bid map</span><span>Execution log</span><span>Projections</span></div>
+      <span class="go">Open report →</span>
+    </a>
+  </div>
+
+  <div class="note">Reports reflect GOAL platform data as of <b>May 22, 2026</b>. Updated before each review. All conversion metrics calculated based on Leads, not Clicks.</div>
+</div>
+
+<div class="foot">GOAL Platform · Prepared by Tom Panos · checkoutgoal.com</div>
 </body>
 </html>
