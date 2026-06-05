@@ -4,874 +4,406 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Supreme Choice Auto — Recovery Plan v2 (Right-Priced) | May 22, 2026</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --goal-blue:#0479DF;
-    --goal-blue-dark:#035FB3;
-    --goal-blue-light:#5BA7E8;
-    --goal-blue-bg:#E6F1FB;
-    --goal-navy:#0A2540;
-    --bg:#F4F7FB;
-    --card:#FFFFFF;
-    --border:#E1E7EF;
-    --text:#1B2733;
-    --muted:#5A6B7B;
-    --green:#0A8A4A;
-    --green-bg:#E6F4EC;
-    --gold:#B8860B;
-    --gold-bg:#FFF8E1;
-    --amber:#C77700;
-    --amber-bg:#FFF4E0;
-    --red:#C7312D;
-    --red-bg:#FCEAEA;
-    --orange:#F59E0B;
-    --orange-bg:#FFF4E0;
-  }
-  *{box-sizing:border-box}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px;line-height:1.55;font-size:14.5px}
-  .wrap{max-width:1100px;margin:0 auto}
+:root{
+  --blue:#057BE5; --blue-hover:#0C6EC5; --sky:#308ED6; --mint:#3BEECA; --mint-d:#0fae8f;
+  --navy:#00172D; --navy-2:#062c4e; --navy-deep:#001020;
+  --ink:#0F1B2D; --body:#2B3442; --muted:#6A7482;
+  --white:#fff; --off:#F8FAFC; --gray:#EFF2F7; --divider:#EDF1F5; --line:#E2E8F0;
+  --success:#2BBF7A; --warning:#F0A93B; --error:#E5484D;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(--body);line-height:1.55;}
+.shell{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:288px 1fr;min-height:100vh;background:var(--white);}
 
-  header{background:linear-gradient(135deg,#F59E0B 0%,#B45309 100%);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:22px;box-shadow:0 6px 22px rgba(245,158,11,.22)}
-  .brand{font-size:13px;letter-spacing:.4px;font-weight:700;opacity:.9;margin-bottom:6px}
-  header h1{margin:0 0 6px 0;font-size:30px;font-weight:700;letter-spacing:-.5px}
-  header .sub{font-size:15px;opacity:.95;margin-bottom:12px}
-  header .meta{font-size:12.5px;opacity:.9}
-  header .meta strong{color:#FFE6BD}
+/* Sidebar */
+.side{background:var(--navy);color:#cfe0ee;padding:34px 30px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;}
+.side .logo{height:28px;width:auto;align-self:flex-start;margin-bottom:8px;}
+.side .back{font-size:11.5px;color:#7fa6c8;text-decoration:none;margin-bottom:30px;display:inline-flex;align-items:center;gap:6px;transition:color .15s;}
+.side .back:hover{color:#fff;}
+.side .eb{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2D90EE;}
+.side h1{font-size:24px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.02em;margin:10px 0 14px;}
+.side .who{font-size:13px;color:#a7c2da;line-height:1.6;}
+.side .who b{color:#fff;font-weight:600;}
+.side nav{margin-top:30px;display:flex;flex-direction:column;gap:1px;overflow-y:auto;}
+.side nav a{font-size:13px;color:#9fbcd6;text-decoration:none;padding:8px 12px;border-radius:8px;display:flex;align-items:center;gap:11px;transition:background .15s,color .15s;}
+.side nav a:hover{background:rgba(255,255,255,.06);color:#fff;text-decoration:none;}
+.side nav a .dot{width:6px;height:6px;border-radius:50%;background:#3a6386;flex-shrink:0;}
+.side nav a:hover .dot{background:var(--mint);}
+.side .foot{margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#6f93b3;line-height:1.6;}
 
-  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 6px rgba(10,37,64,.04)}
-  h2{margin:0 0 16px 0;color:var(--goal-navy);font-size:21px;font-weight:700;letter-spacing:-.2px}
-  h3{margin:18px 0 8px 0;color:var(--goal-navy);font-size:15.5px;font-weight:600}
-  h4{margin:14px 0 6px 0;color:var(--goal-navy);font-size:14.5px;font-weight:600}
-  p{margin:8px 0 14px 0}
+/* Main */
+.main{padding:44px 50px 64px;min-width:0;}
+.block{margin-bottom:44px;scroll-margin-top:24px;}
+.bhead{display:flex;align-items:flex-start;gap:12px;margin-bottom:20px;}
+.bhead .ix{font-size:12px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;background:#E6F1FD;padding:4px 9px;border-radius:6px;flex-shrink:0;margin-top:2px;}
+.bhead h2{font-size:21px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+.bhead p{font-size:13.5px;color:var(--muted);margin-top:3px;}
 
-  .hero{background:linear-gradient(135deg,#FFF4E0,#FFFFFF);border:1px solid #FBD89A;border-radius:14px;padding:28px 32px;margin-bottom:18px}
-  .hero h2{font-size:20px;color:#7C4A03;margin-bottom:10px}
-  .hero p{font-size:15.5px;color:var(--text);margin:6px 0 0 0}
+/* Exec */
+.exec{background:var(--off);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:42px;}
+.exec .eb{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+.exec p{font-size:14.5px;line-height:1.62;color:var(--body);}
+.exec p b{color:var(--ink);font-weight:700;}
 
-  .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:12px 0 16px 0}
-  .stat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;text-align:center}
-  .stat.done{background:linear-gradient(135deg,#E6F4EC,#FFFFFF);border-color:#B7E0C6}
-  .stat.partial{background:linear-gradient(135deg,#FFF4E0,#FFFFFF);border-color:#FBD89A}
-  .stat.todo{background:linear-gradient(135deg,#FCEAEA,#FFFFFF);border-color:#F2BABA}
-  .stat.dropped{background:linear-gradient(135deg,#EEF1F4,#FFFFFF);border-color:#D0D6DC}
-  .stat .num{font-size:36px;font-weight:700;color:var(--goal-navy);letter-spacing:-.4px;font-variant-numeric:tabular-nums;line-height:1}
-  .stat .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:6px;font-weight:600}
+/* group labels */
+.grouplab{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 12px;}
+.grouplab.t2{margin-top:24px;}
 
-  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .kpi{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 18px}
-  .kpi .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;margin-bottom:5px}
-  .kpi .val{font-size:23px;font-weight:700;color:var(--goal-navy);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
-  .kpi .delta{font-size:12.5px;margin-top:4px;font-weight:600}
-  .delta.up{color:var(--green)}
-  .delta.down{color:var(--red)}
-  .delta.flat{color:var(--muted)}
+/* KPI cards */
+.kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.kc{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--white);}
+.kc .v{font-size:28px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.05;}
+.kc .k{font-size:12.5px;color:var(--body);font-weight:600;margin-top:9px;}
+.kc .d{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.45;}
 
-  table{width:100%;border-collapse:collapse;font-size:13.5px}
-  th{background:#EEF4FB;color:var(--goal-navy);text-align:left;padding:10px 12px;border-bottom:2px solid var(--orange);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
-  td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
-  tr:last-child td{border-bottom:none}
-  tr:nth-child(even) td{background:#FAFCFE}
-  .num{text-align:right;font-variant-numeric:tabular-nums}
+/* Panels & tables */
+.panel{border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:var(--white);}
+.tnote{font-size:13px;color:var(--muted);line-height:1.6;margin-top:16px;padding-top:14px;border-top:1px solid var(--divider);}
+.tnote b{color:var(--ink);font-weight:700;}
+.tscroll{overflow-x:auto;}
+.dtable{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+.dtable th{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;text-align:right;padding:0 10px 11px;border-bottom:1px solid var(--line);white-space:nowrap;}
+.dtable th:first-child{text-align:left;padding-left:2px;}
+.dtable th.l{text-align:left;}
+.dtable td{padding:11px 10px;border-bottom:1px solid var(--divider);font-size:13px;color:var(--body);text-align:right;white-space:nowrap;}
+.dtable td:first-child{text-align:left;padding-left:2px;font-weight:700;color:var(--ink);}
+.dtable td.l{text-align:left;white-space:normal;}
+.dtable tr:last-child td{border-bottom:none;}
+.dtable tr.muted td{color:var(--muted);}
+.dtable tr.muted td:first-child{color:var(--muted);}
+.up{color:var(--error);font-weight:700;} /* over-bid % above market = bad */
+.dn{color:var(--mint-d);font-weight:700;}
+.pill{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap;}
+.pill.ship{background:#D6F7EE;color:#0fae8f;} .pill.done{background:#D6F7EE;color:#0fae8f;}
+.pill.hold{background:#E3F0FD;color:var(--blue-hover);} .pill.ticket{background:#E3F0FD;color:var(--blue-hover);}
+.pill.watch{background:#FDF0DA;color:#9a6712;} .pill.drop{background:#EFF2F7;color:#6A7482;}
 
-  .status-pill{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 9px;border-radius:30px;white-space:nowrap}
-  .status-pill.done{background:var(--green-bg);color:var(--green)}
-  .status-pill.partial{background:var(--amber-bg);color:var(--amber)}
-  .status-pill.todo{background:var(--red-bg);color:var(--red)}
-  .status-pill.hold{background:var(--goal-blue-bg);color:var(--goal-blue-dark)}
-  .status-pill.dropped{background:#EEF1F4;color:var(--muted)}
-  .status-pill.new{background:#F4E5FF;color:#6B21A8}
+/* comparison table (peak vs current) */
+.cmp .pk{color:var(--mint-d);font-weight:800;} .cmp .cur{color:var(--ink);font-weight:800;}
 
-  .move{background:#fff;border:1px solid var(--border);border-left:5px solid var(--orange);border-radius:10px;padding:18px 22px;margin-bottom:12px}
-  .move.done{border-left-color:var(--green)}
-  .move.partial{border-left-color:var(--amber)}
-  .move.todo{border-left-color:var(--red)}
-  .move.new{border-left-color:#6B21A8}
-  .move.dropped{border-left-color:var(--muted);background:#FAFAFC}
-  .move h4{margin:0 0 6px 0;font-size:15.5px;color:var(--goal-navy);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .move p{margin:4px 0;font-size:14px}
-  .move .meta{font-size:13px;color:var(--muted);margin-top:6px}
-  .move .change{display:inline-block;background:var(--goal-blue-bg);color:var(--goal-blue-dark);font-weight:700;padding:3px 10px;border-radius:6px;font-size:13px;margin:0 4px}
+/* Callout */
+.callout{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:22px 26px;background:var(--white);}
+.callout.amber{border-left-color:var(--warning);}
+.callout h4{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:9px;}
+.callout p{font-size:13.5px;color:var(--body);line-height:1.6;}
+.callout p+p{margin-top:10px;}
+.callout p b{color:var(--ink);font-weight:700;}
 
-  .callout{background:#FFF8E1;border:1px solid #F0DA9A;border-left:5px solid var(--gold);padding:16px 20px;border-radius:10px;margin:14px 0}
-  .callout strong{color:#8C6800}
-  .green-callout{background:var(--green-bg);border:1px solid #B7E0C6;border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;margin:14px 0}
-  .green-callout strong{color:var(--green)}
-  .red-callout{background:var(--red-bg);border:1px solid #F2BABA;border-left:5px solid var(--red);padding:16px 20px;border-radius:10px;margin:14px 0}
-  .red-callout strong{color:var(--red)}
-  .purple-callout{background:#F4E5FF;border:1px solid #C39EE5;border-left:5px solid #6B21A8;padding:16px 20px;border-radius:10px;margin:14px 0}
-  .purple-callout strong{color:#6B21A8}
+/* Plan / execution log */
+.plan{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;}
+.pstep{display:flex;gap:16px;padding:18px 22px;border-top:1px solid var(--divider);background:var(--white);}
+.pstep:first-child{border-top:none;}
+.pstep .num{flex-shrink:0;width:34px;height:34px;border-radius:9px;background:#E6F1FD;color:var(--blue);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;}
+.pstep .num.dropn{background:#EFF2F7;color:#6A7482;}
+.pstep .ph{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.pstep .h{font-size:14.5px;font-weight:800;color:var(--ink);}
+.pstep .move{font-size:12px;font-weight:700;color:var(--blue-hover);background:#E6F1FD;padding:2px 9px;border-radius:6px;font-variant-numeric:tabular-nums;margin-top:6px;display:inline-block;}
+.pstep .b{font-size:13px;color:var(--body);line-height:1.55;margin-top:6px;}
 
-  .chart-wrap{position:relative;height:300px;margin-top:8px}
+/* Projection cards */
+.pjgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.pj{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--white);}
+.pj .v{font-size:24px;font-weight:900;color:var(--blue);letter-spacing:-.01em;line-height:1.05;}
+.pj .k{font-size:12.5px;color:var(--ink);font-weight:700;margin-top:8px;}
+.pj .d{font-size:11.5px;color:var(--muted);margin-top:3px;}
 
-  .bid-cell{display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
-  .bid-arrow{color:var(--muted);font-weight:700}
-  .mult-push{color:var(--green);font-weight:700}
-  .mult-pull{color:var(--red);font-weight:700}
-  .mult-hold{color:var(--muted);font-weight:700}
+/* Method */
+.method{font-size:12px;color:var(--muted);line-height:1.65;border-top:1px solid var(--line);padding-top:20px;margin-top:8px;}
+.method b{color:var(--ink);font-weight:700;}
+.sigfoot{margin-top:26px;font-size:11.5px;color:var(--muted);}
 
-  footer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:18px;padding-bottom:8px}
-
-  .back-to-landing{position:fixed;top:18px;left:18px;z-index:1000;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#FFFFFF;border:1px solid var(--border);border-radius:999px;color:var(--goal-blue-dark);font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(10,37,64,.08);transition:border-color .15s,box-shadow .15s,transform .15s}
-  .back-to-landing:hover{border-color:var(--goal-blue);box-shadow:0 4px 14px rgba(4,121,223,.18);transform:translateY(-1px)}
-  @media print{.back-to-landing{display:none}}
+@media print{
+  body{background:#fff;} .shell{display:block;max-width:none;}
+  .side{position:static;height:auto;padding:20px 30px;}
+  .side nav,.side .back{display:none;} .side h1{margin:8px 0;}
+  .panel,.plan,.callout,.kc,.pj{break-inside:avoid;}
+  .block{margin-bottom:30px;}
+}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;}
+  .side{position:static;height:auto;} .side nav{display:none;}
+  .main{padding:32px 22px;}
+  .kgrid,.pjgrid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:560px){ .kgrid,.pjgrid{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
-<a href="index.html" class="back-to-landing">&larr; Back to reports</a>
-<div class="wrap">
+<div class="shell">
 
-<!-- ==================== HEADER ==================== -->
-<header>
-  <div class="brand">GOAL Platform &middot; Auto Recovery Plan &middot; Right-Priced v2</div>
-  <h1>Supreme Choice Auto &mdash; Recovery Plan v2</h1>
-  <div class="sub">Refreshed with new RightPricing CA Auto data &middot; 5/22/2026</div>
-  <div class="meta">Prepared May 22, 2026 &middot; <strong>Client:</strong> Supreme Choice Insurance &middot; <strong>LOB:</strong> Auto (Non-Standard) &middot; <strong>State:</strong> California &middot; <strong>Base bid:</strong> $3.00 (unchanged)</div>
-</header>
+  <aside class="side">
+    <svg class="logo" viewBox="0 0 224 68" role="img" aria-label="GOAL" xmlns="http://www.w3.org/2000/svg"><g font-family="Inter, Arial, sans-serif" font-weight="900" font-size="74" fill="#ffffff" letter-spacing="-2"><text x="0" y="57">G</text><text x="120" y="57">A</text><text x="180" y="57">L</text></g><g fill="none" stroke="#2D90EE" stroke-width="5.2" stroke-linecap="round"><circle cx="92" cy="31" r="25.5" stroke-dasharray="120 42" transform="rotate(70 92 31)"/><circle cx="92" cy="31" r="18.5" stroke-dasharray="86 30" transform="rotate(150 92 31)"/><circle cx="92" cy="31" r="11.5" stroke-dasharray="52 20" transform="rotate(20 92 31)"/></g><circle cx="92" cy="31" r="6.6" fill="#2D90EE"/></svg>
+    <a class="back" href="index.html">← All reports</a>
+    <div class="eb">Auto Recovery Plan · Right-Priced v2</div>
+    <h1>Supreme Choice Insurance Solutions</h1>
+    <div class="who">Auto (Non-Standard) · California<br>Base bid <b>$3.00</b> (unchanged)<br>Refreshed with new RightPricing · 5/22/2026</div>
+    <nav>
+      <a href="#s1"><span class="dot"></span>Status — v2 shipped</a>
+      <a href="#s2"><span class="dot"></span>Current Auto state</a>
+      <a href="#s3"><span class="dot"></span>RightPricing shift</a>
+      <a href="#s4"><span class="dot"></span>Right-priced bid map</a>
+      <a href="#s5"><span class="dot"></span>Status of v1 moves</a>
+      <a href="#s6"><span class="dot"></span>Execution log</a>
+      <a href="#s7"><span class="dot"></span>Peak vs current</a>
+      <a href="#s8"><span class="dot"></span>Projected recovery</a>
+      <a href="#s9"><span class="dot"></span>Measurement plan</a>
+      <a href="#s10"><span class="dot"></span>ICP</a>
+    </nav>
+    <div class="foot">Prepared by Tom Panos · GOAL Platform<br>Confidential — Supreme Choice Insurance<br>All conversion metrics based on Leads, not Clicks.</div>
+  </aside>
 
-<!-- ==================== HERO ==================== -->
-<div class="hero">
-  <h2>v2 fully shipped &mdash; all recommended changes live</h2>
-  <p><strong>All eleven multiplier moves are in, the routing ticket is filed, and the day-7 / day-21 measurement clock has started.</strong> The five pushes (Internal SEO 2 114%&rarr;210%, Internal SEO 197%&rarr;245%, Premium Paid Search 2B 125%&rarr;185%, Premium Paid Search 2 180%&rarr;190%, Premium Paid Search 3 145%&rarr;155%) are live. The three cost-cutting pulls (Paid Search 195%&rarr;100%, Premium Paid Search 6 185%&rarr;100%, Premium Paid Search 5A 130%&rarr;80%) are live &mdash; correcting the silent overpay that was burning ~$15-20/mo. Premium Referral 2 routing ticket is filed with Chris / product; the 90%&rarr;200% multiplier raise stays queued for after opportunities resume. Email holds at 165% per the refreshed market read ($4.37 2nd RPC); the v1 push to 195% is dropped. Base Premium Paid Search reactivation also dropped &mdash; infeasible on the account. <strong>Next milestone:</strong> day-7 lead-volume read and the Premium Referral 2 routing fix.</p>
+  <main class="main">
+
+    <section class="block" id="s1" style="margin-bottom:0;">
+      <div class="exec">
+        <div class="eb">v2 fully shipped — all recommended changes live</div>
+        <p>All multiplier moves are in, the routing ticket is filed, and the day-7 / day-21 measurement clock has started. The five pushes (Internal SEO 2 114%→210%, Internal SEO 197%→245%, Premium Paid Search 2B 125%→185%, Premium Paid Search 2 180%→190%, Premium Paid Search 3 145%→155%) are live. The three cost-cutting pulls (Paid Search 195%→100%, Premium Paid Search 6 185%→100%, Premium Paid Search 5A 130%→80%) are live — correcting the silent overpay that was burning ~$15–20/mo. Premium Referral 2 routing ticket is filed with Chris / product; the 90%→200% raise stays queued for after opportunities resume. Email holds at 165% per the refreshed market read ($4.37 2nd RPC); the v1 push to 195% is dropped. Base Premium Paid Search reactivation also dropped — infeasible on the account. <b>Next milestone: the day-7 lead-volume read and the Premium Referral 2 routing fix.</b></p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="bhead"><span class="ix">00</span><div><h2>Plan status at a glance</h2><p>All changes live in the dashboard</p></div></div>
+      <div class="kgrid">
+        <div class="kc"><div class="v">8</div><div class="k">Multiplier moves shipped</div><div class="d">5 pushes + 3 cost-cutting pulls</div></div>
+        <div class="kc"><div class="v">1</div><div class="k">Routing ticket filed</div><div class="d">Premium Referral 2 · with Chris / product</div></div>
+        <div class="kc"><div class="v">2</div><div class="k">v1 targets revised &amp; held</div><div class="d">Email 165% · PPS 7 at cap</div></div>
+        <div class="kc"><div class="v">1</div><div class="k">Dropped (infeasible)</div><div class="d">Base Premium Paid Search</div></div>
+      </div>
+      <p class="tnote">Execution complete. All five pushes and three pulls are live in the dashboard, and the Premium Referral 2 routing ticket is filed. The v1 plan's stale targets (Email 195% push, base Premium Paid Search reactivation) are formally retired. Net spend impact is roughly neutral — budget shifted from over-bid long-tail sources to the historical winners and the Internal SEO 2 latent-winner push. <b>The day-7 lead-volume clock starts today; day-21 quote / sale read follows.</b></p>
+    </section>
+
+    <section class="block" id="s2">
+      <div class="bhead"><span class="ix">01</span><div><h2>Current Auto state — last 30 days</h2><p>From Analytics + Source-Settings exports. Volume is still pre-recovery on every metric — the bid plan isn't fully reflected yet, and Premium Referral 2 is still receiving zero opportunities.</p></div></div>
+      <div class="kgrid">
+        <div class="kc"><div class="v">10</div><div class="k">Leads (30d)</div><div class="d">vs ~200 / mo at peak</div></div>
+        <div class="kc"><div class="v">0</div><div class="k">Contacted</div><div class="d">No volume to read yet</div></div>
+        <div class="kc"><div class="v">0</div><div class="k">Quotes</div><div class="d">No volume to read yet</div></div>
+        <div class="kc"><div class="v">0</div><div class="k">Policies</div><div class="d">vs 8–9 / mo at peak</div></div>
+        <div class="kc"><div class="v">$71.03</div><div class="k">Total spend</div><div class="d">vs ~$753 / mo at peak</div></div>
+        <div class="kc"><div class="v">$4.73</div><div class="k">Avg CPC</div><div class="d">Cost per click · last 30 days</div></div>
+        <div class="kc"><div class="v">0.24%</div><div class="k">Win rate</div><div class="d">vs 3.18% at peak</div></div>
+        <div class="kc"><div class="v">7.67</div><div class="k">Avg ad-wall position</div><div class="d">vs 3.94 at peak</div></div>
+      </div>
+      <p class="tnote">This snapshot is pre-v2 ship. Win rate (0.24%) and ad-wall position (7.67) reflect the state right before the v2 changes went live. With the eight multiplier moves now in place, the day-7 read should show ad-wall position pulling back toward the 4–5 band as the over-bid pulls free auction eligibility for the right-priced winners. <b>Volume return on the Premium Referral 2 pathway still depends on the routing fix landing.</b></p>
+    </section>
+
+    <section class="block" id="s3">
+      <div class="bhead"><span class="ix">02</span><div><h2>What the new RightPricing data shows</h2><p>5/22 RightPricing pull (trailing 7d, CA Auto, non-standard) vs. the 5/8 plan's reference RPCs</p></div></div>
+      <div class="panel tscroll">
+        <table class="dtable">
+          <thead><tr><th class="l">Source</th><th>5/8 plan 2nd RPC</th><th>5/22 actual 2nd RPC</th><th>Mkt shift</th><th class="l">Implication</th></tr></thead>
+          <tbody>
+            <tr><td>Email</td><td>$5.78</td><td>$4.37</td><td class="dn">−24%</td><td class="l">Plan target of 195% now too high — 165% hold is correct</td></tr>
+            <tr><td>Premium Referral</td><td>$5.87</td><td>$5.89</td><td>±0%</td><td class="l">Plan target of 200% still correct — at 210% currently, fine</td></tr>
+            <tr><td>Premium Paid Search 2</td><td>$5.05</td><td>$5.09</td><td>±0%</td><td class="l">Plan target of 180% still close — lift to 190% for small buffer</td></tr>
+            <tr><td>Internal SEO 2</td><td>not in plan</td><td>$5.64</td><td>NEW</td><td class="l">321 weekly clicks. Currently at 114% — push to 210%</td></tr>
+            <tr><td>Premium Paid Search 7</td><td>$6.73</td><td>$14.17</td><td class="up">+111%</td><td class="l">Market now well above our cap — hold 301%, accept 4+ position</td></tr>
+            <tr><td>Paid Search</td><td>not in plan</td><td>$2.53</td><td>SURPRISE</td><td class="l">At 195%, we're 131% above 2nd — pull to 100%</td></tr>
+            <tr><td>Premium Paid Search 6</td><td>not in plan</td><td>$2.36</td><td>SURPRISE</td><td class="l">At 185%, we're 135% above 2nd — pull to 100%</td></tr>
+            <tr><td>Premium Paid Search 5A</td><td>not in plan</td><td>$2.19</td><td>SURPRISE</td><td class="l">At 130%, we're 78% above 2nd — pull to 80%</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote">Net market read: CA Auto pricing softened in the high-volume cluster (Email, the PPS-3 channel) and hardened in the long tail. That's good news — our biggest opportunity sources got cheaper. The cost-cutting pulls on PPS 5A / 6 / Paid Search are not aggressive moves — they're correcting bids that have been overshooting the market for months.</p>
+      </div>
+    </section>
+
+    <section class="block" id="s4">
+      <div class="bhead"><span class="ix">03</span><div><h2>Right-priced bid map — full source table</h2><p>Effective bid = $3.00 base × multiplier. Target: just above 2nd-position RPC where the market allows. Grouped by action category.</p></div></div>
+
+      <div class="grouplab">Tier A — push to / hold at "just above 2nd" (the historical winners)</div>
+      <div class="panel tscroll" style="margin-bottom:18px;">
+        <table class="dtable">
+          <thead><tr><th class="l">Source</th><th>7d clicks</th><th>2nd RPC</th><th>Current</th><th>Recommended</th><th>New eff bid</th><th class="l">Action</th></tr></thead>
+          <tbody>
+            <tr><td>Premium Referral</td><td>1,782</td><td>$5.89</td><td>210%</td><td>Hold 210%</td><td>$6.30</td><td class="l">Just above 2nd — perfect <span class="pill hold">Hold</span></td></tr>
+            <tr><td>Email</td><td>2,391</td><td>$4.37</td><td>165%</td><td>Hold 165%</td><td>$4.95</td><td class="l">Old plan target stale — v2 drops push to 195% <span class="pill hold">Hold</span></td></tr>
+            <tr><td>Premium Paid Search 2</td><td>2,122</td><td>$5.09</td><td>180%</td><td>↑ 190%</td><td>$5.70</td><td class="l">Small lift for buffer above 2nd <span class="pill ship">Shipped</span></td></tr>
+            <tr><td>Premium Paid Search 3</td><td>1,360</td><td>$4.13</td><td>145%</td><td>↑ 155%</td><td>$4.65</td><td class="l">Small lift for buffer above 2nd <span class="pill ship">Shipped</span></td></tr>
+            <tr><td>Native/Display/Social</td><td>854</td><td>$3.97</td><td>145%</td><td>Hold 145%</td><td>$4.35</td><td class="l">Already calibrated <span class="pill hold">Hold</span></td></tr>
+            <tr><td>Internal SEO 2</td><td>321</td><td>$5.64</td><td>114%</td><td>↑↑ 210%</td><td>$6.30</td><td class="l">Latent winner the v1 plan missed <span class="pill ship">Shipped</span></td></tr>
+            <tr><td>Internal SEO</td><td>158</td><td>$6.67</td><td>197%</td><td>↑ 245%</td><td>$7.35</td><td class="l">Push to land just above 2nd <span class="pill ship">Shipped</span></td></tr>
+            <tr><td>Premium Paid Search 2B</td><td>58</td><td>$5.03</td><td>125%</td><td>↑ 185%</td><td>$5.55</td><td class="l">Lift to just above 2nd <span class="pill ship">Shipped</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grouplab">Tier B — hold (already correctly priced or near platform caps)</div>
+      <div class="panel tscroll" style="margin-bottom:18px;">
+        <table class="dtable">
+          <thead><tr><th class="l">Source</th><th>2nd RPC</th><th>Current</th><th>Eff bid</th><th class="l">Read</th></tr></thead>
+          <tbody>
+            <tr><td>Premium Email B</td><td>$5.99</td><td>249%</td><td>$7.47</td><td class="l">Slight buffer above 2nd — fine</td></tr>
+            <tr><td>Premium Paid Search 4</td><td>$8.20</td><td>301%</td><td>$9.03</td><td class="l">At platform cap, just above 2nd</td></tr>
+            <tr><td>Premium Paid Search 7</td><td>$14.17</td><td>301%</td><td>$9.03</td><td class="l">Market is above our cap — accepts 4+ position, leave</td></tr>
+            <tr><td>Premium Paid Search 5D2</td><td>$11.35</td><td>190%</td><td>$5.70</td><td class="l">Wins 3rd-position band — reasonable</td></tr>
+            <tr><td>Premium Paid Search 5B</td><td>$12.13</td><td>100%</td><td>$3.00</td><td class="l">Market 2nd unreachable — rides 4+ position floor</td></tr>
+            <tr><td>Premium Paid Search 5D</td><td>$19.81</td><td>100%</td><td>$3.00</td><td class="l">Market 2nd unreachable — rides 4+ position floor</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grouplab">Tier C — cap (over-aggressive multipliers on costly sources)</div>
+      <div class="panel tscroll" style="margin-bottom:18px;">
+        <table class="dtable">
+          <thead><tr><th class="l">Source</th><th>2nd RPC</th><th>Current</th><th>Recommended</th><th>New eff bid</th><th class="l">Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>Premium Paid Search 5</td><td>$16.87</td><td>244%</td><td>↓ 150%</td><td>$4.50</td><td class="l">Per v1 plan — market 2nd unreachable, cap for budget protection</td></tr>
+            <tr><td>Premium Paid Search 4B</td><td>$9.29</td><td>134%</td><td>Cap 200%</td><td>$6.00</td><td class="l">Push closer to 2nd but cap for budget protection</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grouplab">Tier D — pull (over-bidding the market — cost-cutting opportunity)</div>
+      <div class="panel tscroll" style="margin-bottom:18px;">
+        <table class="dtable">
+          <thead><tr><th class="l">Source</th><th>2nd RPC</th><th>Current</th><th>Cur eff</th><th>Recommended</th><th>New eff</th><th>% above 2nd today</th></tr></thead>
+          <tbody>
+            <tr><td>Paid Search</td><td>$2.53</td><td>195%</td><td>$5.85</td><td>↓ 100%</td><td>$3.00</td><td class="up">+131%</td></tr>
+            <tr><td>Premium Paid Search 6</td><td>$2.36</td><td>185%</td><td>$5.55</td><td>↓ 100%</td><td>$3.00</td><td class="up">+135%</td></tr>
+            <tr><td>Premium Paid Search 5A</td><td>$2.19</td><td>130%</td><td>$3.90</td><td>↓ 80%</td><td>$2.40</td><td class="up">+78%</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote">Pulls shipped — the silent burn is closed. All three pulls are live in the dashboard. Combined, these sources had taken ~$15–20 of spend in the last 30 days at multipliers that bid 78–135% above the 2nd-position market with zero contacts, quotes, or policies to show for it. At full peak-era volume the waste would have compounded to $50+/mo. With the corrections in place, those dollars get reallocated into the right-priced winners.</p>
+      </div>
+
+      <div class="grouplab">Tier E — routing investigation (no bid change until ops resume)</div>
+      <div class="callout" style="margin-bottom:18px;">
+        <h4>Premium Referral 2 — 90% multiplier · 0 opportunities in 60+ days · ticket filed</h4>
+        <p>Ticket filed with Chris / product. Awaiting routing fix. The multiplier raise to 200% is queued for after opportunities resume.</p>
+      </div>
+
+      <div class="grouplab">Tier F — dropped from plan</div>
+      <div class="callout amber">
+        <h4>Premium Paid Search (base) — dropped</h4>
+        <p>v1 plan said: reactivate at 180%. <b>v2 says: drop.</b> The base Premium Paid Search source cannot be reactivated on Supreme Choice's account — only numbered variants (PPS 2, 3, 4, etc.) are available. The v1 recommendation was infeasible.</p>
+      </div>
+    </section>
+
+    <section class="block" id="s5">
+      <div class="bhead"><span class="ix">04</span><div><h2>Status of the original 7 moves — refreshed</h2></div></div>
+      <div class="panel tscroll">
+        <table class="dtable">
+          <thead><tr><th class="l">#</th><th class="l">v1 recovery move</th><th class="l">v2 update</th><th class="l">Status</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="l">Raise base bid $2.86 → $3.00</td><td class="l">Confirmed at $3.00. Base bid stays here in v2.</td><td class="l"><span class="pill done">Done</span></td></tr>
+            <tr><td>2a</td><td class="l">Reactivate Premium Paid Search at 180%</td><td class="l">Source cannot be reactivated — dropped from plan.</td><td class="l"><span class="pill drop">Dropped</span></td></tr>
+            <tr><td>2b</td><td class="l">Reactivate Premium Paid Search 7 at 301%</td><td class="l">Active at 301%. Market 2nd RPC ($14.17) now above our cap — hold and accept 4+ position.</td><td class="l"><span class="pill done">Done</span></td></tr>
+            <tr><td>3</td><td class="l">Boost Premium Referral 86% → 200%</td><td class="l">At 210%. RightPricing confirms target is correct — hold.</td><td class="l"><span class="pill done">Done</span></td></tr>
+            <tr><td>4</td><td class="l">Premium Referral 2 routing investigation</td><td class="l">Ticket filed with Chris / product. Awaiting routing fix; raise to 200% queued.</td><td class="l"><span class="pill ticket">Ticket filed</span></td></tr>
+            <tr><td>5</td><td class="l">Push Email 51% → 195%</td><td class="l">Currently at 165%. v1 target of 195% is stale — market 2nd RPC dropped from $5.78 to $4.37. 165% (eff $4.95) is already 13% above 2nd. Hold at 165%.</td><td class="l"><span class="pill watch">Done (revised)</span></td></tr>
+            <tr><td>6</td><td class="l">Boost Premium Paid Search 2 69% → 180%</td><td class="l">Lifted to 190% per v2 buffer target. Shipped.</td><td class="l"><span class="pill done">Done</span></td></tr>
+            <tr><td>7</td><td class="l">Hold PPS 4, 6, 2B, Email B, Internal SEO</td><td class="l">v2 reframed and shipped: pushes on PPS 2B (125%→185%) and Internal SEO (197%→245%) live; PPS 6 reclassified as a Tier D pull (185%→100%) and pulled. PPS 4 and Email B held per plan.</td><td class="l"><span class="pill done">Done</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="s6">
+      <div class="bhead"><span class="ix">05</span><div><h2>v2 execution log — all changes shipped</h2><p>Eight multiplier changes plus the routing ticket, all live in the dashboard</p></div></div>
+
+      <div class="grouplab">Pushes (5) — shipped</div>
+      <div class="plan">
+        <div class="pstep"><div class="num">1</div><div><div class="ph"><div class="h">Internal SEO 2 multiplier pushed</div><span class="pill ship">Shipped</span></div><span class="move">Internal SEO 2: 114% → 210%</span><div class="b">321 weekly clicks at 2nd-position RPC $5.64. New eff bid $6.30 lands just above 2nd. The single highest-leverage new move in v2 — this channel was sizably under-bid in v1.</div></div></div>
+        <div class="pstep"><div class="num">2</div><div><div class="ph"><div class="h">Internal SEO multiplier pushed</div><span class="pill ship">Shipped</span></div><span class="move">Internal SEO: 197% → 245%</span><div class="b">2nd-position RPC $6.67. New eff bid $7.35 lands just above 2nd. Lower volume (158 weekly clicks) but our exclusive own-channel inventory — worth winning the auctions we're eligible for.</div></div></div>
+        <div class="pstep"><div class="num">3</div><div><div class="ph"><div class="h">Premium Paid Search 2B multiplier pushed</div><span class="pill ship">Shipped</span></div><span class="move">Premium Paid Search 2B: 125% → 185%</span><div class="b">2nd-position RPC $5.03. New eff bid $5.55 lands just above 2nd. Small source by volume (58 weekly clicks) but the under-bid correction was meaningful.</div></div></div>
+        <div class="pstep"><div class="num">4</div><div><div class="ph"><div class="h">Premium Paid Search 2 multiplier pushed</div><span class="pill ship">Shipped</span></div><span class="move">Premium Paid Search 2: 180% → 190%</span><div class="b">High-volume source (2,122 weekly clicks). 2nd-position RPC $5.09 — small lift to $5.70 effective gives a comfortable buffer.</div></div></div>
+        <div class="pstep"><div class="num">5</div><div><div class="ph"><div class="h">Premium Paid Search 3 multiplier pushed</div><span class="pill ship">Shipped</span></div><span class="move">Premium Paid Search 3: 145% → 155%</span><div class="b">High-volume source (1,360 weekly clicks). 2nd-position RPC $4.13 — small lift to $4.65 effective gives buffer above 2nd.</div></div></div>
+      </div>
+
+      <div class="grouplab t2">Pulls (3) — cost-cutting, shipped</div>
+      <div class="plan">
+        <div class="pstep"><div class="num">6</div><div><div class="ph"><div class="h">Paid Search multiplier pulled</div><span class="pill ship">Shipped</span></div><span class="move">Paid Search: 195% → 100%</span><div class="b">Previous effective $5.85 vs. 2nd-position market $2.53 — was bidding 131% above 2nd. New eff $3.00 still wins regular auctions. Pure cost reduction with no expected volume impact.</div></div></div>
+        <div class="pstep"><div class="num">7</div><div><div class="ph"><div class="h">Premium Paid Search 6 multiplier pulled</div><span class="pill ship">Shipped</span></div><span class="move">Premium Paid Search 6: 185% → 100%</span><div class="b">Previous effective $5.55 vs. 2nd-position market $2.36 — was bidding 135% above 2nd. New eff $3.00 still wins. 0 leads had been produced at the inflated multiplier.</div></div></div>
+        <div class="pstep"><div class="num">8</div><div><div class="ph"><div class="h">Premium Paid Search 5A multiplier pulled</div><span class="pill ship">Shipped</span></div><span class="move">Premium Paid Search 5A: 130% → 80%</span><div class="b">Previous effective $3.90 vs. 2nd-position market $2.19 — was bidding 78% above 2nd. New eff $2.40 lands just above 2nd. Overpay reduced without losing position.</div></div></div>
+      </div>
+
+      <div class="grouplab t2">Routing &amp; investigation (1) — ticket filed</div>
+      <div class="plan">
+        <div class="pstep"><div class="num">9</div><div><div class="ph"><div class="h">Premium Referral 2 routing ticket filed with Chris / product</div><span class="pill ticket">Ticket filed</span></div><span class="move">Premium Referral 2: 90% mult · 0 opportunities in 60+ days</span><div class="b">Last year's #2 sales source (8 policies, 36 quotes). Ticket asks: is Supreme Choice's California non-standard targeting properly mapped to this source? Multiplier raise from 90% to 200% remains queued for after opportunities resume.</div></div></div>
+      </div>
+
+      <div class="grouplab t2">Dropped from v1 (2)</div>
+      <div class="plan">
+        <div class="pstep"><div class="num dropn">–</div><div><div class="ph"><div class="h">Reactivate Premium Paid Search at 180%</div><span class="pill drop">Dropped</span></div><div class="b">Per platform constraint: the base Premium Paid Search source cannot be reactivated on Supreme Choice's account. Only numbered variants (PPS 2, 3, 4, etc.) are available. The v1 recommendation was infeasible. The volume gap this would have filled is partially addressed by the Internal SEO 2 push (new in v2).</div></div></div>
+        <div class="pstep"><div class="num dropn">–</div><div><div class="ph"><div class="h">Push Email from 165% to 195%</div><span class="pill watch">Target revised</span></div><div class="b">New RightPricing data shows Email 2nd-position RPC dropped from $5.78 (v1 reference) to $4.37 (5/22 actual). At 165% multiplier, our effective bid of $4.95 is already 13% above 2nd. Hold at 165%. Pushing to 195% would have over-bid the new market by 35%.</div></div></div>
+      </div>
+    </section>
+
+    <section class="block" id="s7">
+      <div class="bhead"><span class="ix">06</span><div><h2>Peak vs. current</h2><p>The May/June 2025 peak remains the destination. Bid math is sharper in v2; the volume return depends on Premium Referral 2 routing unlocking.</p></div></div>
+      <div class="panel tscroll cmp">
+        <table class="dtable">
+          <thead><tr><th class="l">Metric</th><th>Peak — May/Jun 2025</th><th>Current — last 30 days</th></tr></thead>
+          <tbody>
+            <tr><td>Avg monthly leads</td><td class="pk">~200</td><td class="cur">10 <span style="color:var(--error);font-weight:700">(−95%)</span></td></tr>
+            <tr><td>Avg monthly policies</td><td class="pk">8.5</td><td class="cur">0 <span style="color:var(--error);font-weight:700">(−100%)</span></td></tr>
+            <tr><td>Win rate</td><td class="pk">3.18%</td><td class="cur">0.24%</td></tr>
+            <tr><td>Avg bid</td><td class="pk">$2.93</td><td class="cur">$2.48</td></tr>
+            <tr><td>Avg ad-wall position</td><td class="pk">3.94</td><td class="cur">7.67</td></tr>
+            <tr><td>Cost per policy (CPA)</td><td class="pk">$88.64</td><td class="cur">— no policies</td></tr>
+            <tr><td>Monthly spend</td><td class="pk">~$753</td><td class="cur">$71.03</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="s8">
+      <div class="bhead"><span class="ix">07</span><div><h2>Projected recovery once v2 is fully executed</h2><p>Conservative projections anchored to May/June 2025 actuals. Day 7 = volume signal; day 21 = quote / sale signal. Both clocks start when v2 ships and Premium Referral 2 routing is fixed.</p></div></div>
+      <div class="pjgrid">
+        <div class="pj"><div class="v">1.5–3.0%</div><div class="k">Win rate</div><div class="d">Now: 0.24%</div></div>
+        <div class="pj"><div class="v">4–5</div><div class="k">Avg ad-wall position</div><div class="d">Now: 7.67</div></div>
+        <div class="pj"><div class="v">100–200</div><div class="k">Monthly leads</div><div class="d">Now: 10 / 30d</div></div>
+        <div class="pj"><div class="v">$130–180</div><div class="k">Cost per policy</div><div class="d">Now: —</div></div>
+        <div class="pj"><div class="v">4–8</div><div class="k">Monthly policies</div><div class="d">Now: 0</div></div>
+        <div class="pj"><div class="v">$600–800</div><div class="k">Monthly spend pace</div><div class="d">Now: $71</div></div>
+        <div class="pj"><div class="v">3.0–4.0%</div><div class="k">Lead → sale CVR</div><div class="d">Last yr: 3.13%</div></div>
+      </div>
+    </section>
+
+    <section class="block" id="s9">
+      <div class="bhead"><span class="ix">08</span><div><h2>Next 14 days — measurement plan (clock started)</h2></div></div>
+      <div class="panel tscroll">
+        <table class="dtable">
+          <thead><tr><th class="l">When</th><th class="l">Action</th><th class="l">Owner</th><th class="l">Status / measurement</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill done">Done</span></td><td class="l">Ship the 5 pushes (Internal SEO 2, Internal SEO, PPS 2B, PPS 2, PPS 3)</td><td class="l">Tom</td><td class="l">Shipped — activation timestamp logged 5/22</td></tr>
+            <tr><td><span class="pill done">Done</span></td><td class="l">Ship the 3 pulls (Paid Search, PPS 6, PPS 5A)</td><td class="l">Tom</td><td class="l">Shipped — monitoring for any unexpected volume loss</td></tr>
+            <tr><td><span class="pill done">Done</span></td><td class="l">Open Premium Referral 2 routing ticket with Chris / product</td><td class="l">Tom</td><td class="l">Ticket filed — multiplier raise to 200% queued</td></tr>
+            <tr><td>Day 7</td><td class="l">Pull lead volume + ad-wall position from active sources</td><td class="l">Tom</td><td class="l">Internal SEO 2 should produce 5+ leads/week; pulled sources should produce same volume at lower cost</td></tr>
+            <tr><td>Day 21</td><td class="l">Pull contact rate, Quote CPA, policies bound</td><td class="l">Tom</td><td class="l">Targets: Quote CPA &lt; $50, ≥ 1 policy bound, contact rate &gt; 15%</td></tr>
+            <tr><td>14d after fix</td><td class="l">Raise Premium Referral 2 multiplier 90% → 200%</td><td class="l">Tom</td><td class="l">Only after opportunities resume flowing</td></tr>
+            <tr><td>Day 28</td><td class="l">Re-pull RightPricing CA Auto and re-evaluate</td><td class="l">Tom</td><td class="l">Auto market shifted noticeably between 5/8 and 5/22 — recurring monthly cadence is correct here</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="s10">
+      <div class="bhead"><span class="ix">09</span><div><h2>ICP — non-standard, unchanged</h2></div></div>
+      <div class="callout">
+        <p>Supreme Choice serves a non-standard auto market that competing agencies typically avoid: consumers with prior accidents, DUIs, lapsed coverage, or who currently have no insurance. The campaign's <b>"Currently Insured = No"</b> filter is intentional and stays in place. The v2 bid moves above are aimed exclusively at winning more of the right kind of leads.</p>
+        <p>By concentrating budget on the 6 sources that historically produced policies for this audience — and now adding Internal SEO 2 as a seventh — we keep the funnel tight and the lead-to-sale CVR strong (~3% at peak, well above the 2% benchmark). The SR-22 / DUI positive-modifier test is still queued for after Premium Referral 2 routing is fixed and Auto volume returns.</p>
+      </div>
+    </section>
+
+    <div class="method">
+      <b>Methodology &amp; data sources.</b> RightPricing data: trailing 7d CA Auto pull dated 5/22/2026. Position breakdowns (1st / 2nd / 3rd / 4+) used to anchor target effective bids. 30-day source data: GOAL Source-Settings + Analytics exports dated 5/22/2026. Base bid: $3.00, confirmed against realized max bids on cap-multiplier sources (PPS 4 at 301% → $9.03 max; PPS 7 at 301% → $9.03 max). Effective bid = base bid × (multiplier / 100). Target rule: for sources where the market 2nd-position RPC is reachable within platform caps, target eff bid = 2nd RPC + 5–10% buffer; where 2nd is unreachable, hold at platform cap or pull to a sensible position level. Right-pricing philosophy: don't price every source to market — concentrate budget on the 4–8 historical winners and cap the over-aggressive bids on costly long-tail sources. All conversion metrics calculated based on Leads, not Clicks.
+      <div class="sigfoot">Supreme Choice Insurance Solutions · Auto Recovery Plan v2 (Right-Priced) · May 22, 2026 · Prepared by Tom Panos · GOAL Platform · Confidential</div>
+    </div>
+
+  </main>
 </div>
 
-<!-- ==================== STATUS SUMMARY ==================== -->
-<section>
-  <h2>Plan status at a glance &mdash; all changes live</h2>
-  <div class="summary-grid">
-    <div class="stat done">
-      <div class="num">8</div>
-      <div class="lbl">Multiplier moves shipped</div>
-    </div>
-    <div class="stat done">
-      <div class="num">1</div>
-      <div class="lbl">Routing ticket filed</div>
-    </div>
-    <div class="stat done">
-      <div class="num">2</div>
-      <div class="lbl">v1 targets revised &amp; held</div>
-    </div>
-    <div class="stat dropped">
-      <div class="num">1</div>
-      <div class="lbl">Dropped (infeasible)</div>
-    </div>
-  </div>
-
-  <div class="green-callout">
-    <strong>Execution complete.</strong> All five pushes and three pulls are live in the dashboard, and the Premium Referral 2 routing ticket is filed with Chris / product. The v1 plan's stale targets (Email 195% push, base Premium Paid Search reactivation) are formally retired. Net spend impact is roughly neutral &mdash; budget shifted from over-bid long-tail sources to the historical winners and the Internal SEO 2 latent-winner push. The day-7 lead-volume clock starts today; day-21 quote / sale read follows.
-  </div>
-</section>
-
-<!-- ==================== CURRENT STATE ==================== -->
-<section>
-  <h2>Current Auto state (last 30 days)</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">From Analytics + Source-Settings exports. Volume is still pre-recovery on every metric &mdash; the bid plan isn't fully shipped, and Premium Referral 2 is still receiving zero opportunities.</p>
-
-  <div class="kpi-grid">
-    <div class="kpi">
-      <div class="lbl">Leads (30d)</div>
-      <div class="val">10</div>
-      <div class="delta down">vs. ~200 / mo at peak</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Contacted</div>
-      <div class="val">0</div>
-      <div class="delta down">No volume to read yet</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Quotes</div>
-      <div class="val">0</div>
-      <div class="delta down">No volume to read yet</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Policies</div>
-      <div class="val">0</div>
-      <div class="delta down">vs. 8&ndash;9 / mo at peak</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Total Spend</div>
-      <div class="val">$71.03</div>
-      <div class="delta down">vs. ~$753 / mo at peak</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Avg CPC</div>
-      <div class="val">$4.73</div>
-      <div class="delta flat">vs. $3.72 CPL at peak</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Win Rate</div>
-      <div class="val">0.24%</div>
-      <div class="delta down">vs. 3.18% at peak</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Avg Ad Wall Position</div>
-      <div class="val">7.67</div>
-      <div class="delta down">vs. 3.94 at peak</div>
-    </div>
-  </div>
-
-  <div class="callout">
-    <strong>This snapshot is pre-v2 ship.</strong> Win rate (0.24%) and ad-wall position (7.67) reflect the state right before the v2 changes went live. With the eight multiplier moves now in place, the day-7 read should show ad-wall position pulling back toward the 4&ndash;5 band as the over-bid pulls free auction eligibility for the right-priced winners. Volume return on the Premium Referral 2 pathway still depends on the routing fix landing.
-  </div>
-</section>
-
-<!-- ==================== MARKET SHIFT ==================== -->
-<section>
-  <h2>What the new RightPricing data shows</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">5/22 RightPricing pull (trailing 7d, CA Auto, non-standard). Comparison to the 5/8 plan's reference RPCs.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">5/8 plan referenced 2nd RPC</th>
-        <th class="num">5/22 actual 2nd RPC</th>
-        <th class="num">Mkt shift</th>
-        <th>Implication</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Email</strong></td>
-        <td class="num">$5.78</td>
-        <td class="num">$4.37</td>
-        <td class="num" style="color:var(--green);font-weight:700">&minus;24%</td>
-        <td>Plan target of 195% is now too high &mdash; <strong>165% hold is correct</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Referral</strong></td>
-        <td class="num">$5.87</td>
-        <td class="num">$5.89</td>
-        <td class="num">&plusmn;0%</td>
-        <td>Plan target of 200% still correct &mdash; <strong>at 210% currently, fine</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Paid Search 2</strong></td>
-        <td class="num">$5.05</td>
-        <td class="num">$5.09</td>
-        <td class="num">&plusmn;0%</td>
-        <td>Plan target of 180% still close &mdash; lift to 190% for small buffer</td>
-      </tr>
-      <tr>
-        <td><strong>Internal SEO 2</strong></td>
-        <td class="num"><em>not in plan</em></td>
-        <td class="num">$5.64</td>
-        <td class="num" style="color:#6B21A8;font-weight:700">NEW</td>
-        <td>321 weekly clicks. Currently at 114% &mdash; <strong>push to 210%</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Paid Search 7</strong></td>
-        <td class="num">$6.73</td>
-        <td class="num">$14.17</td>
-        <td class="num" style="color:var(--red);font-weight:700">+111%</td>
-        <td>Market now well above our cap &mdash; <strong>hold 301%, accept 4+ position</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Paid Search</strong></td>
-        <td class="num"><em>not in plan</em></td>
-        <td class="num">$2.53</td>
-        <td class="num" style="color:var(--red);font-weight:700">SURPRISE</td>
-        <td>At 195%, we're 131% above 2nd &mdash; <strong>pull to 100%</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Paid Search 6</strong></td>
-        <td class="num"><em>not in plan</em></td>
-        <td class="num">$2.36</td>
-        <td class="num" style="color:var(--red);font-weight:700">SURPRISE</td>
-        <td>At 185%, we're 135% above 2nd &mdash; <strong>pull to 100%</strong></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Paid Search 5A</strong></td>
-        <td class="num"><em>not in plan</em></td>
-        <td class="num">$2.19</td>
-        <td class="num" style="color:var(--red);font-weight:700">SURPRISE</td>
-        <td>At 130%, we're 78% above 2nd &mdash; <strong>pull to 80%</strong></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="green-callout" style="margin-top:14px">
-    <strong>Net market read:</strong> CA Auto pricing softened in the high-volume cluster (Email, the PPS-3 channel) and hardened in the long tail. That's good news &mdash; our biggest opportunity sources got cheaper. The cost-cutting pulls on PPS 5A / 6 / Paid Search are not aggressive moves &mdash; they're correcting bids that have been overshooting the market for months.
-  </div>
-</section>
-
-<!-- ==================== COMPLETE RIGHT-PRICING TABLE ==================== -->
-<section>
-  <h2>Right-priced bid table &mdash; full source map</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Effective bid = $3.00 base &times; multiplier. Target: just above 2nd-position RPC where the market allows. Sources are grouped by action category.</p>
-
-  <h3 style="margin-top:14px">Tier A &mdash; Push to / hold at "just above 2nd" (the historical winners)</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">7d Clicks</th>
-        <th class="num">2nd RPC</th>
-        <th class="num">Current Mult</th>
-        <th class="num">Recommended</th>
-        <th class="num">New Eff Bid</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Premium Referral</strong></td>
-        <td class="num">1,782</td>
-        <td class="num">$5.89</td>
-        <td class="num">210%</td>
-        <td class="num"><span class="mult-hold">Hold 210%</span></td>
-        <td class="num">$6.30</td>
-        <td>Just above 2nd &mdash; perfect <span class="status-pill done">Hold</span></td>
-      </tr>
-      <tr>
-        <td><strong>Email</strong></td>
-        <td class="num">2,391</td>
-        <td class="num">$4.37</td>
-        <td class="num">165%</td>
-        <td class="num"><span class="mult-hold">Hold 165%</span></td>
-        <td class="num">$4.95</td>
-        <td>Old plan target stale &mdash; <strong>v2 drops the push to 195%</strong> <span class="status-pill done">Hold</span></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Paid Search 2</strong></td>
-        <td class="num">2,122</td>
-        <td class="num">$5.09</td>
-        <td class="num">180%</td>
-        <td class="num"><span class="mult-push">&uarr; 190%</span></td>
-        <td class="num">$5.70</td>
-        <td>Small lift to gain buffer above 2nd <span class="status-pill done">Shipped</span></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Paid Search 3</strong></td>
-        <td class="num">1,360</td>
-        <td class="num">$4.13</td>
-        <td class="num">145%</td>
-        <td class="num"><span class="mult-push">&uarr; 155%</span></td>
-        <td class="num">$4.65</td>
-        <td>Small lift to gain buffer above 2nd <span class="status-pill done">Shipped</span></td>
-      </tr>
-      <tr>
-        <td><strong>Native/Display/Social</strong></td>
-        <td class="num">854</td>
-        <td class="num">$3.97</td>
-        <td class="num">145%</td>
-        <td class="num"><span class="mult-hold">Hold 145%</span></td>
-        <td class="num">$4.35</td>
-        <td>Already calibrated <span class="status-pill done">Hold</span></td>
-      </tr>
-      <tr style="background:#F4E5FF !important">
-        <td><strong>Internal SEO 2</strong></td>
-        <td class="num">321</td>
-        <td class="num">$5.64</td>
-        <td class="num">114%</td>
-        <td class="num"><span class="mult-push">&uarr;&uarr; 210%</span></td>
-        <td class="num">$6.30</td>
-        <td><strong>Latent winner the v1 plan missed</strong> <span class="status-pill done">Shipped</span></td>
-      </tr>
-      <tr>
-        <td><strong>Internal SEO</strong></td>
-        <td class="num">158</td>
-        <td class="num">$6.67</td>
-        <td class="num">197%</td>
-        <td class="num"><span class="mult-push">&uarr; 245%</span></td>
-        <td class="num">$7.35</td>
-        <td>Push to land just above 2nd <span class="status-pill done">Shipped</span></td>
-      </tr>
-      <tr>
-        <td><strong>Premium Paid Search 2B</strong></td>
-        <td class="num">58</td>
-        <td class="num">$5.03</td>
-        <td class="num">125%</td>
-        <td class="num"><span class="mult-push">&uarr; 185%</span></td>
-        <td class="num">$5.55</td>
-        <td>Lift to just above 2nd <span class="status-pill done">Shipped</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3 style="margin-top:22px">Tier B &mdash; Hold (already correctly priced or near platform caps)</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">2nd RPC</th>
-        <th class="num">Current Mult</th>
-        <th class="num">Eff Bid</th>
-        <th>Read</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Premium Email B</td>
-        <td class="num">$5.99</td>
-        <td class="num">249%</td>
-        <td class="num">$7.47</td>
-        <td>Slight buffer above 2nd &mdash; fine</td>
-      </tr>
-      <tr>
-        <td>Premium Paid Search 4</td>
-        <td class="num">$8.20</td>
-        <td class="num">301%</td>
-        <td class="num">$9.03</td>
-        <td>At platform cap, just above 2nd</td>
-      </tr>
-      <tr>
-        <td>Premium Paid Search 7</td>
-        <td class="num">$14.17</td>
-        <td class="num">301%</td>
-        <td class="num">$9.03</td>
-        <td>Market is above our cap &mdash; accepts 4+ position, leave</td>
-      </tr>
-      <tr>
-        <td>Premium Paid Search 5D2</td>
-        <td class="num">$11.35</td>
-        <td class="num">190%</td>
-        <td class="num">$5.70</td>
-        <td>Wins 3rd-position band &mdash; reasonable</td>
-      </tr>
-      <tr>
-        <td>Premium Paid Search 5B</td>
-        <td class="num">$12.13</td>
-        <td class="num">100%</td>
-        <td class="num">$3.00</td>
-        <td>Market 2nd unreachable &mdash; rides 4+ position floor</td>
-      </tr>
-      <tr>
-        <td>Premium Paid Search 5D</td>
-        <td class="num">$19.81</td>
-        <td class="num">100%</td>
-        <td class="num">$3.00</td>
-        <td>Market 2nd unreachable &mdash; rides 4+ position floor</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3 style="margin-top:22px">Tier C &mdash; Cap (over-aggressive multipliers on costly sources)</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">2nd RPC</th>
-        <th class="num">Current</th>
-        <th class="num">Recommended</th>
-        <th class="num">New Eff Bid</th>
-        <th>Rationale</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Premium Paid Search 5</td>
-        <td class="num">$16.87</td>
-        <td class="num">244%</td>
-        <td class="num"><span class="mult-pull">&darr; 150%</span></td>
-        <td class="num">$4.50</td>
-        <td>Per v1 plan &mdash; market 2nd unreachable, cap for budget protection</td>
-      </tr>
-      <tr>
-        <td>Premium Paid Search 4B</td>
-        <td class="num">$9.29</td>
-        <td class="num">134%</td>
-        <td class="num"><span class="mult-pull">Cap 200%</span></td>
-        <td class="num">$6.00</td>
-        <td>Push closer to 2nd but cap for budget protection</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3 style="margin-top:22px">Tier D &mdash; Pull (over-bidding the market &mdash; cost-cutting opportunity)</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">2nd RPC</th>
-        <th class="num">Current Mult</th>
-        <th class="num">Current Eff</th>
-        <th class="num">Recommended</th>
-        <th class="num">New Eff</th>
-        <th class="num">% Above 2nd Today</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="background:#FCEAEA !important">
-        <td><strong>Paid Search</strong></td>
-        <td class="num">$2.53</td>
-        <td class="num">195%</td>
-        <td class="num">$5.85</td>
-        <td class="num"><span class="mult-pull">&darr; 100%</span></td>
-        <td class="num">$3.00</td>
-        <td class="num" style="color:var(--red);font-weight:700">+131%</td>
-      </tr>
-      <tr style="background:#FCEAEA !important">
-        <td><strong>Premium Paid Search 6</strong></td>
-        <td class="num">$2.36</td>
-        <td class="num">185%</td>
-        <td class="num">$5.55</td>
-        <td class="num"><span class="mult-pull">&darr; 100%</span></td>
-        <td class="num">$3.00</td>
-        <td class="num" style="color:var(--red);font-weight:700">+135%</td>
-      </tr>
-      <tr style="background:#FCEAEA !important">
-        <td><strong>Premium Paid Search 5A</strong></td>
-        <td class="num">$2.19</td>
-        <td class="num">130%</td>
-        <td class="num">$3.90</td>
-        <td class="num"><span class="mult-pull">&darr; 80%</span></td>
-        <td class="num">$2.40</td>
-        <td class="num" style="color:var(--red);font-weight:700">+78%</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="green-callout" style="margin-top:14px">
-    <strong>Pulls shipped &mdash; the silent burn is closed.</strong> All three pulls are live in the dashboard. Combined, these sources had taken ~$15-20 of spend in the last 30 days at multipliers that bid 78-135% above the 2nd-position market with zero contacts, quotes, or policies to show for it. At full peak-era volume the waste would have compounded to $50+/mo. With the corrections in place, those dollars get reallocated into the right-priced winners.
-  </div>
-
-  <h3 style="margin-top:22px">Tier E &mdash; Routing investigation (no bid change until ops resume)</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th class="num">Current Mult</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="background:#FFF4E0 !important">
-        <td><strong>Premium Referral 2</strong></td>
-        <td class="num">90%</td>
-        <td>0 opportunities in 60+ days &mdash; <span class="status-pill done">Ticket filed</span></td>
-        <td><strong>Ticket filed with Chris / product.</strong> Awaiting routing fix. Multiplier raise to 200% queued for after ops resume.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h3 style="margin-top:22px">Tier F &mdash; Dropped from plan</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Source</th>
-        <th>v1 Plan Said</th>
-        <th>v2 Says</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Premium Paid Search (base)</strong></td>
-        <td>Reactivate at 180%</td>
-        <td><span class="status-pill dropped">Drop</span> Base PPS source cannot be reactivated on Supreme Choice's account &mdash; only numbered variants (PPS 2, 3, 4, etc.) are available. v1 recommendation was infeasible.</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ==================== STATUS OF V1 MOVES ==================== -->
-<section>
-  <h2>Status of original 7 moves &mdash; refreshed</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>v1 recovery move</th>
-        <th>v2 update</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="num">1</td>
-        <td><strong>Raise base bid</strong> $2.86 &rarr; $3.00</td>
-        <td>Confirmed at $3.00. Base bid stays here in v2.</td>
-        <td><span class="status-pill done">Done</span></td>
-      </tr>
-      <tr>
-        <td class="num">2a</td>
-        <td><strong>Reactivate Premium Paid Search</strong> at 180%</td>
-        <td>Source cannot be reactivated &mdash; <strong>dropped from plan</strong>.</td>
-        <td><span class="status-pill dropped">Dropped</span></td>
-      </tr>
-      <tr>
-        <td class="num">2b</td>
-        <td><strong>Reactivate Premium Paid Search 7</strong> at 301%</td>
-        <td>Active at 301%. Market 2nd RPC ($14.17) is now above our cap &mdash; hold and accept 4+ position.</td>
-        <td><span class="status-pill done">Done</span></td>
-      </tr>
-      <tr>
-        <td class="num">3</td>
-        <td><strong>Boost Premium Referral</strong> 86% &rarr; 200%</td>
-        <td>At 210%. RightPricing confirms target is correct &mdash; hold.</td>
-        <td><span class="status-pill done">Done</span></td>
-      </tr>
-      <tr>
-        <td class="num">4</td>
-        <td><strong>Premium Referral 2</strong> routing investigation</td>
-        <td>Ticket filed with Chris / product. Awaiting routing fix; multiplier raise to 200% queued for after ops resume.</td>
-        <td><span class="status-pill done">Ticket filed</span></td>
-      </tr>
-      <tr>
-        <td class="num">5</td>
-        <td><strong>Push Email</strong> 51% &rarr; 195%</td>
-        <td>Currently at 165%. <strong>v1 target of 195% is stale</strong> &mdash; market 2nd RPC dropped from $5.78 to $4.37. 165% (eff $4.95) is already 13% above 2nd. <strong>Hold at 165%.</strong></td>
-        <td><span class="status-pill done">Done (target revised)</span></td>
-      </tr>
-      <tr>
-        <td class="num">6</td>
-        <td><strong>Boost Premium Paid Search 2</strong> 69% &rarr; 180%</td>
-        <td>Lifted to 190% per v2 buffer target. Shipped.</td>
-        <td><span class="status-pill done">Done</span></td>
-      </tr>
-      <tr>
-        <td class="num">7</td>
-        <td><strong>Hold</strong> Premium Paid Search 4, 6, 2B, Email B, Internal SEO</td>
-        <td>v2 reframed and shipped: <strong>pushes</strong> on Premium Paid Search 2B (125% &rarr; 185%) and Internal SEO (197% &rarr; 245%) both live; Premium Paid Search 6 reclassified as a Tier D pull (185% &rarr; 100%) and pulled. Premium Paid Search 4 and Email B held per plan.</td>
-        <td><span class="status-pill done">Done</span></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ==================== EXECUTION CHECKLIST ==================== -->
-<section>
-  <h2>v2 execution log &mdash; all changes shipped</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Eleven multiplier changes plus the routing ticket. All live in the dashboard.</p>
-
-  <h3 style="margin-top:14px">Pushes (5) &mdash; shipped</h3>
-
-  <div class="move done">
-    <h4>1. Internal SEO 2 multiplier pushed <span class="status-pill done">Shipped</span></h4>
-    <p>Internal SEO 2: <span class="change">114% &rarr; 210%</span></p>
-    <p class="meta">321 weekly clicks at 2nd-position RPC $5.64. New eff bid $6.30 lands just above 2nd. The single highest-leverage new move in v2 &mdash; this channel was sizably under-bid in v1.</p>
-  </div>
-
-  <div class="move done">
-    <h4>2. Internal SEO multiplier pushed <span class="status-pill done">Shipped</span></h4>
-    <p>Internal SEO: <span class="change">197% &rarr; 245%</span></p>
-    <p class="meta">2nd-position RPC $6.67. New eff bid $7.35 lands just above 2nd. Lower volume (158 weekly clicks) but our exclusive own-channel inventory &mdash; worth winning the auctions we're eligible for.</p>
-  </div>
-
-  <div class="move done">
-    <h4>3. Premium Paid Search 2B multiplier pushed <span class="status-pill done">Shipped</span></h4>
-    <p>Premium Paid Search 2B: <span class="change">125% &rarr; 185%</span></p>
-    <p class="meta">2nd-position RPC $5.03. New eff bid $5.55 lands just above 2nd. Small source by volume (58 weekly clicks) but the under-bid correction was meaningful.</p>
-  </div>
-
-  <div class="move done">
-    <h4>4. Premium Paid Search 2 multiplier pushed <span class="status-pill done">Shipped</span></h4>
-    <p>Premium Paid Search 2: <span class="change">180% &rarr; 190%</span></p>
-    <p class="meta">High-volume source (2,122 weekly clicks). 2nd-position RPC $5.09 &mdash; small lift to $5.70 effective gives a comfortable buffer.</p>
-  </div>
-
-  <div class="move done">
-    <h4>5. Premium Paid Search 3 multiplier pushed <span class="status-pill done">Shipped</span></h4>
-    <p>Premium Paid Search 3: <span class="change">145% &rarr; 155%</span></p>
-    <p class="meta">High-volume source (1,360 weekly clicks). 2nd-position RPC $4.13 &mdash; small lift to $4.65 effective gives buffer above 2nd.</p>
-  </div>
-
-  <h3 style="margin-top:22px">Pulls (3) &mdash; cost-cutting, shipped</h3>
-
-  <div class="move done">
-    <h4>6. Paid Search multiplier pulled <span class="status-pill done">Shipped</span></h4>
-    <p>Paid Search: <span class="change">195% &rarr; 100%</span></p>
-    <p class="meta">Previous effective $5.85 vs. 2nd-position market $2.53 &mdash; was bidding 131% above 2nd. New eff $3.00 still wins regular auctions. Pure cost reduction with no expected volume impact.</p>
-  </div>
-
-  <div class="move done">
-    <h4>7. Premium Paid Search 6 multiplier pulled <span class="status-pill done">Shipped</span></h4>
-    <p>Premium Paid Search 6: <span class="change">185% &rarr; 100%</span></p>
-    <p class="meta">Previous effective $5.55 vs. 2nd-position market $2.36 &mdash; was bidding 135% above 2nd. New eff $3.00 still wins. 0 leads had been produced at the inflated multiplier.</p>
-  </div>
-
-  <div class="move done">
-    <h4>8. Premium Paid Search 5A multiplier pulled <span class="status-pill done">Shipped</span></h4>
-    <p>Premium Paid Search 5A: <span class="change">130% &rarr; 80%</span></p>
-    <p class="meta">Previous effective $3.90 vs. 2nd-position market $2.19 &mdash; was bidding 78% above 2nd. New eff $2.40 lands just above 2nd. Overpay reduced without losing position.</p>
-  </div>
-
-  <h3 style="margin-top:22px">Routing &amp; investigation (1) &mdash; ticket filed</h3>
-
-  <div class="move done">
-    <h4>9. Premium Referral 2 routing ticket filed with Chris / product team <span class="status-pill done">Ticket filed</span></h4>
-    <p>Premium Referral 2: <span class="change">90% mult, 0 opportunities in 60+ days &mdash; awaiting routing fix</span></p>
-    <p class="meta">Last year's #2 sales source (8 policies, 36 quotes). Ticket asks: is Supreme Choice's California non-standard targeting properly mapped to this source? Multiplier raise from 90% to 200% remains queued for after opportunities resume.</p>
-  </div>
-
-  <h3 style="margin-top:22px">Dropped from v1</h3>
-
-  <div class="move dropped">
-    <h4>&ndash; Reactivate Premium Paid Search at 180% <span class="status-pill dropped">Dropped</span></h4>
-    <p class="meta">Per platform constraint: the base Premium Paid Search source cannot be reactivated on Supreme Choice's account. Only numbered variants (PPS 2, 3, 4, etc.) are available. The v1 recommendation was infeasible. The volume gap this would have filled is partially addressed by the Internal SEO 2 push (new in v2).</p>
-  </div>
-
-  <h3 style="margin-top:22px">Dropped from v1 (target revised)</h3>
-
-  <div class="move done">
-    <h4>&ndash; Push Email from 165% to 195%</h4>
-    <p class="meta">New RightPricing data shows Email 2nd-position RPC dropped from $5.78 (v1 reference) to $4.37 (5/22 actual). At 165% multiplier, our effective bid of $4.95 is already 13% above 2nd. <strong>Hold at 165%</strong>. Pushing to 195% would have over-bid the new market by 35%.</p>
-  </div>
-</section>
-
-<!-- ==================== PEAK vs CURRENT ==================== -->
-<section>
-  <h2>Peak vs current (unchanged context)</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">The May/June 2025 peak remains the destination. Bid math is sharper in v2; the volume return depends on Premium Referral 2 routing unlocking.</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px">
-    <div style="border:1px solid var(--border);border-radius:12px;padding:20px;background:#fff;border-top:4px solid var(--green)">
-      <h3 style="margin-top:0">Peak Performance &mdash; May/Jun 2025</h3>
-      <div style="display:grid;grid-template-columns:1fr auto;gap:6px;font-size:13.5px;margin-top:8px">
-        <div>Avg Monthly Leads</div><div style="font-weight:700;font-variant-numeric:tabular-nums">~200</div>
-        <div>Avg Monthly Policies</div><div style="font-weight:700;font-variant-numeric:tabular-nums">8.5</div>
-        <div>Win Rate</div><div style="font-weight:700;font-variant-numeric:tabular-nums">3.18%</div>
-        <div>Avg Bid</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$2.93</div>
-        <div>Avg Ad Wall Position</div><div style="font-weight:700;font-variant-numeric:tabular-nums">3.94</div>
-        <div>Cost Per Lead</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$3.72</div>
-        <div>Cost Per Policy (CPA)</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$88.64</div>
-        <div>Monthly Spend</div><div style="font-weight:700;font-variant-numeric:tabular-nums">~$753</div>
-      </div>
-    </div>
-    <div style="border:1px solid var(--border);border-radius:12px;padding:20px;background:#fff;border-top:4px solid var(--orange)">
-      <h3 style="margin-top:0">Current &mdash; last 30 days</h3>
-      <div style="display:grid;grid-template-columns:1fr auto;gap:6px;font-size:13.5px;margin-top:8px">
-        <div>Leads</div><div style="font-weight:700;font-variant-numeric:tabular-nums">10 (&minus;95%)</div>
-        <div>Policies</div><div style="font-weight:700;font-variant-numeric:tabular-nums">0 (&minus;100%)</div>
-        <div>Win Rate</div><div style="font-weight:700;font-variant-numeric:tabular-nums">0.24%</div>
-        <div>Avg Bid</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$2.48</div>
-        <div>Avg Ad Wall Position</div><div style="font-weight:700;font-variant-numeric:tabular-nums">7.67</div>
-        <div>Cost Per Lead</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$7.10</div>
-        <div>Cost Per Policy (CPA)</div><div style="font-weight:700;font-variant-numeric:tabular-nums">&mdash; no policies</div>
-        <div>Monthly Spend</div><div style="font-weight:700;font-variant-numeric:tabular-nums">$71.03</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== PROJECTIONS ==================== -->
-<section>
-  <h2>Projected recovery once v2 is fully executed</h2>
-  <p style="color:var(--muted);font-size:13px;margin-top:-6px">Conservative projections anchored to May/June 2025 actuals. Day 7 = volume signal; day 21 = quote/sale signal. Both clocks start when the v2 changes ship and Premium Referral 2 routing is fixed.</p>
-
-  <div class="kpi-grid" style="margin-top:14px">
-    <div class="kpi">
-      <div class="lbl">Win Rate</div>
-      <div class="val">1.5&ndash;3.0%</div>
-      <div class="delta up">Now: 0.24%</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Avg Ad Wall Position</div>
-      <div class="val">4&ndash;5</div>
-      <div class="delta up">Now: 7.67</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Monthly Leads</div>
-      <div class="val">100&ndash;200</div>
-      <div class="delta up">Now: 10 / 30d</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Cost Per Lead</div>
-      <div class="val">$3.50&ndash;4.50</div>
-      <div class="delta up">Now: $7.10</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Cost Per Policy</div>
-      <div class="val">$130&ndash;180</div>
-      <div class="delta up">Now: &mdash;</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Monthly Policies</div>
-      <div class="val">4&ndash;8</div>
-      <div class="delta up">Now: 0</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Monthly Spend Pace</div>
-      <div class="val">$600&ndash;800</div>
-      <div class="delta up">Now: $71</div>
-    </div>
-    <div class="kpi">
-      <div class="lbl">Lead &rarr; Sale CVR</div>
-      <div class="val">3.0&ndash;4.0%</div>
-      <div class="delta up">Last yr: 3.13%</div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== NEXT 14 DAYS ==================== -->
-<section>
-  <h2>Next 14 days &mdash; measurement plan (clock started)</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>When</th>
-        <th>Action</th>
-        <th>Owner</th>
-        <th>Status / measurement</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr style="background:#E6F4EC !important">
-        <td><strong>Done</strong></td>
-        <td>Ship the 5 pushes (Internal SEO 2, Internal SEO, PPS 2B, PPS 2, PPS 3)</td>
-        <td>Tom</td>
-        <td><span class="status-pill done">Shipped</span> Activation timestamp logged 5/22</td>
-      </tr>
-      <tr style="background:#E6F4EC !important">
-        <td><strong>Done</strong></td>
-        <td>Ship the 3 pulls (Paid Search, PPS 6, PPS 5A)</td>
-        <td>Tom</td>
-        <td><span class="status-pill done">Shipped</span> Monitoring for any unexpected volume loss</td>
-      </tr>
-      <tr style="background:#E6F4EC !important">
-        <td><strong>Done</strong></td>
-        <td>Open Premium Referral 2 routing ticket with Chris / product</td>
-        <td>Tom</td>
-        <td><span class="status-pill done">Ticket filed</span> Multiplier raise to 200% queued for after routing fix</td>
-      </tr>
-      <tr>
-        <td><strong>Day 7</strong></td>
-        <td>Pull lead volume + ad wall position from active sources</td>
-        <td>Tom</td>
-        <td>Internal SEO 2 should produce 5+ leads/week; pulled sources should produce same volume at lower cost</td>
-      </tr>
-      <tr>
-        <td><strong>Day 21</strong></td>
-        <td>Pull contact rate, Quote CPA, policies bound</td>
-        <td>Tom</td>
-        <td>Targets: Quote CPA &lt; $50, &ge; 1 policy bound, contact rate &gt; 15%</td>
-      </tr>
-      <tr>
-        <td><strong>14d after Premium Referral 2 routing fix</strong></td>
-        <td>Raise Premium Referral 2 multiplier 90% &rarr; 200%</td>
-        <td>Tom</td>
-        <td>Only after opportunities resume flowing</td>
-      </tr>
-      <tr>
-        <td><strong>Day 28</strong></td>
-        <td>Re-pull RightPricing CA Auto and re-evaluate</td>
-        <td>Tom</td>
-        <td>Auto market shifted noticeably between 5/8 and 5/22 &mdash; recurring monthly cadence is correct here</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ==================== ICP REMINDER ==================== -->
-<section>
-  <h2>ICP &mdash; non-standard, unchanged</h2>
-  <p>Supreme Choice serves a <strong>non-standard auto market</strong> that competing agencies typically avoid: consumers with prior accidents, DUIs, lapsed coverage, or who currently have no insurance. The campaign's <strong>"Currently Insured = No"</strong> filter is intentional and stays in place. The v2 bid moves above are aimed exclusively at winning more <em>of the right kind</em> of leads.</p>
-  <p style="color:var(--muted);font-size:13px">By concentrating budget on the 6 sources that historically produced policies for this audience &mdash; and now adding Internal SEO 2 as a seventh &mdash; we keep the funnel tight and the lead-to-sale CVR strong (~3% at peak, well above the 2% benchmark). The SR-22 / DUI positive-modifier test is still queued for after Premium Referral 2 routing is fixed and Auto volume returns.</p>
-</section>
-
-<!-- ==================== METHODOLOGY ==================== -->
-<section>
-  <h2>Methodology &amp; data sources</h2>
-  <p style="color:var(--muted);font-size:13px"><strong>RightPricing data:</strong> trailing 7d CA Auto pull dated 5/22/2026. Position breakdowns (1st / 2nd / 3rd / 4+) used to anchor target effective bids. <strong>30-day source data:</strong> GOAL Source-Settings + Analytics exports dated 5/22/2026. <strong>Base bid:</strong> $3.00 confirmed against realized max bids on cap-multiplier sources (PPS 4 at 301% &rarr; $9.03 max; PPS 7 at 301% &rarr; $9.03 max). <strong>Effective bid</strong> = base bid &times; (multiplier / 100). <strong>Target rule:</strong> for sources where the market 2nd-position RPC is reachable within platform caps, target eff bid = 2nd RPC + 5-10% buffer. For sources where 2nd is unreachable, hold at platform cap or pull to a sensible position level. <strong>Right-pricing philosophy per Tom's account-management rule:</strong> don't price every source to market &mdash; concentrate budget on the 4-8 historical winners and cap the over-aggressive bids on costly long-tail sources.</p>
-</section>
-
-<!-- ==================== FOOTER ==================== -->
-<footer>
-  Prepared by GOAL Platform &middot; checkoutgoal.com &middot; Confidential &mdash; Supreme Choice Insurance &middot; Auto Recovery Plan v2 &middot; May 22, 2026
-</footer>
-
-</div>
-
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  e.target.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';});
+  io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.kgrid,.pjgrid').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
