@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — Right-Pricing Plan — June 17, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#057BE5; --blue-hover:#0C6EC5; --sky:#308ED6; --mint:#3BEECA; --mint-d:#0fae8f;
+  --navy:#00172D; --navy-2:#062c4e; --navy-deep:#001020;
+  --ink:#0F1B2D; --body:#2B3442; --muted:#6A7482;
+  --white:#fff; --off:#F8FAFC; --gray:#EFF2F7; --divider:#EDF1F5; --line:#E2E8F0;
+  --success:#2BBF7A; --warning:#F0A93B; --error:#E5484D;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(--body);line-height:1.55;}
+.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:288px 1fr;min-height:100vh;background:var(--white);}
+.side{background:var(--navy);color:#cfe0ee;padding:34px 30px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto;}
+.side .logo{height:30px;align-self:flex-start;margin-bottom:34px;}
+.side .eb{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2D90EE;}
+.side h1{font-size:25px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.02em;margin:10px 0 14px;}
+.side .who{font-size:13px;color:#a7c2da;line-height:1.6;}
+.side .who b{color:#fff;font-weight:600;}
+.side nav{margin-top:30px;display:flex;flex-direction:column;gap:2px;}
+.side nav a{font-size:12.5px;color:#9fbcd6;text-decoration:none;padding:7px 12px;border-radius:8px;display:flex;align-items:center;gap:10px;transition:background .15s,color .15s;}
+.side nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
+.side nav a .dot{width:6px;height:6px;border-radius:50%;background:#3a6386;flex-shrink:0;}
+.side nav a:hover .dot{background:var(--mint);}
+.side nav .grp{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#54799c;margin:12px 12px 3px;}
+.side .foot{margin-top:auto;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#6f93b3;line-height:1.6;}
+.main{padding:46px 52px 60px;}
+.block{margin-bottom:44px;scroll-margin-top:24px;}
+.bhead{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.bhead .ix{font-size:12px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;background:#E6F1FD;padding:4px 9px;border-radius:6px;}
+.bhead h2{font-size:21px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+.bsub{font-size:13px;color:var(--muted);margin:0 0 18px 47px;}
+.lobtag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-left:8px;vertical-align:2px;}
+.lobtag.home{background:#E3F0FD;color:var(--blue-hover);}
+.lobtag.auto{background:#FDF0DA;color:#9a6712;}
+.exec{background:var(--off);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:44px;}
+.exec p{font-size:15px;line-height:1.62;color:var(--body);}
+.exec p b{color:var(--ink);font-weight:700;}
+.exec p+p{margin-top:12px;}
+.panel{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--white);}
+.panel+.panel{margin-top:14px;}
+.panel .pt{font-size:12.5px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin-bottom:16px;}
+.panel .pt small{font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0;margin-left:8px;}
+table.dt{width:100%;border-collapse:collapse;}
+table.dt th{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;text-align:right;padding:0 8px 10px;border-bottom:1px solid var(--line);white-space:nowrap;}
+table.dt th:first-child{text-align:left;padding-left:0;}
+table.dt td{padding:9px 8px;border-bottom:1px solid var(--divider);font-size:12.5px;color:var(--body);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+table.dt td:first-child{text-align:left;font-weight:700;color:var(--ink);padding-left:0;}
+table.dt tr:last-child td{border-bottom:none;}
+table.dt tr.w1 td{background:#F0FBF7;}
+table.dt tr.w2 td{background:#F7FAFE;}
+table.dt .pos{color:var(--mint-d);font-weight:700;} table.dt .neg{color:var(--error);font-weight:700;} table.dt .warn{color:#b07a17;font-weight:700;}
+table.dt .chg{font-weight:800;color:var(--blue-hover);}
+.tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:5px;}
+.tag.g{background:#D9F4E7;color:#157a4c;} .tag.a{background:#FDF0DA;color:#9a6712;} .tag.r{background:#FDE1E2;color:#b3262b;} .tag.gr{background:#EDF1F5;color:#5b6675;} .tag.b{background:#E3F0FD;color:var(--blue-hover);} .tag.m{background:#D6F7EE;color:var(--mint-d);}
+.note{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:14px;padding-top:13px;border-top:1px solid var(--divider);}
+.note b{color:var(--ink);font-weight:700;}
+.callout{display:grid;grid-template-columns:46px 1fr;gap:15px;background:var(--navy);border-radius:14px;padding:22px 26px;color:#cfe0ee;margin-top:14px;}
+.callout .icn{width:40px;height:40px;border-radius:10px;background:rgba(59,238,202,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.callout h3{color:#fff;font-size:14.5px;font-weight:800;margin-bottom:5px;}
+.callout p{font-size:13px;line-height:1.6;color:#a7c2da;}
+.callout p b{color:#fff;font-weight:700;} .callout p .m{color:var(--mint);font-weight:600;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.path{border:1px solid var(--line);border-radius:12px;background:var(--white);padding:18px 20px;}
+.path.pa{border-top:3px solid var(--success);}
+.path.pb{border-top:3px solid var(--warning);}
+.path h4{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:7px;}
+.path p{font-size:12.5px;color:var(--body);line-height:1.6;}
+.path p b{color:var(--ink);}
+.path .pl{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.steps{counter-reset:st;display:flex;flex-direction:column;}
+.step{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--divider);}
+.step:last-child{border-bottom:none;}
+.step .n{counter-increment:st;flex-shrink:0;width:32px;height:32px;border-radius:9px;background:#E6F1FD;color:var(--blue);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.step .n:before{content:counter(st);}
+.step .h{font-size:13.5px;font-weight:800;color:var(--ink);}
+.step .b{font-size:12.5px;color:var(--body);line-height:1.55;margin-top:2px;}
+.step .b b{color:var(--ink);}
+@media print{
+  body{background:#fff;} .shell{display:block;max-width:none;}
+  .side{position:static;height:auto;flex-direction:row;align-items:center;justify-content:space-between;padding:20px 30px;}
+  .side nav,.side .foot{display:none;} .side h1{margin:0;font-size:20px;}
+  .main{padding:30px 34px;}
+  .panel,.callout,.path,.exec{break-inside:avoid;}
+  .block{margin-bottom:28px;}
+}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;} .side{position:static;height:auto;} .side nav{display:none;}
+  .main{padding:32px 22px;} .two{grid-template-columns:1fr;}
+}
+/* ---------- Mobile pass ---------- */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table.dt td[style*="text-align"]{white-space:normal;min-width:230px;line-height:1.5;}
+@media(max-width:900px){
+  .side nav{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .side nav .grp{flex-basis:100%;margin:8px 0 0;}
+  .side nav a{background:rgba(255,255,255,.07);padding:10px 14px;border-radius:999px;font-size:12px;}
+  .side nav a .dot{display:none;}
+}
+@media(max-width:640px){
+  .main{padding:26px 16px;}
+  .side{padding:26px 18px;}
+  .side h1{font-size:22px;}
+  .bhead h2{font-size:18px;}
+  .bsub{margin-left:0;}
+  .exec{padding:18px 16px;}
+  table.dt th,table.dt td{font-size:11.5px;padding:8px 6px;}
+  .callout{grid-template-columns:1fr;padding:18px;}
+  .step{gap:12px;}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="side">
+    <svg class="logo" viewBox="0 0 501.8 135" role="img" aria-label="GOAL" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" fill-rule="evenodd" d="M60.4 134.9C59.9 134.8 58.3 134.7 56.8 134.6C37.6 133 21.1 123.6 11.2 108.5C5.3 99.5 2.1 90.3 0.7 77.9C0.2 73.6 0.2 62 0.7 57.7C1.8 47.8 4.2 39.8 8.2 32.2C11.4 26.3 14.6 22 19.4 17.3C29.5 7.5 42.8 1.7 58 0.4C61.5 0.1 70.6 0.3 73.8 0.7C91.4 3 105.9 11.5 114.4 24.3C116.3 27.1 118.2 30.9 119.3 33.7C120.2 36.1 121.3 40.2 121.6 42.5C121.7 43.4 121.8 44.3 121.9 44.7L122 45.2L103.9 45.2L85.9 45.2L85.6 44.2C85.5 43.7 84.9 42.4 84.4 41.2C83.6 39.6 83 38.8 81.8 37.5C79.9 35.5 78.8 34.7 76.7 33.6C73.4 32 69.6 31.2 65 31.2C49.4 31.2 39.6 41.3 37.3 59.4C36.6 64.7 36.7 71.9 37.5 77.1C39 87.3 42.8 94.6 48.7 99.1C54.3 103.3 62 104.8 71.1 103.5C80.3 102.2 86.3 97.6 88.3 90.5C88.8 88.8 89.2 85.7 89.1 85.4C89 85.3 83.6 85.2 77.1 85.2L65.2 85.2L65.2 72.5L65.2 59.8L94.3 59.8L123.4 59.8L123.3 72.7C123.3 86.3 123.2 86.8 122.2 92.1C119 108.3 109 121.3 94.3 128.5C87.5 131.8 80.7 133.7 72.5 134.6C70.4 134.8 62 135 60.4 134.9ZM265.2 133.1C265.2 133 286.7 67.7 306.2 8.6L308.4 2L332.9 2L357.3 2.1L378.9 67.6L400.5 133.1L381.3 133.2C366 133.2 362.1 133.2 362 133C362 132.8 360.2 127.2 358.2 120.4L354.5 108.1L332.8 108L311.2 108L311 108.7C310.9 109.2 309.2 114.8 307.2 121.3L303.7 133.1L284.4 133.2C273.9 133.2 265.2 133.1 265.2 133.1ZM413 67.6L413 2L430.9 2L448.8 2L448.8 53.2L448.8 104.4L475.3 104.4L501.8 104.4L501.8 118.8L501.8 133.2L457.4 133.2L413 133.2L413 67.6ZM346.3 81C346.2 80.7 343.3 71 339.8 59.4C336.3 47.8 333.3 38.2 333.2 38.1C332.5 37.5 332.5 37.7 325.9 59.5C322.3 71.3 319.4 81 319.4 81.2C319.4 81.3 322.2 81.4 332.9 81.4L346.4 81.4L346.3 81Z"/><path fill="#057BE5" fill-rule="evenodd" d="M197.6 133.5C194.1 133.2 187.9 132.2 187.7 131.9C187.6 131.8 191.7 119.4 191.9 119.2C191.9 119.2 192.8 119.3 193.8 119.5C201.9 120.8 210.5 120.2 218.5 117.5C226.6 114.8 233.4 110.7 239.3 104.7C246 97.9 250.6 89.8 253 80.5C254.2 75.6 254.5 73.4 254.5 67.8C254.5 61.4 253.9 57.4 252.1 51.8C249.5 43.7 245.3 36.9 239.2 30.8C235.5 27.1 231.5 24.1 227.3 21.8C226.4 21.3 225.7 20.9 225.6 20.9C225.6 20.8 229.1 10.2 229.8 8.4L230 8L231.6 8.8C244.8 15.4 255.5 26.4 261.8 39.7C264.6 45.6 266.4 51.5 267.4 58.3C268 61.9 268.2 69.7 267.8 73.6C266.4 89.5 259.5 103.9 248.1 115C244.9 118.1 242.4 120.1 238.5 122.7C235.2 124.9 229.8 127.7 226.1 129.2C221.5 131 215.9 132.4 210.6 133.1C208.2 133.4 199.7 133.7 197.6 133.5ZM171.5 126C154.2 116.9 141.8 100.5 137.8 81.5C136.2 73.9 136 65.6 137.1 57.8C139.7 40.4 149.7 24.3 164.3 13.9C172.6 8 182.2 4.2 192.7 2.6C196.3 2 204.4 1.8 208.1 2.2C210.6 2.4 216.1 3.3 216.3 3.5C216.4 3.5 212.2 16 212.1 16.2C212 16.2 210.9 16.1 209.7 15.9C208.4 15.7 205.5 15.5 203.4 15.5C185.8 15 169.1 23.5 159 38.1C154.4 44.9 151.5 52.4 150.3 60.9C149.8 64.2 149.8 71.3 150.3 74.7C151.9 86.1 156.8 96.1 164.7 104.2C168.5 108.1 172.6 111.3 177 113.6C177.8 114.1 178.4 114.6 178.3 114.7C178.3 114.8 177.3 117.7 176.2 121C175 124.4 174 127.2 173.9 127.2C173.8 127.2 172.7 126.7 171.5 126ZM198.8 106.8C197.6 106.7 196.5 106.5 196.4 106.5C196.4 106.4 197.2 103.7 198.3 100.5L200.3 94.6L202.9 94.5C215.5 94.1 225.8 85.5 228.5 73C229 70.6 229 65 228.5 62.7C227.8 59 226.4 55.7 224.5 52.8C223.2 51 219.7 47.3 218.2 46.2C217.6 45.9 217.2 45.5 217.2 45.4C217.2 45 221.2 33.7 221.3 33.7C221.7 33.5 225.6 36.3 227.7 38C233.5 43 238.1 50.2 240.1 57.7C243.6 71.3 239.8 85.6 229.9 95.5C221.7 103.6 210.5 107.7 198.8 106.8ZM180.7 100.4C173.9 95.9 169 89.9 165.9 82.5C161.8 72.4 162.2 60.6 167 50.7C172.6 39.1 183.3 31.2 196 29.1C198.5 28.7 203.3 28.5 205.6 28.8C206.6 28.9 207.5 29 207.5 29.1C207.6 29.1 204.5 38.7 203.7 40.6C203.6 40.9 203.1 41 200.9 41.1C194.1 41.4 188.2 44 183.3 48.9C179.5 52.7 177 57.3 175.9 62.8C175.4 65.1 175.4 70.2 175.9 72.7C177 78.6 180 83.8 184.4 87.7C185 88.3 185.8 88.9 186.2 89.2C186.5 89.4 186.8 89.7 186.8 89.8C186.8 90.1 183 101.1 182.8 101.5C182.7 101.7 182 101.3 180.7 100.4ZM199 80C192.5 78.3 188.5 71.7 189.9 65C190.6 61.5 193.2 58.1 196.5 56.5C198.4 55.5 199.9 55.2 202.2 55.2C205.9 55.2 208.6 56.3 211.1 58.9C212.9 60.7 213.9 62.5 214.5 64.8C215 66.7 214.8 70 214.1 72C212 78.1 205.3 81.6 199 80Z"/></svg>
+    <div class="eb">Right-Pricing Plan · June 17, 2026</div>
+    <h1>Bid &amp; Modifier Recommendations</h1>
+    <div class="who">Supreme Choice Insurance Solutions<br><b>CA Auto + CA Home</b> · RightPricing pulled 6/7<br>Prepared by Tom Panos</div>
+    <nav>
+      <div class="grp">Auto — CA</div>
+      <a href="#s1"><span class="dot"></span>Executive summary</a>
+      <a href="#a1"><span class="dot"></span>Option A · multiplier re-price</a>
+      <a href="#a2"><span class="dot"></span>Holds &amp; locked sources</a>
+      <a href="#a3"><span class="dot"></span>Option B · base $4.00</a>
+      <div class="grp">Home — CA</div>
+      <a href="#h1"><span class="dot"></span>The schedule finding</a>
+      <a href="#h2"><span class="dot"></span>Recommended changes</a>
+      <a href="#h3"><span class="dot"></span>Deferred &amp; locked</a>
+      <div class="grp">Execution</div>
+      <a href="#x1"><span class="dot"></span>Budget reconciliation</a>
+      <a href="#x2"><span class="dot"></span>Change checklist &amp; cadence</a>
+      <a href="#x3"><span class="dot"></span>Method &amp; validation</a>
+    </nav>
+    <div class="foot">GOAL Performance Marketing<br>RightPricing: CA Auto + CA Home, pulled June 7, 2026.<br>Effective Bid = Base × Multiplier ÷ 100.</div>
+  </aside>
+
+  <main class="main">
+
+    <div class="exec" id="s1">
+      <p><b>Auto:</b> base bid $2.86 (held per John, May), multiplier ceiling 301%. Within those constraints, a <b>two-wave re-price of 9 sources</b> puts every reachable workhorse at its target market position (1st where it clears under $6, 2nd+buffer elsewhere — auto's 2nd–7th band). Nine more sources stay locked out at the ceiling; <b>Option B (base → $4.00, multipliers renormalized ×0.715)</b> unlocks all but PPS 5 and is the decision to bring to the 6/17 review.</p>
+      <p><b>Home:</b> the account's <b>observed average bids run only 66–77% of their full-schedule values across all six sources</b> — a scheduled-discount drag that is most expensive on Tier 1, where full-schedule pricing ($4.77) already clears 1st position ($4.34) but average placed bids ($3.32) sit at 2nd-position money in a 94%-of-clicks-go-to-1st market. Fix the schedule or the multiplier — both paths quantified below. Tier 2 is held per John's direction; Tier 3 gets a trim plus a bid-rate investigation; Home Search stays mathematically locked without a base conversation.</p>
+    </div>
+
+    <!-- ============ AUTO ============ -->
+    <section class="block" id="a1">
+      <div class="bhead"><span class="ix">01</span><h2>Option A — multiplier re-price under the locked base <span class="lobtag auto">CA Auto</span></h2></div>
+      <p class="bsub">Base $2.86 · Effective = $2.86 × mult ÷ 100 (full schedule) · targets include 3–11% volatility buffer · rounded per convention</p>
+      <div class="panel">
+        <table class="dt">
+          <tr><th>Source</th><th>Mkt clicks/mo</th><th>Target position</th><th>Position RPC</th><th>Target bid</th><th>Multiplier</th><th>Effective bid</th><th>Wave</th></tr>
+          <tr class="w1"><td>Email</td><td>3,469</td><td>1st (91% of clicks)</td><td>$5.57</td><td>$5.85</td><td class="chg">165% → 205%</td><td>$4.72 → $5.86</td><td><span class="tag m">Wave 1</span></td></tr>
+          <tr class="w1"><td>Premium Paid Search 2</td><td>2,361</td><td>1st (89%)</td><td>$5.99</td><td>$6.29</td><td class="chg">190% → 220%</td><td>$5.43 → $6.29</td><td><span class="tag m">Wave 1</span></td></tr>
+          <tr class="w1"><td>Premium Paid Search 3</td><td>1,647</td><td>1st (92%)</td><td>$5.50</td><td>$5.72</td><td class="chg">155% → 200%</td><td>$4.43 → $5.72</td><td><span class="tag m">Wave 1</span></td></tr>
+          <tr class="w1"><td>Native/Display/Social</td><td>1,054</td><td>2nd +11% (28,602 opps)</td><td>$4.14</td><td>$4.58</td><td class="chg">145% → 160%</td><td>$4.15 → $4.58</td><td><span class="tag m">Wave 1</span></td></tr>
+          <tr class="w2"><td>Premium Paid Search 5C</td><td>589</td><td>2nd +6%</td><td>$6.22</td><td>$6.58</td><td class="chg">80% → 230%</td><td>$2.29 → $6.58</td><td><span class="tag b">Wave 2</span></td></tr>
+          <tr class="w2"><td>Internal SEO 2</td><td>804</td><td>1st +6%</td><td>$7.58</td><td>$8.01</td><td class="chg">210% → 280%</td><td>$6.01 → $8.01</td><td><span class="tag b">Wave 2</span></td></tr>
+          <tr class="w2"><td>Internal SEO</td><td>171</td><td>2nd +5%</td><td>$7.90</td><td>$8.29</td><td class="chg">245% → 290%</td><td>$7.01 → $8.29</td><td><span class="tag b">Wave 2</span></td></tr>
+          <tr class="w2"><td>Premium Email B</td><td>304</td><td>2nd +3% (ceiling-capped)</td><td>$8.30</td><td>$8.58</td><td class="chg">249% → 300%</td><td>$7.12 → $8.58</td><td><span class="tag b">Wave 2</span></td></tr>
+          <tr class="w2"><td>Paid Search</td><td>18</td><td>~95% of 1st</td><td>$3.78</td><td>$3.58</td><td class="chg">100% → 125%</td><td>$2.86 → $3.58</td><td><span class="tag b">Wave 2</span></td></tr>
+        </table>
+        <div class="note"><b>Wave 1 now, Wave 2 at the day-14 checkpoint.</b> Wave 1 covers 38,724 opportunities and 8,531 market clicks/mo — est. incremental spend +$350–700/mo. Wave 2 adds the most-mispriced source on the board (PPS 5C at $2.29 vs a $6.22 2nd position) and the organic-intent SEO pair — est. +$150–300/mo. 1st position is taken only where it clears under $6; everything else targets 2nd+buffer, consistent with auto's 2nd–7th positioning band. <b>Native rule:</b> if its win rate is still ~0% at day 14, stop — investigate targeting/timeout rather than raising again.</div>
+      </div>
+    </section>
+
+    <section class="block" id="a2">
+      <div class="bhead"><span class="ix">02</span><h2>Holds &amp; locked sources <span class="lobtag auto">CA Auto</span></h2></div>
+      <p class="bsub">Deliberate non-changes, with the base bid each locked source would need</p>
+      <div class="two">
+        <div class="panel">
+          <div class="pt">Hold steady — deliberate</div>
+          <table class="dt">
+            <tr><th>Source</th><th>Mult</th><th>Eff</th><th>Why hold</th></tr>
+            <tr><td>Premium Referral</td><td>210%</td><td>$6.01</td><td style="text-align:right">Above 2nd ($5.76) · 13% win · top producer; 1st = $10.11 low-intent risk</td></tr>
+            <tr><td>Premium Paid Search 4</td><td>301%</td><td>$8.61</td><td style="text-align:right">At ceiling · holds 2nd ($6.26)</td></tr>
+            <tr><td>Premium Paid Search 2B</td><td>185%</td><td>$5.29</td><td style="text-align:right">At 2nd ($5.11) +3.5% · thin volume, monitor</td></tr>
+            <tr><td>Premium Email</td><td>191%</td><td>$5.46</td><td style="text-align:right">35 opps — ghost-tier, not worth precision</td></tr>
+            <tr><td>PPS 6 · Native 2</td><td>100/130%</td><td>—</td><td style="text-align:right">Zero bids placed — investigate before pricing</td></tr>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="pt">Locked out at the 301% ceiling <small>base $2.86</small></div>
+          <table class="dt">
+            <tr><th>Source</th><th>Mkt clicks</th><th>2nd RPC</th><th>Base needed @300%</th></tr>
+            <tr><td>Premium Paid Search 5</td><td>544</td><td>$12.47</td><td class="neg">$4.36</td></tr>
+            <tr><td>Premium Paid Search 5B</td><td>406</td><td>$9.10</td><td>$3.19</td></tr>
+            <tr><td>Premium Paid Search 5D</td><td>297</td><td>$9.32</td><td>$3.26</td></tr>
+            <tr><td>Premium Paid Search 5D2</td><td>252</td><td>$11.34</td><td class="neg">$3.97</td></tr>
+            <tr><td>Premium Paid Search 7</td><td>159</td><td>$11.44</td><td class="neg">$4.00</td></tr>
+            <tr><td>Premium Referral 3</td><td>90</td><td>$9.88</td><td>$3.46</td></tr>
+            <tr><td>Premium Paid Search 4B</td><td>57</td><td>$9.66</td><td>$3.38</td></tr>
+            <tr><td>Premium Paid Search 5A</td><td>23</td><td>$9.74</td><td>$3.41 · thin</td></tr>
+          </table>
+          <div class="note">~1,800 market clicks/mo collectively. The retired base "Premium Paid Search" source stays retired — numbered variants only.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="a3">
+      <div class="bhead"><span class="ix">03</span><h2>Option B — base $2.86 → $4.00, renormalized <span class="lobtag auto">CA Auto</span></h2></div>
+      <p class="bsub">The structural fix · decision for John at the 6/17 review · renormalization ×0.715 preserves every current effective bid before re-targeting</p>
+      <div class="panel">
+        <table class="dt">
+          <tr><th>Source</th><th>Target bid</th><th>Option B mult</th><th>Effective bid</th><th>vs Option A</th></tr>
+          <tr><td>Email</td><td>$5.85</td><td>145%</td><td>$5.80</td><td>same target, 60pts of headroom regained</td></tr>
+          <tr><td>Premium Paid Search 2</td><td>$6.29</td><td>155%</td><td>$6.20</td><td>same target</td></tr>
+          <tr><td>Premium Paid Search 3</td><td>$5.72</td><td>145%</td><td>$5.80</td><td>same target</td></tr>
+          <tr><td>Native/Display/Social</td><td>$4.58</td><td>115%</td><td>$4.60</td><td>same target</td></tr>
+          <tr><td>Premium Paid Search 5C</td><td>$6.58</td><td>165%</td><td>$6.60</td><td>same target</td></tr>
+          <tr><td>Internal SEO / SEO 2</td><td>$8.29 / $8.01</td><td>210% / 200%</td><td>$8.40 / $8.00</td><td>same targets</td></tr>
+          <tr><td>Premium Email B</td><td>$8.72</td><td>220%</td><td>$8.80</td><td class="pos">full 2nd +5% buffer now reachable</td></tr>
+          <tr><td>Premium Referral (hold)</td><td>$6.01</td><td>150%</td><td>$6.00</td><td>unchanged effective</td></tr>
+          <tr><td>Premium Paid Search 4 (hold)</td><td>$8.61</td><td>215%</td><td>$8.60</td><td>unchanged effective</td></tr>
+          <tr class="w2"><td>PPS 5B · unlocked</td><td>$9.56</td><td>240%</td><td>$9.60</td><td><span class="tag b">Wave 3 optional</span></td></tr>
+          <tr class="w2"><td>PPS 5D2 · unlocked</td><td>$11.91</td><td>300%</td><td>$12.00</td><td><span class="tag b">Wave 3 optional</span></td></tr>
+          <tr class="w2"><td>PPS 5D · 7 · 4B · PR3 · unlocked</td><td>$9.79–$12.01</td><td>245–300%</td><td>$9.80–$12.00</td><td><span class="tag gr">Enable selectively</span></td></tr>
+          <tr><td>Premium Paid Search 5</td><td>$13.09</td><td class="neg">327% — still locked</td><td>—</td><td>accept; not budget-appropriate anyway</td></tr>
+        </table>
+        <div class="note"><b>Why Option B is worth John's sign-off:</b> identical effective bids on day one (zero spend shock from the base change itself), full multiplier headroom restored for future market moves, and 8 premium sources become priceable. <b>Wave 3 stays optional and selective</b> — those are $9.60–$12.00 clicks; concentrate on the proven winners first and enable at most 2–3 (5B and 5D2 have the best click volume) only if budget headroom exists after Waves 1–2 mature. If John holds the base again, Option A still executes in full.</div>
+      </div>
+    </section>
+
+    <!-- ============ HOME ============ -->
+    <section class="block" id="h1">
+      <div class="bhead"><span class="ix">04</span><h2>The schedule finding <span class="lobtag home">CA Home</span></h2></div>
+      <p class="bsub">Observed average bid vs. full-schedule effective bid (base $4.15 inferred from the 5/8 review — verify in dashboard)</p>
+      <div class="panel">
+        <table class="dt">
+          <tr><th>Source</th><th>Mult</th><th>Full-schedule eff</th><th>Observed avg bid</th><th>Ratio</th><th>1st RPC</th><th>2nd RPC</th><th>Win rate</th></tr>
+          <tr><td>Tier 1</td><td>115%</td><td>$4.77</td><td>$3.32</td><td class="warn">70%</td><td>$4.34</td><td>$3.31</td><td class="neg">0.80%</td></tr>
+          <tr><td>Tier 3</td><td>135%</td><td>$5.60</td><td>$4.07</td><td class="warn">73%</td><td>$3.63</td><td>$2.92</td><td class="pos">25.24%</td></tr>
+          <tr><td>Tier 2</td><td>70%</td><td>$2.90</td><td>$2.01</td><td class="warn">69%</td><td>$2.64</td><td>$2.16</td><td>7.61%</td></tr>
+          <tr><td>Home Search</td><td>100%</td><td>$4.15</td><td>$2.80</td><td class="warn">67%</td><td>$17.77</td><td>$13.74</td><td class="neg">0.00%</td></tr>
+          <tr><td>Home SearchB</td><td>140%</td><td>$5.81</td><td>$3.83</td><td class="warn">66%</td><td>$7.03</td><td>$6.01</td><td class="neg">1.59%</td></tr>
+          <tr><td>Internal SEO</td><td>40%</td><td>$1.66</td><td>$1.27</td><td class="warn">77%</td><td>$8.83</td><td>$0.93 (thin)</td><td>7.69%</td></tr>
+        </table>
+        <div class="note"><b>The discount is uniform (~30%), which points to the bid schedule, not noise.</b> The cost is concentrated on Tier 1: its full-schedule price already clears 1st position, but the average auction bid lands at 2nd-position money — in a market where <b>3,719 of 3,963 Tier 1 clicks (94%) go to 1st</b>. Verification is a 30-second dashboard check of the campaign's schedule percentages; the two fix paths below are sized for either outcome.</div>
+      </div>
+    </section>
+
+    <section class="block" id="h2">
+      <div class="bhead"><span class="ix">05</span><h2>Recommended changes <span class="lobtag home">CA Home</span></h2></div>
+      <p class="bsub">Tier 1 is the agreed focus from the 5/8 review · Tier 2 held per John</p>
+      <div class="two">
+        <div class="path pa">
+          <div class="pl">Tier 1 · Path A — preferred</div>
+          <h4>Normalize the bid schedule</h4>
+          <p>Lift scheduled percentages toward <b>100% during the hours Tier 1 volume actually flows</b>. Average placed bid rises ~$3.32 → ~$4.77 = <b>1st position +10%</b> with no multiplier change and no overpay in any hour. Cleanest price-per-click outcome.</p>
+        </div>
+        <div class="path pb">
+          <div class="pl">Tier 1 · Path B — if the schedule stays</div>
+          <h4>Multiplier 115% → 150%</h4>
+          <p>Average placed bid rises to ~<b>$4.33 ≈ 1st RPC ($4.34)</b> at the current discount pattern. Trade-off: full-schedule hours price at $6.23 (1st +44%) — accept short-term, revisit after the day-14 read.</p>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:14px">
+        <table class="dt">
+          <tr><th>Source</th><th>Change</th><th>Rationale</th><th>Expected</th></tr>
+          <tr class="w1"><td>Tier 1</td><td class="chg">Path A or B above</td><td style="text-align:right">32,872 opps · 5,849 bids · 0.8% win in a 94%-first-click market</td><td style="text-align:right">win → 5–10% · +90–140 clicks · +6–8 quotes/mo · ≈+$400–600 spend</td></tr>
+          <tr class="w1"><td>Tier 3</td><td class="chg">135% → 120% + investigate bid rate</td><td style="text-align:right">Paying above 1st ($4.07 avg vs $3.63 RPC) · bids on only 2.2% of 9,406 opps</td><td style="text-align:right">same wins, ~10% cheaper clicks; bid-rate answer = the real volume unlock (25% win when it bids)</td></tr>
+          <tr><td>Tier 2</td><td><span class="tag g">Hold 70%</span></td><td style="text-align:right">John's direction 5/8 · 2 binds at $105.55 CPA · win 7.6% at $2.01</td><td style="text-align:right">keep printing; do not touch</td></tr>
+          <tr><td>Internal SEO</td><td class="chg">40% → 180% (optional micro-test)</td><td style="text-align:right">Legacy throttle · thin 2nd-pos data → 85%-of-1st rule = $7.51 target</td><td style="text-align:right">~$40/mo max exposure · 78 mkt clicks · review day 14</td></tr>
+        </table>
+        <div class="note"><b>Sequencing:</b> make the Tier 1 move and the Tier 3 trim together, then hold Home pricing still for 14 days so the read is clean. The Mobile-Home/Condo and 55–74 conversion signals (Overall report) inform lead handling now and bid weighting later — they are not a reason to touch Tier 2.</div>
+      </div>
+    </section>
+
+    <section class="block" id="h3">
+      <div class="bhead"><span class="ix">06</span><h2>Deferred &amp; locked <span class="lobtag home">CA Home</span></h2></div>
+      <p class="bsub">Math ready for when the conversation reopens</p>
+      <div class="panel">
+        <table class="dt">
+          <tr><th>Source</th><th>Status</th><th>Market</th><th>The math, when revisited</th></tr>
+          <tr><td>Home SearchB</td><td><span class="tag gr">Deferred by John 5/8</span></td><td style="text-align:right">778 clicks/mo · 1st $7.03 · 2nd $6.01</td><td style="text-align:right">140% → 155% puts full-schedule at $6.43 (2nd +7%); revisit after Tier 1 lands — it was the top contact-rate source this spring</td></tr>
+          <tr><td>Home Search</td><td><span class="tag r">Locked at any multiplier</span></td><td style="text-align:right">1,172 clicks/mo · 1st $17.77 · 2nd $13.74</td><td style="text-align:right">Even 301% = $12.49 &lt; 2nd. Needs base ≥ $4.81 at 300% — a base-bid conversation, not a modifier tweak</td></tr>
+        </table>
+        <div class="note">Both stay active at current settings — capturing stray cheap wins costs nothing. Per the 5/8 call, John explicitly preferred no Home pricing moves beyond the Tier 1 effort; these stay parked until he reopens them.</div>
+      </div>
+    </section>
+
+    <!-- ============ EXECUTION ============ -->
+    <section class="block" id="x1">
+      <div class="bhead"><span class="ix">07</span><h2>Budget reconciliation</h2></div>
+      <div class="panel">
+        <table class="dt">
+          <tr><th>Component</th><th>Current /mo</th><th>Projected /mo</th><th>Driver</th></tr>
+          <tr><td>CA Auto</td><td>$274</td><td>$650–1,000</td><td style="text-align:right">Waves 1–2 re-price (peak-2025 spend was $744–763)</td></tr>
+          <tr><td>CA Home</td><td>$674</td><td>$1,050–1,250</td><td style="text-align:right">Tier 1 fix +$400–600 · Tier 3 trim −$30–50</td></tr>
+          <tr><td>Combined</td><td>$949</td><td class="warn">$1,700–2,250</td><td style="text-align:right">phased — waves gate the ramp</td></tr>
+        </table>
+        <div class="note"><b>This needs to be said plainly at the review:</b> recreating peak volume costs roughly what the peak cost, in a more expensive market. John's stated economics support it — GOAL outproduces his other two lead sources combined, his April CPC improved 11% ($5.28 → $4.70), and his target is double the four April sales. The waves and checkpoints keep every increment reversible; if budget pressure appears, <b>cap the premium channels rather than starving the proven winners</b>. Combined projection at maturity: <b>roughly 5–7 Home + 2–4 Auto policies/mo</b> against the 8+/mo goal, contingent on contact rate holding as volume scales.</div>
+      </div>
+    </section>
+
+    <section class="block" id="x2">
+      <div class="bhead"><span class="ix">08</span><h2>Change checklist &amp; monitoring cadence</h2></div>
+      <div class="panel">
+        <div class="pt">Execute in this order</div>
+        <div class="steps">
+          <div class="step"><span class="n"></span><div><div class="h">Pre-flight (before any change)</div><div class="b">Verify Home base bid + campaign schedule percentages in the dashboard · confirm single ad group per campaign · confirm PPS 6 / Native 2 source status with Chris.</div></div></div>
+          <div class="step"><span class="n"></span><div><div class="h">Auto Wave 1 — four multiplier edits</div><div class="b">Email <b>205%</b> · PPS 2 <b>220%</b> · PPS 3 <b>200%</b> · Native/Display/Social <b>160%</b>.</div></div></div>
+          <div class="step"><span class="n"></span><div><div class="h">Home — two edits (same day)</div><div class="b">Tier 1 <b>Path A (schedule) or B (150%)</b> per pre-flight finding · Tier 3 <b>120%</b>. Tier 2 untouched.</div></div></div>
+          <div class="step"><span class="n"></span><div><div class="h">Days 1–3 / 4–7</div><div class="b">Confirm impressions flow on every raised source · win rate by source at day 7 — <b>under ~5% on a raised source = still underpriced or a targeting conflict</b> (Native: 0% = stop, investigate).</div></div></div>
+          <div class="step"><span class="n"></span><div><div class="h">Day 14 — checkpoint + Wave 2</div><div class="b">Fresh RightPricing pull (7-day window) · pacing check · then Auto Wave 2: PPS 5C <b>230%</b> · Internal SEO <b>290%</b> · Internal SEO 2 <b>280%</b> · Premium Email B <b>300%</b> · Paid Search <b>125%</b> · optional Home Internal SEO <b>180%</b>.</div></div></div>
+          <div class="step"><span class="n"></span><div><div class="h">6/17 review — the base-bid decision</div><div class="b">Present Option B ($4.00 base, renormalized ×0.715, zero day-one spend change) with the locked-source table. If approved, apply base + Option B multipliers as one change set and treat it as a re-launch checkpoint.</div></div></div>
+          <div class="step"><span class="n"></span><div><div class="h">Weeks 3–4 and monthly</div><div class="b">Quote CPA vs. target by source · honey holes bid up, money pits step down toward ~65% before any pause · full monthly re-price on fresh disposition data (next import due ~7/1).</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="x3">
+      <div class="bhead"><span class="ix">09</span><h2>Method &amp; validation</h2></div>
+      <div class="panel">
+        <table class="dt">
+          <tr><th>Check</th><th style="text-align:left">Status</th></tr>
+          <tr><td>Report scope</td><td style="text-align:left">One state, one vertical per report (CA Auto · CA Home), pulled fresh June 7, 2026. Volume read exclusively from the clicks columns; second_rpc primary cost reference; first_rpc used where a vertical/source warrants 1st (Home band = 1st–2nd; Auto = 2nd–7th, 1st only under ~$6).</td></tr>
+          <tr><td>Ghost rows excluded</td><td style="text-align:left">Auto export's Tier 1/2/3, Benepath rows, "Test", and blank-name rows (zero/cross-vertical inventory) excluded from pricing.</td></tr>
+          <tr><td>Bases</td><td style="text-align:left">Auto base $2.86 — documented in the May 13 plan, held per John. Home base $4.15 — inferred from the 5/8 review (HomeSearchB 140% ↔ $5.81 effective); <b>verify before executing Home Path B</b>. Multiplier ceiling 301%.</td></tr>
+          <tr><td>Buffers &amp; rounding</td><td style="text-align:left">Targets carry 3–11% volatility buffer (largest on Native, where 3,642 bids at the 2nd-position average won zero). Rounded to nearest 5%, nearest 10% above 200%. No geo buffer applied — statewide CA targeting.</td></tr>
+          <tr><td>Constraints honored</td><td style="text-align:left">Non-standard ICP filters untouched · Tier 2 and Home SearchB pricing held per client · no source removals · retired base Premium Paid Search not recommended · 20% increase = 120%, never 20%.</td></tr>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script>
+document.querySelectorAll('table.dt').forEach(t=>{const w=document.createElement('div');w.className='tw';t.parentNode.insertBefore(w,t);w.appendChild(t);});
+</script>
+</body>
+</html>
