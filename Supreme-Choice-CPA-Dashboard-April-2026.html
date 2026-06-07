@@ -996,6 +996,29 @@
             .source-table-container {
                 padding: 16px;
             }
+
+            /* Collapse grids that set their columns via inline styles
+               (inline rules would otherwise override the class defaults) */
+            [style*="grid-template-columns"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            /* Back link is position:fixed via inline style and overlaps the
+               centered title on narrow screens — let it flow in-line instead */
+            a[href="index.html"][style*="fixed"] {
+                position: static !important;
+                margin: 0 0 16px 0;
+            }
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 14px;
+            }
+
+            [style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
         }
 
         /* Print Styles */

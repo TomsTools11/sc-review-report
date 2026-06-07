@@ -147,13 +147,20 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
 }
 @media(max-width:900px){
   .shell{grid-template-columns:1fr;}
-  .side{position:static;height:auto;}
+  .side{position:static;height:auto;padding:26px 24px;}
   .side nav{display:none;}
   .main{padding:32px 22px;}
   .kgrid,.kgrid.k4{grid-template-columns:1fr 1fr;}
   .trend{grid-template-columns:1fr;}
+  .panel{min-width:0;}
+  .dtable{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
 }
-@media(max-width:560px){ .kgrid,.kgrid.k4{grid-template-columns:1fr;} .fstep .lab{width:92px;} }
+@media(max-width:560px){
+  .kgrid,.kgrid.k4{grid-template-columns:1fr;} .fstep .lab{width:92px;}
+  .main{padding:24px 16px;}
+  .panel,.fpanel{padding:18px 16px;} .exec{padding:18px;}
+  .bhead h2{font-size:18px;} .bhead{gap:9px;}
+}
 </style>
 </head>
 <body>

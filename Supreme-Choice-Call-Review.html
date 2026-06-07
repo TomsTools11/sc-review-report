@@ -342,11 +342,15 @@
   @media (max-width: 900px) {
     .kpi-grid, .formula-grid, .eras, .principles-grid, .rec-grid { grid-template-columns: 1fr 1fr; }
     .auto-split { grid-template-columns: 1fr; }
+    .crisis-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
   }
   @media (max-width: 600px) {
     .kpi-grid, .formula-grid, .eras, .principles-grid, .rec-grid { grid-template-columns: 1fr; }
     .hero .container { flex-direction: column; align-items: flex-start; }
     .hero .meta { text-align: left; }
+    .container { padding: 0 18px; }
+    .crisis-wrap, .auto-wrap, .principles { padding: 20px 18px; }
+    .compare-row { grid-template-columns: 1fr; gap: 6px; }
   }
 </style>
 </head>
