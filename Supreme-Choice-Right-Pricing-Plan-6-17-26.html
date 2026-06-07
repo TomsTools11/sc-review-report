@@ -97,7 +97,9 @@ table.dt .chg{font-weight:800;color:var(--blue-hover);}
   .main{padding:32px 22px;} .two{grid-template-columns:1fr;}
 }
 /* ---------- Mobile pass ---------- */
-.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;}
+.main{min-width:0;}
+.two>*,.gates>*,.kgrid>*{min-width:0;}
 table.dt td[style*="text-align"]{white-space:normal;min-width:230px;line-height:1.5;}
 @media(max-width:900px){
   .side nav{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:20px;}
