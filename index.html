@@ -29,12 +29,11 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
 .lead p{font-size:16px;color:var(--body);line-height:1.62;}
 .lead p b{color:var(--ink);font-weight:700;}
 
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:920px;}
 .card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:26px 26px 24px;text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,23,45,.05);transition:transform .18s,box-shadow .18s,border-color .18s;}
 .card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(0,23,45,.12);border-color:var(--blue);}
 .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
 .card.c1::before{background:var(--blue);}
-.card.c2::before{background:var(--sky);}
 .card.c3::before{background:var(--mint-d);}
 .card .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);}
 .card.c3 .tag{color:var(--mint-d);}
@@ -60,38 +59,30 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
 
 <div class="wrap">
   <div class="lead">
-    <div class="eb">Account Review · May 22, 2026</div>
+    <div class="eb">Account Review · June 17, 2026</div>
     <h1>Supreme Choice Insurance Solutions</h1>
-    <p>Three performance reports for the <b>May 22, 2026</b> review — covering the California Home campaign recovery and the Auto right-pricing plan. Open any report below.</p>
+    <p>Two performance reports for the <b>June 17, 2026</b> review — the overall CA Home + CA Auto campaign review and the Auto deep-dive with the improvement plan. Open any report below.</p>
   </div>
 
   <div class="grid">
-    <a class="card c1" href="Supreme-Choice-Performance-Review-May-22-2026.html">
-      <div class="tag">Home CA · Client review</div>
-      <h3>Performance Review — May 22, 2026</h3>
-      <p>Latest client review of the CA Home campaign: Quote CPA broke below the $35 gold standard at $20.70, Tier 1 recovered organically (9.5% → 28.1%), and Tier 2 is carrying every policy.</p>
-      <div class="traits"><span>CPA scorecard</span><span>Source table</span><span>Recommendations</span></div>
+    <a class="card c1" href="Supreme-Choice-Overall-Performance-Report-6-17-26.html">
+      <div class="tag">Home + Auto CA · Performance</div>
+      <h3>Overall Campaign Performance — June 17, 2026</h3>
+      <p>Per-campaign KPIs for CA Home and CA Auto — reported separately, never blended — with attribute breakdowns across source, property type, age, county, and credit, and the segments showing the highest quote and bind rates.</p>
+      <div class="traits"><span>KPI grids</span><span>Attribute visuals</span><span>Targeting signals</span></div>
       <span class="go">Open report →</span>
     </a>
 
-    <a class="card c2" href="Supreme-Choice-Contact-Rate-Analysis-2026-05-22.html">
-      <div class="tag">Home CA · Analysis</div>
-      <h3>Contact Rate Analysis — May 22, 2026</h3>
-      <p>Full recovery reading: blended contact rate 28.6%, three of four producing sources now under the gold-standard Quote CPA. The 7-month trend rebuilt with the new May reading.</p>
-      <div class="traits"><span>7-month trend</span><span>By-source bars</span><span>Funnel compare</span></div>
-      <span class="go">Open report →</span>
-    </a>
-
-    <a class="card c3" href="Supreme-Choice-Auto-Recovery-Plan-May-22-2026.html">
-      <div class="tag">Auto · Right-priced v2</div>
-      <h3>Auto Recovery Plan v2 — May 22, 2026</h3>
-      <p>All recommended changes shipped: 5 pushes, 3 cost-cutting pulls, and the Premium Referral 2 routing ticket filed. The day-7 / day-21 measurement clock has started.</p>
-      <div class="traits"><span>Bid map</span><span>Execution log</span><span>Projections</span></div>
+    <a class="card c3" href="Supreme-Choice-Auto-Campaign-Deep-Dive-6-17-26.html">
+      <div class="tag">Auto CA · Deep-dive</div>
+      <h3>Auto Campaign Deep-Dive — June 17, 2026</h3>
+      <p>Peak-vs-today diagnosis of the CA Auto campaign: the three-gate funnel read, market position map, the 301% ceiling problem, and the two-wave re-price plan with projections and checkpoints.</p>
+      <div class="traits"><span>Trend table</span><span>Position map</span><span>Recommendations</span></div>
       <span class="go">Open report →</span>
     </a>
   </div>
 
-  <div class="note">Reports reflect GOAL platform data as of <b>May 22, 2026</b>. Updated before each review.</div>
+  <div class="note">Reports reflect GOAL platform data as of <b>June 7, 2026</b>. Updated before each review.</div>
 </div>
 
 <div class="foot">GOAL Platform · Prepared by Tom Panos · checkoutgoal.com</div>
