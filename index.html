@@ -34,6 +34,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
 .card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(0,23,45,.12);border-color:var(--blue);}
 .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
 .card.c1::before{background:var(--blue);}
+.card.c2::before{background:var(--sky);}
 .card.c3::before{background:var(--mint-d);}
 .card .tag{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);}
 .card.c3 .tag{color:var(--mint-d);}
@@ -49,6 +50,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
 .foot{padding:22px 48px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);background:var(--white);}
 
 @media(max-width:920px){ .grid{grid-template-columns:1fr;} .wrap{padding:44px 26px 30px;} .top,.foot{padding-left:26px;padding-right:26px;} .lead h1{font-size:30px;} }
+@media(max-width:560px){
+  .top{flex-direction:column;align-items:flex-start;gap:10px;padding:18px 22px;}
+  .top .r{font-size:10.5px;letter-spacing:.1em;}
+  .wrap{padding:36px 18px 26px;}
+  .lead h1{font-size:26px;}
+  .lead p{font-size:15px;}
+  .card{padding:22px 20px 20px;}
+}
 </style>
 </head>
 <body>
@@ -61,7 +70,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
   <div class="lead">
     <div class="eb">Account Review · June 17, 2026</div>
     <h1>Supreme Choice Insurance Solutions</h1>
-    <p>Two performance reports for the <b>June 17, 2026</b> review — the overall CA Home + CA Auto campaign review and the Auto deep-dive with the improvement plan. Open any report below.</p>
+    <p>Three performance reports for the <b>June 17, 2026</b> review — the overall CA Home + CA Auto campaign review, the Auto deep-dive with the improvement plan, and the right-pricing plan with the full bid and modifier changeset. Open any report below.</p>
   </div>
 
   <div class="grid">
@@ -78,6 +87,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
       <h3>Auto Campaign Deep-Dive — June 17, 2026</h3>
       <p>Peak-vs-today diagnosis of the CA Auto campaign: the three-gate funnel read, market position map, the 301% ceiling problem, and the two-wave re-price plan with projections and checkpoints.</p>
       <div class="traits"><span>Trend table</span><span>Position map</span><span>Recommendations</span></div>
+      <span class="go">Open report →</span>
+    </a>
+
+    <a class="card c2" href="Supreme-Choice-Right-Pricing-Plan-6-17-26.html">
+      <div class="tag">Auto + Home CA · Bid plan</div>
+      <h3>Right-Pricing Plan — June 17, 2026</h3>
+      <p>The full bid and modifier changeset from the June 7 RightPricing pull: the two-wave Auto multiplier re-price, the base-bid Option B math, the Home Tier 1 schedule finding, and the execution checklist with monitoring cadence.</p>
+      <div class="traits"><span>Multiplier tables</span><span>Option B math</span><span>Change checklist</span></div>
       <span class="go">Open report →</span>
     </a>
   </div>
