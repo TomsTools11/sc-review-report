@@ -60,7 +60,6 @@ table.dt tr:last-child td{border-bottom:none;}
 table.dt tr.hl td{background:#F0FBF7;}
 table.dt tr.lo td{background:#FEF6F6;}
 table.dt .pos{color:var(--mint-d);font-weight:700;} table.dt .neg{color:var(--error);font-weight:700;} table.dt .warn{color:#b07a17;font-weight:700;}
-table.dt td[style*="text-align:left"],table.dt th[style*="text-align:left"]{white-space:normal;min-width:200px;}
 .tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:5px;}
 .tag.g{background:#D9F4E7;color:#157a4c;} .tag.a{background:#FDF0DA;color:#9a6712;} .tag.r{background:#FDE1E2;color:#b3262b;} .tag.gr{background:#EDF1F5;color:#5b6675;} .tag.b{background:#E3F0FD;color:var(--blue-hover);}
 .gates{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
@@ -110,20 +109,36 @@ table.dt td[style*="text-align:left"],table.dt th[style*="text-align:left"]{whit
   .block{margin-bottom:28px;}
 }
 @media(max-width:900px){
-  .shell{grid-template-columns:1fr;} .side{position:static;height:auto;overflow:visible;padding:26px 24px;} .side nav{display:none;}
-  .main{padding:32px 22px;min-width:0;} .kgrid{grid-template-columns:1fr 1fr;} .gates{grid-template-columns:1fr;}
+  .shell{grid-template-columns:1fr;} .side{position:static;height:auto;} .side nav{display:none;}
+  .main{padding:32px 22px;} .kgrid{grid-template-columns:1fr 1fr;} .gates{grid-template-columns:1fr;}
   .brow .lab{width:110px;} .brow .end{display:none;}
-  .panel{min-width:0;}
-  table.dt{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
 }
-@media(max-width:560px){
-  .main{padding:24px 16px;}
-  .kgrid{gap:10px;} .kc{padding:14px;min-width:0;} .kc .v{font-size:23px;}
-  .exec{padding:18px;} .exec p{font-size:13.5px;}
-  .panel{padding:18px 16px;}
-  .bhead{gap:9px;} .bhead h2{font-size:18px;} .bsub{margin-left:0;}
-  .callout{padding:18px;}
-  .rec .top{flex-wrap:wrap;}
+/* ---------- Mobile pass ---------- */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table.dt td[style*="text-align"]{white-space:normal;min-width:230px;line-height:1.5;}
+@media(max-width:900px){
+  .side nav{display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .side nav a{background:rgba(255,255,255,.07);padding:10px 14px;border-radius:999px;font-size:12px;}
+  .side nav a .dot{display:none;}
+}
+@media(max-width:640px){
+  .main{padding:26px 16px;}
+  .side{padding:26px 18px;}
+  .side h1{font-size:22px;}
+  .bhead h2{font-size:18px;}
+  .bsub{margin-left:0;}
+  .exec{padding:18px 16px;}
+  .kgrid{gap:10px;}
+  .kc{padding:14px;}
+  .kc .v{font-size:21px;overflow-wrap:anywhere;}
+  table.dt th,table.dt td{font-size:11.5px;padding:8px 6px;}
+  .brow{flex-wrap:wrap;row-gap:4px;}
+  .brow .lab{width:100%;text-align:left;}
+  .brow .lab small{display:inline;margin-left:6px;}
+  .btrack{flex:1 1 100%;min-width:0;height:38px;}
+  .btrack .mk:after{top:auto;bottom:4px;}
+  .brow .end{display:block;width:100%;text-align:right;}
+  .callout{grid-template-columns:1fr;padding:18px;}
 }
 </style>
 </head>
@@ -324,6 +339,7 @@ table.dt td[style*="text-align:left"],table.dt th[style*="text-align:left"]{whit
   </main>
 </div>
 <script>
+document.querySelectorAll('table.dt').forEach(t=>{const w=document.createElement('div');w.className='tw';t.parentNode.insertBefore(w,t);w.appendChild(t);});
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.dataset.w+'%';io.unobserve(e.target);}})},{threshold:.3});
 document.querySelectorAll('.btrack i').forEach(b=>io.observe(b));
 </script>
