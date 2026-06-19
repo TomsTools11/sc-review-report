@@ -14,8 +14,9 @@ The current review package (June 19, 2026), all in the **Structured Dashboard** 
 
 | File | Description |
 |------|-------------|
-| `index.html` | Landing page / report hub — sidebar nav linking to the three reports |
-| `Supreme-Choice-Overall-Performance-Report-6-19-26.html` | Overall CA Home + CA Auto performance summary |
+| `index.html` | Landing page / report hub — sidebar nav linking to the four reports |
+| `Supreme-Choice-Auto-Performance-Review-6-19-26.html` | CA Auto performance review — KPIs, lead mix, funnel, and breakdowns by month, driver age, and credit rating |
+| `Supreme-Choice-Home-Performance-Review-6-19-26.html` | CA Home performance review — KPIs, lead mix, funnel, and breakdowns by property type, month, and applicant age |
 | `Supreme-Choice-Auto-Campaign-Deep-Dive-6-19-26.html` | CA Auto deep-dive — trend, source performance, market position |
 | `Supreme-Choice-Right-Pricing-Plan-6-19-26.html` | Full bid & modifier changeset with implementation plan |
 

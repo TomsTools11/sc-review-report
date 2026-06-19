@@ -36,7 +36,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
 .exec h2{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.1;margin:11px 0 13px;}
 .exec p{font-size:15.5px;line-height:1.62;color:var(--body);}
 .exec p b{color:var(--ink);font-weight:700;}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
 .card{position:relative;border:1px solid var(--line);border-radius:14px;background:var(--white);padding:24px 24px 22px;text-decoration:none;color:inherit;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 2px 10px rgba(0,23,45,.05);transition:transform .18s,box-shadow .18s,border-color .18s;}
 .card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(0,23,45,.12);border-color:var(--blue);}
 .card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
@@ -74,7 +74,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
     <h1>Supreme Choice Insurance Solutions</h1>
     <div class="who">Prepared for <b>John Hunt</b><br>California &middot; Home &amp; Auto<br>Review of June 19, 2026</div>
     <nav>
-      <a href="Supreme-Choice-Overall-Performance-Report-6-19-26.html"><span class="dot"></span>Overall Performance</a>
+      <a href="Supreme-Choice-Auto-Performance-Review-6-19-26.html"><span class="dot"></span>Auto Performance Review</a>
+      <a href="Supreme-Choice-Home-Performance-Review-6-19-26.html"><span class="dot"></span>Home Performance Review</a>
       <a href="Supreme-Choice-Auto-Campaign-Deep-Dive-6-19-26.html"><span class="dot"></span>Auto Campaign Deep-Dive</a>
       <a href="Supreme-Choice-Right-Pricing-Plan-6-19-26.html"><span class="dot"></span>Right-Pricing Plan</a>
     </nav>
@@ -86,33 +87,42 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(-
     <div class="exec">
       <div class="eb">Account Review &middot; June 19, 2026</div>
       <h2>June 19 review package</h2>
-      <p>Three reports for the <b>June 19, 2026</b> review of the CA Home and CA Auto campaigns — the overall performance summary, the Auto deep-dive, and the full right-pricing changeset. All reflect the last 30 days through <b>June 18, 2026</b>. Open any report below.</p>
+      <p>Four reports for the <b>June 19, 2026</b> review of the CA Auto and CA Home campaigns — a performance review for each campaign, the Auto deep-dive, and the full right-pricing changeset. Headline metrics reflect the last 30 days through <b>June 18, 2026</b>. Open any report below.</p>
     </div>
 
     <div class="cards">
-      <a class="card c1" href="Supreme-Choice-Overall-Performance-Report-6-19-26.html">
+      <a class="card c1" href="Supreme-Choice-Auto-Performance-Review-6-19-26.html">
         <span class="ix">01</span>
-        <div class="tag">Home + Auto CA &middot; Performance</div>
-        <h3>Overall Performance</h3>
-        <p>Per-line KPIs for CA Home and CA Auto — leads, calls, win rate, and average position — with the lead-mix split, conversion funnel, targeting priorities, and the headline recommendations.</p>
-        <div class="traits"><span>KPI grid</span><span>Donut + funnel</span><span>Recommendations</span></div>
+        <div class="tag">Auto CA &middot; Performance review</div>
+        <h3>Auto Performance Review</h3>
+        <p>The full CA Auto review — KPIs, lead mix by source, conversion funnel, and performance by month, driver age, and credit rating, with recommendations.</p>
+        <div class="traits"><span>Donut + funnel</span><span>By month / age / credit</span><span>Recommendations</span></div>
+        <span class="go">Open report →</span>
+      </a>
+
+      <a class="card c2" href="Supreme-Choice-Home-Performance-Review-6-19-26.html">
+        <span class="ix">02</span>
+        <div class="tag">Home CA &middot; Performance review</div>
+        <h3>Home Performance Review</h3>
+        <p>The full CA Home review — KPIs, lead mix by source, conversion funnel, and performance by property type, month, and applicant age, with recommendations.</p>
+        <div class="traits"><span>Donut + funnel</span><span>By property / month / age</span><span>Recommendations</span></div>
         <span class="go">Open report →</span>
       </a>
 
       <a class="card c3" href="Supreme-Choice-Auto-Campaign-Deep-Dive-6-19-26.html">
-        <span class="ix">02</span>
+        <span class="ix">03</span>
         <div class="tag">Auto CA &middot; Deep-dive</div>
         <h3>Auto Campaign Deep-Dive</h3>
-        <p>Peak-vs-current diagnosis of CA Auto: the 2025 monthly trend, source performance against market pricing, the market-position map, and the funnel with first-call priority and recommendations.</p>
+        <p>Peak-vs-current diagnosis of CA Auto: the 2025 monthly trend, source performance against market pricing, the market-position map, and the funnel with first-call priority.</p>
         <div class="traits"><span>Trend table</span><span>Position map</span><span>Funnel</span></div>
         <span class="go">Open report →</span>
       </a>
 
-      <a class="card c2" href="Supreme-Choice-Right-Pricing-Plan-6-19-26.html">
-        <span class="ix">03</span>
+      <a class="card c1" href="Supreme-Choice-Right-Pricing-Plan-6-19-26.html">
+        <span class="ix">04</span>
         <div class="tag">Auto + Home CA &middot; Bid plan</div>
         <h3>Right-Pricing Plan</h3>
-        <p>The full bid and modifier changeset from the June 19 market pull — Auto and Home multiplier tables, market pricing by ad-wall position, budget direction, and the step-by-step implementation plan.</p>
+        <p>The full bid and modifier changeset from the June 19 market pull — Auto and Home multiplier tables, market pricing by ad-wall position, budget direction, and the implementation plan.</p>
         <div class="traits"><span>Multiplier tables</span><span>Market pricing</span><span>Implementation</span></div>
         <span class="go">Open report →</span>
       </a>
