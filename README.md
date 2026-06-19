@@ -10,15 +10,26 @@ Reports include KPI dashboards, campaign breakdowns, call review analyses, conta
 
 ## Reports
 
+The current review package (June 19, 2026), all in the **Structured Dashboard** theme:
+
 | File | Description |
 |------|-------------|
-| `index.html` | Main landing page / internal campaign review report |
-| `Supreme-Choice-CPA-Dashboard-April-2026.html` | CPA performance dashboard — April 2026 |
-| `Supreme-Choice-Call-Review.html` | Call review analysis report |
-| `Supreme-Choice-Client-Dashboard-April-2026.html` | Client-facing dashboard — April 2026 |
-| `Supreme-Choice-Client-Dashboard-April-2026-v2.html` | Client-facing dashboard — April 2026 (v2) |
-| `Supreme-Choice-Contact-Rate-Analysis.html` | Contact rate analysis and metrics |
-| `Supreme-Choice-Home-CA-Client-Report.html` | Home & CA client report |
+| `index.html` | Landing page / report hub — sidebar nav linking to the three reports |
+| `Supreme-Choice-Overall-Performance-Report-6-19-26.html` | Overall CA Home + CA Auto performance summary |
+| `Supreme-Choice-Auto-Campaign-Deep-Dive-6-19-26.html` | CA Auto deep-dive — trend, source performance, market position |
+| `Supreme-Choice-Right-Pricing-Plan-6-19-26.html` | Full bid & modifier changeset with implementation plan |
+
+Earlier reports are archived under `past reports/` (kept in the repo, excluded from the live Vercel site via `.vercelignore`).
+
+## Deployment
+
+The site is a zero-build static site, ready to deploy on **Vercel**:
+
+- `index.html` serves at the root; the three reports are linked by relative path.
+- `vercel.json` keeps `.html` URLs intact (no `cleanUrls` rewrites).
+- `.vercelignore` excludes the `past reports/` archive from deployment.
+
+To deploy, connect this GitHub repo to a Vercel project (Framework Preset: **Other**, no build command, output directory: root). Pushes to `main` then publish automatically.
 
 ## Getting Started
 
