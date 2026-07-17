@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — CA Auto Deep-Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#057BE5; --blue-hover:#0C6EC5; --sky:#308ED6; --mint:#3BEECA; --mint-d:#0fae8f;
+  --navy:#00172D; --ink:#0F1B2D; --body:#2B3442; --muted:#6A7482;
+  --white:#fff; --off:#F8FAFC; --gray:#EFF2F7; --divider:#EDF1F5; --line:#E2E8F0;
+  --success:#2BBF7A; --warning:#F0A93B; --error:#E5484D;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(--body);line-height:1.55;}
+.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:288px 1fr;min-height:100vh;background:var(--white);}
+.side{background:var(--navy);color:#cfe0ee;padding:34px 30px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;}
+.side .backbtn{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;margin-bottom:24px;font-size:12.5px;font-weight:600;color:#cfe0ee;text-decoration:none;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:7px 13px 7px 11px;border-radius:9px;transition:background .15s,border-color .15s,color .15s;}
+.side .backbtn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3);color:#fff;}
+.side .backbtn svg{width:14px;height:14px;flex-shrink:0;}
+.side .logo{height:30px;align-self:flex-start;margin-bottom:38px;}
+.side .eb{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2D90EE;}
+.side h1{font-size:25px;font-weight:900;color:#fff;line-height:1.08;letter-spacing:-.02em;margin:10px 0 14px;}
+.side .who{font-size:13px;color:#a7c2da;line-height:1.6;}
+.side .who b{color:#fff;font-weight:600;}
+.side nav{margin-top:34px;display:flex;flex-direction:column;gap:2px;}
+.side nav a{font-size:13.5px;color:#9fbcd6;text-decoration:none;padding:9px 12px;border-radius:8px;display:flex;align-items:center;gap:11px;transition:background .15s,color .15s;}
+.side nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
+.side nav a .dot{width:6px;height:6px;border-radius:50%;background:#3a6386;flex-shrink:0;}
+.side nav a:hover .dot{background:var(--mint);}
+.side .foot{margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#6f93b3;line-height:1.6;}
+.main{padding:46px 52px 60px;}
+.block{margin-bottom:44px;scroll-margin-top:24px;}
+.bhead{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.bhead .ix{font-size:12px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;background:#E6F1FD;padding:4px 9px;border-radius:6px;}
+.bhead h2{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+.bhead p{font-size:13px;color:var(--muted);margin-top:3px;}
+.exec{background:var(--off);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:42px;}
+.exec p{font-size:15.5px;line-height:1.62;color:var(--body);}
+.exec p b{color:var(--ink);font-weight:700;}
+.kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.kc{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--white);}
+.kc .v{font-size:26px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+.kc .k{font-size:12.5px;color:var(--body);font-weight:600;margin-top:9px;}
+.kc .d{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.panel{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--white);}
+.panel .pt{font-size:13px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin-bottom:18px;}
+/* trend table */
+.tpanel{border:1px solid var(--line);border-radius:14px;background:var(--white);overflow-x:auto;}
+.ttable{width:100%;border-collapse:collapse;min-width:720px;}
+.ttable th{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;text-align:right;padding:18px 14px 12px;border-bottom:1px solid var(--line);}
+.ttable th:first-child{text-align:left;padding-left:24px;} .ttable th:last-child{padding-right:24px;}
+.ttable td{font-size:13px;color:var(--body);text-align:right;padding:13px 14px;border-bottom:1px solid var(--divider);font-variant-numeric:tabular-nums;}
+.ttable td:first-child{text-align:left;font-weight:700;color:var(--ink);padding-left:24px;} .ttable td:last-child{padding-right:24px;}
+.ttable tr:last-child td{border-bottom:none;}
+.ttable tr.peak td{background:#F2FBF8;}
+.ttable tr.now td{background:#E6F1FD;}
+.ttable .pk{font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--mint-d);margin-left:7px;}
+.ttable .nw{font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--blue);margin-left:7px;}
+/* source matrix */
+.mtable{width:100%;border-collapse:collapse;}
+.mtable th{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;text-align:right;padding:0 12px 12px;border-bottom:1px solid var(--line);}
+.mtable th:first-child{text-align:left;}
+.mtable td{font-size:13px;color:var(--body);text-align:right;padding:13px 12px;border-bottom:1px solid var(--divider);font-variant-numeric:tabular-nums;}
+.mtable td:first-child{text-align:left;font-weight:700;color:var(--ink);}
+.mtable tr:last-child td{border-bottom:none;}
+.stat{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:6px;}
+.s-hold{background:#EDF1F5;color:#56616f;} .s-perf{background:#D6F7EE;color:var(--mint-d);} .s-inv{background:#FDF0DA;color:#9a6712;} .s-red{background:#E3F0FD;color:var(--blue-hover);}
+/* market position bars */
+.mplegend{display:flex;flex-wrap:wrap;gap:18px;font-size:11.5px;color:var(--muted);margin-bottom:20px;align-items:center;}
+.mplegend span{display:inline-flex;align-items:center;gap:6px;}
+.mplegend .lb{width:16px;height:10px;border-radius:2px;background:var(--blue);}
+.mplegend .k2{width:3px;height:15px;background:#9aa4b2;border-radius:2px;}
+.mplegend .k1{width:3px;height:15px;background:#0F1B2D;border-radius:2px;}
+.mp-row{display:grid;grid-template-columns:175px 1fr;gap:14px;align-items:center;margin-bottom:15px;}
+.mp-nm{font-size:12.5px;font-weight:700;color:var(--ink);text-align:right;line-height:1.2;}
+.mp-nm small{display:block;font-weight:500;color:var(--muted);font-size:10.5px;}
+.mp-track{position:relative;height:32px;background:var(--gray);border-radius:7px;}
+.mp-fill{position:absolute;left:0;top:0;height:100%;border-radius:7px;background:var(--blue);width:0;transition:width 1s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;justify-content:flex-end;}
+.mp-fill span{color:#fff;font-size:11px;font-weight:800;padding-right:8px;white-space:nowrap;}
+.mp-tick{position:absolute;top:-5px;height:42px;width:3px;border-radius:2px;}
+.mp-tick.t2{background:#9aa4b2;} .mp-tick.t1{background:#0F1B2D;}
+.scaleax{display:flex;justify-content:space-between;margin-top:4px;padding-left:189px;font-size:10px;color:var(--muted);}
+/* funnel */
+.fpanel{border:1px solid var(--line);border-radius:14px;padding:26px 28px;background:var(--white);}
+.fstep{display:flex;align-items:center;gap:16px;margin-bottom:11px;}
+.fstep .lab{width:150px;flex-shrink:0;text-align:right;font-size:13px;font-weight:600;color:var(--ink);}
+.fstep .lab small{display:block;font-weight:500;color:var(--muted);font-size:11px;}
+.fbar{flex:1;height:42px;background:var(--gray);border-radius:8px;overflow:hidden;}
+.fbar i{display:flex;align-items:center;height:100%;border-radius:8px;width:0;color:#fff;font-weight:800;font-size:15px;padding-left:15px;transition:width 1.1s cubic-bezier(.2,.7,.2,1);font-style:normal;font-variant-numeric:tabular-nums;}
+.fstep .pct{width:64px;flex-shrink:0;font-size:12px;color:var(--muted);font-weight:700;text-align:right;}
+.fnote{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:18px;padding-top:16px;border-top:1px solid var(--divider);}
+.fnote b{color:var(--ink);font-weight:700;}
+.prio{list-style:none;display:flex;flex-direction:column;gap:13px;}
+.prio li{display:flex;gap:12px;font-size:13.5px;color:var(--body);line-height:1.5;}
+.prio li .rk{flex-shrink:0;width:24px;height:24px;border-radius:7px;background:#E6F1FD;color:var(--blue);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;}
+.prio li b{color:var(--ink);font-weight:700;}
+.twocol{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;}
+.plan{border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.pstep{display:flex;gap:18px;padding:20px 24px;border-top:1px solid var(--divider);background:var(--white);}
+.pstep:first-child{border-top:none;}
+.pstep .num{flex-shrink:0;width:36px;height:36px;border-radius:9px;background:#E6F1FD;color:var(--blue);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.pstep.amber .num{background:#FDF0DA;color:#9a6712;} .pstep.gray .num{background:#EDF1F5;color:#56616f;}
+.pstep .h{font-size:15px;font-weight:800;color:var(--ink);}
+.pstep .b{font-size:13.5px;color:var(--body);line-height:1.55;margin-top:3px;}
+@media print{
+  body{background:#fff;} .shell{display:block;max-width:none;}
+  .side{position:static;height:auto;flex-direction:row;align-items:center;justify-content:space-between;padding:20px 30px;}
+  .side nav,.side .foot{display:none;} .side h1{margin:0;}
+  .kc,.fpanel,.panel,.plan,.tpanel{break-inside:avoid;}
+}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;} .side{position:static;height:auto;} .side nav{display:none;}
+  .main{padding:32px 22px;} .kgrid{grid-template-columns:1fr 1fr;} .twocol{grid-template-columns:1fr;}
+  .mp-row{grid-template-columns:130px 1fr;} .scaleax{padding-left:144px;}
+}
+@media(max-width:560px){ .kgrid{grid-template-columns:1fr;} .fstep .lab{width:104px;} }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <a class="backbtn" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>All reports</a>
+    <svg class="logo" viewBox="0 0 501.8 135" role="img" aria-label="GOAL" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" fill-rule="evenodd" d="M60.4 134.9C59.9 134.8 58.3 134.7 56.8 134.6C37.6 133 21.1 123.6 11.2 108.5C5.3 99.5 2.1 90.3 0.7 77.9C0.2 73.6 0.2 62 0.7 57.7C1.8 47.8 4.2 39.8 8.2 32.2C11.4 26.3 14.6 22 19.4 17.3C29.5 7.5 42.8 1.7 58 0.4C61.5 0.1 70.6 0.3 73.8 0.7C91.4 3 105.9 11.5 114.4 24.3C116.3 27.1 118.2 30.9 119.3 33.7C120.2 36.1 121.3 40.2 121.6 42.5C121.7 43.4 121.8 44.3 121.9 44.7L122 45.2L103.9 45.2L85.9 45.2L85.6 44.2C85.5 43.7 84.9 42.4 84.4 41.2C83.6 39.6 83 38.8 81.8 37.5C79.9 35.5 78.8 34.7 76.7 33.6C73.4 32 69.6 31.2 65 31.2C49.4 31.2 39.6 41.3 37.3 59.4C36.6 64.7 36.7 71.9 37.5 77.1C39 87.3 42.8 94.6 48.7 99.1C54.3 103.3 62 104.8 71.1 103.5C80.3 102.2 86.3 97.6 88.3 90.5C88.8 88.8 89.2 85.7 89.1 85.4C89 85.3 83.6 85.2 77.1 85.2L65.2 85.2L65.2 72.5L65.2 59.8L94.3 59.8L123.4 59.8L123.3 72.7C123.3 86.3 123.2 86.8 122.2 92.1C119 108.3 109 121.3 94.3 128.5C87.5 131.8 80.7 133.7 72.5 134.6C70.4 134.8 62 135 60.4 134.9ZM265.2 133.1C265.2 133 286.7 67.7 306.2 8.6L308.4 2L332.9 2L357.3 2.1L378.9 67.6L400.5 133.1L381.3 133.2C366 133.2 362.1 133.2 362 133C362 132.8 360.2 127.2 358.2 120.4L354.5 108.1L332.8 108L311.2 108L311 108.7C310.9 109.2 309.2 114.8 307.2 121.3L303.7 133.1L284.4 133.2C273.9 133.2 265.2 133.1 265.2 133.1ZM413 67.6L413 2L430.9 2L448.8 2L448.8 53.2L448.8 104.4L475.3 104.4L501.8 104.4L501.8 118.8L501.8 133.2L457.4 133.2L413 133.2L413 67.6ZM346.3 81C346.2 80.7 343.3 71 339.8 59.4C336.3 47.8 333.3 38.2 333.2 38.1C332.5 37.5 332.5 37.7 325.9 59.5C322.3 71.3 319.4 81 319.4 81.2C319.4 81.3 322.2 81.4 332.9 81.4L346.4 81.4L346.3 81Z"/><path fill="#057BE5" fill-rule="evenodd" d="M197.6 133.5C194.1 133.2 187.9 132.2 187.7 131.9C187.6 131.8 191.7 119.4 191.9 119.2C191.9 119.2 192.8 119.3 193.8 119.5C201.9 120.8 210.5 120.2 218.5 117.5C226.6 114.8 233.4 110.7 239.3 104.7C246 97.9 250.6 89.8 253 80.5C254.2 75.6 254.5 73.4 254.5 67.8C254.5 61.4 253.9 57.4 252.1 51.8C249.5 43.7 245.3 36.9 239.2 30.8C235.5 27.1 231.5 24.1 227.3 21.8C226.4 21.3 225.7 20.9 225.6 20.9C225.6 20.8 229.1 10.2 229.8 8.4L230 8L231.6 8.8C244.8 15.4 255.5 26.4 261.8 39.7C264.6 45.6 266.4 51.5 267.4 58.3C268 61.9 268.2 69.7 267.8 73.6C266.4 89.5 259.5 103.9 248.1 115C244.9 118.1 242.4 120.1 238.5 122.7C235.2 124.9 229.8 127.7 226.1 129.2C221.5 131 215.9 132.4 210.6 133.1C208.2 133.4 199.7 133.7 197.6 133.5ZM171.5 126C154.2 116.9 141.8 100.5 137.8 81.5C136.2 73.9 136 65.6 137.1 57.8C139.7 40.4 149.7 24.3 164.3 13.9C172.6 8 182.2 4.2 192.7 2.6C196.3 2 204.4 1.8 208.1 2.2C210.6 2.4 216.1 3.3 216.3 3.5C216.4 3.5 212.2 16 212.1 16.2C212 16.2 210.9 16.1 209.7 15.9C208.4 15.7 205.5 15.5 203.4 15.5C185.8 15 169.1 23.5 159 38.1C154.4 44.9 151.5 52.4 150.3 60.9C149.8 64.2 149.8 71.3 150.3 74.7C151.9 86.1 156.8 96.1 164.7 104.2C168.5 108.1 172.6 111.3 177 113.6C177.8 114.1 178.4 114.6 178.3 114.7C178.3 114.8 177.3 117.7 176.2 121C175 124.4 174 127.2 173.9 127.2C173.8 127.2 172.7 126.7 171.5 126ZM198.8 106.8C197.6 106.7 196.5 106.5 196.4 106.5C196.4 106.4 197.2 103.7 198.3 100.5L200.3 94.6L202.9 94.5C215.5 94.1 225.8 85.5 228.5 73C229 70.6 229 65 228.5 62.7C227.8 59 226.4 55.7 224.5 52.8C223.2 51 219.7 47.3 218.2 46.2C217.6 45.9 217.2 45.5 217.2 45.4C217.2 45 221.2 33.7 221.3 33.7C221.7 33.5 225.6 36.3 227.7 38C233.5 43 238.1 50.2 240.1 57.7C243.6 71.3 239.8 85.6 229.9 95.5C221.7 103.6 210.5 107.7 198.8 106.8ZM180.7 100.4C173.9 95.9 169 89.9 165.9 82.5C161.8 72.4 162.2 60.6 167 50.7C172.6 39.1 183.3 31.2 196 29.1C198.5 28.7 203.3 28.5 205.6 28.8C206.6 28.9 207.5 29 207.5 29.1C207.6 29.1 204.5 38.7 203.7 40.6C203.6 40.9 203.1 41 200.9 41.1C194.1 41.4 188.2 44 183.3 48.9C179.5 52.7 177 57.3 175.9 62.8C175.4 65.1 175.4 70.2 175.9 72.7C177 78.6 180 83.8 184.4 87.7C185 88.3 185.8 88.9 186.2 89.2C186.5 89.4 186.8 89.7 186.8 89.8C186.8 90.1 183 101.1 182.8 101.5C182.7 101.7 182 101.3 180.7 100.4ZM199 80C192.5 78.3 188.5 71.7 189.9 65C190.6 61.5 193.2 58.1 196.5 56.5C198.4 55.5 199.9 55.2 202.2 55.2C205.9 55.2 208.6 56.3 211.1 58.9C212.9 60.7 213.9 62.5 214.5 64.8C215 66.7 214.8 70 214.1 72C212 78.1 205.3 81.6 199 80Z"/></svg>
+    <div class="eb">CA Auto Deep-Dive</div>
+    <h1>Supreme Choice Insurance Solutions</h1>
+    <div class="who">Prepared for <b>John Hunt</b><br>California &middot; Auto (non-standard)<br>Last 30 days &middot; through July 1, 2026</div>
+    <nav>
+      <a href="#s1"><span class="dot"></span>Peak vs. current</a>
+      <a href="#s2"><span class="dot"></span>Source performance</a>
+      <a href="#s3"><span class="dot"></span>Market position</a>
+      <a href="#s4"><span class="dot"></span>Funnel &amp; investigations</a>
+      <a href="#s5"><span class="dot"></span>Recommendations</a>
+    </nav>
+    <div class="foot">GOAL Performance Marketing<br>All conversion metrics based on Leads, not Clicks.</div>
+  </aside>
+
+  <main class="main">
+
+    <div class="exec">
+      <p>In the last 30 days (through July 1, 2026) CA Auto produced <b>63 leads and 5 calls</b> on <b>$594.53</b>, at a <b>1.7%</b> win rate and average position <b>8.4</b> — <b>2.15%</b> at position <b>3.9</b> since the June 19 changes went live. At the 2025 peak the same campaign ran at a 3.1&ndash;3.3% win rate and position ~4. Of leads contacted, <b>94% were quoted</b>, and <b>2 policies bound</b>. The data below maps each source against the July 2 market pull; the base bid holds at $2.86.</p>
+    </div>
+
+    <section class="block" id="s1">
+      <div class="bhead"><span class="ix">01</span><div><h2>Peak vs. current</h2><p>2025&ndash;2026 monthly trend &middot; last 30 days through July 1, 2026</p></div></div>
+      <div class="kgrid" style="margin-bottom:18px;">
+        <div class="kc"><div class="v">1.7%</div><div class="k">Win rate</div><div class="d">2025 peak 3.1&ndash;3.3% &middot; since Jun 19: 2.15%</div></div>
+        <div class="kc"><div class="v">8.4</div><div class="k">Average position</div><div class="d">2025 peak ~4 &middot; since Jun 19: 3.9</div></div>
+        <div class="kc"><div class="v">94%</div><div class="k">Quote per contact</div><div class="d">16 of 17 contacted</div></div>
+        <div class="kc"><div class="v">$6.68</div><div class="k">Avg CPC</div><div class="d">2025 peak ~$2.76</div></div>
+        <div class="kc"><div class="v">63</div><div class="k">Leads</div><div class="d">Last 30 days &middot; 5,205 searches</div></div>
+        <div class="kc"><div class="v">$594.53</div><div class="k">Ad spend</div><div class="d">2025 peak ~$750/mo</div></div>
+      </div>
+      <div class="tpanel">
+        <table class="ttable">
+          <thead><tr><th>Month</th><th>Searches</th><th>Win rate</th><th>Avg pos</th><th>Clicks</th><th>Leads+calls</th><th>Quotes</th><th>Policies</th><th>CPC</th><th>Spend</th></tr></thead>
+          <tbody>
+            <tr class="peak"><td>May 2025<span class="pk">Peak</span></td><td>8,280</td><td>3.26%</td><td>3.76</td><td>270</td><td>212</td><td>37</td><td>8</td><td>$2.82</td><td>$763.00</td></tr>
+            <tr class="peak"><td>Jun 2025<span class="pk">Peak</span></td><td>8,880</td><td>3.09%</td><td>4.12</td><td>275</td><td>214</td><td>35</td><td>9</td><td>$2.70</td><td>$743.80</td></tr>
+            <tr><td>Feb 2026</td><td>7,942</td><td>1.05%</td><td>4.98</td><td>84</td><td>59</td><td>44</td><td>2</td><td>$5.83</td><td>$490.03</td></tr>
+            <tr><td>Mar 2026</td><td>7,296</td><td>0.26%</td><td>6.74</td><td>19</td><td>16</td><td>13</td><td>0</td><td>$6.06</td><td>$115.29</td></tr>
+            <tr><td>Apr 2026</td><td>3,209</td><td>0.18%</td><td>7.09</td><td>6</td><td>3</td><td>0</td><td>0</td><td>$5.11</td><td>$30.66</td></tr>
+            <tr><td>May 2026</td><td>4,523</td><td>0.50%</td><td>10.27</td><td>23</td><td>14</td><td>0</td><td>0</td><td>$5.71</td><td>$131.55</td></tr>
+            <tr><td>Jun 2026</td><td>5,151</td><td>1.80%</td><td>9.06</td><td>93</td><td>70</td><td>17</td><td>2</td><td>$6.69</td><td>$622.70</td></tr>
+            <tr class="now"><td>Last 30 days<span class="nw">Now</span></td><td>5,205</td><td>1.70%</td><td>8.42</td><td>89</td><td>68</td><td>16</td><td>2</td><td>$6.68</td><td>$594.53</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="s2">
+      <div class="bhead"><span class="ix">02</span><div><h2>Source performance</h2><p>Active sources by opportunity volume &middot; last 30 days through July 1, 2026 &middot; base bid $2.86</p></div></div>
+      <div class="panel" style="padding:14px 26px;">
+        <table class="mtable">
+          <thead><tr><th>Source</th><th>Multiplier</th><th>Opportunities</th><th>Win rate</th><th>Effective bid</th><th>1st / 2nd RPC</th><th style="text-align:right;">Status</th></tr></thead>
+          <tbody>
+            <tr><td>Native / Display / Social</td><td>260%</td><td>38,713</td><td>0.0%</td><td>$7.44</td><td>$7.44 / $2.69</td><td><span class="stat s-inv">Investigate</span></td></tr>
+            <tr><td>Email</td><td>205%</td><td>5,955</td><td>8.1%</td><td>$5.86</td><td>$5.75 / $5.58</td><td><span class="stat s-red">Reduce</span></td></tr>
+            <tr><td>Premium Referral</td><td>210%</td><td>5,333</td><td>29.3%</td><td>$6.01</td><td>$9.87 / $4.86</td><td><span class="stat s-red">Reduce</span></td></tr>
+            <tr><td>Internal SEO</td><td>290%</td><td>4,100</td><td>0.7%</td><td>$8.29</td><td>$14.13 / $9.32</td><td><span class="stat s-inv">Investigate</span></td></tr>
+            <tr><td>Premium Paid Search 2</td><td>170%</td><td>3,701</td><td>18.1%</td><td>$4.86</td><td>$4.39 / $4.31</td><td><span class="stat s-red">Reduce</span></td></tr>
+            <tr><td>Premium Paid Search 5C</td><td>230%</td><td>1,674</td><td>5.1%</td><td>$6.58</td><td>$6.30 / $6.91</td><td><span class="stat s-red">Reduce</span></td></tr>
+            <tr><td>Internal SEO 2</td><td>280%</td><td>1,561</td><td>13.7%</td><td>$8.01</td><td>$6.37 / $4.88</td><td><span class="stat s-red">Reduce</span></td></tr>
+            <tr><td>Premium Paid Search 3</td><td>155%</td><td>1,521</td><td>0.0%</td><td>$4.43</td><td>$4.51 / $3.99</td><td><span class="stat s-inv">Investigate</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block" id="s3">
+      <div class="bhead"><span class="ix">03</span><div><h2>Market position</h2><p>Effective bid vs. market price by position &middot; July 2, 2026 pull &middot; ranked by market click volume</p></div></div>
+      <div class="panel mppanel">
+        <div class="mplegend">
+          <span><span class="lb"></span>Effective bid</span>
+          <span><span class="k2"></span>2nd position price</span>
+          <span><span class="k1"></span>1st position price</span>
+          <span style="color:var(--muted);">Scale 0&ndash;$10.00</span>
+        </div>
+        <div class="mp-row"><div class="mp-nm">Email<small>2,917 mkt clicks</small></div><div class="mp-track"><div class="mp-fill" data-w="58.6"><span>$5.86</span></div><div class="mp-tick t2" style="left:55.8%"></div><div class="mp-tick t1" style="left:57.5%"></div></div></div>
+        <div class="mp-row"><div class="mp-nm">Premium Referral<small>2,392 mkt clicks</small></div><div class="mp-track"><div class="mp-fill" data-w="60.1"><span>$6.01</span></div><div class="mp-tick t2" style="left:48.6%"></div><div class="mp-tick t1" style="left:98.7%"></div></div></div>
+        <div class="mp-row"><div class="mp-nm">Premium Paid Search 2<small>2,361 mkt clicks</small></div><div class="mp-track"><div class="mp-fill" data-w="48.6"><span>$4.86</span></div><div class="mp-tick t2" style="left:43.1%"></div><div class="mp-tick t1" style="left:43.9%"></div></div></div>
+        <div class="mp-row"><div class="mp-nm">Native / Display / Social<small>913 mkt clicks</small></div><div class="mp-track"><div class="mp-fill" data-w="74.4"><span>$7.44</span></div><div class="mp-tick t2" style="left:26.9%"></div><div class="mp-tick t1" style="left:74.4%"></div></div></div>
+        <div class="mp-row"><div class="mp-nm">Internal SEO 2<small>878 mkt clicks</small></div><div class="mp-track"><div class="mp-fill" data-w="80.1"><span>$8.01</span></div><div class="mp-tick t2" style="left:48.8%"></div><div class="mp-tick t1" style="left:63.7%"></div></div></div>
+        <div class="mp-row"><div class="mp-nm">Premium Paid Search 3<small>491 mkt clicks</small></div><div class="mp-track"><div class="mp-fill" data-w="44.3"><span>$4.43</span></div><div class="mp-tick t2" style="left:39.9%"></div><div class="mp-tick t1" style="left:45.1%"></div></div></div>
+        <div class="scaleax"><span>$0</span><span>$2.50</span><span>$5.00</span><span>$7.50</span><span>$10.00</span></div>
+        <div class="fnote">Auto target band is 2nd through 7th position. Email ($5.86) and Premium Paid Search 2 ($4.86) sit above their 1st-position prices; Internal SEO 2 ($8.01) and Premium Referral ($6.01) sit above 2nd. Native / Display / Social bids at its 1st-position price ($7.44) and wins 0% of placed auctions. The reductions in section 05 re-anchor each source to 2nd position.</div>
+      </div>
+    </section>
+
+    <section class="block" id="s4">
+      <div class="bhead"><span class="ix">04</span><div><h2>Funnel &amp; investigations</h2><p>Last 30 days through July 1, 2026</p></div></div>
+      <div class="twocol">
+        <div class="fpanel">
+          <div class="fstep"><div class="lab">Impressions<small>ad shown</small></div><div class="fbar"><i style="background:#9cc4ec" data-w="100">231</i></div><div class="pct">100%</div></div>
+          <div class="fstep"><div class="lab">Clicks<small>to the funnel</small></div><div class="fbar"><i style="background:#3a92e0" data-w="42">89</i></div><div class="pct">38.5%</div></div>
+          <div class="fstep"><div class="lab">Leads + calls<small>submitted</small></div><div class="fbar"><i style="background:#057BE5" data-w="33">68</i></div><div class="pct">76.4%</div></div>
+          <div class="fstep"><div class="lab">Contacted<small>reached</small></div><div class="fbar"><i style="background:#0c5fb0" data-w="14">17</i></div><div class="pct">25.0%</div></div>
+          <div class="fstep"><div class="lab">Quoted<small>presented</small></div><div class="fbar"><i style="background:#0a3a6b" data-w="12">16</i></div><div class="pct">23.5%</div></div>
+          <div class="fnote">Of leads and calls, 25.0% were contacted and 23.5% quoted. Of the leads contacted, <b>94.1% were quoted</b> (16 of 17). <b>2 policies bound</b> in this window ($297.27 per policy), both attached to June leads via disposition imports.</div>
+        </div>
+        <div class="panel">
+          <div class="pt">Investigation status</div>
+          <ol class="prio">
+            <li><span class="rk">1</span><div><b>Native / Display / Social.</b> 0 of 4,125 bids won on 38,713 opportunities at a bid equal to 1st-position price. Source status, targeting, and timeout under review with GOAL; staged reduction 260&rarr;200&rarr;160% pending approval.</div></li>
+            <li><span class="rk">2</span><div><b>Premium Paid Search 3.</b> 0 clicks on 60 bids priced between 2nd and 1st position. Reduces to 140%; re-check at the day-14 checkpoint.</div></li>
+            <li><span class="rk">3</span><div><b>Internal SEO.</b> 62 impressions, 1 click at position 5.28. Click-through review; not a bid change.</div></li>
+            <li><span class="rk">4</span><div><b>Premium Paid Search 5C.</b> 2nd-position sample thin (15 market clicks) and priced above 1st. Reduces to 200%; re-anchor at the day-14 checkpoint.</div></li>
+          </ol>
+          <div class="fnote" style="margin-top:16px;">Targeting filters unchanged. No source removals.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="s5" style="margin-bottom:0;">
+      <div class="bhead"><span class="ix">05</span><div><h2>Recommendations</h2></div></div>
+      <div class="plan">
+        <div class="pstep gray"><div class="num">1</div><div><div class="h">Hold the base bid at $2.86</div><div class="b">All July 2 changes run through source multipliers against the held base. No base-bid change.</div></div></div>
+        <div class="pstep"><div class="num">2</div><div><div class="h">Reduce four sources to 2nd-position pricing</div><div class="b">Email 205&rarr;195% ($5.58 = 2nd, $5.58), Premium Referral 210&rarr;170% ($4.86 = 2nd, $4.86), Premium Paid Search 2 170&rarr;150% ($4.29 &asymp; 2nd, $4.31), Premium Paid Search 3 155&rarr;140% ($4.00 &asymp; 2nd, $3.99).</div></div></div>
+        <div class="pstep"><div class="num">3</div><div><div class="h">Step the two largest gaps down in stages</div><div class="b">Internal SEO 2: 280&rarr;220% now ($6.29), then toward 2nd position (170%, $4.86) at day 14. Premium Paid Search 5C: 230&rarr;200% ($5.72) on thin 2nd-position data.</div></div></div>
+        <div class="pstep amber"><div class="num">4</div><div><div class="h">Investigate before any further Native change</div><div class="b">Native / Display / Social won 0 of 4,125 bids at a bid equal to 1st-position price &mdash; price is not the constraint. Source status, targeting, and timeout review with GOAL; staged reduction 260&rarr;200&rarr;160% pending approval. Not a raise.</div></div></div>
+        <div class="pstep"><div class="num">5</div><div><div class="h">Day-14 checkpoint</div><div class="b">Fresh market pull; Internal SEO 2 step two; Native stage two if the review clears; Premium Paid Search 5C re-anchor; Email quote flow re-checked before any further trim.</div></div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  e.target.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';});
+  io.unobserve(e.target);}});},{threshold:.2});
+document.querySelectorAll('.fpanel,.mppanel').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
