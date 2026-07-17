@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supreme Choice — Home Performance Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#057BE5; --blue-hover:#0C6EC5; --sky:#308ED6; --mint:#3BEECA; --mint-d:#0fae8f;
+  --navy:#00172D; --navy-2:#062c4e; --navy-deep:#001020; --ink:#0F1B2D; --body:#2B3442; --muted:#6A7482;
+  --white:#fff; --off:#F8FAFC; --gray:#EFF2F7; --divider:#EDF1F5; --line:#E2E8F0;
+  --success:#2BBF7A; --warning:#F0A93B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(--body);line-height:1.55;}
+.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:288px 1fr;min-height:100vh;background:var(--white);}
+.side{background:var(--navy);color:#cfe0ee;padding:34px 30px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;}
+.side .backbtn{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;margin-bottom:24px;font-size:12.5px;font-weight:600;color:#cfe0ee;text-decoration:none;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);padding:7px 13px 7px 11px;border-radius:9px;transition:background .15s,border-color .15s,color .15s;}
+.side .backbtn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3);color:#fff;}
+.side .backbtn svg{width:14px;height:14px;flex-shrink:0;}
+.side .logo{height:30px;align-self:flex-start;margin-bottom:38px;}
+.side .eb{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2D90EE;}
+.side h1{font-size:27px;font-weight:900;color:#fff;line-height:1.08;letter-spacing:-.02em;margin:10px 0 14px;}
+.side .who{font-size:13px;color:#a7c2da;line-height:1.6;}
+.side .who b{color:#fff;font-weight:600;}
+.side nav{margin-top:38px;display:flex;flex-direction:column;gap:2px;}
+.side nav a{font-size:13.5px;color:#9fbcd6;text-decoration:none;padding:9px 12px;border-radius:8px;display:flex;align-items:center;gap:11px;transition:background .15s,color .15s;}
+.side nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
+.side nav a .dot{width:6px;height:6px;border-radius:50%;background:#3a6386;flex-shrink:0;}
+.side nav a:hover .dot{background:var(--mint);}
+.side .foot{margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#6f93b3;line-height:1.6;}
+.main{padding:46px 52px 60px;}
+.block{margin-bottom:46px;scroll-margin-top:24px;}
+.bhead{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.bhead .ix{font-size:12px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;background:#E6F1FD;padding:4px 9px;border-radius:6px;}
+.bhead h2{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.01em;}
+.bhead p{font-size:13.5px;color:var(--muted);margin-top:3px;}
+.exec{background:var(--off);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:46px;}
+.exec p{font-size:15.5px;line-height:1.62;color:var(--body);}
+.exec p b{color:var(--ink);font-weight:700;}
+.kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.kc{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--white);}
+.kc .v{font-size:26px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+.kc .v.blue{color:var(--blue);}
+.kc .v.mint{color:var(--mint-d);}
+.kc .k{font-size:12.5px;color:var(--body);font-weight:600;margin-top:9px;}
+.kc .d{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.split{display:grid;grid-template-columns:300px 1fr;gap:18px;}
+.panel{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--white);}
+.panel .pt{font-size:13px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin-bottom:18px;}
+.donut-wrap{display:flex;flex-direction:column;align-items:center;}
+.donut{position:relative;width:180px;height:180px;}
+.donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.donut .center .n{font-size:38px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+.donut .center .l{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;}
+.legend{width:100%;margin-top:20px;display:flex;flex-direction:column;gap:9px;}
+.legend .li{display:flex;align-items:center;gap:9px;font-size:13px;}
+.legend .li .sw{width:10px;height:10px;border-radius:3px;}
+.legend .li .nm{color:var(--body);font-weight:500;}
+.legend .li .vl{margin-left:auto;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;}
+.ltable{width:100%;border-collapse:collapse;}
+.ltable th{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;text-align:left;padding:0 0 12px;border-bottom:1px solid var(--line);}
+.ltable th.r,.ltable td.r{text-align:right;padding-right:26px;}
+.ltable td{padding:15px 0;border-bottom:1px solid var(--divider);font-size:13.5px;color:var(--body);vertical-align:top;}
+.ltable tr:last-child td{border-bottom:none;}
+.ltable .nm{font-weight:800;color:var(--ink);font-size:14px;display:flex;align-items:center;gap:9px;}
+.ltable .nm .bd{width:8px;height:8px;border-radius:50%;}
+.ltable .tag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-top:5px;}
+.tag.blue{background:#E3F0FD;color:var(--blue-hover);} .tag.mint{background:#D6F7EE;color:var(--mint-d);}
+.tag.amber{background:#FDF0DA;color:#9a6712;} .tag.gray{background:#EEF2F7;color:#5b6878;}
+.tag.green{background:#DDF5EA;color:#177a4e;}
+.ltable .big{font-size:20px;font-weight:900;color:var(--ink);letter-spacing:-.02em;}
+.ltable .sub{font-size:11.5px;color:var(--muted);line-height:1.45;max-width:340px;}
+.fpanel{border:1px solid var(--line);border-radius:14px;padding:26px 28px;background:var(--white);}
+.fstep{display:flex;align-items:center;gap:16px;margin-bottom:11px;}
+.fstep .lab{width:150px;flex-shrink:0;text-align:right;font-size:13px;font-weight:600;color:var(--ink);}
+.fstep .lab small{display:block;font-weight:500;color:var(--muted);font-size:11px;}
+.fbar{flex:1;height:42px;background:var(--gray);border-radius:8px;overflow:hidden;}
+.fbar i{display:flex;align-items:center;height:100%;border-radius:8px;width:0;color:#fff;font-weight:800;font-size:15px;padding-left:15px;transition:width 1.1s cubic-bezier(.2,.7,.2,1);font-style:normal;font-variant-numeric:tabular-nums;}
+.fstep .pct{width:62px;flex-shrink:0;font-size:12px;color:var(--muted);font-weight:700;text-align:right;}
+.fnote{font-size:13px;color:var(--muted);line-height:1.6;margin-top:18px;padding-top:16px;border-top:1px solid var(--divider);}
+.fnote b{color:var(--ink);font-weight:700;}
+.kpi-inline{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap;}
+.kpi-inline .chip{background:var(--off);border:1px solid var(--line);border-radius:9px;padding:9px 14px;font-size:12.5px;color:var(--body);font-weight:600;}
+.kpi-inline .chip b{color:var(--ink);font-weight:900;font-size:15px;}
+.bignum{font-size:38px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+.bignum span{font-size:15px;color:var(--muted);font-weight:700;letter-spacing:0;}
+.plan{border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.pstep{display:flex;gap:18px;padding:20px 24px;border-top:1px solid var(--divider);background:var(--white);}
+.pstep:first-child{border-top:none;}
+.pstep .num{flex-shrink:0;width:36px;height:36px;border-radius:9px;background:#E6F1FD;color:var(--blue);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;}
+.pstep .h{font-size:15px;font-weight:800;color:var(--ink);}
+.pstep .b{font-size:13.5px;color:var(--body);line-height:1.55;margin-top:3px;}
+.cad-link{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:14px;max-width:520px;border:1px solid var(--line);border-radius:9px;padding:15px 18px;background:var(--off);text-decoration:none;transition:background .15s,border-color .15s,transform .15s;}
+.cad-link:hover{background:#E6F1FD;border-color:#bcd8f5;transform:translateY(-1px);}
+.cad-link .clt{font-size:14px;font-weight:800;color:var(--ink);}
+.cad-link .cls{font-size:12px;color:var(--muted);margin-top:2px;}
+.cad-link .cla{flex-shrink:0;font-size:12.5px;font-weight:800;color:var(--blue);white-space:nowrap;}
+.brk{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+.bars{display:flex;flex-direction:column;gap:9px;margin-top:2px;}
+.brow{display:flex;align-items:center;gap:12px;}
+.brow .bl{width:110px;flex-shrink:0;font-size:12px;font-weight:600;color:var(--ink);text-align:right;}
+.brow .bt{flex:1;height:22px;background:var(--gray);border-radius:6px;overflow:hidden;}
+.brow .bt i{display:block;height:100%;width:0;background:var(--blue);border-radius:6px;transition:width 1.1s cubic-bezier(.2,.7,.2,1);}
+.brow .bt i.mint{background:var(--mint-d);}
+.brow .bv{width:48px;flex-shrink:0;font-size:12.5px;font-weight:800;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums;}
+.brk-cap{font-size:11.5px;color:var(--muted);margin-top:14px;line-height:1.5;}
+.brk-cap b{color:var(--ink);font-weight:700;}
+@media print{
+  body{background:#fff;} .shell{display:block;max-width:none;}
+  .side{position:static;height:auto;flex-direction:row;align-items:center;justify-content:space-between;padding:20px 30px;}
+  .side nav,.side .foot,.side .backbtn{display:none;} .side h1{margin:0;}
+  .kc,.fpanel,.panel,.plan{break-inside:avoid;}
+}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr;} .side{position:static;height:auto;} .side nav{display:none;}
+  .main{padding:32px 22px;} .kgrid{grid-template-columns:1fr 1fr;} .split{grid-template-columns:1fr;} .brk{grid-template-columns:1fr;}
+}
+@media(max-width:560px){ .kgrid{grid-template-columns:1fr;} .fstep .lab{width:104px;} }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <a class="backbtn" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>All reports</a>
+    <svg class="logo" viewBox="0 0 501.8 135" role="img" aria-label="GOAL" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" fill-rule="evenodd" d="M60.4 134.9C59.9 134.8 58.3 134.7 56.8 134.6C37.6 133 21.1 123.6 11.2 108.5C5.3 99.5 2.1 90.3 0.7 77.9C0.2 73.6 0.2 62 0.7 57.7C1.8 47.8 4.2 39.8 8.2 32.2C11.4 26.3 14.6 22 19.4 17.3C29.5 7.5 42.8 1.7 58 0.4C61.5 0.1 70.6 0.3 73.8 0.7C91.4 3 105.9 11.5 114.4 24.3C116.3 27.1 118.2 30.9 119.3 33.7C120.2 36.1 121.3 40.2 121.6 42.5C121.7 43.4 121.8 44.3 121.9 44.7L122 45.2L103.9 45.2L85.9 45.2L85.6 44.2C85.5 43.7 84.9 42.4 84.4 41.2C83.6 39.6 83 38.8 81.8 37.5C79.9 35.5 78.8 34.7 76.7 33.6C73.4 32 69.6 31.2 65 31.2C49.4 31.2 39.6 41.3 37.3 59.4C36.6 64.7 36.7 71.9 37.5 77.1C39 87.3 42.8 94.6 48.7 99.1C54.3 103.3 62 104.8 71.1 103.5C80.3 102.2 86.3 97.6 88.3 90.5C88.8 88.8 89.2 85.7 89.1 85.4C89 85.3 83.6 85.2 77.1 85.2L65.2 85.2L65.2 72.5L65.2 59.8L94.3 59.8L123.4 59.8L123.3 72.7C123.3 86.3 123.2 86.8 122.2 92.1C119 108.3 109 121.3 94.3 128.5C87.5 131.8 80.7 133.7 72.5 134.6C70.4 134.8 62 135 60.4 134.9ZM265.2 133.1C265.2 133 286.7 67.7 306.2 8.6L308.4 2L332.9 2L357.3 2.1L378.9 67.6L400.5 133.1L381.3 133.2C366 133.2 362.1 133.2 362 133C362 132.8 360.2 127.2 358.2 120.4L354.5 108.1L332.8 108L311.2 108L311 108.7C310.9 109.2 309.2 114.8 307.2 121.3L303.7 133.1L284.4 133.2C273.9 133.2 265.2 133.1 265.2 133.1ZM413 67.6L413 2L430.9 2L448.8 2L448.8 53.2L448.8 104.4L475.3 104.4L501.8 104.4L501.8 118.8L501.8 133.2L457.4 133.2L413 133.2L413 67.6ZM346.3 81C346.2 80.7 343.3 71 339.8 59.4C336.3 47.8 333.3 38.2 333.2 38.1C332.5 37.5 332.5 37.7 325.9 59.5C322.3 71.3 319.4 81 319.4 81.2C319.4 81.3 322.2 81.4 332.9 81.4L346.4 81.4L346.3 81Z"/><path fill="#057BE5" fill-rule="evenodd" d="M197.6 133.5C194.1 133.2 187.9 132.2 187.7 131.9C187.6 131.8 191.7 119.4 191.9 119.2C191.9 119.2 192.8 119.3 193.8 119.5C201.9 120.8 210.5 120.2 218.5 117.5C226.6 114.8 233.4 110.7 239.3 104.7C246 97.9 250.6 89.8 253 80.5C254.2 75.6 254.5 73.4 254.5 67.8C254.5 61.4 253.9 57.4 252.1 51.8C249.5 43.7 245.3 36.9 239.2 30.8C235.5 27.1 231.5 24.1 227.3 21.8C226.4 21.3 225.7 20.9 225.6 20.9C225.6 20.8 229.1 10.2 229.8 8.4L230 8L231.6 8.8C244.8 15.4 255.5 26.4 261.8 39.7C264.6 45.6 266.4 51.5 267.4 58.3C268 61.9 268.2 69.7 267.8 73.6C266.4 89.5 259.5 103.9 248.1 115C244.9 118.1 242.4 120.1 238.5 122.7C235.2 124.9 229.8 127.7 226.1 129.2C221.5 131 215.9 132.4 210.6 133.1C208.2 133.4 199.7 133.7 197.6 133.5ZM171.5 126C154.2 116.9 141.8 100.5 137.8 81.5C136.2 73.9 136 65.6 137.1 57.8C139.7 40.4 149.7 24.3 164.3 13.9C172.6 8 182.2 4.2 192.7 2.6C196.3 2 204.4 1.8 208.1 2.2C210.6 2.4 216.1 3.3 216.3 3.5C216.4 3.5 212.2 16 212.1 16.2C212 16.2 210.9 16.1 209.7 15.9C208.4 15.7 205.5 15.5 203.4 15.5C185.8 15 169.1 23.5 159 38.1C154.4 44.9 151.5 52.4 150.3 60.9C149.8 64.2 149.8 71.3 150.3 74.7C151.9 86.1 156.8 96.1 164.7 104.2C168.5 108.1 172.6 111.3 177 113.6C177.8 114.1 178.4 114.6 178.3 114.7C178.3 114.8 177.3 117.7 176.2 121C175 124.4 174 127.2 173.9 127.2C173.8 127.2 172.7 126.7 171.5 126ZM198.8 106.8C197.6 106.7 196.5 106.5 196.4 106.5C196.4 106.4 197.2 103.7 198.3 100.5L200.3 94.6L202.9 94.5C215.5 94.1 225.8 85.5 228.5 73C229 70.6 229 65 228.5 62.7C227.8 59 226.4 55.7 224.5 52.8C223.2 51 219.7 47.3 218.2 46.2C217.6 45.9 217.2 45.5 217.2 45.4C217.2 45 221.2 33.7 221.3 33.7C221.7 33.5 225.6 36.3 227.7 38C233.5 43 238.1 50.2 240.1 57.7C243.6 71.3 239.8 85.6 229.9 95.5C221.7 103.6 210.5 107.7 198.8 106.8ZM180.7 100.4C173.9 95.9 169 89.9 165.9 82.5C161.8 72.4 162.2 60.6 167 50.7C172.6 39.1 183.3 31.2 196 29.1C198.5 28.7 203.3 28.5 205.6 28.8C206.6 28.9 207.5 29 207.5 29.1C207.6 29.1 204.5 38.7 203.7 40.6C203.6 40.9 203.1 41 200.9 41.1C194.1 41.4 188.2 44 183.3 48.9C179.5 52.7 177 57.3 175.9 62.8C175.4 65.1 175.4 70.2 175.9 72.7C177 78.6 180 83.8 184.4 87.7C185 88.3 185.8 88.9 186.2 89.2C186.5 89.4 186.8 89.7 186.8 89.8C186.8 90.1 183 101.1 182.8 101.5C182.7 101.7 182 101.3 180.7 100.4ZM199 80C192.5 78.3 188.5 71.7 189.9 65C190.6 61.5 193.2 58.1 196.5 56.5C198.4 55.5 199.9 55.2 202.2 55.2C205.9 55.2 208.6 56.3 211.1 58.9C212.9 60.7 213.9 62.5 214.5 64.8C215 66.7 214.8 70 214.1 72C212 78.1 205.3 81.6 199 80Z"/></svg>
+    <div class="eb">Home Campaign &middot; Performance Review</div>
+    <h1>Supreme Choice Insurance Solutions</h1>
+    <div class="who">Prepared for <b>John Hunt</b><br>California &middot; Home<br>Last 60 days &middot; through July 17, 2026</div>
+    <nav>
+      <a href="#s1"><span class="dot"></span>Key metrics</a>
+      <a href="#s2"><span class="dot"></span>Since July 2</a>
+      <a href="#s3"><span class="dot"></span>Performance by source</a>
+      <a href="#s4"><span class="dot"></span>Conversion funnel</a>
+      <a href="#s5"><span class="dot"></span>Property type</a>
+      <a href="#s6"><span class="dot"></span>All-time book</a>
+      <a href="#s7"><span class="dot"></span>Age bands</a>
+      <a href="#s8"><span class="dot"></span>Geography</a>
+      <a href="#s9"><span class="dot"></span>Recommendations</a>
+    </nav>
+    <div class="foot">GOAL Performance Marketing<br>CA Home &middot; base bid $4.15<br>All conversion metrics based on Leads, not Clicks.</div>
+  </aside>
+
+  <main class="main">
+
+    <div class="exec">
+      <p>Over the last 60 days (through July 17, 2026), CA Home delivered <b>292 leads and 32 inbound calls</b> from <b>14,979 searches</b>, at <b>$1,406.76</b> in ad spend &mdash; a <b>2.65% win rate</b> at average position 4.06. Of 324 leads and calls, <b>54 were contacted (16.7%) and 29 quoted</b>; <b>2 policies are bound</b> in-window, both Mobile Home. The corrected all-time export shows <b>887 contacted, 714 quoted, and 302 policies</b> on $7,898.51 &mdash; <b>$26.15 per policy</b>. The July 2 age changes are live; the schedule and multiplier bundle is not in the July 17 settings and is re-priced in today&rsquo;s changeset (report 05).</p>
+    </div>
+
+    <section class="block" id="s1">
+      <div class="bhead"><span class="ix">01</span><div><h2>Key metrics</h2><p>Last 60 days &middot; through July 17, 2026</p></div></div>
+      <div class="kgrid">
+        <div class="kc"><div class="v">292</div><div class="k">Leads</div><div class="d">Form submissions &middot; 60 days</div></div>
+        <div class="kc"><div class="v">32</div><div class="k">Inbound calls</div><div class="d">Call Now button &middot; 60 days</div></div>
+        <div class="kc"><div class="v blue">2.65%</div><div class="k">Win rate</div><div class="d">Average position 4.06</div></div>
+        <div class="kc"><div class="v">16.7%</div><div class="k">Contact rate</div><div class="d">54 of 324 leads + calls</div></div>
+        <div class="kc"><div class="v">2</div><div class="k">Policies bound</div><div class="d">Both Mobile Home</div></div>
+        <div class="kc"><div class="v">$1,406.76</div><div class="k">Ad spend</div><div class="d">Base bid $4.15 &middot; CPC $3.53</div></div>
+      </div>
+      <div class="brk-cap">Whole-campaign figures from the 60-day campaign export pulled <b>July 17, 2026</b>; an earlier July 15 pull of the same window is not used. Contact and quote figures reflect dispositions imported July 15, 2026.</div>
+    </section>
+
+    <section class="block" id="s2">
+      <div class="bhead"><span class="ix">02</span><div><h2>Since July 2</h2><p>July 2 changes &middot; dashboard status July 17, 2026</p></div></div>
+      <div class="kgrid">
+        <div class="kc"><div class="v mint">Live</div><div class="k">75+ age filter cut</div><div class="d">Dashboard-confirmed July 17</div></div>
+        <div class="kc"><div class="v mint">Live</div><div class="k">65&ndash;74 up-modifier</div><div class="d">Dashboard-confirmed July 17</div></div>
+        <div class="kc"><div class="v mint">Live</div><div class="k">55&ndash;64 down-modifier</div><div class="d">Dashboard-confirmed July 17</div></div>
+        <div class="kc"><div class="v">Not live</div><div class="k">Bid-schedule normalization</div><div class="d">Placed bids run below effective across tiers</div></div>
+        <div class="kc"><div class="v">Not live</div><div class="k">Tier multiplier resets</div><div class="d">Tier 1 150% &middot; Tier 3 120% &middot; Tier 2 70% in settings</div></div>
+        <div class="kc"><div class="v">Re-priced</div><div class="k">July 17 changeset</div><div class="d">Bundle re-anchored to the July 17 market pull</div></div>
+      </div>
+      <div class="brk-cap">The 60-day exports blend roughly six pre-change weeks with two post-change weeks; an isolated read of the age changes follows a 7/2&ndash;7/17 export (report 04). The schedule and multiplier bundle is re-priced against the July 17 pull in report 05.</div>
+    </section>
+
+    <section class="block" id="s3">
+      <div class="bhead"><span class="ix">03</span><div><h2>Performance by source</h2><p>Lead volume by traffic source &middot; last 60 days through July 17, 2026</p></div></div>
+      <div class="split">
+        <div class="panel">
+          <div class="pt">Lead mix</div>
+          <div class="donut-wrap">
+            <div class="donut">
+              <svg viewBox="0 0 42 42" width="180" height="180">
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="#EFF2F7" stroke-width="6"></circle>
+                <circle class="seg" cx="21" cy="21" r="15.915" fill="none" stroke="#057BE5" stroke-width="6" stroke-dasharray="0 100" data-dash="39.7" transform="rotate(-90 21 21)"></circle>
+                <circle class="seg" cx="21" cy="21" r="15.915" fill="none" stroke="#308ED6" stroke-width="6" stroke-dasharray="0 100" data-dash="29.1" data-offset="39.7" transform="rotate(-90 21 21)"></circle>
+                <circle class="seg" cx="21" cy="21" r="15.915" fill="none" stroke="#0fae8f" stroke-width="6" stroke-dasharray="0 100" data-dash="24.3" data-offset="68.8" transform="rotate(-90 21 21)"></circle>
+                <circle class="seg" cx="21" cy="21" r="15.915" fill="none" stroke="#F0A93B" stroke-width="6" stroke-dasharray="0 100" data-dash="5.5" data-offset="93.1" transform="rotate(-90 21 21)"></circle>
+                <circle class="seg" cx="21" cy="21" r="15.915" fill="none" stroke="#9aa4b2" stroke-width="6" stroke-dasharray="0 100" data-dash="1.4" data-offset="98.6" transform="rotate(-90 21 21)"></circle>
+              </svg>
+              <div class="center"><div class="n">292</div><div class="l">leads</div></div>
+            </div>
+            <div class="legend">
+              <div class="li"><span class="sw" style="background:#057BE5"></span><span class="nm">Tier 2</span><span class="vl">116</span></div>
+              <div class="li"><span class="sw" style="background:#308ED6"></span><span class="nm">Tier 1</span><span class="vl">85</span></div>
+              <div class="li"><span class="sw" style="background:#0fae8f"></span><span class="nm">Tier 3</span><span class="vl">71</span></div>
+              <div class="li"><span class="sw" style="background:#F0A93B"></span><span class="nm">Home SearchB</span><span class="vl">16</span></div>
+              <div class="li"><span class="sw" style="background:#9aa4b2"></span><span class="nm">Other sources</span><span class="vl">4</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <table class="ltable">
+            <thead><tr><th>Source</th><th class="r">Leads</th><th class="r">Calls</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="nm"><span class="bd" style="background:#057BE5"></span>Tier 2</div><span class="tag blue">Cost anchor</span></td>
+                <td class="r"><span class="big">116</span></td><td class="r">17</td>
+                <td><div class="sub">21 contacted, 12 quotes, and both policies this window at the cheapest CPC ($2.02) &mdash; $24.84 per quote. We raise 70&rarr;90% ($3.74 &asymp; 2nd position, $3.68) with the schedule bundle.</div></td>
+              </tr>
+              <tr>
+                <td><div class="nm"><span class="bd" style="background:#308ED6"></span>Tier 1</div><span class="tag amber">Reset</span></td>
+                <td class="r"><span class="big">85</span></td><td class="r">10</td>
+                <td><div class="sub">Largest pool (55,526 opportunities) at a 1.08% win rate. With the schedule at 100%, we reset 150&rarr;105% ($4.36 &asymp; 2nd position, $4.33 on the July 17 pull).</div></td>
+              </tr>
+              <tr>
+                <td><div class="nm"><span class="bd" style="background:#0fae8f"></span>Tier 3</div><span class="tag amber">Investigate</span></td>
+                <td class="r"><span class="big">71</span></td><td class="r">4</td>
+                <td><div class="sub">Bids on 2.67% of a 13,548-opportunity pool and wins 68.8% of auctions entered. Companion reset 120&rarr;90% ($3.74 &asymp; 2nd, $3.63); the overlap review continues. No raise.</div></td>
+              </tr>
+              <tr>
+                <td><div class="nm"><span class="bd" style="background:#F0A93B"></span>Home SearchB</div><span class="tag green">Hold</span></td>
+                <td class="r"><span class="big">16</span></td><td class="r">1</td>
+                <td><div class="sub">2nd position moved from $6.83 to $6.33; the current 155% ($6.43) now sits just above it. The schedule change alone raises the placed bid from $4.42 toward $6.43.</div></td>
+              </tr>
+              <tr>
+                <td><div class="nm"><span class="bd" style="background:#9aa4b2"></span>Other sources</div><span class="tag gray">Hold</span></td>
+                <td class="r"><span class="big">4</span></td><td class="r">&mdash;</td>
+                <td><div class="sub">Internal SEO (3, holds at 180%), Home Search (1, holds at 20% &mdash; 2nd position $14.87 is unreachable at the current base).</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="s4">
+      <div class="bhead"><span class="ix">04</span><div><h2>Conversion funnel</h2><p>Ad shown through policies &middot; last 60 days through July 17, 2026</p></div></div>
+      <div class="fpanel">
+        <div class="fstep"><div class="lab">Ad shown<small>impressions</small></div><div class="fbar"><i style="background:#9cc4ec" data-w="100">835</i></div><div class="pct">100%</div></div>
+        <div class="fstep"><div class="lab">Clicks<small>to your page</small></div><div class="fbar"><i style="background:#3a92e0" data-w="48">398</i></div><div class="pct">47.7%</div></div>
+        <div class="fstep"><div class="lab">Leads + calls<small>submitted</small></div><div class="fbar"><i style="background:#057BE5" data-w="39">324</i></div><div class="pct">81.4%</div></div>
+        <div class="fstep"><div class="lab">Contacted<small>reached by team</small></div><div class="fbar"><i style="background:#0c5fb0" data-w="8">54</i></div><div class="pct">16.7%</div></div>
+        <div class="fstep"><div class="lab">Quoted<small>presented</small></div><div class="fbar"><i style="background:#0a3a6b" data-w="5">29</i></div><div class="pct">53.7%</div></div>
+        <div class="fstep"><div class="lab">Policies<small>bound</small></div><div class="fbar"><i style="background:#0fae8f;color:#062b4e" data-w="2">2</i></div><div class="pct">6.9%</div></div>
+        <div class="fnote">Shoppers click the ad <b>47.7%</b> of the times it is shown; <b>81.4%</b> of clicks become a lead or a call. Of 324 leads and calls, <b>16.7% were contacted</b> and 29 quoted; <b>2 policies are bound</b> in-window. The all-time contact rate is <b>33.1%</b>; contact and quote figures reflect dispositions imported July 15, 2026, and the most recent leads are still being worked.</div>
+      </div>
+    </section>
+
+    <section class="block" id="s5">
+      <div class="bhead"><span class="ix">05</span><div><h2>Property type</h2><p>Leads and win rate by property type &middot; last 60 days through July 17, 2026</p></div></div>
+      <div class="brk">
+        <div class="panel">
+          <div class="pt">Leads by property type</div>
+          <div class="bars">
+            <div class="brow"><div class="bl">Single Family</div><div class="bt"><i data-w="100"></i></div><div class="bv">201</div></div>
+            <div class="brow"><div class="bl">Mobile Home</div><div class="bt"><i data-w="32"></i></div><div class="bv">64</div></div>
+            <div class="brow"><div class="bl">Townhome</div><div class="bt"><i data-w="4"></i></div><div class="bv">8</div></div>
+            <div class="brow"><div class="bl">Condominium</div><div class="bt"><i data-w="3"></i></div><div class="bv">7</div></div>
+            <div class="brow"><div class="bl">Multi Family</div><div class="bt"><i data-w="3"></i></div><div class="bv">6</div></div>
+            <div class="brow"><div class="bl">Apartment</div><div class="bt"><i data-w="2"></i></div><div class="bv">5</div></div>
+          </div>
+          <div class="brk-cap"><b>Both policies bound this window are Mobile Home.</b> Duplex: 1 lead.</div>
+        </div>
+        <div class="panel">
+          <div class="pt">Impression share by property type</div>
+          <div class="bars">
+            <div class="brow"><div class="bl">Mobile Home</div><div class="bt"><i class="mint" data-w="100"></i></div><div class="bv">18.0%</div></div>
+            <div class="brow"><div class="bl">Apartment</div><div class="bt"><i class="mint" data-w="90"></i></div><div class="bv">16.3%</div></div>
+            <div class="brow"><div class="bl">Townhome</div><div class="bt"><i class="mint" data-w="39"></i></div><div class="bv">7.1%</div></div>
+            <div class="brow"><div class="bl">Multi Family</div><div class="bt"><i class="mint" data-w="35"></i></div><div class="bv">6.3%</div></div>
+            <div class="brow"><div class="bl">Single Family</div><div class="bt"><i class="mint" data-w="27"></i></div><div class="bv">4.9%</div></div>
+            <div class="brow"><div class="bl">Condominium</div><div class="bt"><i class="mint" data-w="14"></i></div><div class="bv">2.5%</div></div>
+          </div>
+          <div class="brk-cap">Impressions &divide; searches per property type. By property age, <b>30-year homes carry 113 leads</b> and 20-year homes 73 with 1 policy.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="s6">
+      <div class="bhead"><span class="ix">06</span><div><h2>All-time book</h2><p>All-time export &middot; pulled July 17, 2026</p></div></div>
+      <div class="panel">
+        <div class="bignum">$26.15 <span>per policy &middot; all-time</span></div>
+        <div class="kpi-inline">
+          <div class="chip">Leads + calls <b>2,679</b></div>
+          <div class="chip">Contacted <b>887</b> &middot; 33.1%</div>
+          <div class="chip">Quoted <b>714</b></div>
+          <div class="chip">Policies <b>302</b></div>
+          <div class="chip">Spend <b>$7,898.51</b></div>
+        </div>
+        <div class="fnote">Ages 55+ hold <b>258 of 302 policies</b> (85.4%); ages 65+ hold 186. Full age-band detail, the 60-day snapshot, and the export-verification status are in report 04.</div>
+      </div>
+    </section>
+
+    <section class="block" id="s7">
+      <div class="bhead"><span class="ix">07</span><div><h2>Age bands</h2><p>Leads + calls and contacts by age band &middot; last 60 days through July 17, 2026</p></div></div>
+      <div class="brk">
+        <div class="panel">
+          <div class="pt">Leads + calls by age band</div>
+          <div class="bars">
+            <div class="brow"><div class="bl">25&ndash;34</div><div class="bt"><i data-w="2"></i></div><div class="bv">3</div></div>
+            <div class="brow"><div class="bl">35&ndash;44</div><div class="bt"><i data-w="7"></i></div><div class="bv">9</div></div>
+            <div class="brow"><div class="bl">45&ndash;54</div><div class="bt"><i data-w="16"></i></div><div class="bv">21</div></div>
+            <div class="brow"><div class="bl">55&ndash;64</div><div class="bt"><i data-w="34"></i></div><div class="bv">46</div></div>
+            <div class="brow"><div class="bl">65&ndash;74</div><div class="bt"><i data-w="83"></i></div><div class="bv">111</div></div>
+            <div class="brow"><div class="bl">75+</div><div class="bt"><i data-w="100"></i></div><div class="bv">134</div></div>
+          </div>
+          <div class="brk-cap">Ages <b>65+ carry 245 of 324</b> leads and calls (75.6%) and both policies (75+ band). 18&ndash;24: 0 leads on 157 searches.</div>
+        </div>
+        <div class="panel">
+          <div class="pt">Contact rate by age band</div>
+          <div class="bars">
+            <div class="brow"><div class="bl">25&ndash;34</div><div class="bt"><i class="mint" data-w="100"></i></div><div class="bv">33.3%</div></div>
+            <div class="brow"><div class="bl">35&ndash;44</div><div class="bt"><i class="mint" data-w="100"></i></div><div class="bv">33.3%</div></div>
+            <div class="brow"><div class="bl">45&ndash;54</div><div class="bt"><i class="mint" data-w="29"></i></div><div class="bv">9.5%</div></div>
+            <div class="brow"><div class="bl">55&ndash;64</div><div class="bt"><i class="mint" data-w="20"></i></div><div class="bv">6.5%</div></div>
+            <div class="brow"><div class="bl">65&ndash;74</div><div class="bt"><i class="mint" data-w="51"></i></div><div class="bv">17.1%</div></div>
+            <div class="brow"><div class="bl">75+</div><div class="bt"><i class="mint" data-w="58"></i></div><div class="bv">19.4%</div></div>
+          </div>
+          <div class="brk-cap">45&ndash;54 contacts at <b>9.5%</b> (2 of 21) and 55&ndash;64 at <b>6.5%</b> (3 of 46) this window, against <b>37.8% and 38.4%</b> all-time.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="s8">
+      <div class="bhead"><span class="ix">08</span><div><h2>Geography</h2><p>Leads by county &middot; last 60 days through July 17, 2026</p></div></div>
+      <div class="panel">
+        <div class="bignum">56 <span>leads in Los Angeles County</span></div>
+        <div class="kpi-inline">
+          <div class="chip">Riverside <b>33</b> leads &middot; 1 policy</div>
+          <div class="chip">San Diego <b>25</b> leads</div>
+          <div class="chip">San Bernardino <b>20</b> leads &middot; 6 contacted</div>
+          <div class="chip">Kern <b>10</b> leads &middot; 3 quoted</div>
+          <div class="chip">Contra Costa <b>10</b> leads &middot; 4 contacted</div>
+        </div>
+        <div class="fnote">Los Angeles County: 56 leads and 6 calls, 12 contacted, 4 quoted on $290.33. Riverside: 33 leads and 5 calls, 5 contacted, 3 quoted, 1 policy on $169.55.</div>
+      </div>
+    </section>
+
+    <section class="block" id="s9" style="margin-bottom:0;">
+      <div class="bhead"><span class="ix">09</span><div><h2>Recommendations</h2></div></div>
+      <div class="plan">
+        <div class="pstep"><div class="num">1</div><div><div class="h">Hold the base bid at $4.15</div><div class="b">All July 17 changes run through the bid schedule and source multipliers against the held base. No base-bid change.</div></div></div>
+        <div class="pstep"><div class="num">2</div><div><div class="h">Ship the schedule and multiplier bundle in one session</div><div class="b">Per-hour delta check first; then schedule to 100% in active hours, Tier 1 150&rarr;105% ($4.36 &asymp; 2nd position, $4.33), Tier 3 120&rarr;90% ($3.74), and Tier 2 70&rarr;90% ($3.74 &asymp; 2nd, $3.68) in the same session. Home SearchB holds at 155%. The multiplier changes apply only if the schedule change ships. Home targets 1st or 2nd position.</div></div></div>
+        <div class="pstep"><div class="num">3</div><div><div class="h">Keep the July 2 age changes in place; order the isolating export</div><div class="b">The 75+ filter cut, 65&ndash;74 up-modifier, and 55&ndash;64 down-modifier are live. A 7/2&ndash;7/17 by-age export isolates their read at the next checkpoint (report 04).</div></div></div>
+        <div class="pstep"><div class="num">4</div><div><div class="h">Work the 45&ndash;64 contact gap</div><div class="b">45&ndash;54 and 55&ndash;64 contact at 9.5% and 6.5% this window against 37.8% and 38.4% all-time &mdash; 67 leads and calls in the two bands, 5 contacted. First-call coverage on these bands within the existing cadence.</div></div></div>
+        <div class="pstep"><div class="num">5</div><div><div class="h">Mobile Home sub-campaign scoping stays open</div><div class="b">Mobile Home carries both in-window policies on 64 leads at an 18.0% impression share. Scoping is additive only &mdash; current statewide targeting unchanged.</div></div></div>
+        <div class="pstep"><div class="num">6</div><div><div class="h">Respond within 5 minutes</div><div class="b">New leads and inbound calls stay the highest-priority task in the queue; a text after a missed call raises callback rates.
+          <a class="cad-link" href="https://goal-followup-best-practices.vercel.app/" target="_blank" rel="noopener"><div><div class="clt">Follow-up best practices</div><div class="cls">30-day cadence &middot; phone, text, and email</div></div><span class="cla">Open guide &rarr;</span></a>
+        </div></div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+  e.target.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';});
+  e.target.querySelectorAll('.seg').forEach(s=>{const d=+s.dataset.dash;const o=+(s.dataset.offset||0);
+    s.setAttribute('stroke-dashoffset', -o);
+    s.style.transition='stroke-dasharray 1.1s cubic-bezier(.2,.7,.2,1)';
+    requestAnimationFrame(()=>{ s.setAttribute('stroke-dasharray', d+' '+(100-d)); });});
+  io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.block').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
