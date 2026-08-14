@@ -3,218 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supreme Choice Insurance Solutions — Performance Reports</title>
+<title>Supreme Choice Insurance Solutions — Account Review, August 14, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --blue:#057BE5; --blue-hover:#0C6EC5; --sky:#308ED6; --mint:#3BEECA; --mint-d:#0fae8f;
-  --navy:#00172D; --ink:#0F1B2D; --body:#2B3442; --muted:#6A7482;
-  --white:#fff; --off:#F8FAFC; --gray:#EFF2F7; --divider:#EDF1F5; --line:#E2E8F0;
-  --success:#2BBF7A; --warning:#F0A93B; --error:#E5484D;
-}
+:root{--blue:#057BE5;--sky:#2D90EE;--mint:#3BEECA;--mint-d:#0fae8f;--navy:#00172D;--navy-deep:#001020;
+--ink:#0F1B2D;--body:#2B3442;--muted:#6A7482;--white:#fff;--off:#F8FAFC;--gray:#EFF2F7;--line:#E2E8F0;}
 *{margin:0;padding:0;box-sizing:border-box;}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+html{-webkit-font-smoothing:antialiased;}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--gray);color:var(--body);line-height:1.55;}
-.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:288px 1fr;min-height:100vh;background:var(--white);}
-.side{background:var(--navy);color:#cfe0ee;padding:34px 30px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;}
-.side .logo{height:30px;align-self:flex-start;margin-bottom:38px;}
-.side .eb{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2D90EE;}
-.side h1{font-size:25px;font-weight:900;color:#fff;line-height:1.08;letter-spacing:-.02em;margin:10px 0 14px;}
-.side .who{font-size:13px;color:#a7c2da;line-height:1.6;}
-.side .who b{color:#fff;font-weight:600;}
-.side nav{margin-top:34px;display:flex;flex-direction:column;gap:2px;}
-.side nav a{font-size:13.5px;color:#9fbcd6;text-decoration:none;padding:9px 12px;border-radius:8px;display:flex;align-items:center;gap:11px;transition:background .15s,color .15s;}
-.side nav a:hover{background:rgba(255,255,255,.06);color:#fff;}
-.side nav a .dot{width:6px;height:6px;border-radius:50%;background:#3a6386;flex-shrink:0;}
-.side nav a:hover .dot{background:var(--mint);}
-.side .foot{margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);font-size:11px;color:#6f93b3;line-height:1.6;}
-.main{padding:46px 52px 60px;}
-.exec{background:var(--off);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:40px;}
-.exec .eb{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);}
-.exec h2{font-size:30px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1.1;margin:11px 0 13px;}
-.exec p{font-size:15.5px;line-height:1.62;color:var(--body);}
-.exec p b{color:var(--ink);font-weight:700;}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
-.card.wide{grid-column:1/-1;}
-.grouplab{grid-column:1/-1;margin-top:16px;padding-top:20px;border-top:1px solid var(--divider);font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
-.card{position:relative;border:1px solid var(--line);border-radius:14px;background:var(--white);padding:24px 24px 22px;text-decoration:none;color:inherit;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 2px 10px rgba(0,23,45,.05);transition:transform .18s,box-shadow .18s,border-color .18s;}
-.card:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(0,23,45,.12);border-color:var(--blue);}
-.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
-.card.c1::before{background:var(--blue);}
-.card.c2::before{background:var(--sky);}
-.card.c3::before{background:var(--mint-d);}
-.card .ix{font-size:12px;font-weight:800;color:var(--blue);font-variant-numeric:tabular-nums;background:#E6F1FD;padding:4px 9px;border-radius:6px;align-self:flex-start;}
-.card.c3 .ix{color:var(--mint-d);background:#D6F7EE;}
-.card .tag{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:16px 0 0;}
-.card h3{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.01em;margin:7px 0 10px;line-height:1.25;}
-.card p{font-size:13px;color:var(--muted);line-height:1.6;flex:1;}
-.card .traits{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 18px;}
-.card .traits span{font-size:11px;font-weight:600;color:var(--body);background:var(--gray);border:1px solid var(--line);padding:4px 9px;border-radius:20px;}
-.card .go{font-size:13.5px;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px;}
-.card.c3 .go{color:var(--mint-d);}
-.note{margin-top:38px;padding-top:22px;border-top:1px solid var(--divider);font-size:12.5px;color:var(--muted);line-height:1.6;}
+.wrap{max-width:1180px;margin:0 auto;background:var(--white);min-height:100vh;}
+.hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;padding:52px 60px 56px;}
+.hero img{height:32px;margin-bottom:40px;}
+.hero .eb{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);}
+.hero h1{font-size:42px;font-weight:900;letter-spacing:-.025em;line-height:1.06;margin:12px 0 16px;max-width:16ch;}
+.hero .sub{font-size:15px;color:#a7c2da;line-height:1.6;}
+.hero .sub b{color:#fff;font-weight:600;}
+.hbar{display:flex;gap:40px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.14);flex-wrap:wrap;}
+.hbar .hs .v{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1;}
+.hbar .hs .l{font-size:11.5px;color:#8fb0cc;font-weight:600;margin-top:6px;}
+.main{padding:46px 60px 64px;}
+.sechead{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--white);
+text-decoration:none;color:inherit;transition:border-color .16s,box-shadow .16s,transform .16s;position:relative;overflow:hidden;}
+.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue);}
+.card.mint:before{background:var(--mint);}
+.card:hover{border-color:#c6d9ee;box-shadow:0 8px 26px rgba(15,27,45,.09);transform:translateY(-2px);}
+.cix{font-size:11px;font-weight:800;color:var(--blue);background:#E6F1FD;padding:4px 9px;border-radius:6px;align-self:flex-start;font-variant-numeric:tabular-nums;}
+.card.mint .cix{color:var(--mint-d);background:#D6F7EE;}
+.cbody{flex:1;margin-top:16px;}
+.cbody h3{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.01em;line-height:1.25;}
+.cmeta{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:5px;}
+.cbody p{font-size:13.5px;color:var(--body);margin-top:11px;line-height:1.55;}
+.cstats{display:flex;gap:26px;margin-top:18px;padding-top:16px;border-top:1px solid #EDF1F5;flex-wrap:wrap;}
+.cs .csv{font-size:18px;font-weight:900;color:var(--ink);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;}
+.cs .csl{font-size:11px;color:var(--muted);font-weight:600;margin-top:4px;}
+.cgo{margin-top:20px;font-size:12.5px;font-weight:800;color:var(--blue);display:flex;align-items:center;gap:7px;}
+.card.mint .cgo{color:var(--mint-d);}
+.card:hover .cgo span{transform:translateX(3px);}
+.cgo span{transition:transform .16s;display:inline-block;}
+.note{border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:18px 22px;background:var(--off);font-size:13.5px;line-height:1.6;}
 .note b{color:var(--ink);font-weight:700;}
-@media print{
-  body{background:#fff;} .shell{display:block;max-width:none;}
-  .side{position:static;height:auto;flex-direction:row;align-items:center;justify-content:space-between;padding:20px 30px;}
-  .side nav,.side .foot{display:none;} .side h1{margin:0;}
-  .card{break-inside:avoid;}
-}
-@media(max-width:900px){
-  .shell{grid-template-columns:1fr;} .side{position:static;height:auto;} .side nav{display:none;}
-  .main{padding:32px 22px;} .cards{grid-template-columns:1fr;}
-}
+.foot{padding:26px 60px 40px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6;}
+@media(max-width:860px){.grid{grid-template-columns:1fr;}.hero{padding:38px 26px 42px;}.hero h1{font-size:31px;}.main{padding:34px 26px 44px;}.foot{padding:22px 26px 34px;}.hbar{gap:26px;}}
+@media print{body{background:#fff;}.card{break-inside:avoid;}.card:hover{transform:none;box-shadow:none;}}
 </style>
 </head>
 <body>
-<div class="shell">
-  <aside class="side">
-    <svg class="logo" viewBox="0 0 501.8 135" role="img" aria-label="GOAL" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" fill-rule="evenodd" d="M60.4 134.9C59.9 134.8 58.3 134.7 56.8 134.6C37.6 133 21.1 123.6 11.2 108.5C5.3 99.5 2.1 90.3 0.7 77.9C0.2 73.6 0.2 62 0.7 57.7C1.8 47.8 4.2 39.8 8.2 32.2C11.4 26.3 14.6 22 19.4 17.3C29.5 7.5 42.8 1.7 58 0.4C61.5 0.1 70.6 0.3 73.8 0.7C91.4 3 105.9 11.5 114.4 24.3C116.3 27.1 118.2 30.9 119.3 33.7C120.2 36.1 121.3 40.2 121.6 42.5C121.7 43.4 121.8 44.3 121.9 44.7L122 45.2L103.9 45.2L85.9 45.2L85.6 44.2C85.5 43.7 84.9 42.4 84.4 41.2C83.6 39.6 83 38.8 81.8 37.5C79.9 35.5 78.8 34.7 76.7 33.6C73.4 32 69.6 31.2 65 31.2C49.4 31.2 39.6 41.3 37.3 59.4C36.6 64.7 36.7 71.9 37.5 77.1C39 87.3 42.8 94.6 48.7 99.1C54.3 103.3 62 104.8 71.1 103.5C80.3 102.2 86.3 97.6 88.3 90.5C88.8 88.8 89.2 85.7 89.1 85.4C89 85.3 83.6 85.2 77.1 85.2L65.2 85.2L65.2 72.5L65.2 59.8L94.3 59.8L123.4 59.8L123.3 72.7C123.3 86.3 123.2 86.8 122.2 92.1C119 108.3 109 121.3 94.3 128.5C87.5 131.8 80.7 133.7 72.5 134.6C70.4 134.8 62 135 60.4 134.9ZM265.2 133.1C265.2 133 286.7 67.7 306.2 8.6L308.4 2L332.9 2L357.3 2.1L378.9 67.6L400.5 133.1L381.3 133.2C366 133.2 362.1 133.2 362 133C362 132.8 360.2 127.2 358.2 120.4L354.5 108.1L332.8 108L311.2 108L311 108.7C310.9 109.2 309.2 114.8 307.2 121.3L303.7 133.1L284.4 133.2C273.9 133.2 265.2 133.1 265.2 133.1ZM413 67.6L413 2L430.9 2L448.8 2L448.8 53.2L448.8 104.4L475.3 104.4L501.8 104.4L501.8 118.8L501.8 133.2L457.4 133.2L413 133.2L413 67.6ZM346.3 81C346.2 80.7 343.3 71 339.8 59.4C336.3 47.8 333.3 38.2 333.2 38.1C332.5 37.5 332.5 37.7 325.9 59.5C322.3 71.3 319.4 81 319.4 81.2C319.4 81.3 322.2 81.4 332.9 81.4L346.4 81.4L346.3 81Z"/><path fill="#057BE5" fill-rule="evenodd" d="M197.6 133.5C194.1 133.2 187.9 132.2 187.7 131.9C187.6 131.8 191.7 119.4 191.9 119.2C191.9 119.2 192.8 119.3 193.8 119.5C201.9 120.8 210.5 120.2 218.5 117.5C226.6 114.8 233.4 110.7 239.3 104.7C246 97.9 250.6 89.8 253 80.5C254.2 75.6 254.5 73.4 254.5 67.8C254.5 61.4 253.9 57.4 252.1 51.8C249.5 43.7 245.3 36.9 239.2 30.8C235.5 27.1 231.5 24.1 227.3 21.8C226.4 21.3 225.7 20.9 225.6 20.9C225.6 20.8 229.1 10.2 229.8 8.4L230 8L231.6 8.8C244.8 15.4 255.5 26.4 261.8 39.7C264.6 45.6 266.4 51.5 267.4 58.3C268 61.9 268.2 69.7 267.8 73.6C266.4 89.5 259.5 103.9 248.1 115C244.9 118.1 242.4 120.1 238.5 122.7C235.2 124.9 229.8 127.7 226.1 129.2C221.5 131 215.9 132.4 210.6 133.1C208.2 133.4 199.7 133.7 197.6 133.5ZM171.5 126C154.2 116.9 141.8 100.5 137.8 81.5C136.2 73.9 136 65.6 137.1 57.8C139.7 40.4 149.7 24.3 164.3 13.9C172.6 8 182.2 4.2 192.7 2.6C196.3 2 204.4 1.8 208.1 2.2C210.6 2.4 216.1 3.3 216.3 3.5C216.4 3.5 212.2 16 212.1 16.2C212 16.2 210.9 16.1 209.7 15.9C208.4 15.7 205.5 15.5 203.4 15.5C185.8 15 169.1 23.5 159 38.1C154.4 44.9 151.5 52.4 150.3 60.9C149.8 64.2 149.8 71.3 150.3 74.7C151.9 86.1 156.8 96.1 164.7 104.2C168.5 108.1 172.6 111.3 177 113.6C177.8 114.1 178.4 114.6 178.3 114.7C178.3 114.8 177.3 117.7 176.2 121C175 124.4 174 127.2 173.9 127.2C173.8 127.2 172.7 126.7 171.5 126ZM198.8 106.8C197.6 106.7 196.5 106.5 196.4 106.5C196.4 106.4 197.2 103.7 198.3 100.5L200.3 94.6L202.9 94.5C215.5 94.1 225.8 85.5 228.5 73C229 70.6 229 65 228.5 62.7C227.8 59 226.4 55.7 224.5 52.8C223.2 51 219.7 47.3 218.2 46.2C217.6 45.9 217.2 45.5 217.2 45.4C217.2 45 221.2 33.7 221.3 33.7C221.7 33.5 225.6 36.3 227.7 38C233.5 43 238.1 50.2 240.1 57.7C243.6 71.3 239.8 85.6 229.9 95.5C221.7 103.6 210.5 107.7 198.8 106.8ZM180.7 100.4C173.9 95.9 169 89.9 165.9 82.5C161.8 72.4 162.2 60.6 167 50.7C172.6 39.1 183.3 31.2 196 29.1C198.5 28.7 203.3 28.5 205.6 28.8C206.6 28.9 207.5 29 207.5 29.1C207.6 29.1 204.5 38.7 203.7 40.6C203.6 40.9 203.1 41 200.9 41.1C194.1 41.4 188.2 44 183.3 48.9C179.5 52.7 177 57.3 175.9 62.8C175.4 65.1 175.4 70.2 175.9 72.7C177 78.6 180 83.8 184.4 87.7C185 88.3 185.8 88.9 186.2 89.2C186.5 89.4 186.8 89.7 186.8 89.8C186.8 90.1 183 101.1 182.8 101.5C182.7 101.7 182 101.3 180.7 100.4ZM199 80C192.5 78.3 188.5 71.7 189.9 65C190.6 61.5 193.2 58.1 196.5 56.5C198.4 55.5 199.9 55.2 202.2 55.2C205.9 55.2 208.6 56.3 211.1 58.9C212.9 60.7 213.9 62.5 214.5 64.8C215 66.7 214.8 70 214.1 72C212 78.1 205.3 81.6 199 80Z"/></svg>
-    <div class="eb">Performance Reports</div>
+<div class="wrap">
+  <header class="hero">
+    <img src="data:image/png;base64,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" alt="GOAL">
+    <div class="eb">Account Review</div>
     <h1>Supreme Choice Insurance Solutions</h1>
-    <div class="who">Prepared for <b>John Hunt</b><br>California &middot; Home &amp; Auto<br>Review of August 4, 2026</div>
-    <nav>
-      <a href="Supreme-Choice-Blended-Contact-Rate-Review-8-04-26.html"><span class="dot"></span>Blended Contact Rate Review</a>
-      <a href="Supreme-Choice-Blended-Quote-Performance-Review-8-04-26.html"><span class="dot"></span>Blended Quote Performance</a>
-      <a href="Supreme-Choice-Home-Contact-Rate-Review-8-04-26.html"><span class="dot"></span>Home Contact Rate Review</a>
-      <a href="Supreme-Choice-Auto-Contact-Rate-Review-8-04-26.html"><span class="dot"></span>Auto Contact Rate Review</a>
-      <a href="Supreme-Choice-Home-Quote-Performance-Review-8-04-26.html"><span class="dot"></span>Home Quote Performance</a>
-      <a href="Supreme-Choice-Auto-Quote-Performance-Review-8-04-26.html"><span class="dot"></span>Auto Quote Performance</a>
-      <a href="Supreme-Choice-Home-Auto-Quote-Performance-Review-8-04-26.html"><span class="dot"></span>Home &amp; Auto Quote Performance</a>
-      <a href="Supreme-Choice-Blended-Age-Band-Deep-Dive-8-04-26.html"><span class="dot"></span>Blended Age Band Deep-Dive</a>
-      <a href="Supreme-Choice-Blended-Hourly-Contact-Quote-Review-8-04-26.html"><span class="dot"></span>Hourly Contact & Quote</a>
-      <a href="Supreme-Choice-Blended-Hourly-Close-Performance-Review-8-04-26.html"><span class="dot"></span>Hourly Close Performance</a>
-      <a href="Supreme-Choice-CA-Brush-Fire-Risk-7-28-26.html"><span class="dot"></span>CA Brush Fire Risk</a>
-      <a href="Supreme-Choice-CA-Demographic-Research-7-28-26.html"><span class="dot"></span>CA Demographic Research</a>
-    </nav>
-    <div class="foot">GOAL Performance Marketing<br>All conversion metrics based on Leads, not Clicks.</div>
-  </aside>
+    <div class="sub">Prepared for <b>Monty</b> &middot; California<br>Review of <b>August 14, 2026</b></div>
+    <div class="hbar">
+      <div class="hs"><div class="v">1,070</div><div class="l">Leads year to date</div></div>
+      <div class="hs"><div class="v">285</div><div class="l">Quotes year to date</div></div>
+      <div class="hs"><div class="v">23</div><div class="l">Policies bound</div></div>
+      <div class="hs"><div class="v">$291.58</div><div class="l">Cost per policy</div></div>
+      <div class="hs"><div class="v">58</div><div class="l">Counties with delivery</div></div>
+    </div>
+  </header>
 
   <main class="main">
-
-    <div class="exec">
-      <div class="eb">Account Review &middot; August 4, 2026</div>
-      <h2>August 4 review package</h2>
-      <p>Ten reports for the <b>August 4, 2026</b> review of the CA Home and CA Auto campaigns — contact rate and quote performance at the blended level, contact rate and quote performance for each campaign on its own, the segmented Home-and-Auto quote review, the blended age band deep-dive, and two hourly timing reviews. Year to date, the two campaigns delivered <b>1,028 leads</b> and <b>99 inbound calls</b> on <b>$6,323.50</b> of spend; <b>398</b> were contacted for a <b>38.7% contact rate</b> at <b>$15.89</b> per contact, producing <b>285 quotes</b> and <b>23 policies</b> at <b>$274.93</b> each. Campaign figures cover <b>2026 year to date through August 4, 2026</b>. Two California market research companions — brush fire risk geography and ZIP-level demographics — follow at the bottom.</p>
-    </div>
-
-    <div class="cards">
-      <a class="card c1" href="Supreme-Choice-Blended-Contact-Rate-Review-8-04-26.html">
-        <span class="ix">01</span>
-        <div class="tag">Auto + Home CA &middot; Contact rate</div>
-        <h3>Blended Contact Rate Review</h3>
-        <p>Both campaigns combined year to date — 1,028 leads and 99 inbound calls on $6,323.50 of spend, a 38.7% contact rate at $15.89 per contact and 23 policies, with contact rate broken out by campaign, county, source, consumer age, and home ownership.</p>
-        <div class="traits"><span>Campaign split</span><span>County range</span><span>Home ownership</span></div>
-        <span class="go">Open report →</span>
+    <div class="sechead">Current period &middot; last 30 days</div>
+    <div class="grid">
+      <a class="card blue" href="Supreme-Choice-Home-Campaign-Performance-Last-30-Days-8-14-26.html">
+        <div class="cix">01</div>
+        <div class="cbody">
+          <h3>Home Campaign Performance</h3>
+          <div class="cmeta">Last 30 days &middot; through Aug 14, 2026</div>
+          <p>Delivery funnel, source performance and disposition status for Home (CA).</p>
+          <div class="cstats"><div class="cs"><div class="csv">74</div><div class="csl">Leads</div></div><div class="cs"><div class="csv">$442.24</div><div class="csl">Cost</div></div><div class="cs"><div class="csv">5.24</div><div class="csl">Avg pos</div></div></div>
+        </div>
+        <div class="cgo">Open report <span>&rarr;</span></div>
       </a>
-
-      <a class="card c2" href="Supreme-Choice-Blended-Quote-Performance-Review-8-04-26.html">
-        <span class="ix">02</span>
-        <div class="tag">Auto + Home CA &middot; Quote performance</div>
-        <h3>Blended Quote Performance Review</h3>
-        <p>Both campaigns combined year to date — 285 quotes from 1,028 leads, a 27.7% quote rate at $22.19 per quote and 23 policies at $274.93 each, with quote performance by campaign, county, source, and consumer age.</p>
-        <div class="traits"><span>Quote rate</span><span>Contact-to-quote</span><span>Quote-to-close</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c3" href="Supreme-Choice-Home-Contact-Rate-Review-8-04-26.html">
-        <span class="ix">03</span>
-        <div class="tag">Home CA &middot; Contact rate</div>
-        <h3>Home Contact Rate Review</h3>
-        <p>CA Home year to date — 808 leads and 86 inbound calls on $4,264.86 of spend, a 37.9% contact rate at $13.94 per contact and 19 policies at $224.47 each, with contact rate by source, consumer age, property type, and county.</p>
-        <div class="traits"><span>Age bands</span><span>Property type</span><span>Quote-to-close</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c1" href="Supreme-Choice-Auto-Contact-Rate-Review-8-04-26.html">
-        <span class="ix">04</span>
-        <div class="tag">Auto CA &middot; Contact rate</div>
-        <h3>Auto Contact Rate Review</h3>
-        <p>CA Auto year to date — 220 leads and 13 inbound calls on $2,058.64 of spend, a 41.8% contact rate at $22.38 per contact and 4 policies at $514.66 each, with contact rate by source, consumer age, and county.</p>
-        <div class="traits"><span>Source spread</span><span>Age bands</span><span>County detail</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c2" href="Supreme-Choice-Home-Quote-Performance-Review-8-04-26.html">
-        <span class="ix">05</span>
-        <div class="tag">Home CA &middot; Quote performance</div>
-        <h3>Home Quote Performance Review</h3>
-        <p>CA Home year to date — 198 quotes from 808 leads, a 24.5% quote rate at $21.54 per quote, 64.7% contact-to-quote and 9.6% quote-to-close for 19 policies at $224.47 each, with quote rate broken out by source, consumer age band, and county.</p>
-        <div class="traits"><span>By source</span><span>By age band</span><span>By county</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c3" href="Supreme-Choice-Auto-Quote-Performance-Review-8-04-26.html">
-        <span class="ix">06</span>
-        <div class="tag">Auto CA &middot; Quote performance</div>
-        <h3>Auto Quote Performance Review</h3>
-        <p>CA Auto year to date — 87 quotes from 220 leads, a 39.5% quote rate at $23.66 per quote, 94.6% contact-to-quote and 4.6% quote-to-close for 4 policies at $514.66 each, with quote rate broken out by source, consumer age band, and county.</p>
-        <div class="traits"><span>By source</span><span>By age band</span><span>By county</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c1" href="Supreme-Choice-Home-Auto-Quote-Performance-Review-8-04-26.html">
-        <span class="ix">07</span>
-        <div class="tag">Home + Auto CA &middot; Quote performance</div>
-        <h3>Home &amp; Auto Quote Performance Review</h3>
-        <p>Both campaigns segmented side by side — Home at a 24.5% quote rate and 9.6% quote-to-close for 19 policies at $224.47; Auto at 39.5% and 4.6% for 4 policies at $514.66. Every section shows Home first, then Auto: key metrics, quote funnel, source, age band, and county.</p>
-        <div class="traits"><span>Segmented</span><span>Home vs Auto</span><span>Cost per quote</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c2" href="Supreme-Choice-Blended-Age-Band-Deep-Dive-8-04-26.html">
-        <span class="ix">08</span>
-        <div class="tag">Auto + Home CA &middot; Deep-dive</div>
-        <h3>Blended Age Band Deep-Dive</h3>
-        <p>Every age band across both campaigns year to date — contact rate and funnel by band, volume, spend and policy share, five-year age detail, the Home and Auto split within each band, and cost per contact and cost per policy. Contact rate peaked at 55.8% across the 45&ndash;64 bands.</p>
-        <div class="traits"><span>Five-year detail</span><span>Spend share</span><span>Cost per policy</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c3" href="Supreme-Choice-Blended-Hourly-Contact-Quote-Review-8-04-26.html">
-        <span class="ix">09</span>
-        <div class="tag">Auto + Home CA &middot; Timing</div>
-        <h3>Hourly Contact &amp; Quote Review</h3>
-        <p>When leads arrive and how they convert — contact and quote rate by hour and by day of week, plus the day-and-hour delivery grid. The four hours from 9 AM to 12 PM carried 830 leads, 80% of volume; contact rate by day ran 32.3% Monday to 47.3% Friday.</p>
-        <div class="traits"><span>By hour</span><span>By weekday</span><span>Delivery grid</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c1" href="Supreme-Choice-Blended-Hourly-Close-Performance-Review-8-04-26.html">
-        <span class="ix">10</span>
-        <div class="tag">Auto + Home CA &middot; Timing</div>
-        <h3>Hourly Close Performance Review</h3>
-        <p>When policies get bound — quote-to-close and close rate by hour and by day of week, and every day-and-hour cell recording a policy. 21 of 23 policies record Monday through Wednesday and Friday records none; the 11 AM hour carries the highest quote-to-close at 19.1%.</p>
-        <div class="traits"><span>Quote-to-close</span><span>By weekday</span><span>Policy cells</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <div class="grouplab">California market research &middot; companion reports &middot; July 28, 2026</div>
-
-      <a class="card c2" href="Supreme-Choice-CA-Brush-Fire-Risk-7-28-26.html">
-        <span class="ix">11</span>
-        <div class="tag">California &middot; Risk geography</div>
-        <h3>CA Brush Fire Risk &amp; Exclusion Geography</h3>
-        <p>Every populated California ZIP scored for brush fire risk from the FEMA National Risk Index at census-tract resolution, expressed on the scales the four commercial underwriting models use. Includes the recommended exclusion geography for Home and the ZIP suppressions for Auto.</p>
-        <div class="traits"><span>Statewide map</span><span>Exclusion list</span><span>Review tier</span></div>
-        <span class="go">Open report →</span>
-      </a>
-
-      <a class="card c3" href="Supreme-Choice-CA-Demographic-Research-7-28-26.html">
-        <span class="ix">12</span>
-        <div class="tag">California &middot; Market research</div>
-        <h3>CA Demographic Research by ZIP</h3>
-        <p>Demographic profile of all 1,803 populated California ZIP codes — household income, homeownership, owner occupancy, age, and vehicles — built from the Census ACS 2020&ndash;2024 five-year estimates, with within-county spread, prime-target ZIPs, and household screens.</p>
-        <div class="traits"><span>1,803 ZIPs</span><span>Prime targets</span><span>Household screens</span></div>
-        <span class="go">Open report →</span>
+      <a class="card blue" href="Supreme-Choice-Auto-Campaign-Performance-Last-30-Days-8-14-26.html">
+        <div class="cix">02</div>
+        <div class="cbody">
+          <h3>Auto Campaign Performance</h3>
+          <div class="cmeta">Last 30 days &middot; through Aug 14, 2026</div>
+          <p>Delivery funnel, source performance and disposition status for Auto (CA).</p>
+          <div class="cstats"><div class="cs"><div class="csv">37</div><div class="csl">Leads</div></div><div class="cs"><div class="csv">$469.78</div><div class="csl">Cost</div></div><div class="cs"><div class="csv">2.56</div><div class="csl">Avg pos</div></div></div>
+        </div>
+        <div class="cgo">Open report <span>&rarr;</span></div>
       </a>
     </div>
 
-    <div class="note">Campaign reports reflect GOAL Platform data for <b>2026 year to date through August 4, 2026</b>; all conversion metrics are based on Leads, not Clicks. The California research companions are built on the <b>FEMA National Risk Index (December 2025)</b> and the <b>Census ACS 2020&ndash;2024</b> five-year estimates, not on campaign data. Each report is self-contained and prints cleanly to PDF.</div>
+    <div class="sechead">2026 year to date</div>
+    <div class="grid">
+      <a class="card blue" href="Supreme-Choice-Source-Type-Performance-YTD-8-14-26.html">
+        <div class="cix">03</div>
+        <div class="cbody">
+          <h3>Source Type Performance</h3>
+          <div class="cmeta">2026 year to date &middot; Jan 1 &ndash; Aug 14</div>
+          <p>Monthly change over time, full source-type table and the source mix shift between windows.</p>
+          <div class="cstats"><div class="cs"><div class="csv">1,070</div><div class="csl">Leads</div></div><div class="cs"><div class="csv">285</div><div class="csl">Quotes</div></div><div class="cs"><div class="csv">23</div><div class="csl">Policies</div></div></div>
+        </div>
+        <div class="cgo">Open report <span>&rarr;</span></div>
+      </a>
+      <a class="card blue" href="Supreme-Choice-Geographic-Performance-By-County-YTD-8-14-26.html">
+        <div class="cix">04</div>
+        <div class="cbody">
+          <h3>Geographic Performance by County</h3>
+          <div class="cmeta">2026 year to date &middot; Jan 1 &ndash; Aug 14</div>
+          <p>County-level delivery, lead concentration and contact rate against policy outcome.</p>
+          <div class="cstats"><div class="cs"><div class="csv">58</div><div class="csl">Counties</div></div><div class="cs"><div class="csv">$291.58</div><div class="csl">CPA</div></div><div class="cs"><div class="csv">9</div><div class="csl">Counties w/ policies</div></div></div>
+        </div>
+        <div class="cgo">Open report <span>&rarr;</span></div>
+      </a>
+    </div>
 
+    <div class="sechead">Market research</div>
+    <div class="grid">
+      <a class="card mint" href="Supreme-Choice-CA-Brush-Fire-Risk-7-28-26.html">
+        <div class="cix">05</div>
+        <div class="cbody">
+          <h3>California Brush Fire Risk</h3>
+          <div class="cmeta">Research &middot; Jul 28, 2026</div>
+          <p>Wildfire exposure across California counties and the implications for Home targeting.</p>
+          
+        </div>
+        <div class="cgo">Open report <span>&rarr;</span></div>
+      </a>
+      <a class="card mint" href="Supreme-Choice-CA-Demographic-Research-7-28-26.html">
+        <div class="cix">06</div>
+        <div class="cbody">
+          <h3>California Demographic Research</h3>
+          <div class="cmeta">Research &middot; Jul 28, 2026</div>
+          <p>Population, household and income characteristics across the California footprint.</p>
+          
+        </div>
+        <div class="cgo">Open report <span>&rarr;</span></div>
+      </a>
+    </div>
+
+    <div class="note">All conversion metrics &mdash; contact rate, quote rate and cost per policy &mdash; are calculated on <b>Leads</b>, not Clicks. Year-to-date figures cover <b>Jan 1 &ndash; Aug 14, 2026</b> and are blended across Home and Auto. Quote, contact and policy counts reflect dispositions recorded in the platform as of Aug 14, 2026.</div>
   </main>
+
+  <footer class="foot">GOAL Performance Marketing &middot; checkoutgoal.com<br>Report package generated August 14, 2026.</footer>
 </div>
 </body>
 </html>
