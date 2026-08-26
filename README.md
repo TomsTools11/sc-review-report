@@ -10,15 +10,16 @@ Reports include KPI dashboards, campaign breakdowns, call review analyses, conta
 
 ## Reports
 
-The current review package (June 19, 2026), all in the **Structured Dashboard** theme:
+The current review package (August 26, 2026):
 
 | File | Description |
 |------|-------------|
-| `index.html` | Landing page / report hub — sidebar nav linking to the four reports |
-| `Supreme-Choice-Auto-Performance-Review-6-19-26.html` | CA Auto performance review — KPIs, lead mix, funnel, and breakdowns by month, driver age, and credit rating |
-| `Supreme-Choice-Home-Performance-Review-6-19-26.html` | CA Home performance review — KPIs, lead mix, funnel, and breakdowns by property type, month, and applicant age |
-| `Supreme-Choice-Auto-Campaign-Deep-Dive-6-19-26.html` | CA Auto deep-dive — trend, source performance, market position |
-| `Supreme-Choice-Right-Pricing-Plan-6-19-26.html` | Full bid & modifier changeset with implementation plan |
+| `index.html` | Landing page / report hub — cards linking to the review and research reports |
+| `Supreme-Choice-Home-Campaign-Performance-Last-30-Days-8-26-26.html` | CA Home campaign performance — last 30 days through Aug 26, 2026 |
+| `Supreme-Choice-Auto-Campaign-Performance-Last-30-Days-8-26-26.html` | CA Auto campaign performance — last 30 days through Aug 26, 2026 |
+| `Supreme-Choice-Blended-Account-Performance-YTD-8-26-26.html` | Blended account performance — 2026 year to date (Jan 1 – Aug 26) |
+| `Supreme-Choice-CA-Brush-Fire-Risk-7-28-26.html` | California brush fire risk market research — Jul 28, 2026 |
+| `Supreme-Choice-CA-Demographic-Research-7-28-26.html` | California demographic market research — Jul 28, 2026 |
 
 Earlier reports are archived under `past reports/` (kept in the repo, excluded from the live Vercel site via `.vercelignore`).
 
@@ -26,7 +27,7 @@ Earlier reports are archived under `past reports/` (kept in the repo, excluded f
 
 The site is a zero-build static site, ready to deploy on **Vercel**:
 
-- `index.html` serves at the root; the three reports are linked by relative path.
+- `index.html` serves at the root; the reports are linked by relative path.
 - `vercel.json` keeps `.html` URLs intact (no `cleanUrls` rewrites).
 - `.vercelignore` excludes the `past reports/` archive from deployment.
 
