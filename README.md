@@ -10,14 +10,14 @@ Reports include KPI dashboards, campaign breakdowns, call review analyses, conta
 
 ## Reports
 
-The current review package (August 26, 2026):
+The current review package (September 9, 2026):
 
 | File | Description |
 |------|-------------|
 | `index.html` | Landing page / report hub — cards linking to the review and research reports |
-| `Supreme-Choice-Home-Campaign-Performance-Last-30-Days-8-26-26.html` | CA Home campaign performance — last 30 days through Aug 26, 2026 |
-| `Supreme-Choice-Auto-Campaign-Performance-Last-30-Days-8-26-26.html` | CA Auto campaign performance — last 30 days through Aug 26, 2026 |
-| `Supreme-Choice-Blended-Account-Performance-YTD-8-26-26.html` | Blended account performance — 2026 year to date (Jan 1 – Aug 26) |
+| `Supreme-Choice-Home-Campaign-Performance-Last-30-Days-9-9-26.html` | CA Home campaign performance — last 30 days through Sep 9, 2026 |
+| `Supreme-Choice-Auto-Campaign-Performance-Last-30-Days-9-9-26.html` | CA Auto campaign performance — last 30 days through Sep 9, 2026 |
+| `Supreme-Choice-Blended-Contact-Rate-By-Source-YTD-9-9-26.html` | Blended contact rate by source — 2026 year to date (Jan 1 – Sep 9) |
 | `Supreme-Choice-CA-Brush-Fire-Risk-7-28-26.html` | California brush fire risk market research — Jul 28, 2026 |
 | `Supreme-Choice-CA-Demographic-Research-7-28-26.html` | California demographic market research — Jul 28, 2026 |
 
