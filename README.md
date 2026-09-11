@@ -18,6 +18,7 @@ The current review package (September 9, 2026):
 | `Supreme-Choice-Home-Campaign-Performance-Last-30-Days-9-9-26.html` | CA Home campaign performance — last 30 days through Sep 9, 2026 |
 | `Supreme-Choice-Auto-Campaign-Performance-Last-30-Days-9-9-26.html` | CA Auto campaign performance — last 30 days through Sep 9, 2026 |
 | `Supreme-Choice-Blended-Contact-Rate-By-Source-YTD-9-9-26.html` | Blended contact rate by source — 2026 year to date (Jan 1 – Sep 9) |
+| `Supreme-Choice-Contact-Rate-Source-Updates-9-9-26.html` | Contact rate by source with Home and Auto source updates — leads received Jan 1 – Aug 10, 2026 |
 | `Supreme-Choice-SEO-Audit-9-9-26.html` | supreme-choice.com SEO audit — measured Sep 9, 2026 (prior audit Aug 26) |
 | `Supreme-Choice-CA-Brush-Fire-Risk-7-28-26.html` | California brush fire risk market research — Jul 28, 2026 |
 | `Supreme-Choice-CA-Demographic-Research-7-28-26.html` | California demographic market research — Jul 28, 2026 |
