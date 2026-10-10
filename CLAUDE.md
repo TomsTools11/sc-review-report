@@ -23,6 +23,15 @@ Standalone HTML performance review reports for **Supreme Choice Insurance Soluti
 - Hub: sidebar + main column with period strip and numbered report cards (`.rc`) carrying headline stats
 - Report pages link back to `index.html`; bars use `data-w` (percent) and donut segments use `.seg` with `data-dash`/`data-offset`, animated by a small inline script with a `beforeprint` fallback
 
+### Light/dark theme toggle (required on every page)
+
+Every page carries the same three-part theme snippet. Copy it from `index.html` when adding a report:
+1. A `<script>` right after `<meta charset>` in `<head>` that sets `data-theme="light|dark"` on `<html>` before first paint. It follows the system setting by default, tracks live system changes, and reads a saved override from `localStorage` key `goal-theme`. That key is shared by every page on the site.
+2. The `.theme-toggle` CSS block at the end of `<style>`. It is a fixed round button at the top right and is hidden in print.
+3. The `<button class="theme-toggle" onclick="goalToggleTheme()">` just before `</body>`. Switching back to the system's theme clears the saved override.
+
+New-style pages key their dark tokens off `:root[data-theme="dark"] .g`. Legacy pages get a `@media screen` dark block that remaps their light colors. Print always renders light.
+
 Older research/SEO reports still use the legacy palette (`--goal-brand: #077BE5`, `--goal-dark-blue: #00172D`, `--goal-accent-1/2/3`).
 
 ## Working with Reports

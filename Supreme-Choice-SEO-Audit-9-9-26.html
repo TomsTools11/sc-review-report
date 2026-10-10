@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Theme: follows the viewer's system by default; the toggle saves an override
+   (shared by every report on this site). Sets data-theme on <html>. */
+(function(){var k='goal-theme',r=document.documentElement,m=window.matchMedia('(prefers-color-scheme: dark)');
+function saved(){try{var s=localStorage.getItem(k);return s==='light'||s==='dark'?s:null;}catch(e){return null;}}
+function sys(){return m.matches?'dark':'light';}
+r.setAttribute('data-theme',saved()||sys());
+var onSys=function(){if(!saved())r.setAttribute('data-theme',sys());};
+if(m.addEventListener)m.addEventListener('change',onSys);else if(m.addListener)m.addListener(onSys);
+window.goalToggleTheme=function(){var n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);
+try{if(n===sys())localStorage.removeItem(k);else localStorage.setItem(k,n);}catch(e){}};})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Supreme Choice &mdash; SEO Audit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -167,6 +179,56 @@ code,.ltable code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-s
   .split,.bagrid,.cards{grid-template-columns:1fr;} .method .grid{grid-template-columns:1fr;}
 }
 @media(max-width:600px){ .kgrid,.kgrid.k4,.kgrid.k5,.scores{grid-template-columns:1fr;} .fstep .lab{width:110px;font-size:12px;} }
+
+/* ---------- Theme toggle (shared across reports) ---------- */
+:root[data-theme="light"]{color-scheme:light;} :root[data-theme="dark"]{color-scheme:dark;}
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:1000;width:40px;height:40px;border-radius:9999px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  background:#ffffff;color:#334155;border:1px solid #dbe2ec;box-shadow:0 2px 8px rgba(15,23,42,.12);transition:background .15s,color .15s,border-color .15s;}
+.theme-toggle:hover{color:#057be5;border-color:#94a3b8;}
+.theme-toggle:focus-visible{outline:2px solid #057be5;outline-offset:2px;}
+.theme-toggle svg{width:18px;height:18px;}
+.theme-toggle .i-sun{display:none;}
+:root[data-theme="dark"] .theme-toggle{background:#151a1e;color:#e2e8f0;border-color:#334155;box-shadow:0 2px 10px rgba(0,0,0,.4);}
+:root[data-theme="dark"] .theme-toggle:hover{color:#339fff;border-color:#64748b;}
+:root[data-theme="dark"] .theme-toggle .i-sun{display:block;} :root[data-theme="dark"] .theme-toggle .i-moon{display:none;}
+@media print{ .theme-toggle{display:none !important;} }
+
+/* ---------- Dark mode (screen only; print stays light) ---------- */
+@media screen{
+:root[data-theme="dark"]{
+  --ink:#F1F5F9; --body:#CBD5E1; --muted:#94A3B8;
+  --white:#0d1117; --off:#151a1e; --gray:#1b2229; --divider:#1e293b; --line:#263241;
+  --blue-hover:#5cb0ff; --mint-d:#3BEECA;
+}
+:root[data-theme="dark"] body{background:#080c10;}
+:root[data-theme="dark"] .bhead .ix{background:rgba(5,123,229,.16);}
+:root[data-theme="dark"] .kc.alert{border-color:rgba(229,72,77,.4);background:rgba(229,72,77,.08);}
+:root[data-theme="dark"] .kc.good{border-color:rgba(43,191,122,.35);background:rgba(43,191,122,.08);}
+:root[data-theme="dark"] .kc.good .v{color:#4ade80;}
+:root[data-theme="dark"] .sc .track{background:#263241;}
+:root[data-theme="dark"] .tag.blue{background:rgba(5,123,229,.16);}
+:root[data-theme="dark"] .tag.mint{background:rgba(59,238,202,.12);}
+:root[data-theme="dark"] .tag.amber{background:rgba(240,169,59,.14);color:#f2b65a;}
+:root[data-theme="dark"] .tag.red{background:rgba(229,72,77,.14);color:#ff8a8f;}
+:root[data-theme="dark"] .tag.gray{background:#1e293b;}
+:root[data-theme="dark"] .tag.green{background:rgba(43,191,122,.13);color:#4ade80;}
+:root[data-theme="dark"] .ba .row.fix{background:rgba(5,123,229,.08);}
+:root[data-theme="dark"] .card .meta span.e,:root[data-theme="dark"] .pstep .meta span.e{background:rgba(5,123,229,.16);}
+:root[data-theme="dark"] .card .meta span.hi,:root[data-theme="dark"] .pstep .meta span.hi{background:rgba(43,191,122,.13);color:#4ade80;}
+:root[data-theme="dark"] .card .meta span.md,:root[data-theme="dark"] .pstep .meta span.md{background:rgba(240,169,59,.14);color:#f2b65a;}
+:root[data-theme="dark"] .pstep.hot{background:rgba(229,72,77,.08);}
+:root[data-theme="dark"] .pstep .num{background:rgba(5,123,229,.16);}
+:root[data-theme="dark"] .pstep.hot .num{background:rgba(229,72,77,.14);}
+:root[data-theme="dark"] .callout{border:1px solid rgba(5,123,229,.35);background:rgba(5,123,229,.08);}
+:root[data-theme="dark"] .st.pass{color:#4ade80;}
+:root[data-theme="dark"] .st.warn{color:#f2b65a;}
+:root[data-theme="dark"] .st.fail{color:#ff8a8f;}
+:root[data-theme="dark"] .st.open{color:#ff8a8f;}
+:root[data-theme="dark"] [style*="background:#F4FAFF"]{background:rgba(5,123,229,.08) !important;}
+:root[data-theme="dark"] [style*="background:#b8c2cf"]{background:#64748b !important;}
+:root[data-theme="dark"] .main [stroke="#EFF2F7"]{stroke:#1b2229;}
+:root[data-theme="dark"] .main [stroke="#b8c2cf"]{stroke:#64748b;}
+}
 </style>
 </head>
 <body>
@@ -599,5 +661,9 @@ document.querySelectorAll('.fpanel,.split,.scores,.panel,.ltable').forEach(el=>i
 if (window.matchMedia && window.matchMedia('print').matches) { document.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';}); }
 window.addEventListener('beforeprint',()=>{document.querySelectorAll('[data-w]').forEach(b=>{b.style.width=b.dataset.w+'%';});document.querySelectorAll('.seg').forEach(s=>{const d=+s.dataset.dash;const o=+(s.dataset.offset||0);s.setAttribute('stroke-dashoffset',-o);s.setAttribute('stroke-dasharray',d+' '+(100-d));});});
 </script>
+<button class="theme-toggle" type="button" onclick="goalToggleTheme()" aria-label="Switch between light and dark mode" title="Switch light/dark mode">
+<svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+</button>
 </body>
 </html>
