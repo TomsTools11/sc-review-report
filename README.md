@@ -57,9 +57,10 @@ As of the October 9, 2026 package, the hub and campaign reports use the **new GO
 - **Hub layout** — sidebar (logo, client, review date, section nav) plus a main column with a period strip and numbered report cards showing headline stats
 - **Report pages** — period strip, KPI panels, animated bars (`data-w` widths) and SVG donut segments (`.seg`), with a back link to `index.html`
 - **Minimal JS** — a small IntersectionObserver animates bars/donuts on scroll, and a `beforeprint` handler draws them fully for PDF export
+- **Light/dark toggle** — a button at the top right of every page. It follows the viewer's system theme by default, and a manual choice is remembered across all reports on the site. Print always renders light.
 - **Responsive layout** — mobile-friendly with print optimization
 
-The older research and SEO reports still use the previous GOAL palette (`--goal-brand: #077BE5`, `--goal-dark-blue`, `--goal-accent-*`).
+The older research and SEO reports still use the previous GOAL palette (`--goal-brand: #077BE5`, `--goal-dark-blue`, `--goal-accent-*`). They have a dark-mode color map added so the toggle works on them too.
 
 ## Tech Stack
 
